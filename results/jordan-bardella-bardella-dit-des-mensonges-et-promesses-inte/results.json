@@ -43,9 +43,49 @@
   "videos_scanned": 10,
   "articles_scanned": 25
  },
- "videos": [],
+ "videos": [
+  {
+   "title": "Nouvelles révélations de Mediapart sur Jordan Bardella: \"Aujourd'hui le RN ment aux Français, il y a d'autres mensonges qui sont bien plus graves\", déclare Florian Philippot, président des (Patriotes) et candidat à l'élection présidentielle",
+   "uploaded": "2026-10-09",
+   "platform": "dailymotion",
+   "channel": "BFM",
+   "url": "https://www.dailymotion.com/video/xbki5yy",
+   "method": "transcript",
+   "moments": [
+    {
+     "timestamp": "00:36",
+     "seconds": 36.0,
+     "link": "https://www.dailymotion.com/video/xbki5yy?start=36",
+     "t": 36.0,
+     "quote": "c'est pourquoi aujourd'hui, il mente aux Français. Il y a d'autres mensonges qui sont encore bien plus graves.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Florian Philippot",
+     "confidence": 0.95,
+     "why": "Florian Philippot affirme que le RN et Jordan Bardella mentent aux Français."
+    },
+    {
+     "timestamp": "00:48",
+     "seconds": 48.0,
+     "link": "https://www.dailymotion.com/video/xbki5yy?start=48",
+     "t": 48.0,
+     "quote": "Quand ils disent qu'ils vont augmenter les salaires et le pouvoir d'achat en restant dans l'Union européenne et l'euro, il va falloir m'expliquer comment. C'est un mensonge.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Florian Philippot",
+     "confidence": 0.95,
+     "why": "Florian Philippot qualifie de mensonges intenables les promesses du RN sur le pouvoir d'achat et l'Europe."
+    }
+   ]
+  }
+ ],
  "articles": [],
  "unverifiable_videos": [
+  {
+   "title": "L'ECO & YOU - La bataille autour des factures d'électricité",
+   "url": "https://www.dailymotion.com/video/x9069zq",
+   "reason": "pas de transcription disponible"
+  },
   {
    "title": "\"Bande d'abrutis\", \"énorme connerie\", \"bossez un peu\" : pourquoi Cyril Hanouna a perdu ses nerfs dan",
    "url": "https://www.dailymotion.com/video/x87kcg0",
@@ -54,16 +94,6 @@
   {
    "title": "Résumé vidéo du débat entre Gabriel Attal, Jordan Bardella et Olivier Faure",
    "url": "https://www.dailymotion.com/video/x912sr6",
-   "reason": "pas de transcription disponible"
-  },
-  {
-   "title": "Nouvelles révélations de Mediapart sur Jordan Bardella: \"Aujourd'hui le RN ment aux Français, il y a d'autres mensonges qui sont bien plus graves\", déclare Florian Philippot, président des (Patriotes) et candidat à l'élection présidentielle",
-   "url": "https://www.dailymotion.com/video/xbki5yy",
-   "reason": "erreur LLM: HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to n"
-  },
-  {
-   "title": "L'ECO & YOU - La bataille autour des factures d'électricité",
-   "url": "https://www.dailymotion.com/video/x9069zq",
    "reason": "pas de transcription disponible"
   },
   {
