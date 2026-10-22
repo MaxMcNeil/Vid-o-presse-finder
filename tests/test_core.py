@@ -114,3 +114,13 @@ def test_dedupe_and_keep():
     assert not scan.keep_hit(other, PLAN, False, [], 0.5, False)
     assert scan.keep_hit(other, PLAN, False, ["Colin Powell"], 0.5, False)
     assert scan.keep_hit(other, PLAN, True, [], 0.5, False)
+
+
+def test_keys_from_env_uses_secret_names(monkeypatch):
+    from quote_finder.keys import keys_from_env
+    monkeypatch.setenv("GEMINI_API_KEYS", "a\nb\nc\nd\ne\n")
+    monkeypatch.setenv("FALLBACK_LLM_KEYS", "x,y")
+    monkeypatch.setenv("YOUTUBE_API_KEYS", "")
+    assert keys_from_env("GEMINI") == ["a", "b", "c", "d", "e"]
+    assert keys_from_env("FALLBACK_LLM") == ["x", "y"]
+    assert keys_from_env("YOUTUBE") == []

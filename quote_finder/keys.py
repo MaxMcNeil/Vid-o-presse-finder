@@ -12,11 +12,13 @@ def parse_keys(raw: str | None) -> list[str]:
 
 
 def keys_from_env(prefix: str) -> list[str]:
-    """PREFIX_KEYS="a,b,c" + PREFIX_KEY + PREFIX_KEY_1..PREFIX_KEY_20."""
-    out = parse_keys(os.environ.get(f"{prefix}_KEYS"))
-    out += parse_keys(os.environ.get(f"{prefix}_KEY"))
-    for i in range(1, 21):
-        out += parse_keys(os.environ.get(f"{prefix}_KEY_{i}"))
+    """Lit PREFIX_KEYS, PREFIX_KEY, PREFIX_KEY_1..20 et les mêmes avec PREFIX_API_ (ex. GEMINI_API_KEYS)."""
+    out: list[str] = []
+    for base in (prefix, f"{prefix}_API"):
+        out += parse_keys(os.environ.get(f"{base}_KEYS"))
+        out += parse_keys(os.environ.get(f"{base}_KEY"))
+        for i in range(1, 21):
+            out += parse_keys(os.environ.get(f"{base}_KEY_{i}"))
     seen, res = set(), []
     for k in out:
         if k not in seen:
