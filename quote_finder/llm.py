@@ -37,10 +37,10 @@ DEFAULT_MODELS = ["gemini-3.8-flash", "gemini-flash-latest", "gemini-3-flash", "
 def _model_rank(name: str):
     """Plus grand = préférable : version la plus récente, famille 'flash' (pas lite/image/tts...)."""
     n = name.replace("models/", "")
-    if "flash" not in n or any(x in n for x in ("lite", "image", "tts", "live", "audio", "thinking", "embedding", "preview-")):
+    if "flash" not in n or any(x in n for x in ("image", "tts", "live", "audio", "thinking", "embedding", "preview-")):
         return None
     m = re.search(r"gemini-(\d+(?:\.\d+)?)", n)
-    return float(m.group(1)) if m else 0.0
+    return (float(m.group(1)) if m else 0.0) - (0.5 if "lite" in n else 0.0)
 
 
 class GeminiClient:
@@ -49,14 +49,31 @@ class GeminiClient:
         self.pool, self.timeout = pool, timeout
         self.http = session or requests.Session()
         self._bad: set[str] = set()
+        self._cool: dict[str, float] = {}
+        self._overload: dict[str, int] = {}
         self._discovered = False
 
     @property
     def model(self) -> str:
-        for m in self.models:
-            if m not in self._bad:
+        now = time.time()
+        ok = [m for m in self.models if m not in self._bad]
+        if not ok:
+            raise LLMError("aucun modèle Gemini utilisable : définis la variable GEMINI_MODEL")
+        for m in ok:
+            if self._cool.get(m, 0) <= now:
                 return m
-        raise LLMError("aucun modèle Gemini utilisable : définis la variable GEMINI_MODEL")
+        return min(ok, key=lambda m: self._cool.get(m, 0))  # tous surchargés : le moins pénalisé
+
+    def _note_overload(self, key: str) -> None:
+        """503 « forte demande » : après 2 échecs on met le modèle en pause 2 min et on passe au suivant."""
+        m = self.model
+        self._overload[m] = self._overload.get(m, 0) + 1
+        if self._overload[m] >= 2:
+            self._overload[m] = 0
+            self._cool[m] = time.time() + 120
+            if not self._discovered:
+                self._discover(key)
+            log.warning("Gemini %s surchargé, bascule sur %s", m, self.model)
 
     def _discover(self, key: str) -> None:
         """Demande à Google la liste des modèles accessibles à cette clé et ajoute les 'flash' les plus récents."""
@@ -74,17 +91,22 @@ class GeminiClient:
                 self.models.insert(0, n) if n == ranked[0] else self.models.append(n)
         log.info("Modèles Gemini découverts : %s", ranked[:4])
 
-    def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1):
+    def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1, inline_media=None):
+        """inline_media = (mime, octets) pour un enregistrement audio envoyé directement (< ~15 Mo)."""
+        import base64
         parts = []
         if video_url:
             parts.append({"file_data": {"file_uri": video_url}})
+        if inline_media:
+            parts.append({"inline_data": {"mime_type": inline_media[0],
+                                          "data": base64.b64encode(inline_media[1]).decode()}})
         parts.append({"text": prompt})
         body = {
             "contents": [{"role": "user", "parts": parts}],
             "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"},
         }
         last = "aucune clé disponible"
-        for attempt in range(max(6, 3 * len(self.pool._next_ok)) + len(self.models) + 4):
+        for attempt in range(max(8, 3 * len(self.pool._next_ok)) + len(self.models) + 6):
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted("toutes les clés Gemini sont épuisées")
@@ -124,7 +146,8 @@ class GeminiClient:
                 self.pool.exhaust(key)
                 continue
             if r.status_code >= 500:
-                time.sleep(3 + 2 * attempt)
+                self._note_overload(key)
+                time.sleep(min(3 + 2 * attempt, 20))
                 continue
             raise LLMError(last)  # 400 : vidéo privée/indisponible, requête invalide...
         raise LLMError(last)
@@ -205,25 +228,25 @@ class LLMRouter:
     def has_video(self) -> bool:
         return bool(self.gemini and self.gemini.pool.available())
 
-    def generate_json(self, prompt: str, video_url: str | None = None):
-        ck = f"{video_url or ''}\n{prompt}"
+    def generate_json(self, prompt: str, video_url: str | None = None, inline_media=None, media_key: str = ""):
+        ck = f"{video_url or ''}|{media_key}\n{prompt}"
         hit = cache.get("llm", ck)
         if hit is not None:
             return hit
         err = None
         if self.gemini and self.gemini.pool.available():
             try:
-                out = self.gemini.generate_json(prompt, video_url)
+                out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media)
                 cache.put("llm", ck, out)
                 return out
             except QuotaExhausted as e:
                 err = e
             except LLMError as e:
-                if video_url:
+                if video_url or inline_media:
                     raise
                 err = e
                 log.warning("Gemini a échoué (%s), tentative de repli", e)
-        if self.fallback and not video_url:
+        if self.fallback and not video_url and not inline_media:
             out = self.fallback.generate_json(prompt)
             cache.put("llm", ck, out)
             return out

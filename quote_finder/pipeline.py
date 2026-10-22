@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import logging
+import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 
 import requests
 import trafilatura
 
-from . import scan, transcripts
+from . import media, scan, transcripts
 from .keys import KeyPool, keys_from_env
 from .llm import LLMError, QuotaExhausted
 from .models import ArticleCandidate, Hit, Plan, Segment, VideoCandidate
@@ -27,7 +28,8 @@ class Options:
     langs: list[str] = field(default_factory=lambda: ["en", "fr"])
     max_videos: int = 40
     max_articles: int = 25
-    video_fallback_max: int = 6   # vidéos sans transcription analysées directement par Gemini
+    video_fallback_max: int = 6   # vidéos YouTube sans transcription analysées directement par Gemini
+    audio_fallback_max: int = 10  # vidéos sans transcription (Dailymotion...) : audio écouté par Gemini
     min_confidence: float = 0.55
     strict: bool = False
     platforms: list[str] = field(default_factory=lambda: ["youtube", "dailymotion", "archive"])
@@ -86,7 +88,8 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list
 def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[ArticleCandidate]:
     found: dict[str, ArticleCandidate] = {}
     for i, q in enumerate(plan.news_queries):
-        batch = news.gdelt(q, 40, http)
+        batch = news.gdelt(q, 40, http) if i < 3 else []
+        batch += news.bing_news(q, 20, o.langs[i % len(o.langs)] if o.langs else "en", http)
         if i < 4:
             batch += news.google_news(q, 20, o.langs[i % len(o.langs)] if o.langs else "en", http)
         if i < 4:
@@ -106,7 +109,19 @@ def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[Ar
 
 
 # ------------------------------------------------------------------ analyse
-def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budget: list[int]) -> VideoResult:
+_budget_lock = threading.Lock()
+
+
+def _take(budget: list[int]) -> bool:
+    with _budget_lock:
+        if budget[0] > 0:
+            budget[0] -= 1
+            return True
+    return False
+
+
+def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budget: list[int],
+                  audio_budget: list[int] | None = None) -> VideoResult:
     meta = {"title": v.title, "channel": v.channel, "published": v.published, "description": v.description}
     t = transcripts.get_transcript(v, o.langs)
     try:
@@ -124,11 +139,16 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
                                        "sous-titres automatiques" if "auto" in t.kind else "sous-titres")
             return VideoResult(v, hits, "transcript")
         # pas de transcription : analyse directe de la vidéo par Gemini (YouTube uniquement)
-        if v.platform == "youtube" and llm.has_video and fallback_budget[0] > 0:
-            fallback_budget[0] -= 1
+        if v.platform == "youtube" and llm.has_video and _take(fallback_budget):
             hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url)
             return VideoResult(v, hits, "gemini-video")
-        return VideoResult(v, [], "none", "pas de transcription disponible")
+        if v.platform != "youtube" and llm.has_video and audio_budget is not None and _take(audio_budget):
+            audio = media.fetch_audio(v.url)
+            if audio:
+                hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, audio=audio)
+                return VideoResult(v, hits, "gemini-audio")
+            return VideoResult(v, [], "none", "pas de sous-titres et audio non téléchargeable")
+        return VideoResult(v, [], "none", "pas de transcription disponible (budget d'analyse IA épuisé)")
     except QuotaExhausted as e:
         return VideoResult(v, [], "none", f"quota LLM épuisé ({e})")
     except LLMError as e:
@@ -139,7 +159,16 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
     text = a.text
     if not text:
         try:
-            html = trafilatura.fetch_url(a.url) if "news.google.com" not in a.url else None
+            url = a.url
+            if "news.google.com" in url:
+                try:
+                    from googlenewsdecoder import gnewsdecoder
+                    dec = gnewsdecoder(url, interval=1)
+                    if dec.get("status"):
+                        url = a.url = dec["decoded_url"]
+                except Exception:  # noqa: BLE001
+                    pass
+            html = trafilatura.fetch_url(url) if "news.google.com" not in url else None
             text = (trafilatura.extract(html) or "") if html else ""
         except Exception:  # noqa: BLE001
             text = ""
@@ -174,9 +203,10 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
 
     vids = discover_videos(plan, o, yt_pool, http)
     budget = [o.video_fallback_max]
+    abudget = [o.audio_fallback_max]
     vres: list[VideoResult] = []
     with ThreadPoolExecutor(o.workers) as ex:
-        futs = {ex.submit(analyze_video, v, plan, o, llm, budget): v for v in vids}
+        futs = {ex.submit(analyze_video, v, plan, o, llm, budget, abudget): v for v in vids}
         for i, f in enumerate(as_completed(futs), 1):
             r = f.result()
             vres.append(r)

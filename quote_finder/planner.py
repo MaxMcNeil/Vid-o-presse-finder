@@ -9,7 +9,7 @@ from .util import normalize
 
 log = logging.getLogger("qf.planner")
 
-STOP = set("""a an the of to in on at is are was were be been has have had that this these those and or for with
+STOP = set("""dit dire disent disait says said say affirme affirment declare a an the of to in on at is are was were be been has have had that this these those and or for with
 from by as it its he she they them his her their not no do does did can could would should will
 le la les un une des du de d l et ou que qui quoi dans sur par pour avec est sont a ont au aux ce cet cette ces
 il elle ils elles son sa ses leur leurs ne pas se

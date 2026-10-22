@@ -22,6 +22,7 @@ def parse_args(argv=None):
     p.add_argument("--max-videos", type=int, default=40)
     p.add_argument("--max-articles", type=int, default=25)
     p.add_argument("--video-fallback-max", type=int, default=6, help="Vidéos sans transcription analysées directement par Gemini")
+    p.add_argument("--audio-fallback-max", type=int, default=10, help="Vidéos sans sous-titres dont Gemini écoute l'audio")
     p.add_argument("--min-confidence", type=float, default=0.55)
     p.add_argument("--strict", action="store_true", help="Exclure les propos rapportés/locuteur incertain")
     p.add_argument("--platforms", default="youtube,dailymotion,archive")
@@ -36,7 +37,7 @@ def main(argv=None) -> int:
     split = lambda s: [x.strip() for x in s.split(",") if x.strip()]  # noqa: E731
     o = Options(person=a.person.strip(), claim=a.claim.strip(), also=split(a.also), anyone=a.anyone,
                 langs=split(a.langs) or ["en"], max_videos=a.max_videos, max_articles=a.max_articles,
-                video_fallback_max=a.video_fallback_max, min_confidence=a.min_confidence, strict=a.strict,
+                video_fallback_max=a.video_fallback_max, audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict,
                 platforms=split(a.platforms), articles=not a.no_articles)
     llm = LLMRouter.from_env()
     if not llm.has_text:

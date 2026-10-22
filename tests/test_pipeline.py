@@ -12,12 +12,14 @@ class FakeLLM:
     def __init__(self):
         self.prompts = []
 
-    def generate_json(self, prompt, video_url=None):
+    def generate_json(self, prompt, video_url=None, inline_media=None, media_key=""):
         self.prompts.append((prompt[:40], video_url))
         if "Tu prépares une recherche" in prompt:
             return {"claim_summary": "Saddam aurait des ADM",
                     "term_groups": [["saddam"], ["weapons of mass destruction", "wmd"]],
                     "person_aliases": ["Bill Clinton"], "youtube_queries": ["clinton saddam wmd"], "news_queries": ["clinton wmd"]}
+        if inline_media:
+            return {"hits": [{"t": 36, "quote": "il ment", "verdict": "paraphrase", "who_says": "other_named", "speaker_name": "X", "confidence": 0.9}]}
         if video_url:
             return {"hits": [{"t": "03:10", "quote": "he has wmd", "verdict": "literal", "who_says": "target", "confidence": 0.9}]}
         if "article de presse" in prompt:
@@ -31,6 +33,7 @@ class FakeLLM:
 def test_end_to_end(monkeypatch, tmp_path):
     vids = [VideoCandidate("youtube", "AAA", "https://www.youtube.com/watch?v=AAA", "CLINTON-SPEECH 1998", "", "WH", "1998-02-17T00:00:00Z", 3000),
             VideoCandidate("youtube", "BBB", "https://www.youtube.com/watch?v=BBB", "Clinton on WMD (clickbait)", "", "Chan", "2020-01-01T00:00:00Z", 600),
+            VideoCandidate("dailymotion", "DDD", "https://www.dailymotion.com/video/DDD", "DM no subs", "", "BFM", "2026-10-09", 300),
             VideoCandidate("youtube", "CCC", "https://www.youtube.com/watch?v=CCC", "No captions", "", "Chan", "2021-01-01T00:00:00Z", 600)]
     monkeypatch.setattr(youtube, "search", lambda *a, **k: list(vids))
     monkeypatch.setattr(other_video, "dailymotion", lambda *a, **k: [])
@@ -49,6 +52,7 @@ def test_end_to_end(monkeypatch, tmp_path):
         return {"AAA": Transcript(segs_a, "en", "auto"), "BBB": Transcript(segs_b, "en", "manual")}.get(v.id)
     monkeypatch.setattr(transcripts, "get_transcript", fake_tr)
 
+    monkeypatch.setattr(pipeline.media, "fetch_audio", lambda url, **k: b"audio")
     llm = FakeLLM()
     o = pipeline.Options("Bill Clinton", "Saddam has weapons of mass destruction", workers=1)
     plan, vres, ares = pipeline.run(o, llm)
@@ -58,6 +62,7 @@ def test_end_to_end(monkeypatch, tmp_path):
     assert by["CCC"].method == "gemini-video" and by["CCC"].hits[0].t == 190  # repli analyse vidéo directe
     # jugements texte : 1 vidéo (AAA) + 1 article ; BBB (hors sujet) et le reuters injoignable n'en consomment aucun
     assert sum(1 for p, _ in llm.prompts if "Tu vérifies" in p) == 2
+    assert by["DDD"].method == "gemini-audio" and by["DDD"].hits == []  # locuteur X non voulu (anyone=False) : écarté
     assert len(ares) == 2 and any(r.hits for r in ares)
 
     out = tmp_path / "r"

@@ -142,3 +142,30 @@ def test_gemini_switches_model_on_404_and_discovers():
     c = GeminiClient(KeyPool("g", ["k"], 0), ["gemini-3.8-flash", "gemini-flash-latest"], http)
     assert c.generate_json("x") == {"hits": []}
     assert http.calls[0] == "gemini-3.8-flash" and http.calls[1] == "gemini-3.9-flash"
+
+
+def test_gemini_rotates_model_on_repeated_503(monkeypatch):
+    import quote_finder.llm as L
+    monkeypatch.setattr(L.time, "sleep", lambda s: None)
+
+    class H(FakeHttp):
+        def post(self, url, params=None, json=None, timeout=None):
+            self.calls.append(url.split("models/")[1].split(":")[0]); return self.seq.pop(0)
+        def get(self, url, params=None, timeout=None):
+            return R(200, {"models": []})
+    busy = R(503, "currently experiencing high demand")
+    http = H([busy, busy, ok('{"hits": []}')])
+    c = GeminiClient(KeyPool("g", ["k"], 0), ["m-a", "m-b"], http)
+    assert c.generate_json("x") == {"hits": []}
+    assert http.calls == ["m-a", "m-a", "m-b"]
+
+
+def test_bing_news_extracts_real_url():
+    from quote_finder.sources import news
+    xml = b"""<rss xmlns:News="x"><channel><item><title>T</title>
+      <link>http://www.bing.com/news/apiclick.aspx?ref=FexRss&amp;url=https%3a%2f%2fwww.lemonde.fr%2fa.html&amp;c=1</link>
+      <pubDate>Mon, 05 Oct 2026 10:00:00 GMT</pubDate><News:Source>Le Monde</News:Source></item></channel></rss>"""
+    class H:
+        def get(self, url, **kw): return type("R", (), {"status_code": 200, "content": xml})()
+    a = news.bing_news("q", http=H())[0]
+    assert a.url == "https://www.lemonde.fr/a.html" and a.published == "2026-10-05" and a.source == "Le Monde"

@@ -143,7 +143,7 @@ def judge_excerpts(llm, plan: Plan, person: str, others: list[str], claim: str, 
     return dedupe_hits(hits)
 
 
-VIDEO_PROMPT = """Regarde et écoute cette vidéo en entier.
+VIDEO_PROMPT = """{medium}
 PERSONNE CIBLE : {person} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {others}.
 AFFIRMATION RECHERCHÉE : {claim}  (Reformulation : {summary})
 Le titre peut être trompeur : juge uniquement ce qui est réellement dit.
@@ -154,10 +154,16 @@ Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vid�
 Si rien ne correspond : {{"hits": []}}. Réponds en JSON : {{"hits": [...]}}"""
 
 
-def judge_video_direct(llm, plan: Plan, person: str, others: list[str], claim: str, url: str) -> list[Hit]:
-    prompt = VIDEO_PROMPT.format(person=person, aliases=", ".join(plan.person_aliases),
+def judge_video_direct(llm, plan: Plan, person: str, others: list[str], claim: str, url: str,
+                       audio: bytes | None = None) -> list[Hit]:
+    medium = ("Écoute cet enregistrement audio en entier." if audio
+              else "Regarde et écoute cette vidéo en entier.")
+    prompt = VIDEO_PROMPT.format(medium=medium, person=person, aliases=", ".join(plan.person_aliases),
                                  others=", ".join(others) or "aucun", claim=claim, summary=plan.claim_summary)
-    d = llm.generate_json(prompt, video_url=url)
+    if audio:
+        d = llm.generate_json(prompt, inline_media=("audio/mp3", audio), media_key=url)
+    else:
+        d = llm.generate_json(prompt, video_url=url)
     return dedupe_hits([h for h in (_hit_from(x) for x in (d or {}).get("hits", [])) if h and h.quote])
 
 

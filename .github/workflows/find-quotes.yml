@@ -79,7 +79,10 @@ jobs:
           key: qf-cache-${{ github.run_id }}
           restore-keys: qf-cache-
 
-      - run: pip install -r requirements.txt
+      - name: Dépendances (ffmpeg pour écouter l'audio des vidéos sans sous-titres)
+        run: |
+          which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          pip install -r requirements.txt
 
       - name: Recherche
         run: |
