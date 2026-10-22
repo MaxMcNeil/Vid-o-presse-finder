@@ -1,0 +1,102 @@
+name: Find quotes
+
+on:
+  workflow_dispatch:
+    inputs:
+      person:
+        description: "Personne (ex: Bill Clinton)"
+        required: true
+      claim:
+        description: "Sujet / affirmation (mot, phrase, thème... ex: Saddam a des armes de destruction massive)"
+        required: true
+      also:
+        description: "Autres locuteurs acceptés, séparés par des virgules (optionnel)"
+        required: false
+        default: ""
+      anyone:
+        description: "Accepter n'importe qui qui fait cette affirmation"
+        type: boolean
+        default: false
+      langs:
+        description: "Langues (ex: en,fr)"
+        required: false
+        default: "en,fr"
+      max_videos:
+        description: "Nombre max de vidéos analysées"
+        required: false
+        default: "40"
+      strict:
+        description: "Exclure les propos rapportés par un tiers"
+        type: boolean
+        default: false
+      articles:
+        description: "Chercher aussi les articles de presse"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: find-quotes
+  cancel-in-progress: false
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+      GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
+      FALLBACK_LLM_KEYS: ${{ secrets.FALLBACK_LLM_KEYS }}
+      GUARDIAN_API_KEYS: ${{ secrets.GUARDIAN_API_KEYS }}
+      NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
+      YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
+      FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
+      GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+      QF_CACHE_DIR: .cache
+      # entrées passées par variables d'environnement (jamais interpolées dans le shell)
+      IN_PERSON: ${{ inputs.person }}
+      IN_CLAIM: ${{ inputs.claim }}
+      IN_ALSO: ${{ inputs.also }}
+      IN_LANGS: ${{ inputs.langs }}
+      IN_MAX: ${{ inputs.max_videos }}
+      IN_ANYONE: ${{ inputs.anyone }}
+      IN_STRICT: ${{ inputs.strict }}
+      IN_ARTICLES: ${{ inputs.articles }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: "Cache (transcriptions et réponses IA, économise les quotas)"
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: qf-cache-${{ github.run_id }}
+          restore-keys: qf-cache-
+
+      - run: pip install -r requirements.txt
+
+      - name: Recherche
+        run: |
+          args=(--person "$IN_PERSON" --claim "$IN_CLAIM" --also "$IN_ALSO" --langs "$IN_LANGS" --max-videos "$IN_MAX" --out results)
+          [ "$IN_ANYONE" = "true" ] && args+=(--anyone)
+          [ "$IN_STRICT" = "true" ] && args+=(--strict)
+          [ "$IN_ARTICLES" = "false" ] && args+=(--no-articles)
+          python -m quote_finder "${args[@]}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resultats
+          path: results/
+
+      - name: Enregistrer les résultats dans le dépôt
+        run: |
+          git config user.name "quote-finder-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add results
+          git diff --cached --quiet || (git commit -m "résultats: ${GITHUB_RUN_ID}" && git pull --rebase -q && git push)
