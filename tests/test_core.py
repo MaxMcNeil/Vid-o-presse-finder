@@ -124,3 +124,21 @@ def test_keys_from_env_uses_secret_names(monkeypatch):
     assert keys_from_env("GEMINI") == ["a", "b", "c", "d", "e"]
     assert keys_from_env("FALLBACK_LLM") == ["x", "y"]
     assert keys_from_env("YOUTUBE") == []
+
+
+def test_gemini_switches_model_on_404_and_discovers():
+    class H(FakeHttp):
+        def post(self, url, params=None, json=None, timeout=None):
+            self.calls.append(url.split("models/")[1].split(":")[0])
+            return self.seq.pop(0)
+        def get(self, url, params=None, timeout=None):
+            return R(200, {"models": [
+                {"name": "models/gemini-3.8-flash", "supportedGenerationMethods": ["generateContent"]},
+                {"name": "models/gemini-3.9-flash", "supportedGenerationMethods": ["generateContent"]},
+                {"name": "models/gemini-3.9-flash-lite", "supportedGenerationMethods": ["generateContent"]},
+                {"name": "models/embedding-1", "supportedGenerationMethods": ["embedContent"]}]})
+    err = R(404, "This model models/gemini-3.8-flash is no longer available to new users")
+    http = H([err, ok('{"hits": []}')])
+    c = GeminiClient(KeyPool("g", ["k"], 0), ["gemini-3.8-flash", "gemini-flash-latest"], http)
+    assert c.generate_json("x") == {"hits": []}
+    assert http.calls[0] == "gemini-3.8-flash" and http.calls[1] == "gemini-3.9-flash"

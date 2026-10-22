@@ -31,10 +31,48 @@ class QuotaExhausted(LLMError):
     pass
 
 
+DEFAULT_MODELS = ["gemini-3.8-flash", "gemini-flash-latest", "gemini-3-flash", "gemini-2.5-flash"]
+
+
+def _model_rank(name: str):
+    """Plus grand = préférable : version la plus récente, famille 'flash' (pas lite/image/tts...)."""
+    n = name.replace("models/", "")
+    if "flash" not in n or any(x in n for x in ("lite", "image", "tts", "live", "audio", "thinking", "embedding", "preview-")):
+        return None
+    m = re.search(r"gemini-(\d+(?:\.\d+)?)", n)
+    return float(m.group(1)) if m else 0.0
+
+
 class GeminiClient:
-    def __init__(self, pool: KeyPool, model: str, session=None, timeout: int = 180):
-        self.pool, self.model, self.timeout = pool, model, timeout
+    def __init__(self, pool: KeyPool, model: str | list[str], session=None, timeout: int = 180):
+        self.models = [model] if isinstance(model, str) else list(model)
+        self.pool, self.timeout = pool, timeout
         self.http = session or requests.Session()
+        self._bad: set[str] = set()
+        self._discovered = False
+
+    @property
+    def model(self) -> str:
+        for m in self.models:
+            if m not in self._bad:
+                return m
+        raise LLMError("aucun modèle Gemini utilisable : définis la variable GEMINI_MODEL")
+
+    def _discover(self, key: str) -> None:
+        """Demande à Google la liste des modèles accessibles à cette clé et ajoute les 'flash' les plus récents."""
+        self._discovered = True
+        try:
+            r = self.http.get("https://generativelanguage.googleapis.com/v1beta/models",
+                              params={"key": key, "pageSize": 200}, timeout=30)
+            names = [m["name"].replace("models/", "") for m in r.json().get("models", [])
+                     if "generateContent" in m.get("supportedGenerationMethods", [])]
+        except (requests.RequestException, ValueError, KeyError, AttributeError):
+            return
+        ranked = sorted((n for n in names if _model_rank(n) is not None), key=lambda n: (-_model_rank(n), n))
+        for n in ranked:
+            if n not in self.models:
+                self.models.insert(0, n) if n == ranked[0] else self.models.append(n)
+        log.info("Modèles Gemini découverts : %s", ranked[:4])
 
     def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1):
         parts = []
@@ -46,7 +84,7 @@ class GeminiClient:
             "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"},
         }
         last = "aucune clé disponible"
-        for attempt in range(max(6, 3 * len(self.pool._next_ok))):
+        for attempt in range(max(6, 3 * len(self.pool._next_ok)) + len(self.models) + 4):
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted("toutes les clés Gemini sont épuisées")
@@ -67,6 +105,13 @@ class GeminiClient:
                     continue
             msg = r.text[:400]
             last = f"HTTP {r.status_code}: {msg}"
+            if r.status_code in (404, 400) and re.search(r"no longer available|not found|is not supported|deprecated", msg, re.I) \
+                    and "model" in msg.lower():
+                log.warning("Modèle Gemini %s indisponible, on change de modèle", self.model)
+                self._bad.add(self.model)
+                if not self._discovered:
+                    self._discover(key)
+                continue
             if r.status_code == 429:
                 if re.search(r"PerDay|per day|daily", msg, re.I):
                     log.warning("Gemini: quota journalier atteint pour une clé, rotation")
@@ -138,8 +183,9 @@ class LLMRouter:
     @classmethod
     def from_env(cls) -> "LLMRouter":
         g = keys_from_env("GEMINI")
+        forced = os.environ.get("GEMINI_MODEL")
         gem = GeminiClient(KeyPool("gemini", g, min_interval=float(os.environ.get("GEMINI_MIN_INTERVAL", "5"))),
-                           (os.environ.get("GEMINI_MODEL") or "gemini-2.5-flash")) if g else None
+                           [forced] + DEFAULT_MODELS if forced else DEFAULT_MODELS) if g else None
         fb = None
         prov = os.environ.get("FALLBACK_LLM_PROVIDER", "").lower()
         fkeys = keys_from_env("FALLBACK_LLM")

@@ -28,9 +28,14 @@ def _get(http, url, **kw):
 def gdelt(query: str, n: int = 50, http=None) -> list[ArticleCandidate]:
     """GDELT DOC 2.0 : ~3 derniers mois, énorme couverture mondiale, gratuit."""
     http = http or requests
-    r = _get(http, "https://api.gdeltproject.org/api/v2/doc/doc", params={
-        "query": query, "mode": "artlist", "format": "json", "maxrecords": n, "sort": "hybridrel"})
-    time.sleep(5.5)  # limite : 1 requête / 5 s
+    r = None
+    for wait in (6, 20, 45):  # limite : 1 requête / 5 s ; GitHub partage des IP très sollicitées
+        r = _get(http, "https://api.gdeltproject.org/api/v2/doc/doc", params={
+            "query": query, "mode": "artlist", "format": "json", "maxrecords": n, "sort": "hybridrel"})
+        if r:
+            break
+        time.sleep(wait)
+    time.sleep(6)
     if not r:
         return []
     try:
