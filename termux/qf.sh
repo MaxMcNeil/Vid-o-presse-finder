@@ -7,6 +7,7 @@ mkdir -p "$CONF"
 [ -f "$ENVF" ] && . "$ENVF"
 
 KEYVARS="GEMINI_API_KEYS YOUTUBE_API_KEYS FALLBACK_LLM_KEYS GUARDIAN_API_KEYS NYT_API_KEYS NTFY_TOPIC PHONE_SECRET"
+ASKVARS="GEMINI_API_KEYS YOUTUBE_API_KEYS FALLBACK_LLM_KEYS GUARDIAN_API_KEYS NYT_API_KEYS"
 
 save_keys() {
   : > "$ENVF"; chmod 600 "$ENVF"
@@ -16,19 +17,28 @@ save_keys() {
 }
 
 case "$1" in
-  keys)
-    echo "Colle tes clés sur UNE ligne (séparées par des espaces ou virgules). Entrée = garder l'actuel / ignorer."
-    for v in $KEYVARS; do
+  keys|set)
+    # Saisie multi-lignes : colle tes clés (une par ligne ou séparées par espaces/virgules), puis une LIGNE VIDE pour finir.
+    # Entrée tout de suite = garder l'actuel / ignorer ce service.
+    if [ "$1" = "set" ] && [ -n "$2" ]; then LIST="$2"; else LIST="$ASKVARS"; fi
+    echo "Pour chaque service : colle la/les clé(s), puis appuie sur Entrée sur une ligne vide. Entrée seule = ignorer."
+    for v in $LIST; do
       cur="${!v}"; hint=""; [ -n "$cur" ] && hint=" [déjà défini]"
-      read -rp "$v$hint : " val
-      if [ -n "$val" ]; then
-        printf -v "$v" '%s' "$(echo "$val" | tr -s ' ,;' ',' | sed 's/^,//; s/,$//')"
+      echo; echo ">> $v$hint"
+      buf=""
+      while IFS= read -r line; do
+        [ -z "$line" ] && break
+        buf="$buf $line"
+      done
+      if [ -n "$buf" ]; then
+        printf -v "$v" '%s' "$(echo "$buf" | tr -s ' ,;\r' ',' | sed 's/^,//; s/,$//')"
         export "$v"
       fi
     done
     [ -n "$FALLBACK_LLM_KEYS" ] && [ -z "$FALLBACK_LLM_PROVIDER" ] && FALLBACK_LLM_PROVIDER=groq
     save_keys
-    echo "Clés enregistrées dans $ENVF (lisible par toi seul)."
+    echo; echo "Enregistré dans $ENVF. Services définis :"
+    for v in $KEYVARS; do [ -n "${!v}" ] && echo "  - $v ($(echo "${!v}" | tr ',' '\n' | wc -l) valeur(s))"; done
     exit 0 ;;
   phone-setup)
     if [ -z "$NTFY_TOPIC" ] || [ -z "$PHONE_SECRET" ]; then
