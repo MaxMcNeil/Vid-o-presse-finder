@@ -61,3 +61,13 @@ qf "Bill Clinton" "Saddam a des armes de destruction massive" "" n 30   # ou en 
 qf update                            # récupère la dernière version
 ```
 Le rapport est copié dans Téléchargements et peut être envoyé sur GitHub. Sans compilation : `rapidfuzz` et `trafilatura` sont optionnels (repli en Python pur).
+
+## Déclenchement automatique du téléphone depuis GitHub
+
+*Run workflow* envoie une demande **signée** (HMAC, valable 10 min) au téléphone via ntfy.sh. Termux (`qf listen`) la reçoit, lance la recherche, pousse les résultats dans le dépôt et copie le rapport dans Téléchargements. Sans accusé de réception sous 100 s, GitHub fait la recherche lui-même (option `where` : `phone-then-github` par défaut, `github` ou `phone`).
+
+1. Sur le téléphone : `qf phone-setup` (affiche `NTFY_TOPIC` et `PHONE_SECRET`) puis ajoute-les comme **secrets** GitHub.
+2. `qf listen` laisse Termux à l'écoute (`qf autostart` pour le lancer au démarrage, avec l'appli Termux:Boot).
+3. Android : *Paramètres → Applis → Termux → Batterie → Sans restriction*, sinon le système tue l'écoute en arrière-plan.
+
+Sécurité : le sujet ntfy est aléatoire et chaque message est signé avec `PHONE_SECRET` ; un message non signé, modifié ou ancien est ignoré. Les arguments ne passent jamais par un shell.

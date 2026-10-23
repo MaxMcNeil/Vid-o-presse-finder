@@ -6,7 +6,7 @@ ENVF="$CONF/keys.env"
 mkdir -p "$CONF"
 [ -f "$ENVF" ] && . "$ENVF"
 
-KEYVARS="GEMINI_API_KEYS YOUTUBE_API_KEYS FALLBACK_LLM_KEYS GUARDIAN_API_KEYS NYT_API_KEYS"
+KEYVARS="GEMINI_API_KEYS YOUTUBE_API_KEYS FALLBACK_LLM_KEYS GUARDIAN_API_KEYS NYT_API_KEYS NTFY_TOPIC PHONE_SECRET"
 
 save_keys() {
   : > "$ENVF"; chmod 600 "$ENVF"
@@ -29,6 +29,30 @@ case "$1" in
     [ -n "$FALLBACK_LLM_KEYS" ] && [ -z "$FALLBACK_LLM_PROVIDER" ] && FALLBACK_LLM_PROVIDER=groq
     save_keys
     echo "Clés enregistrées dans $ENVF (lisible par toi seul)."
+    exit 0 ;;
+  phone-setup)
+    if [ -z "$NTFY_TOPIC" ] || [ -z "$PHONE_SECRET" ]; then
+      NTFY_TOPIC="qf-$(python -c 'import secrets;print(secrets.token_hex(12))')"
+      PHONE_SECRET="$(python -c 'import secrets;print(secrets.token_hex(16))')"
+      save_keys
+    fi
+    echo "Ajoute ces 2 SECRETS dans GitHub (Settings > Secrets and variables > Actions) :"
+    echo
+    echo "  NTFY_TOPIC   = $NTFY_TOPIC"
+    echo "  PHONE_SECRET = $PHONE_SECRET"
+    echo
+    echo "(appui long sur une valeur pour la copier). Ensuite :  qf listen"
+    exit 0 ;;
+  listen)
+    [ -z "$NTFY_TOPIC" ] && { echo "Lance d'abord :  qf phone-setup"; exit 1; }
+    command -v termux-wake-lock >/dev/null && termux-wake-lock
+    export QF_CONF="$CONF" NTFY_TOPIC PHONE_SECRET
+    cd "$REPO" && exec python -m quote_finder.phone ;;
+  autostart)
+    mkdir -p "$HOME/.termux/boot"
+    printf '#!/data/data/com.termux/files/usr/bin/bash\ntermux-wake-lock\nqf listen >> %s/listen.log 2>&1\n' "$CONF" > "$HOME/.termux/boot/qf-listen.sh"
+    chmod +x "$HOME/.termux/boot/qf-listen.sh"
+    echo "Démarrage automatique configuré (nécessite l'appli Termux:Boot, installée depuis F-Droid, ouverte une fois)."
     exit 0 ;;
   update)
     cd "$REPO" && git pull --rebase -q && pip install -q -r requirements-termux.txt && echo "À jour."

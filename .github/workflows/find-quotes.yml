@@ -33,6 +33,14 @@ on:
         description: "Chercher aussi les articles de presse"
         type: boolean
         default: true
+      where:
+        description: "Où traiter : téléphone d'abord puis GitHub en secours / GitHub seul / téléphone seul"
+        type: choice
+        options:
+          - phone-then-github
+          - github
+          - phone
+        default: phone-then-github
 
 permissions:
   contents: write
@@ -42,7 +50,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  route:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run_github: ${{ steps.r.outputs.run_github }}
+    env:
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      PHONE_SECRET: ${{ secrets.PHONE_SECRET }}
+      WHERE: ${{ inputs.where }}
+      IN_PERSON: ${{ inputs.person }}
+      IN_CLAIM: ${{ inputs.claim }}
+      IN_ALSO: ${{ inputs.also }}
+      IN_LANGS: ${{ inputs.langs }}
+      IN_MAX: ${{ inputs.max_videos }}
+      IN_ANYONE: ${{ inputs.anyone }}
+      IN_STRICT: ${{ inputs.strict }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        name: Envoyer la demande au téléphone (secours GitHub si pas de réponse)
+        run: python3 scripts/route_to_phone.py
+
   search:
+    needs: route
+    if: needs.route.outputs.run_github == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 180
     env:
