@@ -18,7 +18,7 @@ def dailymotion(query: str, n: int = 15, http=None) -> list[VideoCandidate]:
             "search": query, "limit": n, "sort": "relevance",
             "fields": "id,title,description,created_time,duration,url,owner.screenname"})
         r.raise_for_status()
-        items = r.json().get("list", [])
+        items = (r.json() or {}).get("list") or []
     except (requests.RequestException, ValueError) as e:
         log.warning("Dailymotion: %s", e)
         return []
@@ -39,8 +39,8 @@ def archive_org(query: str, n: int = 15, http=None) -> list[VideoCandidate]:
             "q": q, "fl[]": ["identifier", "title", "date", "description", "creator"], "rows": n,
             "output": "json", "sort[]": "downloads desc"})
         r.raise_for_status()
-        docs = r.json()["response"]["docs"]
-    except (requests.RequestException, ValueError, KeyError) as e:
+        docs = ((r.json() or {}).get("response") or {}).get("docs") or []
+    except (requests.RequestException, ValueError, KeyError, TypeError) as e:
         log.warning("Internet Archive: %s", e)
         return []
     out = []

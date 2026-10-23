@@ -1,3 +1,4 @@
+from quote_finder.models import Plan
 import json
 
 from quote_finder import pipeline, report, transcripts
@@ -72,3 +73,36 @@ def test_end_to_end(monkeypatch, tmp_path):
     data = json.loads((out / "results.json").read_text())
     assert data["videos"][0]["title"].startswith("CLINTON") and data["videos"][0]["moments"][0]["timestamp"] == "00:50"
     assert (out / "videos.csv").exists() and (out / "articles.csv").exists()
+
+
+def test_source_failures_never_kill_the_run(monkeypatch, tmp_path):
+    """Régression : le NYT renvoyait {"response": {"docs": null}} et faisait planter tout le run."""
+    from quote_finder.sources import news
+    from quote_finder import pipeline as P
+
+    class H:
+        def get(self, url, **kw):
+            return type("R", (), {"status_code": 200, "json": lambda self: {"response": {"docs": None, "results": None}},
+                                  "content": b"<rss/>"})()
+    assert news.nyt(P.KeyPool("n", ["k"], 0), "q", 10, H()) == []
+    assert news.guardian(P.KeyPool("g", ["k"], 0), "q", 10, H()) == []
+
+    def boom(*a, **k): raise KeyError("x")
+    monkeypatch.setattr(news, "gdelt", boom)
+    assert P._safe(news.gdelt, "q") == []
+
+
+def test_anyone_mode_is_announced_to_the_judge():
+    from quote_finder import scan
+    seen = {}
+
+    class L:
+        def generate_json(self, prompt, **k):
+            seen["p"] = prompt
+            return {"hits": []}
+    plan = Plan("x", [["a"]], ["bardella"], [], [], ["fr"])
+    ex = [scan.Excerpt(0, 10, 1, "[00:00] a")]
+    scan.judge_excerpts(L(), plan, "Bardella", [], "il ment", {}, ex, anyone=True)
+    assert "TOUT LOCUTEUR EST ACCEPTÉ" in seen["p"]
+    scan.judge_excerpts(L(), plan, "Bardella", [], "il ment", {}, ex, anyone=False)
+    assert "TOUT LOCUTEUR EST ACCEPTÉ" not in seen["p"]

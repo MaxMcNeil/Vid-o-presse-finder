@@ -22,9 +22,9 @@ on:
         required: false
         default: "en,fr"
       max_videos:
-        description: "Nombre max de vidéos analysées"
+        description: "Nombre max de vidéos analysées (30 conseillé)"
         required: false
-        default: "40"
+        default: "30"
       strict:
         description: "Exclure les propos rapportés par un tiers"
         type: boolean

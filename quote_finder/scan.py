@@ -91,7 +91,7 @@ JUDGE_PROMPT = """Tu vérifies si une personne AFFIRME quelque chose, à partir 
 
 PERSONNE CIBLE : {person}  (alias : {aliases})
 AUTRES LOCUTEURS ACCEPTÉS : {others}
-AFFIRMATION RECHERCHÉE : {claim}
+{anyone_line}AFFIRMATION RECHERCHÉE : {claim}
 (Reformulation : {summary})
 
 CONTENU : titre « {title} » — chaîne/source : {channel} — date : {date}
@@ -129,14 +129,19 @@ def _hit_from(d: dict, offset_ok=True) -> Hit | None:
         return None
 
 
+ANYONE = ("TOUT LOCUTEUR EST ACCEPTÉ : relève l'affirmation quel que soit celui qui la fait (journaliste, adversaire, "
+          "invité...). La « personne cible » est alors le SUJET de l'affirmation, pas forcément celui qui parle ; "
+          "renseigne toujours speaker_name.\n")
+
+
 def judge_excerpts(llm, plan: Plan, person: str, others: list[str], claim: str, meta: dict,
-                   excerpts: list[Excerpt], kind: str = "vidéo") -> list[Hit]:
+                   excerpts: list[Excerpt], kind: str = "vidéo", anyone: bool = False) -> list[Hit]:
     if not excerpts:
         return []
     body = "\n\n".join(f"--- EXTRAIT {i + 1} ---\n{e.text}" for i, e in enumerate(excerpts))
     prompt = JUDGE_PROMPT.format(
         kind=kind, person=person, aliases=", ".join(plan.person_aliases), others=", ".join(others) or "aucun",
-        claim=claim, summary=plan.claim_summary, title=meta.get("title", ""), channel=meta.get("channel", ""),
+        claim=claim, anyone_line=ANYONE if anyone else "", summary=plan.claim_summary, title=meta.get("title", ""), channel=meta.get("channel", ""),
         date=meta.get("published", ""), desc=(meta.get("description", "") or "")[:500].replace("\n", " "), excerpts=body)
     d = llm.generate_json(prompt)
     hits = [h for h in (_hit_from(x) for x in (d or {}).get("hits", [])) if h and h.quote]
@@ -145,7 +150,7 @@ def judge_excerpts(llm, plan: Plan, person: str, others: list[str], claim: str, 
 
 VIDEO_PROMPT = """{medium}
 PERSONNE CIBLE : {person} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {others}.
-AFFIRMATION RECHERCHÉE : {claim}  (Reformulation : {summary})
+{anyone_line}AFFIRMATION RECHERCHÉE : {claim}  (Reformulation : {summary})
 Le titre peut être trompeur : juge uniquement ce qui est réellement dit.
 Liste CHAQUE moment où l'affirmation est faite, à la lettre ou dans le sens, avec l'horodatage exact (début de la phrase).
 Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vidéo), "quote" (propos tenus, au plus près),
@@ -155,11 +160,12 @@ Si rien ne correspond : {{"hits": []}}. Réponds en JSON : {{"hits": [...]}}"""
 
 
 def judge_video_direct(llm, plan: Plan, person: str, others: list[str], claim: str, url: str,
-                       audio: bytes | None = None) -> list[Hit]:
+                       audio: bytes | None = None, anyone: bool = False) -> list[Hit]:
     medium = ("Écoute cet enregistrement audio en entier." if audio
               else "Regarde et écoute cette vidéo en entier.")
     prompt = VIDEO_PROMPT.format(medium=medium, person=person, aliases=", ".join(plan.person_aliases),
-                                 others=", ".join(others) or "aucun", claim=claim, summary=plan.claim_summary)
+                                 others=", ".join(others) or "aucun", claim=claim, summary=plan.claim_summary,
+                                 anyone_line=ANYONE if anyone else "")
     if audio:
         d = llm.generate_json(prompt, inline_media=("audio/mp3", audio), media_key=url)
     else:

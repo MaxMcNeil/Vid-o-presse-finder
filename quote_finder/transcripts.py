@@ -148,7 +148,7 @@ def get_transcript(v: VideoCandidate, langs: list[str]) -> Transcript | None:
         try:
             t = _yt_api(v.id, langs)
         except Exception as e:  # noqa: BLE001 (blocage IP, sous-titres désactivés...)
-            log.info("transcript API %s: %s", v.id, str(e).splitlines()[0][:120] if str(e) else type(e).__name__)
+            log.info("transcript API %s: %s", v.id, type(e).__name__)
         if t is None:
             t = _ytdlp_subs(v.url, langs)
     elif v.platform == "archive":

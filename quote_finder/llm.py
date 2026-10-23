@@ -91,7 +91,8 @@ class GeminiClient:
                 self.models.insert(0, n) if n == ranked[0] else self.models.append(n)
         log.info("Modèles Gemini découverts : %s", ranked[:4])
 
-    def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1, inline_media=None):
+    def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1, inline_media=None,
+                      max_attempts: int | None = None):
         """inline_media = (mime, octets) pour un enregistrement audio envoyé directement (< ~15 Mo)."""
         import base64
         parts = []
@@ -105,8 +106,12 @@ class GeminiClient:
             "contents": [{"role": "user", "parts": parts}],
             "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"},
         }
+        if (video_url or inline_media) and not getattr(self, "_no_res", False):
+            # on n'a besoin que de la parole : résolution basse = ~3x moins de jetons de quota
+            body["generationConfig"]["mediaResolution"] = "MEDIA_RESOLUTION_LOW"
         last = "aucune clé disponible"
-        for attempt in range(max(8, 3 * len(self.pool._next_ok)) + len(self.models) + 6):
+        total = max_attempts or (max(8, 3 * len(self.pool._next_ok)) + len(self.models) + 6)
+        for attempt in range(total):
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted("toutes les clés Gemini sont épuisées")
@@ -127,6 +132,10 @@ class GeminiClient:
                     continue
             msg = r.text[:400]
             last = f"HTTP {r.status_code}: {msg}"
+            if r.status_code == 400 and "mediaResolution" in msg:
+                self._no_res = True
+                body["generationConfig"].pop("mediaResolution", None)
+                continue
             if r.status_code in (404, 400) and re.search(r"no longer available|not found|is not supported|deprecated", msg, re.I) \
                     and "model" in msg.lower():
                 log.warning("Modèle Gemini %s indisponible, on change de modèle", self.model)
@@ -236,7 +245,8 @@ class LLMRouter:
         err = None
         if self.gemini and self.gemini.pool.available():
             try:
-                out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media)
+                out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media,
+                                                max_attempts=(4 if self.fallback and not video_url and not inline_media else None))
                 cache.put("llm", ck, out)
                 return out
             except QuotaExhausted as e:

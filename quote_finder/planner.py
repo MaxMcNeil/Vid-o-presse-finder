@@ -21,7 +21,7 @@ PROMPT = """Tu prépares une recherche de citations dans des vidéos (transcript
 
 PERSONNE CIBLE : {person}
 AUTRES LOCUTEURS ACCEPTÉS : {others}
-AFFIRMATION / SUJET RECHERCHÉ (peut être un mot, une phrase, un thème, un pays, une affirmation...) :
+{anyone_line}AFFIRMATION / SUJET RECHERCHÉ (peut être un mot, une phrase, un thème, un pays, une affirmation...) :
 \"\"\"{claim}\"\"\"
 LANGUES SOUHAITÉES POUR LES REQUÊTES : {langs}
 
@@ -46,13 +46,15 @@ def _heuristic(person: str, claim: str, others: list[str], langs: list[str]) -> 
                 [f'"{person}" {claim}', f"{person} {claim}"], langs)
 
 
-def make_plan(llm, person: str, claim: str, others: list[str], langs: list[str]) -> Plan:
+def make_plan(llm, person: str, claim: str, others: list[str], langs: list[str], anyone: bool = False) -> Plan:
     if llm is None or not llm.has_text:
         log.warning("Pas de LLM : plan heuristique (moins précis)")
         return _heuristic(person, claim, others, langs)
     try:
         d = llm.generate_json(PROMPT.format(person=person, others=", ".join(others) or "aucun", claim=claim,
-                                            langs=", ".join(langs)))
+                                            langs=", ".join(langs),
+                                            anyone_line=("TOUT LOCUTEUR EST ACCEPTÉ : la personne cible est le SUJET de l'affirmation, "
+                                                         "pas forcément celui qui parle (ex. des gens qui disent que cette personne ment).\n") if anyone else ""))
         groups = [[normalize(t) for t in g if normalize(t)] for g in d.get("term_groups", []) if g]
         groups = [g for g in groups if g][:5]
         if not groups:

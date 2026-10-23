@@ -49,7 +49,7 @@ def gdelt(query: str, n: int = 50, http=None) -> list[ArticleCandidate]:
         return []
     _gdelt_fail = 0
     try:
-        arts = r.json().get("articles", [])
+        arts = (r.json() or {}).get("articles") or []
     except ValueError:
         return []
     out = []
@@ -132,8 +132,8 @@ def guardian(pool: KeyPool, query: str, n: int = 30, http=None) -> list[ArticleC
     if not r:
         return []
     out = []
-    for a in r.json().get("response", {}).get("results", []):
-        f = a.get("fields", {})
+    for a in ((r.json() or {}).get("response") or {}).get("results") or []:
+        f = a.get("fields") or {}
         out.append(ArticleCandidate("The Guardian", a["webUrl"], f.get("headline") or a.get("webTitle", ""),
                                     (a.get("webPublicationDate") or "")[:10], text=f.get("bodyText", "")))
     return out
@@ -150,8 +150,8 @@ def nyt(pool: KeyPool, query: str, n: int = 10, http=None) -> list[ArticleCandid
     if not r:
         return []
     out = []
-    for d in r.json().get("response", {}).get("docs", [])[:n]:
+    for d in (((r.json() or {}).get("response") or {}).get("docs") or [])[:n]:
         snip = " ".join(filter(None, [d.get("abstract"), d.get("lead_paragraph"), d.get("snippet")]))
-        out.append(ArticleCandidate("The New York Times", d["web_url"], d.get("headline", {}).get("main", ""),
+        out.append(ArticleCandidate("The New York Times", d["web_url"], (d.get("headline") or {}).get("main", ""),
                                     (d.get("pub_date") or "")[:10], snippet=snip))
     return out

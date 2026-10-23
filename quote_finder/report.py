@@ -96,6 +96,11 @@ def build(person, claim, plan, vres, ares, outdir: Path, stats: dict | None = No
         for h in r.hits[:2]:
             L.append(f"  > {h.quote}")
     L.append("")
+    ana = [r for r in vres if not r.hits and r.method != "none"]
+    if ana:
+        L += [f"## Vidéos analysées sans passage correspondant ({len(ana)})", ""]
+        L += [f"- {r.video.title or r.video.id} — {r.video.url} — {r.method}" for r in ana[:40]]
+        L.append("")
     unv = [r for r in ares if not r.hits and not r.verified]
     if unv:
         L += [f"## Articles trouvés mais non lisibles ({len(unv)}) — à vérifier à la main", ""]

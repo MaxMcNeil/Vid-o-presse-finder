@@ -28,7 +28,7 @@ class Options:
     langs: list[str] = field(default_factory=lambda: ["en", "fr"])
     max_videos: int = 40
     max_articles: int = 25
-    video_fallback_max: int = 6   # vidéos YouTube sans transcription analysées directement par Gemini
+    video_fallback_max: int = 15  # vidéos YouTube sans transcription analysées directement par Gemini
     audio_fallback_max: int = 10  # vidéos sans transcription (Dailymotion...) : audio écouté par Gemini
     min_confidence: float = 0.55
     strict: bool = False
@@ -54,6 +54,14 @@ class ArticleResult:
 
 
 # ------------------------------------------------------------------ découverte
+def _safe(fn, *a, **k):
+    try:
+        return fn(*a, **k) or []
+    except Exception as e:  # noqa: BLE001
+        log.warning("source %s en erreur (%s: %s), ignorée", getattr(fn, "__name__", fn), type(e).__name__, str(e)[:120])
+        return []
+
+
 def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list[VideoCandidate]:
     found: dict[str, VideoCandidate] = {}
 
@@ -68,11 +76,11 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list
     for i, q in enumerate(plan.youtube_queries):
         lang = o.langs[i % len(o.langs)] if o.langs else None
         if "youtube" in o.platforms:
-            add(youtube.search(yt_pool, q, 25, lang, http), q)
+            add(_safe(youtube.search, yt_pool, q, 25, lang, http), q)
         if "dailymotion" in o.platforms and i < 4:
-            add(other_video.dailymotion(q, 12, http), q)
+            add(_safe(other_video.dailymotion, q, 12, http), q)
         if "archive" in o.platforms and i < 3:
-            add(other_video.archive_org(q, 10, http), q)
+            add(_safe(other_video.archive_org, q, 10, http), q)
     vids = list(found.values())
     log.info("%d vidéos candidates", len(vids))
     # Priorité (pas d'exclusion sur le titre, qui peut mentir) : trouvées par plusieurs requêtes + indices dans les métadonnées.
@@ -88,14 +96,14 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list
 def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[ArticleCandidate]:
     found: dict[str, ArticleCandidate] = {}
     for i, q in enumerate(plan.news_queries):
-        batch = news.gdelt(q, 40, http) if i < 3 else []
-        batch += news.bing_news(q, 20, o.langs[i % len(o.langs)] if o.langs else "en", http)
+        lg = o.langs[i % len(o.langs)] if o.langs else "en"
+        batch = _safe(news.gdelt, q, 40, http) if i < 3 else []
+        batch += _safe(news.bing_news, q, 20, lg, http)
         if i < 4:
-            batch += news.google_news(q, 20, o.langs[i % len(o.langs)] if o.langs else "en", http)
-        if i < 4:
-            batch += news.guardian(pools["guardian"], q, 25, http)
+            batch += _safe(news.google_news, q, 20, lg, http)
+            batch += _safe(news.guardian, pools["guardian"], q, 25, http)
         if i < 3:
-            batch += news.nyt(pools["nyt"], q, 10, http)
+            batch += _safe(news.nyt, pools["nyt"], q, 10, http)
         for a in batch:
             if a.url:
                 found.setdefault(a.url, a).found_by.add(q)
@@ -136,16 +144,16 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
             if not ex:
                 return VideoResult(v, [], "transcript", "aucun passage ne contient les termes recherchés")
             hits = scan.judge_excerpts(llm, plan, o.person, o.also, o.claim, meta, ex,
-                                       "sous-titres automatiques" if "auto" in t.kind else "sous-titres")
+                                       "sous-titres automatiques" if "auto" in t.kind else "sous-titres", o.anyone)
             return VideoResult(v, hits, "transcript")
         # pas de transcription : analyse directe de la vidéo par Gemini (YouTube uniquement)
         if v.platform == "youtube" and llm.has_video and _take(fallback_budget):
-            hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url)
+            hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, anyone=o.anyone)
             return VideoResult(v, hits, "gemini-video")
         if v.platform != "youtube" and llm.has_video and audio_budget is not None and _take(audio_budget):
             audio = media.fetch_audio(v.url)
             if audio:
-                hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, audio=audio)
+                hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, audio=audio, anyone=o.anyone)
                 return VideoResult(v, hits, "gemini-audio")
             return VideoResult(v, [], "none", "pas de sous-titres et audio non téléchargeable")
         return VideoResult(v, [], "none", "pas de transcription disponible (budget d'analyse IA épuisé)")
@@ -186,7 +194,7 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
         e.text = "\n".join(l.split("] ", 1)[-1] for l in e.text.splitlines())
     meta = {"title": a.title, "channel": a.source, "published": a.published, "description": ""}
     try:
-        hits = scan.judge_excerpts(llm, plan, o.person, o.also, o.claim, meta, ex, "article de presse")
+        hits = scan.judge_excerpts(llm, plan, o.person, o.also, o.claim, meta, ex, "article de presse", o.anyone)
     except LLMError as e:
         return ArticleResult(a, [], verified, f"erreur LLM: {str(e)[:100]}")
     for h in hits:
@@ -195,7 +203,7 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
 
 
 def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[ArticleResult]]:
-    plan = make_plan(llm, o.person, o.claim, o.also, o.langs)
+    plan = make_plan(llm, o.person, o.claim, o.also, o.langs, o.anyone)
     log.info("Plan : %s | groupes : %s", plan.claim_summary, plan.term_groups)
     yt_pool = KeyPool("youtube", keys_from_env("YOUTUBE"))
     pools = {"guardian": KeyPool("guardian", keys_from_env("GUARDIAN"), 1.0),
@@ -205,21 +213,48 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     budget = [o.video_fallback_max]
     abudget = [o.audio_fallback_max]
     vres: list[VideoResult] = []
+
+    def safe_video(v):
+        try:
+            return analyze_video(v, plan, o, llm, budget, abudget)
+        except Exception as e:  # noqa: BLE001 - une vidéo en erreur ne doit pas perdre les autres
+            return VideoResult(v, [], "none", f"erreur interne ({type(e).__name__}: {str(e)[:100]})")
+
     with ThreadPoolExecutor(o.workers) as ex:
-        futs = {ex.submit(analyze_video, v, plan, o, llm, budget, abudget): v for v in vids}
+        futs = {ex.submit(safe_video, v): v for v in vids}
         for i, f in enumerate(as_completed(futs), 1):
             r = f.result()
             vres.append(r)
-            log.info("[%d/%d] %s → %d passage(s) (%s)", i, len(vids), r.video.title[:60] or r.video.id, len(r.hits), r.method)
+            log.info("[%d/%d] %s → %d passage(s) bruts (%s)%s", i, len(vids), r.video.title[:60] or r.video.id, len(r.hits),
+                     r.method, f" — {r.note}" if r.note else "")
     for r in vres:
-        r.hits = sorted([h for h in r.hits if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict)],
-                        key=lambda h: h.t if h.t is not None else 0)
+        kept = []
+        for h in r.hits:
+            if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict):
+                kept.append(h)
+            else:
+                log.info("  écarté (%s, %s, %s, conf %.2f) : %s", h.verdict, h.who_says, h.speaker_name or "?", h.confidence,
+                         h.quote[:80])
+        r.hits = sorted(kept, key=lambda h: h.t if h.t is not None else 0)
+    blocked = sum(1 for r in vres if r.method in ("gemini-video", "gemini-audio"))
+    if blocked:
+        log.info("%d/%d vidéos analysées sans transcription (YouTube bloque souvent les transcriptions depuis GitHub)",
+                 blocked, len(vres))
 
     ares: list[ArticleResult] = []
     if o.articles:
-        arts = discover_articles(plan, o, pools, http)
-        with ThreadPoolExecutor(o.workers) as ex:
-            ares = list(ex.map(lambda a: analyze_article(a, plan, o, llm, http), arts))
-        for r in ares:
-            r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict)]
+        try:
+            arts = discover_articles(plan, o, pools, http)
+
+            def safe_article(a):
+                try:
+                    return analyze_article(a, plan, o, llm, http)
+                except Exception as e:  # noqa: BLE001
+                    return ArticleResult(a, [], False, f"erreur interne ({type(e).__name__})")
+            with ThreadPoolExecutor(o.workers) as ex:
+                ares = list(ex.map(safe_article, arts))
+            for r in ares:
+                r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict)]
+        except Exception as e:  # noqa: BLE001 - les résultats vidéo sont conservés quoi qu'il arrive
+            log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
     return plan, vres, ares
