@@ -5,7 +5,14 @@ import logging
 import math
 from dataclasses import dataclass
 
-from rapidfuzz import fuzz
+try:
+    from rapidfuzz import fuzz
+    HAVE_RAPIDFUZZ = True
+except ImportError:  # Termux : pas de compilation, repli pur Python (difflib)
+    fuzz = None
+    HAVE_RAPIDFUZZ = False
+import difflib
+from functools import lru_cache
 
 from .models import Hit, Plan, Segment
 from .util import fmt_ts, normalize, parse_ts
@@ -13,6 +20,21 @@ from .util import fmt_ts, normalize, parse_ts
 log = logging.getLogger("qf.scan")
 
 WIN, STEP, CONTEXT = 40.0, 20.0, 25.0
+
+
+@lru_cache(maxsize=200_000)
+def _tok_close(a: str, b: str) -> bool:
+    if a == b:
+        return True
+    if len(a) < 5 or abs(len(a) - len(b)) > 2:
+        return False
+    return difflib.SequenceMatcher(None, a, b).ratio() >= 0.84
+
+
+def _fuzzy_fallback(text_norm: str, term: str) -> bool:
+    """Sans rapidfuzz : chaque mot du terme doit se retrouver (à une faute près) dans la fenêtre."""
+    words = set(text_norm.split())
+    return all(any(_tok_close(t, w) for w in words) for t in term.split())
 
 
 def term_present(text_norm: str, term: str) -> bool:
@@ -23,6 +45,8 @@ def term_present(text_norm: str, term: str) -> bool:
     if len(term) < 5:
         return False
     # tolérance aux erreurs de transcription automatique ("sadam", "weapon of mass destruction"...)
+    if not HAVE_RAPIDFUZZ:
+        return _fuzzy_fallback(text_norm, term)
     thr = 90 if len(term) < 9 else 85
     return fuzz.partial_ratio(term, text_norm) >= thr
 

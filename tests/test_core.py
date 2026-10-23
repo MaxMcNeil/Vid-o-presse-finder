@@ -169,3 +169,11 @@ def test_bing_news_extracts_real_url():
         def get(self, url, **kw): return type("R", (), {"status_code": 200, "content": xml})()
     a = news.bing_news("q", http=H())[0]
     assert a.url == "https://www.lemonde.fr/a.html" and a.published == "2026-10-05" and a.source == "Le Monde"
+
+
+def test_fuzzy_fallback_without_rapidfuzz(monkeypatch):
+    monkeypatch.setattr(scan, "HAVE_RAPIDFUZZ", False)
+    assert scan.term_present("sadam husein a des armes", "saddam")
+    assert scan.term_present("weapon of mass destruction program", "weapons of mass destruction")
+    assert not scan.term_present("the cat sat on the mat", "saddam")
+    assert not scan.term_present("good morning france", "weapons of mass destruction")

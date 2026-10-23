@@ -5,8 +5,13 @@ import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 
+import re
 import requests
-import trafilatura
+
+try:
+    import trafilatura
+except ImportError:  # Termux : extraction simplifiée
+    trafilatura = None
 
 from . import media, scan, transcripts
 from .keys import KeyPool, keys_from_env
@@ -163,6 +168,45 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
         return VideoResult(v, [], "none", f"erreur LLM: {str(e)[:120]}")
 
 
+class _P(__import__("html.parser", fromlist=["HTMLParser"]).HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.skip, self.cur, self.paras = 0, [], []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style", "nav", "footer", "header", "aside", "form"):
+            self.skip += 1
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style", "nav", "footer", "header", "aside", "form"):
+            self.skip = max(0, self.skip - 1)
+        if tag in ("p", "h1", "h2", "h3", "li", "blockquote") and self.cur:
+            t = " ".join("".join(self.cur).split())
+            if len(t) > 40:
+                self.paras.append(t)
+            self.cur = []
+
+    def handle_data(self, d):
+        if not self.skip:
+            self.cur.append(d)
+
+
+def fetch_article_text(url: str) -> str:
+    """Texte d'un article : trafilatura si installé, sinon extraction des paragraphes <p>."""
+    try:
+        if trafilatura is not None:
+            html = trafilatura.fetch_url(url)
+            return (trafilatura.extract(html) or "") if html else ""
+        r = requests.get(url, timeout=25, headers={"User-Agent": "Mozilla/5.0 (compatible; quote-finder)"})
+        if r.status_code != 200 or "html" not in r.headers.get("content-type", "html"):
+            return ""
+        p = _P()
+        p.feed(r.text)
+        return "\n".join(p.paras)
+    except Exception:  # noqa: BLE001
+        return ""
+
+
 def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None) -> ArticleResult:
     text = a.text
     if not text:
@@ -176,8 +220,7 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
                         url = a.url = dec["decoded_url"]
                 except Exception:  # noqa: BLE001
                     pass
-            html = trafilatura.fetch_url(url) if "news.google.com" not in url else None
-            text = (trafilatura.extract(html) or "") if html else ""
+            text = fetch_article_text(url) if "news.google.com" not in url else ""
         except Exception:  # noqa: BLE001
             text = ""
     verified = bool(text)

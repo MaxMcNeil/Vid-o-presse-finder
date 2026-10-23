@@ -50,3 +50,14 @@ Variable optionnelle `GEMINI_MODEL` (défaut `gemini-2.5-flash`) : à changer si
 - GDELT ne couvre que ~3 mois ; pour les archives anciennes (ex. 1998), les clés Guardian/NYT sont utiles.
 - Si Gemini est surchargé (erreur 503), le programme change de modèle automatiquement ; garde quand même `FALLBACK_LLM_KEYS` (Groq) comme filet de sécurité.
 - Articles sous paywall : vérifiés sur le chapô seulement (signalé).
+
+## Version Termux (téléphone, adresse IP non bloquée par YouTube)
+
+```bash
+cd ~/vpf && bash termux/install.sh   # une seule fois
+qf keys                              # enregistre tes clés (stockées dans ~/.quote_finder/keys.env)
+qf                                   # recherche interactive
+qf "Bill Clinton" "Saddam a des armes de destruction massive" "" n 30   # ou en une ligne
+qf update                            # récupère la dernière version
+```
+Le rapport est copié dans Téléchargements et peut être envoyé sur GitHub. Sans compilation : `rapidfuzz` et `trafilatura` sont optionnels (repli en Python pur).
