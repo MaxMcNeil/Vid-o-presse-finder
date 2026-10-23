@@ -2,37 +2,62 @@
  "person": "Jordan Bardella",
  "claim": "Bardella dit des mensonges et promesses intenables et chiffres erronés",
  "plan": {
-  "claim_summary": "Bardella dit des mensonges et promesses intenables et chiffres erronés",
+  "claim_summary": "Critiques, vérifications des faits ou accusations ciblant Jordan Bardella concernant des mensonges allégués, des chiffres erronés ou des promesses électorales jugées irréalistes ou intenables.",
   "term_groups": [
    [
-    "bardella"
+    "mensonge",
+    "mensonges",
+    "mentir",
+    "ment",
+    "intox",
+    "chiffres faux",
+    "chiffres errones",
+    "fake news",
+    "desinformation",
+    "lies",
+    "false claims",
+    "fact check"
    ],
    [
-    "dit"
-   ],
-   [
-    "mensonges"
-   ],
-   [
-    "promesses"
-   ],
-   [
-    "intenables"
+    "promesses intenables",
+    "promesse intenable",
+    "irrealiste",
+    "infaisable",
+    "inapplicable",
+    "chiffrage",
+    "demagogie",
+    "flou",
+    "unrealistic promises",
+    "unfeasible"
    ]
   ],
   "person_aliases": [
-   "jordan bardella"
+   "jordan bardella",
+   "bardella",
+   "jordan bardela",
+   "m bardella",
+   "president du rn jordan bardella"
   ],
   "youtube_queries": [
    "Jordan Bardella Bardella dit des mensonges et promesses intenables et chiffres erronés",
-   "Jordan Bardella Bardella dit des mensonges et promesses intenables et chiffres erronés interview",
-   "Jordan Bardella Bardella dit des mensonges et promesses intenables et chiffres erronés speech",
-   "Jordan Bardella says Bardella dit des mensonges et promesses intenables et chiffres erronés",
-   "\"Bardella dit des mensonges et promesses intenables et chiffres erronés\" Jordan Bardella"
+   "Jordan Bardella fact check mensonges",
+   "Bardella chiffres faux vérification",
+   "Bardella promesses intenables débat",
+   "Jordan Bardella vrai ou faux intox",
+   "Jordan Bardella programme chiffrage irréaliste",
+   "fact checking Jordan Bardella 2024",
+   "Bardella mensonge extrait interview",
+   "Jordan Bardella désinformation plateau tv",
+   "Bardella chiffres erronés face à face",
+   "Jordan Bardella false claims fact check"
   ],
   "news_queries": [
    "\"Jordan Bardella\" Bardella dit des mensonges et promesses intenables et chiffres erronés",
-   "Jordan Bardella Bardella dit des mensonges et promesses intenables et chiffres erronés"
+   "\"Jordan Bardella\" \"mensonge\" OR \"chiffres erronés\" AFP OR Le Monde",
+   "\"Jordan Bardella\" \"fact-check\" OR \"vrai du faux\"",
+   "\"Bardella\" \"promesses intenables\" OR \"irréaliste\" Le Figaro OR Libération",
+   "\"Jordan Bardella\" \"false claims\" OR \"misleading\" Reuters",
+   "\"Bardella\" \"chiffrage\" \"programme\" faux OR trompeur"
   ],
   "languages": [
    "en",
@@ -40,71 +65,376 @@
   ]
  },
  "stats": {
-  "videos_scanned": 10,
-  "articles_scanned": 25
+  "videos_scanned": 30,
+  "articles_scanned": 23
  },
  "videos": [
   {
-   "title": "Nouvelles révélations de Mediapart sur Jordan Bardella: \"Aujourd'hui le RN ment aux Français, il y a d'autres mensonges qui sont bien plus graves\", déclare Florian Philippot, président des (Patriotes) et candidat à l'élection présidentielle",
-   "uploaded": "2026-10-09",
-   "platform": "dailymotion",
-   "channel": "BFM",
-   "url": "https://www.dailymotion.com/video/xbki5yy",
-   "method": "transcript",
+   "title": "Les preuves de Mediapart contre Jordan Bardella sont-elles irréfutables ?",
+   "uploaded": "2026-10-02",
+   "platform": "youtube",
+   "channel": "M6 Info",
+   "url": "https://www.youtube.com/watch?v=FmggDfxdfSc",
+   "method": "gemini-video",
    "moments": [
     {
-     "timestamp": "00:36",
-     "seconds": 36.0,
-     "link": "https://www.dailymotion.com/video/xbki5yy?start=36",
-     "t": 36.0,
-     "quote": "c'est pourquoi aujourd'hui, il mente aux Français. Il y a d'autres mensonges qui sont encore bien plus graves.",
+     "timestamp": "01:00",
+     "seconds": 60.0,
+     "link": "https://www.youtube.com/watch?v=FmggDfxdfSc&t=60s",
+     "t": 60.0,
+     "quote": "Ce matin, gauche et droite dénonçaient une défense bâtie sur le mensonge.",
      "verdict": "paraphrase",
-     "who_says": "other_named",
-     "speaker_name": "Florian Philippot",
-     "confidence": 0.95,
-     "why": "Florian Philippot affirme que le RN et Jordan Bardella mentent aux Français."
+     "who_says": "unknown",
+     "speaker_name": "Journaliste",
+     "confidence": 0.85,
+     "why": "Le journaliste rapporte que les opposants politiques accusent Jordan Bardella de fonder sa défense sur le mensonge."
     },
     {
-     "timestamp": "00:48",
-     "seconds": 48.0,
-     "link": "https://www.dailymotion.com/video/xbki5yy?start=48",
-     "t": 48.0,
-     "quote": "Quand ils disent qu'ils vont augmenter les salaires et le pouvoir d'achat en restant dans l'Union européenne et l'euro, il va falloir m'expliquer comment. C'est un mensonge.",
+     "timestamp": "01:45",
+     "seconds": 105.0,
+     "link": "https://www.youtube.com/watch?v=FmggDfxdfSc&t=105s",
+     "t": 105.0,
+     "quote": "Il aurait pu dire : 'j'ai été jeune, et je me suis repris depuis, etc.' C'est pas ce qu'il dit, il ment.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Olivier Faure",
+     "confidence": 0.95,
+     "why": "Olivier Faure affirme directement que Jordan Bardella ment sur cette affaire."
+    },
+    {
+     "timestamp": "01:56",
+     "seconds": 116.0,
+     "link": "https://www.youtube.com/watch?v=FmggDfxdfSc&t=116s",
+     "t": 116.0,
+     "quote": "Veut-on d'un Premier ministre qui non seulement est antisémite, mais par ailleurs ment aux Français devant des preuves qui l'accablent ?",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Gérald Darmanin",
+     "confidence": 0.95,
+     "why": "Gérald Darmanin accuse Jordan Bardella de mentir aux Français face aux accusations."
+    }
+   ]
+  },
+  {
+   "title": "Jordan Bardella contre Mediapart : \"Son antisémitisme et le mensonge en politique\"",
+   "uploaded": "2026-10-02",
+   "platform": "youtube",
+   "channel": "RTL  ",
+   "url": "https://www.youtube.com/watch?v=ejLmut3Kebg",
+   "method": "gemini-video",
+   "moments": [
+    {
+     "timestamp": "00:21",
+     "seconds": 21.0,
+     "link": "https://www.youtube.com/watch?v=ejLmut3Kebg&t=21s",
+     "t": 21.0,
+     "quote": "c'est pas ce qu'il dit, il ment. Et donc on a un double sujet : son antisémitisme et le mensonge en politique.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Olivier Faure",
+     "confidence": 0.95,
+     "why": "Olivier Faure accuse directement Jordan Bardella de mentir (« il ment ») au sujet des révélations le concernant, dénonçant « le mensonge en politique »."
+    }
+   ]
+  },
+  {
+   "title": "Bardella/écrits antisémites : Mediapart publie les documents",
+   "uploaded": "2026-10-01",
+   "platform": "youtube",
+   "channel": "C à vous - France Télévisions",
+   "url": "https://www.youtube.com/watch?v=bjZS-yCfk2w",
+   "method": "gemini-video",
+   "moments": [
+    {
+     "timestamp": "05:31",
+     "seconds": 331.0,
+     "link": "https://www.youtube.com/watch?v=bjZS-yCfk2w&t=331s",
+     "t": 331.0,
+     "quote": "un double mensonge de monsieur Bardella, d'abord celui depuis lundi devant les Françaises et les Français, mais aussi celui de sa biographie, de son autobiographie sur son propre parcours",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Fabrice Arfi",
+     "confidence": 0.95,
+     "why": "Fabrice Arfi accuse directement Jordan Bardella de mentir aux Français et dans son autobiographie concernant ses écrits passés."
+    },
+    {
+     "timestamp": "12:03",
+     "seconds": 723.0,
+     "link": "https://www.youtube.com/watch?v=bjZS-yCfk2w&t=723s",
+     "t": 723.0,
+     "quote": "C'est le droit le plus ultime de dire que le ciel n'est pas bleu et de continuer à mentir",
      "verdict": "paraphrase",
      "who_says": "other_named",
-     "speaker_name": "Florian Philippot",
+     "speaker_name": "Fabrice Arfi",
+     "confidence": 0.85,
+     "why": "Fabrice Arfi reproche à Jordan Bardella et à ses partisans de persister dans le mensonge et de nier l'évidence des révélations."
+    }
+   ]
+  },
+  {
+   "title": "\"Jordan Bardella ment éhontément\"  : Gérald Darmanin sur RTL",
+   "uploaded": "2026-10-02",
+   "platform": "youtube",
+   "channel": "RTL  ",
+   "url": "https://www.youtube.com/watch?v=v5ENd7-KLCk",
+   "method": "gemini-video",
+   "moments": [
+    {
+     "timestamp": "00:44",
+     "seconds": 44.0,
+     "link": "https://www.youtube.com/watch?v=v5ENd7-KLCk&t=44s",
+     "t": 44.0,
+     "quote": "C'est sa stratégie de défense : il ment, il ment éhontément.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Gérald Darmanin",
      "confidence": 0.95,
-     "why": "Florian Philippot qualifie de mensonges intenables les promesses du RN sur le pouvoir d'achat et l'Europe."
+     "why": "Gérald Darmanin accuse directement Jordan Bardella de mentir de manière éhontée concernant les propos et accusations portés contre lui."
+    }
+   ]
+  },
+  {
+   "title": "Mediapart publie ses preuves, Jordan Bardella se défend",
+   "uploaded": "2026-10-02",
+   "platform": "youtube",
+   "channel": "franceinfo",
+   "url": "https://www.youtube.com/watch?v=pcd_PG3BMEE",
+   "method": "gemini-video",
+   "moments": [
+    {
+     "timestamp": "01:56",
+     "seconds": 116.0,
+     "link": "https://www.youtube.com/watch?v=pcd_PG3BMEE&t=116s",
+     "t": 116.0,
+     "quote": "Veut-on d'un Premier ministre qui non seulement est antisémite, mais par ailleurs ment aux Français devant des preuves qui l'accablent ?",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Gérald Darmanin",
+     "confidence": 0.95,
+     "why": "Gérald Darmanin accuse explicitement Jordan Bardella de mentir aux Français face aux accusations et preuves rapportées par Mediapart."
+    }
+   ]
+  },
+  {
+   "title": "Comment le RN transforme l'affaire Bardella en festival de mensonges",
+   "uploaded": "2026-10-09",
+   "platform": "youtube",
+   "channel": "LeHuffPost",
+   "url": "https://www.youtube.com/watch?v=VM-4b7BYARc",
+   "method": "gemini-video",
+   "moments": [
+    {
+     "timestamp": "03:11",
+     "seconds": 191.0,
+     "link": "https://www.youtube.com/watch?v=VM-4b7BYARc&t=191s",
+     "t": 191.0,
+     "quote": "Ce qui est faux, Mediapart précise que l'extraction des messages a bien été réalisée le 16 août 2026 au cœur de l'enquête.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Marie Haynes",
+     "confidence": 0.9,
+     "why": "La journaliste vérifie les faits et qualifie de fausse l'affirmation formulée juste avant par Jordan Bardella concernant la date d'authentification des messages par Mediapart."
+    }
+   ]
+  },
+  {
+   "title": "Jordan Bardella : le piège du mensonge ?",
+   "uploaded": "2026-10-02",
+   "platform": "youtube",
+   "channel": "RTL  ",
+   "url": "https://www.youtube.com/watch?v=vylB64W-BZ4",
+   "method": "gemini-video",
+   "moments": [
+    {
+     "timestamp": "00:15",
+     "seconds": 15.0,
+     "link": "https://www.youtube.com/watch?v=vylB64W-BZ4&t=15s",
+     "t": 15.0,
+     "quote": "Il ment éhontément. [...] veut-on d'un Premier ministre qui non seulement est antisémite, mais par ailleurs ment aux Français devant des preuves qui l'accablent ?",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Gérald Darmanin",
+     "confidence": 0.95,
+     "why": "Gérald Darmanin accuse ouvertement Jordan Bardella de mentir aux Français au sujet de ses publications passées révélées par Mediapart."
+    },
+    {
+     "timestamp": "02:20",
+     "seconds": 140.0,
+     "link": "https://www.youtube.com/watch?v=vylB64W-BZ4&t=140s",
+     "t": 140.0,
+     "quote": "ce qu'il fait de erreur madornale c'est le fait de s'enfoncer en mentant.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Eva Morletto",
+     "confidence": 0.9,
+     "why": "La journaliste Eva Morletto critique la stratégie de Jordan Bardella en affirmant qu'il commet l'erreur de s'enfoncer dans le mensonge."
+    },
+    {
+     "timestamp": "06:13",
+     "seconds": 373.0,
+     "link": "https://www.youtube.com/watch?v=vylB64W-BZ4&t=373s",
+     "t": 373.0,
+     "quote": "Et là, il s'enferre dans le mensonge, et tout le monde voit que c'est un mensonge.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Vibeke Knoop Rachlew",
+     "confidence": 0.9,
+     "why": "La journaliste Vibeke Knoop Rachlew accuse Jordan Bardella de persister dans un mensonge évident pour le public."
     }
    ]
   }
  ],
  "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Enquête sur Jordan Bardella : Gérald Darmanin accuse le président du RN de mentir « éhontément » - Le Monde.fr",
+   "date": "2026-10-02",
+   "source": "Le Monde.fr",
+   "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPbTFEWHZZclZWb2dGbmJTSk1qcWRBczJHeU9PczA2MVlXWWktamU0Q0RxZmNxNHpiQlpnVDBCYklsNmphb1VLd2NUMDZtbllwaFJQbnZ1ZHdDNzljbGkwNnprM1g0QjhnNS1pbVNvSWxsdUdwYVkwLWFiVlV5Ymo0N0RQeVdQS3Z1Q1I3T0lKQ2pZRlBWdnNRWmVtVW1hQldtUEFLV0RITnB6aVFBbkExVEg4N0JJZ3BvcGx5Zi14SjVqSU9qNm1LbWI3X3ZmQ1JDaHUtTDdGdWNiOWxGM0dYR3VzNko3VDBSYWtaYkctLXc4dlh3?oc=5"
+  },
+  {
+   "title": "Cet autre point de la défense de Jordan Bardella est (encore) un mensonge - Le HuffPost",
+   "date": "2026-10-13",
+   "source": "Le HuffPost",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNN3FQRXkxOEYzR1M3Zk5RdWlnZEhBQzZUaW5jTlozWXJpc05UOTdLZVdzMFI4dndPclZkNFNGY3ZuVEY3TVRzX2JQNzczYk9SMTR3cUN6aXlGczZLWWVJRmdxYXZUMllpS3k3dW55NXpqMy1LX3ZlSU9zRHlIRmVNMUhCWElmSE9aQWcxMFcxemhYakRfUWhEVE8taEgyZlVJdW53NXlrXzViOXV4MXk4bC1PQ2pUdE4wTXB0cDk5YW9jUGN1YnM5WjJmQQ?oc=5"
+  },
+  {
+   "title": "Empêtré dans la spirale du mensonge, Bardella court-il à sa perte ? - Courrier international",
+   "date": "2026-10-05",
+   "source": "Courrier international",
+   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPZEJDZGVUN1Fwb0FrMTI0MEM3cXpHVEJ6VktUTmZsTVVaOVRlQm5SOERacjUyOE9nUGphUnZ4Z0JnUjYwWmxXQzZOaDlPRndjQ3p0dlV3d0gtempmMzZYb1hPTWhUYnFkSG1zMThjUmUwT0RBaUk2YXdldGpxaGlJcUhuQmVDMzZjcDd1T3JCSVAzc2hVdmlibnlHMG5Hem1zaU83dzhQNUdDRExqaFF0VzVBaEV0Z19kc0VSWkFWSndqZkcxeWt2Q0tmOGNOS28?oc=5"
+  },
+  {
+   "title": "Jordan Bardella embrasse l’arme trumpienne du mensonge - Mediapart",
+   "date": "2026-10-02",
+   "source": "Mediapart",
+   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQOTBlbk9ZTHR5OFBMZEZSMExrMnBrOTUtLU02TmRqTHZPZWRkSF9xaC1BZmVHUUFsQzhpTzY2VFMwRjJ2X1doNWRsbjAyT1FRd3lUYl81NHNEOWdyaDBCam1ZbU9tSDMxTFJ4LUZsT21CdUpZVE9PZlZlNTQ1bnE5WTY5ZVVsb2l1NnBSa2pkZV8wM3dZX284MXQ2Y2hEeEY2dVhNT21IVQ?oc=5"
+  },
+  {
+   "title": "Après deux semaines de mensonges, le RN cherche à sortir de l’affaire Bardella - Mediapart",
+   "date": "2026-10-12",
+   "source": "Mediapart",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOWkpBZVM1OGRHTTQxZXotbmZFMVZLdUNyRmxWS2NzY3lQZXZuSmpKSWdjbnRPSEdoZGpVZEZLZ2VNVXhmd1Z0SG00NXJzZ2loQzRjU05ocmwzbXhHT3gyTVl4YzNnVFhiQXVOdzU1cjl1T1pBdTBMU25jTG1qWjNrLXM3SFYxREhKblpqVUpOcUNjSDlkQk5fa3VIb0hUUnM3WjY5TkNsZzJ4WTRDOXQxNWgtTW9fNjllMTJobzRnaEFhWlU?oc=5"
+  },
+  {
+   "title": "« Montages », « faux » : 24 heures de mensonges du Rassemblement national - Mediapart",
+   "date": "2026-10-02",
+   "source": "Mediapart",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOR1RXZ0ItMlVRUDM5WlZMOVBMbmR3Z1hSa2NGWUlsLXEyODY0Q1VNSy1iS3doVVAxSElhVDNWTV8tdnhZSmJkTFpsTVloTnV5cjRrYU8zbUZTR29GWXMwakN5ZlRtTlZZZ1BZbDdzNUh3cGRjcTVDYVVPZ1NRNDlSbDJJV3lScGtBQUJWaEI4NlhrcE1HY2FsNmRPZVE1MVpBR2FyZnlReWlSbDJiU21PZTVB?oc=5"
+  },
+  {
+   "title": "Marine Tondelier veut une loi pour \"interdire le mensonge en politique\" après les propos polémiques d'un sénateur sur un pesticide - franceinfo",
+   "date": "2026-09-05",
+   "source": "franceinfo",
+   "url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxPcl8wal9iSFJoWDduTU1HMHJPTmJqTHBzbGNTNW1QZ2ZIUmpkYi1DVmxJQlRScHNYeEJTZkIxdlBBZGhjZ09nbEREdUdMcDJkWVJzSkduYThiTVZpcUFyUGZwMXBBQU1RWTV2V3dRdWNXam0xNzFrTjlUWnpIQldVZVRKVUw3ZHc3eVRsZlN3SmdUMlVPQUZyN3RwWFNCd1FjMzlUTUxNZWNKd1dGYzJjRlFiV2ZDUDNhejVxWERONGRwRjFLS0hfZXhuYlR3UXpZMGZvY0I5ejlSd1lJdlJsX0hOaGdMelQ3Y096WWNEU3Q5dzFQeDF0MUJyUmtYU0IxVndzZWJoaEtQUWdILVQ4?oc=5"
+  },
+  {
+   "title": "Écrits antisémites de Jordan Bardella : les preuves du mensonge - Mediapart",
+   "date": "2026-10-01",
+   "source": "Mediapart",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNTFhrbm05Wm1lY0dBSFBiR2ZPQnoxYWVGZG5Oc29qa1QtZnFaNkpqLXZFa3FZVEIySVdIVE9XY2pGZzBqOUFXdDkxeGwzRGlmNDZORHhxT003Q2NsUU1kRm1jME5XTXBOSkNGanIzZjdubXZtY1h2eTJhNjF3bHNYbFJIUFVORGpjQUZMcEp3bTZ2UC1BX2VYd1J5dDZPR0ItYXdXM3FhX1pNQkFrNGZfUg?oc=5"
+  },
+  {
+   "title": "Derrière la défense trumpiste de Jordan Bardella, le poison lent de la « réinformation » - Mediapart",
+   "date": "2026-10-08",
+   "source": "Mediapart",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOekxVak9CQ3d6am5naVhNMFEzUFVHeGNGYVhfX1JLUjR3R21KM1RMdWJWX1Rxc1FZOTVjbEZBdzBFeTM5TFNST2dNX3l2RmkwTnhIdGp2M09XY2JXWEpmRFhOeXM0R0xTRmJ1UW5hdmt5WjRHWjRRTjFyWm1SNzNTQk0yRVNaM3FzX1JtdldzTERKeHhHUGJRd2t1bTJia1k4RTlJNHpKd2J4YVlZS1NYYm5GaV8tWTVhQXJ2bkd6ZzAwa2NENnVnYjBWTFBvQQ?oc=5"
+  },
+  {
+   "title": "«On ne peut pas parler d’une incertitude judiciaire» : Marine Le Pen juge «irréaliste» que la justice perturbe la suite de sa campagne - Le Figaro",
+   "date": "2026-07-11",
+   "source": "Le Figaro",
+   "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOajZtYldFYTNnU0szUS1GRDFIbWFXQWxsVXVOTzMyQ05WbVBCWGJrY2MydXF0UmgzVkRpOVBrTnJ4YUFBd3BmR29BbmlzM3hHLVQtUWVuYWNSTFJLZFpDejd3U0ZmcXIzMWdDZDdEbXJvXzF6Q1pBaUhRQlJ0QWhfd1F3MGQ1MFU5ODZzOHZaQm1xQVhCLVpZa0FYSzZkQTBpa3lma0FiZXBvV2xkNFhfVFQwZFBKc29zOWwxM1lRRDRhWFJpb3FJTmpqTHF3bzhQZU5va25FRGkzRkowdWJGMVNmTEJuN0R5MFpUaWphZDFaYzlVLXZHWEZHSlVuU3Q4?oc=5"
+  },
+  {
+   "title": "\"Des propos parfaitement délirants\" : Jordan Bardella annonce porter plainte pour diffamation après les accusations d'antisémitisme portées par Mediapart - franceinfo",
+   "date": "2026-09-28",
+   "source": "franceinfo",
+   "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxQZ0NOTi1MYVNFSGZfWFBHN01EMktmNkI2bjkxVTB3X1N3a3hyZ2owWkU0Tk1YTmQxekF3Xzk4WFJOcHZqVkVRNWNUWkpScldUTGxjRzdGb0dSV0o0QV9XVHh3LTdCaC1EZ1ZGOWM5U01ENUNfcEFJTFdiWGgwb0Y5MHlfdFJrNkdwbmNmNE5DZy1oTHdNZEtOLXRtR3FOMkREZXZFbHJjNlZLbjRLeUdablNEMFh5ZHl5TTVfWEEyR3NwLUN3bWQzRjFIR1hNTXEwLWdXMkIwZkkwR3MxTHFncEp4RDU1czh2MEZsMzhuckF2dU5BZWQ3MUJQclBNNXI1X0haTFBMaDFzLWRBYWZmczk0WXMyUlgxOXFoMEZTemFCelNSdE1ib0RVeFBQanpXS1ZvWnFUQkRyZml5NFFTQ1J2MkljOF80eXc?oc=5"
+  },
+  {
+   "title": "Accusations d'antisémitisme : le chemin de Matignon de plus en plus tortueux pour Jordan Bardella - France 24",
+   "date": "2026-10-02",
+   "source": "France 24",
+   "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxQTEZabUs5SFN6aFZNS3hRdGNETFpmWHdsWF9aYmk3cUw1cU5mV1puQ194V281NVhLMXVIX2d1OU1raEJFdU5nRTd6UHFENi1QZ3FxZThIdGVXS3hCcGNCSHA2MlYxVU1veHVTZExSWko2NTBYUGhIZ1kwblVxTkRqMEdrcVpCOFRCcUxwSF9rY2hKbW8zZnZKYWRhcWxSOWFwYUNJU1ZKbmZHN0Y4NC1fRGJJeTZ4bDhCV3dmdy02am5wR1RFbDE3dDVfY0J0R1JiWlc4ZUt0TjZGVWpNcUxTS2J0VjB0X2tMdW9ENFRUN0IxMGdlcWJPdEZHVkw5NnRpN0g0VHRCX1JDNVJj?oc=5"
+  },
+  {
+   "title": "Affaire Bardella : au RN, le démenti demeure, la défense évolue - Le Point",
+   "date": "2026-10-02",
+   "source": "Le Point",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNU3pYaU5wbTdKZ2d0aEFydHgxUUhCVl9kUlE2SG9rR09MOFFXLU1GbXpNajYyY0tlNzZ4eXNhM2g1dlRlWjNUNXBmZHdudVRiMUdGVFh4dHZVWUdGVVJoMlFrOUdjMGpsRG1uYjRPd29Wdk8zaWN0S2pNVjdfVWNEQ2djamtubktMSDZPNGQwQkt3aEdiSDdWN1RTMzZESVVrejREX3N2S3c0cmxCR2I2T2tTMkNxZGE5Q3BxeA?oc=5"
+  },
+  {
+   "title": "Mediapart publie les messages antisémites attribués à Jordan Bardella qui dénonce « des montages grossiers » - La Tribune",
+   "date": "2026-10-01",
+   "source": "La Tribune",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQOVlrZzl4VWZ6M0xQeFJsWkJxVkYtLTNCVlNPdkI4c1pIMzlkaE82bXN3cHRpTml4d194R1RVNlowU1phd0F3cmkxdkxtdGxtanRXVWhVY1ZlUGh1RW5wMWRFS0h1N1FfT0NDa09hbFBFaUFIQUpwbUI5dGVxRXpIZXBHWFpkT0RKdkRseVJLek9EQzAzYkoyeEUzMWg5UU4ta1Z0X1N5TGZ2S0xkOGREeUkyWUhBbmdyVHVoRk9Td0FLQXJoNlpGMS1qRkhwdENiMUVFWGJ0NTlVMEZFcGNWbw?oc=5"
+  },
+  {
+   "title": "«Marine Le Pen va le débrancher»: l'avenir de Jordan Bardella au RN vacille - blue News",
+   "date": "2026-10-02",
+   "source": "blue News",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPb2w4NHdiUnRIN2hfNklIYURCSThRS3ZvYmZlNjJlUERnTmxkRWZLeHh4ZjlPRFhvTmo0Y3k5aTdodGhtR0c5VEtBYVljcDVJQ1J2N3ktX3hZRGRRN3JEamNkZ1RyMlBDb1QxMV9UU3o5MmZjd1U4aGNpQ2pOWjVSd0VpUi00LXllT09pTTU5TzZ6OGtUVVoxWXFfMlR5V1hiSVdyUFVtLW55T2tkdGNqLVJvUWdWbzl4U0RwVlVVOTZmMTdYSFhEalllUDNhQQ?oc=5"
+  },
+  {
+   "title": "Médiapart révèle des captures d’écran des écrits antisémites: Jordan Bardella dénonce des “pseudo-preuves” - 7sur7.be",
+   "date": "2026-10-01",
+   "source": "7sur7.be",
+   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOMjVFZ0ozLW8zRlhkbkczZ0o5VXNZdkNRSGFfNWNueDlrZG9mMTE2a0JQLWlxczF1Q3hsaDBObnRnd1lCOURNWkZLN3JvZW5WZ1JRNmh4MUp0MjZORXhhdXJjWWh3bW5uRU11VW0wSkx4SS1SeGk1M1pscU83Wl9hU2puNnBYb1JBT0xQYVlZR3U3QllVTWZ1cUdsQ1NjYU5xd2JtOWp4bXh0V29Zd1o1bHhDdWZjQ2hmRWh2a3QwbkRZam9QWnhZVnRrYW5kNl9ZaGJBQlBhaw?oc=5"
+  },
+  {
+   "title": "Perquisitions dans le cadre d'une enquête du parquet européen visant le RN - Les Echos",
+   "date": "2026-07-01",
+   "source": "Les Echos",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNT3BSc0hITWVrcHdZaWNFUzJwM2FvVFFCSEZ6REN3ZVd6Mk9kQlp3Mzl6eDY4cmIxMzJXaFhBVkRiRy1QR2pDWWxtOGc1QlMwV1U0YXF1X3FpNXhyaEpYbGdoVHZfVHBZVWFpYlJUdG5wZUZaSW9oR2JxeHpuUEFoVHdGVG9wN1ZJMWpVZUJUQmozNFNFRmlUOTJEb1N0cmJxa01JVGZ5TnVwMGtnSnpOY3V2a2hjWS1EeTNyY0NYd3NCcEJkNFc5aG1EZ2djZw?oc=5"
+  },
+  {
+   "title": "«C’est du trumpisme» - L’étau se resserre sur Jordan Bardella ! - blue News",
+   "date": "2026-10-02",
+   "source": "blue News",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNaVBfX3B0ZWFQR1B0UTY2aGZ2N1p1Smg1dnJGTVgxcUpXY3ByaEFVZWtYQXZmajVxazhqVlMxQnJkUFFsdElXb1VXQ2FLY0FybkRwNkVvSExpZ01fTkZIN25GYXpwYjdUSzNVY0sxRzZwWXBlZnBBUkN3WlhtRnRiS0xZdk1JMFdHWUhQM2VrLVFVQ0FGZXRWUDUyYko2aExnb1EzNUhwRVZJTms?oc=5"
+  },
+  {
+   "title": "EXCLUSIF - Emmanuel Moulin à la Banque de France : le deal entre Macron et le Sénat - Les Echos",
+   "date": "2026-04-30",
+   "source": "Les Echos",
+   "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQNWhvMWVGN3ZfODhfTWxselN6UHR3YU1PTTdpUnJGNlRJY2I0VzlxWFNLeW9kUzhzanloRTNObFZWZHRjX21renBKQTJhT1Q5STFBekdKbUhsdEJSMmZmRTZkc2VWc3ZCU0pCaDJpV2lpX1hxN0dzVDZRekJieElXWUtnVDh3X0V2Ylh0OERYQkkxeklSWnBvSzdmd3dkNHhjY3pYRWZPcXFBWXh0NzNzNlk5NkFicG9CeFVkRXlJN0lRWElQRlZzTXB2eDV5Z1Zza0VSRVBB?oc=5"
+  },
+  {
+   "title": "Mediapart publie les \"preuves\" des messages antisémites attribués à Jordan Bardella - France 24",
+   "date": "2026-10-01",
+   "source": "France 24",
+   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNRXFqdnFiSnpUTkI2T3N3LU9YQVYwQzRUWG1jRHJoeHFpRE50N1NLOFdIYVFrZi1raGNQazU1UVh6VS1CenFYTzV2d2ZqU3ExYTJ3aHg0WVl2b1VEc09rN1ZnY25xNk44NHh5UmhWSUsyeVZqejB5TzdmTEZyVDcyWmk3TndCOGVYeDhvdzBzb1hpeDR2Ul9ZVWJuLUZZaDI5V0FFX01QZHdSRmQ5RXpURlVFM0RQR2ViYTAtbDRMRlgyd3BRUzNGZGFvZDR6YVk?oc=5"
+  },
+  {
+   "title": "SONDAGE EXCLUSIF - A l'extrême droite, Jordan Bardella et Marine Le Pen profitent de la chute de leurs adversaires - Les Echos",
+   "date": "2025-12-26",
+   "source": "Les Echos",
+   "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOd3RkWDJTeHQ0X0pvbFBfdEt2TURoVDhDbHBrUFgxOFd6aUdIUzlqblUyTzhDdWRMd2hXUkE0N0xaYlRYSTNBUUNCTl8zY19qSV9xTWpYYzBxdWRtbWJ6Y2Z4TktwOUdPUmlVWDc1WFd3UFA3Vk40LURMdWZhTzI4TFhERDdaUERYdmJTUVdsbUhhSGRiYUNLZE03T3ZoaHNBSHdWd0JsU1pYd2trdkkxYW1iamtmVUxzNDlvNnNTQzVOSDl0Z2ZTUkRheG5STUN2QXRUV3RLQlBTc2RvTFlZME9aZmNOcHJDaUR3WHFxUFdXZllaZEtGT21hMEpzZ1U?oc=5"
+  },
+  {
+   "title": "Présidentielle 2027 : Jordan Bardella veut un « gouvernement d’union nationale » au-delà du RN - Sud Ouest",
+   "date": "2026-07-12",
+   "source": "Sud Ouest",
+   "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQdjFmeXdfRGdQQmxORUhCQUY1TzRqbFBJX0I4U2FtYUI5RGg1ZnJUdmFHbTRBa180THJrZnVIUFpmYV83QmxCb2lTaGlkbWgyYkhOV1BScExBODQ2T0Rxd1VPbVladUpfM3JzajJ6Mk1iS1JHSnRrZi1VOGMzV1N5OFM0M3A4TGlSdGE4WDBuNWlKWUtHQ0pxNzRUbmlHeGYySlZ2bUdET2NoMXZ6OUpxUHhkLVZOOXE1TmZSMXJDajV4TVBubDkyUDFZZGJyeEZUMDJaOHhsQU5jaXNiRTlhWWVIZUxEUQ?oc=5"
+  },
+  {
+   "title": "«Ce sont des grands amateurs»: le Prix Nobel d’économie Philippe Aghion fustige le contre-budget du RN - Le Figaro",
+   "date": "2025-10-27",
+   "source": "Le Figaro",
+   "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOUJnQXUzd2xTcENfM3MyZS1CV2pHSFBQcGVBS2pxanNZLWQ4UWVlSWpFUDVXdG54Yk5NaHJoaXd6VEs3QmJPMUlwNnE3aWVuUm5fb2FpZkZ6c3FydVV2akRzWkdUdWpRdnpHUlh4RkRGeWY3Y2NVV19jenRVdkFZTkxidUN4ZVhzLU45YVRzVXhvUUltWGptaFBrTUljZXlZM0h4Sl9DSWh1azRaSl9JOHpzUzlraU9EY3o0QTlpMUpTbUE5aXJXQlZlU3AzUkhRc205RnFPa09xN2FfRFE?oc=5"
+  }
+ ],
  "unverifiable_videos": [
   {
-   "title": "L'ECO & YOU - La bataille autour des factures d'électricité",
-   "url": "https://www.dailymotion.com/video/x9069zq",
-   "reason": "pas de transcription disponible"
+   "title": "Propos antisémites Bardella : \"Le but n'est pas de dire une vérité, c'est de salir\" (J. Tanguy)",
+   "url": "https://www.youtube.com/watch?v=5zAO6Homh4E",
+   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
   },
   {
-   "title": "\"Bande d'abrutis\", \"énorme connerie\", \"bossez un peu\" : pourquoi Cyril Hanouna a perdu ses nerfs dan",
-   "url": "https://www.dailymotion.com/video/x87kcg0",
-   "reason": "pas de transcription disponible"
-  },
-  {
-   "title": "Résumé vidéo du débat entre Gabriel Attal, Jordan Bardella et Olivier Faure",
-   "url": "https://www.dailymotion.com/video/x912sr6",
-   "reason": "pas de transcription disponible"
-  },
-  {
-   "title": "Jordan Bardella (RN) n'est \"pas favorable\" à la fusion des 42 régimes de retraites existants prévue dans la réforme",
-   "url": "https://www.dailymotion.com/video/x7k288e",
-   "reason": "pas de transcription disponible"
-  },
-  {
-   "title": "Jordan Bardella et le culot",
-   "url": "https://www.dailymotion.com/video/xbbcqhy",
-   "reason": "pas de transcription disponible"
+   "title": "Affaire J. Bardella : \"Je crois qu'il est cuit. Sa défense était absolument nulle, lamentable\"",
+   "url": "https://www.youtube.com/watch?v=EQNF6pWQXgU",
+   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
   }
  ]
 }
