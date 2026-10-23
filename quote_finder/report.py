@@ -25,6 +25,22 @@ def ts_url(url: str, platform: str, t: float | None) -> str:
     return url
 
 
+def span(h) -> str:
+    return f"{fmt_ts(h.t)} → {fmt_ts(h.t_end)}" if h.t_end is not None else fmt_ts(h.t)
+
+
+def dur(h) -> int | None:
+    return int(round(h.t_end - h.t)) if (h.t is not None and h.t_end is not None) else None
+
+
+def clip_link(url: str, platform: str, h) -> str:
+    """Lien qui ne lit QUE l'extrait (YouTube)."""
+    if platform == "youtube" and h.t is not None and h.t_end is not None and "v=" in url:
+        vid = url.split("v=")[1].split("&")[0]
+        return f"https://www.youtube.com/embed/{vid}?start={int(h.t)}&end={int(h.t_end) + 1}&autoplay=1"
+    return ts_url(url, platform, h.t)
+
+
 def _best(h_list):
     return min((rank_key(h) for h in h_list), default=(9, 9, 0))
 
@@ -39,8 +55,9 @@ def build(person, claim, plan, vres, ares, outdir: Path, stats: dict | None = No
         "person": person, "claim": claim, "plan": plan.to_dict(), "stats": stats or {},
         "videos": [{"title": r.video.title, "uploaded": r.video.published[:10], "platform": r.video.platform,
                     "channel": r.video.channel, "url": r.video.url, "method": r.method,
-                    "moments": [{"timestamp": fmt_ts(h.t), "seconds": h.t, "link": ts_url(r.video.url, r.video.platform, h.t),
-                                 **h.to_dict()} for h in r.hits]} for r in vm],
+                    "moments": [{"start": fmt_ts(h.t), "end": fmt_ts(h.t_end), "start_seconds": h.t, "end_seconds": h.t_end,
+                                 "duration_seconds": dur(h), "timestamp": fmt_ts(h.t), "link": ts_url(r.video.url, r.video.platform, h.t),
+                                 "clip_link": clip_link(r.video.url, r.video.platform, h), **h.to_dict()} for h in r.hits]} for r in vm],
         "articles": [{"title": r.article.title, "date": r.article.published, "source": r.article.source,
                       "url": r.article.url, "verified_on_full_text": r.verified,
                       "passages": [h.to_dict() for h in r.hits]} for r in am],
@@ -53,11 +70,20 @@ def build(person, claim, plan, vres, ares, outdir: Path, stats: dict | None = No
 
     with open(outdir / "videos.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
-        w.writerow(["titre", "date_upload", "timestamps", "url", "plateforme", "locuteur", "type_de_match", "confiance"])
+        w.writerow(["titre", "date_upload", "extraits", "url", "plateforme", "locuteurs"])
         for r in vm:
-            w.writerow([r.video.title, r.video.published[:10], " ; ".join(fmt_ts(h.t) for h in r.hits), r.video.url,
-                        r.video.platform, " ; ".join(h.speaker_name or h.who_says for h in r.hits),
-                        " ; ".join(h.verdict for h in r.hits), " ; ".join(f"{h.confidence:.2f}" for h in r.hits)])
+            w.writerow([r.video.title, r.video.published[:10], " ; ".join(span(h) for h in r.hits), r.video.url,
+                        r.video.platform, " ; ".join(h.speaker_name or h.who_says for h in r.hits)])
+    with open(outdir / "moments.csv", "w", newline="", encoding="utf-8-sig") as f:  # 1 ligne = 1 extrait à monter
+        w = csv.writer(f)
+        w.writerow(["titre", "date_upload", "url", "plateforme", "debut", "fin", "debut_s", "fin_s", "duree_s", "locuteur",
+                    "qui_parle", "type_de_match", "confiance", "citation", "lien_extrait"])
+        for r in vm:
+            for h in r.hits:
+                w.writerow([r.video.title, r.video.published[:10], r.video.url, r.video.platform, fmt_ts(h.t), fmt_ts(h.t_end),
+                            int(h.t) if h.t is not None else "", int(h.t_end) if h.t_end is not None else "", dur(h) or "",
+                            h.speaker_name, h.who_says, h.verdict, f"{h.confidence:.2f}", h.quote,
+                            clip_link(r.video.url, r.video.platform, h)])
     with open(outdir / "articles.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         w.writerow(["titre", "date", "source", "url", "texte_complet_verifie"])
@@ -80,7 +106,8 @@ def build(person, claim, plan, vres, ares, outdir: Path, stats: dict | None = No
             r.method, "vidéo analysée par IA (Gemini)"))
         L.append("- **Moments** :")
         for h in r.hits:
-            L.append(f"  - [{fmt_ts(h.t)}]({ts_url(v.url, v.platform, h.t)}) — {VERDICT.get(h.verdict, h.verdict)}, "
+            d = dur(h)
+            L.append(f"  - [{span(h)}]({clip_link(v.url, v.platform, h)})" + (f" ({d} s)" if d else "") + f" — {VERDICT.get(h.verdict, h.verdict)}, "
                      f"{WHO.get(h.who_says, h.who_says)}{' (' + h.speaker_name + ')' if h.speaker_name else ''}, "
                      f"confiance {h.confidence:.0%}")
             L.append(f"    > {h.quote}")
@@ -101,7 +128,7 @@ def build(person, claim, plan, vres, ares, outdir: Path, stats: dict | None = No
         L += [f"## Vidéos analysées sans passage correspondant ({len(ana)})", ""]
         L += [f"- {r.video.title or r.video.id} — {r.video.url} — {r.method}" for r in ana[:40]]
         L.append("")
-    unv = [r for r in ares if not r.hits and not r.verified]
+    unv = [r for r in ares if not r.hits and not r.verified and r.relevant_title]
     if unv:
         L += [f"## Articles trouvés mais non lisibles ({len(unv)}) — à vérifier à la main", ""]
         L += [f"- {r.article.title} — {r.article.source}, {r.article.published or '?'} — {r.article.url}" for r in unv[:15]]

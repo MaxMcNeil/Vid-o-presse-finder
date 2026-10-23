@@ -71,3 +71,14 @@ Le rapport est copié dans Téléchargements et peut être envoyé sur GitHub. S
 3. Android : *Paramètres → Applis → Termux → Batterie → Sans restriction*, sinon le système tue l'écoute en arrière-plan.
 
 Sécurité : le sujet ntfy est aléatoire et chaque message est signé avec `PHONE_SECRET` ; un message non signé, modifié ou ancien est ignoré. Les arguments ne passent jamais par un shell.
+
+## Extraits pour le montage
+
+Chaque passage trouvé a un **début** et une **fin** (rapport, `results.json`, et `moments.csv` : une ligne par extrait avec `debut`, `fin`, `duree_s`, `citation`, `lien_extrait`). Les fins non fournies par l'IA sont estimées d'après la longueur de la citation ; les horodatages d'une analyse vidéo/audio par IA peuvent varier de quelques secondes, d'où les marges ajoutées au téléchargement.
+
+Télécharger **uniquement** ces extraits (avec 2 s avant et 1 s après), sur le téléphone :
+```bash
+qf clips                                   # derniers résultats
+qf clips --own-voice-only --min-confidence 0.9
+```
+Ils sont copiés dans `Movies` (ou Téléchargements) avec un fichier `montage_list.txt` : `ffmpeg -f concat -safe 0 -i montage_list.txt -c copy montage.mp4`. En local : `python -m quote_finder.clips results/<recherche>/results.json`.

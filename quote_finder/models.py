@@ -51,13 +51,14 @@ class ArticleCandidate:
 
 @dataclass
 class Hit:
-    t: Optional[float]  # secondes (None pour un article)
+    t: Optional[float]  # début, en secondes (None pour un article)
     quote: str
     verdict: str  # literal | paraphrase | mention | denial
     who_says: str  # target | other_named | reported | unknown
     speaker_name: str = ""
     confidence: float = 0.0
     why: str = ""
+    t_end: Optional[float] = None  # fin de la déclaration, en secondes
 
     def to_dict(self):
         return asdict(self)

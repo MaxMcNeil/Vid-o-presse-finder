@@ -40,6 +40,22 @@ case "$1" in
     echo; echo "Enregistré dans $ENVF. Services définis :"
     for v in $KEYVARS; do [ -n "${!v}" ] && echo "  - $v ($(echo "${!v}" | tr ',' '\n' | wc -l) valeur(s))"; done
     exit 0 ;;
+  clips)
+    # qf clips [results.json] [--own-voice-only] [--min-confidence 0.8] : télécharge SEULEMENT les extraits (début -> fin)
+    shift
+    RJ="$1"
+    if [ -z "$RJ" ] || [ "${RJ#--}" != "$RJ" ]; then
+      RJ="$(ls -t "$REPO"/results/*/results.json 2>/dev/null | head -1)"
+    else
+      shift
+    fi
+    [ -z "$RJ" ] && { echo "Aucun results.json trouvé : lance d'abord une recherche."; exit 1; }
+    cd "$REPO" && python -m quote_finder.clips "$RJ" --out "$HOME/qf_clips/$(basename "$(dirname "$RJ")")" "$@"
+    D="$HOME/storage/movies"; [ -d "$D" ] || D="$HOME/storage/downloads"
+    if [ -d "$D" ]; then
+      cp -r "$HOME/qf_clips/$(basename "$(dirname "$RJ")")" "$D/" && echo "Copié dans $(basename "$D")/$(basename "$(dirname "$RJ")")"
+    fi
+    exit 0 ;;
   phone-setup)
     if [ -z "$NTFY_TOPIC" ] || [ -z "$PHONE_SECRET" ]; then
       NTFY_TOPIC="qf-$(python -c 'import secrets;print(secrets.token_hex(12))')"

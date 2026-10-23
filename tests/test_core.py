@@ -177,3 +177,30 @@ def test_fuzzy_fallback_without_rapidfuzz(monkeypatch):
     assert scan.term_present("weapon of mass destruction program", "weapons of mass destruction")
     assert not scan.term_present("the cat sat on the mat", "saddam")
     assert not scan.term_present("good morning france", "weapons of mass destruction")
+
+
+def test_finish_times_and_merge():
+    h = Hit(60, "mot " * 20, "literal", "target", "", 0.9, t_end=None)
+    scan.finish_times([h], duration=3000)
+    assert h.t_end == 60 + 20 / 2.5 + 1.5  # estimée d'après la longueur
+    ok_ = Hit(10, "court", "literal", "target", "", 0.9, t_end=22)
+    scan.finish_times([ok_]); assert ok_.t_end == 22  # valeur du LLM conservée
+    bad = Hit(10, "court", "literal", "target", "", 0.9, t_end=5)  # fin avant début : corrigée
+    scan.finish_times([bad]); assert bad.t_end > 10
+    clamp = Hit(98, "x " * 30, "literal", "target", "", 0.9)
+    scan.finish_times([clamp], duration=100); assert clamp.t_end == 100
+    a = Hit(50, "q", "literal", "target", "", 0.9, t_end=58); b = Hit(54, "q", "literal", "target", "", 0.7, t_end=70)
+    m = scan.dedupe_hits([a, b]); assert len(m) == 1 and m[0].t_end == 70  # étendue complète conservée
+
+
+def test_plan_clips_adds_margins_and_filters():
+    from quote_finder.clips import plan_clips
+    data = {"videos": [{"title": "Le titre", "url": "https://y/v=1", "moments": [
+        {"start_seconds": 105, "end_seconds": 118, "confidence": 0.95, "who_says": "other_named", "speaker_name": "Olivier Faure", "quote": "il ment"},
+        {"start_seconds": 1, "end_seconds": 6, "confidence": 0.5, "who_says": "unknown"},
+        {"start_seconds": 200, "end_seconds": 210, "confidence": 0.9, "who_says": "reported", "speaker_name": "X"}]}]}
+    c = plan_clips(data, 2, 1, 0.8)
+    assert [(x["start"], x["end"]) for x in c] == [(103, 119), (198, 211)]
+    assert len(plan_clips(data, 2, 1, 0.8, only_own_voice=True)) == 1
+    assert c[0]["name"].startswith("01_olivier-faure_le-titre_01m45")
+    assert plan_clips(data, 5, 1, 0.0)[1]["start"] == 0  # jamais négatif

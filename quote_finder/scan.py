@@ -132,11 +132,13 @@ Pour chaque passage où l'affirmation est faite — à la lettre OU dans le sens
 Un même extrait peut contenir plusieurs occurrences (répétitions) : une entrée par occurrence, avec son propre horodatage.
 Champs :
 - "excerpt": numéro de l'extrait
-- "t": horodatage en secondes du début de la phrase concernée (lu sur les [mm:ss] de l'extrait)
+- "t": horodatage en secondes du DÉBUT de la déclaration (lu sur les [mm:ss] de l'extrait)
+- "t_end": horodatage en secondes de la FIN de la déclaration : le [mm:ss] de la ligne qui suit la dernière phrase concernée
+  (si la déclaration va jusqu'au bout de l'extrait, estime-la). La déclaration doit être complète : début de la phrase jusqu'à sa conclusion
 - "quote": citation EXACTE copiée de l'extrait (max 300 caractères)
 - "verdict": "literal" (formulation quasi identique) | "paraphrase" (même sens, autres mots) | "mention" (le sujet est évoqué mais sans affirmer) | "denial" (la personne nie/conteste l'affirmation)
 - "who_says": "target" (la personne cible parle elle-même) | "other_named" (un autre locuteur identifiable parle) | "reported" (un narrateur/journaliste RAPPORTE que quelqu'un a dit cela) | "unknown"
-- "speaker_name": nom du locuteur si identifiable, sinon ""
+- "speaker_name": nom du locuteur UNIQUEMENT s'il est cité dans l'extrait, la description ou le titre ; n'invente jamais un nom, sinon "" 
 - "confidence": nombre de 0 à 1
 - "why": une phrase justifiant le jugement
 N'invente rien : si aucun passage ne convient, renvoie {{"hits": []}}.
@@ -146,7 +148,7 @@ Réponds en JSON : {{"hits": [...]}}"""
 def _hit_from(d: dict, offset_ok=True) -> Hit | None:
     try:
         t = parse_ts(d.get("t"))
-        return Hit(t=t, quote=str(d.get("quote", "")).strip(), verdict=str(d.get("verdict", "")).lower(),
+        return Hit(t=t, t_end=parse_ts(d.get("t_end")), quote=str(d.get("quote", "")).strip(), verdict=str(d.get("verdict", "")).lower(),
                    who_says=str(d.get("who_says", "unknown")).lower(), speaker_name=str(d.get("speaker_name", "") or ""),
                    confidence=float(d.get("confidence", 0) or 0), why=str(d.get("why", "")))
     except (TypeError, ValueError):
@@ -177,9 +179,10 @@ PERSONNE CIBLE : {person} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {oth
 {anyone_line}AFFIRMATION RECHERCHÉE : {claim}  (Reformulation : {summary})
 Le titre peut être trompeur : juge uniquement ce qui est réellement dit.
 Liste CHAQUE moment où l'affirmation est faite, à la lettre ou dans le sens, avec l'horodatage exact (début de la phrase).
-Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vidéo), "quote" (propos tenus, au plus près),
+Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vidéo : DÉBUT de la déclaration), "t_end" (secondes : FIN de la
+déclaration, juste après sa dernière phrase ; la déclaration doit être complète), "quote" (propos tenus, au plus près),
 "verdict" ("literal"|"paraphrase"|"mention"|"denial"), "who_says" ("target"|"other_named"|"reported"|"unknown"),
-"speaker_name", "confidence" (0-1), "why".
+"speaker_name" (UNIQUEMENT si le nom est prononcé ou affiché à l'écran, p. ex. bandeau ; n'invente jamais un nom : sinon "Journaliste" ou "Intervenant"), "confidence" (0-1), "why".
 Si rien ne correspond : {{"hits": []}}. Réponds en JSON : {{"hits": [...]}}"""
 
 
@@ -201,8 +204,11 @@ def dedupe_hits(hits: list[Hit], gap: float = 8.0) -> list[Hit]:
     out: list[Hit] = []
     for h in sorted(hits, key=lambda x: (x.t if x.t is not None else -1)):
         if out and h.t is not None and out[-1].t is not None and abs(h.t - out[-1].t) < gap:
+            ends = [e for e in (h.t_end, out[-1].t_end) if e is not None]
             if h.confidence > out[-1].confidence:
                 out[-1] = h
+            if ends:
+                out[-1].t_end = max(ends)  # on garde l'étendue complète des deux détections
             continue
         out.append(h)
     return out
@@ -237,3 +243,15 @@ def rank_key(h: Hit):
     own = 0 if h.who_says in ("target", "other_named") else 1
     lit = 0 if h.verdict == "literal" else 1
     return (own, lit, -h.confidence)
+
+
+def finish_times(hits: list[Hit], duration: float | None = None) -> None:
+    """Garantit un intervalle [début, fin] exploitable : fin estimée d'après la longueur de la citation si le LLM n'en donne pas."""
+    for h in hits:
+        if h.t is None:
+            continue
+        est = max(4.0, len(h.quote.split()) / 2.5 + 1.5)
+        if h.t_end is None or h.t_end <= h.t or h.t_end - h.t > 240 or h.t_end - h.t < 0.6 * est:
+            h.t_end = h.t + est
+        if duration:
+            h.t_end = min(h.t_end, float(duration))

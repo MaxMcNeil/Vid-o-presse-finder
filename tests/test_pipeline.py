@@ -41,6 +41,7 @@ def test_end_to_end(monkeypatch, tmp_path):
     monkeypatch.setattr(other_video, "archive_org", lambda *a, **k: [])
     monkeypatch.setattr(news, "gdelt", lambda *a, **k: [ArticleCandidate("reuters.com", "https://reuters.com/x", "Clinton says...", "2003-01-01")])
     monkeypatch.setattr(news, "google_news", lambda *a, **k: [])
+    monkeypatch.setattr(news, "bing_news", lambda *a, **k: [])
     monkeypatch.setattr(news, "guardian", lambda *a, **k: [ArticleCandidate("The Guardian", "https://g.co/y", "Full text piece", "1998-02-18", text="Intro.\nClinton said Saddam has WMD today.\nMore.")])
     monkeypatch.setattr(news, "nyt", lambda *a, **k: [])
 
@@ -69,10 +70,14 @@ def test_end_to_end(monkeypatch, tmp_path):
     out = tmp_path / "r"
     p = report.build(o.person, o.claim, plan, vres, ares, out, {"videos_scanned": 3, "articles_scanned": 2})
     md = p.read_text()
-    assert "&t=50s" in md and "&t=500s" in md and "1998-02-17" in md and "https://www.youtube.com/watch?v=AAA" in md
+    assert "start=50&end=" in md and "start=500&end=" in md and "00:50 → " in md and "1998-02-17" in md and "https://www.youtube.com/watch?v=AAA" in md
     data = json.loads((out / "results.json").read_text())
     assert data["videos"][0]["title"].startswith("CLINTON") and data["videos"][0]["moments"][0]["timestamp"] == "00:50"
     assert (out / "videos.csv").exists() and (out / "articles.csv").exists()
+    m0 = data["videos"][0]["moments"][0]
+    assert m0["start_seconds"] == 50 and m0["end_seconds"] > 50 and m0["duration_seconds"] >= 4  # fin estimée si absente
+    rows = (out / "moments.csv").read_text(encoding="utf-8-sig").splitlines()
+    assert rows[0].startswith("titre,") and "debut,fin,debut_s,fin_s,duree_s" in rows[0] and len(rows) >= 3
 
 
 def test_source_failures_never_kill_the_run(monkeypatch, tmp_path):

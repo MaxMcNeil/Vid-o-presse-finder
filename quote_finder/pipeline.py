@@ -56,6 +56,7 @@ class ArticleResult:
     hits: list[Hit]
     verified: bool
     note: str = ""
+    relevant_title: bool = True  # le titre évoque le sujet (sert à trier les articles illisibles)
 
 
 # ------------------------------------------------------------------ découverte
@@ -113,6 +114,11 @@ def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[Ar
             if a.url:
                 found.setdefault(a.url, a).found_by.add(q)
     arts = list(found.values())
+    by_src: dict[str, int] = {}
+    for a in arts:
+        k = "google" if "news.google.com" in a.url else a.source.split(".")[0][:14]
+        by_src[k] = by_src.get(k, 0) + 1
+    log.info("%d articles candidats : %s", len(arts), dict(sorted(by_src.items(), key=lambda x: -x[1])[:8]))
 
     def prio(a: ArticleCandidate):
         meta = normalize(f"{a.title} {a.snippet}")
@@ -150,15 +156,18 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
                 return VideoResult(v, [], "transcript", "aucun passage ne contient les termes recherchés")
             hits = scan.judge_excerpts(llm, plan, o.person, o.also, o.claim, meta, ex,
                                        "sous-titres automatiques" if "auto" in t.kind else "sous-titres", o.anyone)
+            scan.finish_times(hits, v.duration)
             return VideoResult(v, hits, "transcript")
         # pas de transcription : analyse directe de la vidéo par Gemini (YouTube uniquement)
         if v.platform == "youtube" and llm.has_video and _take(fallback_budget):
             hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, anyone=o.anyone)
+            scan.finish_times(hits, v.duration)
             return VideoResult(v, hits, "gemini-video")
         if v.platform != "youtube" and llm.has_video and audio_budget is not None and _take(audio_budget):
             audio = media.fetch_audio(v.url)
             if audio:
                 hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, audio=audio, anyone=o.anyone)
+                scan.finish_times(hits, v.duration)
                 return VideoResult(v, hits, "gemini-audio")
             return VideoResult(v, [], "none", "pas de sous-titres et audio non téléchargeable")
         return VideoResult(v, [], "none", "pas de transcription disponible (budget d'analyse IA épuisé)")
@@ -218,8 +227,10 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
                     dec = gnewsdecoder(url, interval=1)
                     if dec.get("status"):
                         url = a.url = dec["decoded_url"]
-                except Exception:  # noqa: BLE001
-                    pass
+                    else:
+                        log.info("lien Google News non décodé : %s", str(dec.get("message"))[:100])
+                except Exception as e:  # noqa: BLE001
+                    log.info("décodeur Google News en erreur : %s", type(e).__name__)
             text = fetch_article_text(url) if "news.google.com" not in url else ""
         except Exception:  # noqa: BLE001
             text = ""
@@ -298,6 +309,9 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                 ares = list(ex.map(safe_article, arts))
             for r in ares:
                 r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict)]
+                tn = normalize(r.article.title)
+                r.relevant_title = scan.group_score(r.article.title, plan.term_groups) >= 1 and \
+                    any(a and a in tn for a in plan.person_aliases)
         except Exception as e:  # noqa: BLE001 - les résultats vidéo sont conservés quoi qu'il arrive
             log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
     return plan, vres, ares
