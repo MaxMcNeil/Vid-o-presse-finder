@@ -1,0 +1,111 @@
+{
+ "person": "La Suisse",
+ "claim": "la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
+ "plan": {
+  "claim_summary": "la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
+  "term_groups": [
+   [
+    "suisse"
+   ],
+   [
+    "abandonne"
+   ],
+   [
+    "microsoft"
+   ],
+   [
+    "cause"
+   ],
+   [
+    "espionnage"
+   ]
+  ],
+  "person_aliases": [
+   "la suisse"
+  ],
+  "youtube_queries": [
+   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
+   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique interview",
+   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique speech",
+   "La Suisse says la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
+   "\"la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique\" La Suisse"
+  ],
+  "news_queries": [
+   "\"La Suisse\" la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
+   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique"
+  ],
+  "languages": [
+   "en",
+   "fr"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 16,
+  "articles_scanned": 1
+ },
+ "videos": [],
+ "articles": [],
+ "unreadable_articles": [],
+ "unverifiable_videos": [
+  {
+   "title": "La Suisse ouvre ses bunkers au numérique",
+   "url": "https://www.dailymotion.com/video/x1agjnw",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "Jura: une station fermée faute de passagers",
+   "url": "https://www.dailymotion.com/video/x8g9v2u",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "L'actu du numérique 20.07.12 : Windows Phone 8 / Dropbox / Nexus 7",
+   "url": "https://www.dailymotion.com/video/x5hgf3x",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "Crans-Montana: Le chargé de sécurité en Suisse aurait dû interdire l'exploitation du bar dès la deuxième année\", affirme David Gruberg, consultant en sécurité incendie",
+   "url": "https://www.dailymotion.com/video/x9ysvtg",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "Le coronavirus paralyse la tech mondiale - DQJMM (1/2)",
+   "url": "https://www.dailymotion.com/video/x7siwt7",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "En Suisse, une fillette de 7 ans fuit ses parents... et se retrouve dans un avion",
+   "url": "https://www.dailymotion.com/video/x67e21p",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "Solar Impulse : \"nous ne sommes pas des casse-cou, mais des explorateurs\"",
+   "url": "https://www.dailymotion.com/video/x2sacan",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "L'invité de la rédaction - Jean-Luc Vez",
+   "url": "https://www.dailymotion.com/video/x460hbz",
+   "reason": "pas de sous-titres et audio non téléchargeable"
+  },
+  {
+   "title": "Apple victime d'une énorme faille de sécurité sur ses Mac DQJMM (1/2)",
+   "url": "https://www.dailymotion.com/video/x6awbyo",
+   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+  },
+  {
+   "title": "L'invité de la rédaction - François-Bernard Huygue",
+   "url": "https://www.dailymotion.com/video/x577hk0",
+   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+  },
+  {
+   "title": "24h dans la Tech: Emmanuel Macron à Station F - 09/10",
+   "url": "https://www.dailymotion.com/video/x6v5i4a",
+   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+  },
+  {
+   "title": "De Tchap à WhatsApp, la démocratie européenne par messageries interposées",
+   "url": "https://www.dailymotion.com/video/x76i432",
+   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+  }
+ ]
+}
