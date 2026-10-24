@@ -1,0 +1,111 @@
+{
+ "keys": {
+  "gemini:0ad101a9a2": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "Gemini clé 1",
+   "used_models": {
+    "gemini-3.8-flash": 1
+   }
+  },
+  "gemini:6f10d27b24": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "Gemini clé 1",
+   "used_models": {
+    "gemini-3.8-flash": 1
+   }
+  },
+  "gemini:8c54858ebc": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "Gemini clé 1",
+   "used_models": {
+    "gemini-3.8-flash": 1
+   }
+  },
+  "gemini:181ad99cca": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "Gemini clé 1",
+   "used_models": {
+    "gemini-3.8-flash": 1
+   }
+  },
+  "gemini:c7a23ab254": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "Gemini clé 1",
+   "used_models": {
+    "gemini-3.8-flash": 1
+   }
+  },
+  "groq:1691e6b64a": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "Groq clé 1",
+   "used_models": {
+    "openai/gpt-oss-120b": 1
+   }
+  },
+  "youtube:ca0e47bd85": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "YouTube clé 1"
+  },
+  "youtube:bcc568c3e7": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "YouTube clé 2"
+  },
+  "youtube:0f238cfda0": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "YouTube clé 3"
+  },
+  "youtube:92aa479928": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "YouTube clé 4"
+  },
+  "youtube:a5a9d82454": {
+   "day": "2026-10-24",
+   "calls": 1,
+   "units": 1,
+   "errors": 0,
+   "models": {},
+   "label": "YouTube clé 5"
+  }
+ },
+ "saved": "2026-10-24T13:07:38+00:00"
+}
