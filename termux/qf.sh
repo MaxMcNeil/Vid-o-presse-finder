@@ -21,18 +21,32 @@ case "$1" in
     # Saisie multi-lignes : colle tes clés (une par ligne ou séparées par espaces/virgules), puis une LIGNE VIDE pour finir.
     # Entrée tout de suite = garder l'actuel / ignorer ce service.
     if [ "$1" = "set" ] && [ -n "$2" ]; then LIST="$2"; else LIST="$ASKVARS"; fi
-    echo "Pour chaque service : colle la/les clé(s), puis appuie sur Entrée sur une ligne vide. Entrée seule = ignorer."
+    echo "Pour chaque service : colle la/les clé(s) puis appuie UNE fois sur Entrée. Entrée seule = ignorer ce service."
     for v in $LIST; do
       cur="${!v}"; hint=""; [ -n "$cur" ] && hint=" [déjà défini]"
       echo; echo ">> $v$hint"
-      buf=""
-      while IFS= read -r line; do
-        [ -z "$line" ] && break
-        buf="$buf $line"
-      done
+      # Une seule validation (Entrée) suffit. Un collage multi-lignes (clés l'une sous l'autre) arrive d'un coup :
+      # on récupère ces lignes-là ; mais une commande tapée/collée plus tard n'est PAS avalée.
+      IFS= read -r buf
+      while IFS= read -r -t 0.5 more; do buf="$buf $more"; done
       if [ -n "$buf" ]; then
-        printf -v "$v" '%s' "$(echo "$buf" | tr -s ' ,;\r' ',' | sed 's/^,//; s/,$//')"
-        export "$v"
+        all="$(echo "$buf" | tr -s ' ,;\r' '\n' | sed '/^$/d')"
+        pref=""
+        case "$v" in
+          GEMINI_API_KEYS|YOUTUBE_API_KEYS) pref="AIza" ;;
+          FALLBACK_LLM_KEYS) case "${FALLBACK_LLM_PROVIDER:-groq}" in groq) pref="gsk_" ;; cerebras) pref="csk-" ;; esac ;;
+        esac
+        # une clé = un seul bloc de 20 caractères ou plus, lettres/chiffres/_/- uniquement (jamais une commande ou une phrase)
+        good="$(echo "$all" | grep -E '^[A-Za-z0-9_-]{20,}$')"
+        [ -n "$pref" ] && good="$(echo "$good" | grep "^$pref")"
+        nbad=$(( $(echo "$all" | wc -l) - $(echo "$good" | sed '/^$/d' | wc -l) ))
+        [ "$nbad" -gt 0 ] && echo "   ⚠ $nbad élément(s) ignoré(s) : ne ressemblent pas à une clé${pref:+ (elle commence par $pref)}"
+        if [ -n "$good" ]; then
+          printf -v "$v" '%s' "$(echo "$good" | paste -sd, -)"
+          export "$v"
+        else
+          echo "   ✘ aucune clé valide reconnue : $v inchangé"
+        fi
       fi
     done
     [ -n "$FALLBACK_LLM_KEYS" ] && [ -z "$FALLBACK_LLM_PROVIDER" ] && FALLBACK_LLM_PROVIDER=groq
