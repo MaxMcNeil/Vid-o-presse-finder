@@ -38,12 +38,32 @@ def main() -> int:
     print("\nIA :")
     llm = LLMRouter.from_env()
     if llm.gemini:
-        r, e, d = t(lambda: llm.gemini.generate_json('Réponds exactement {"ok": true}'))
-        line(OK if r else KO, "Gemini", f"modèle {llm.gemini.model}, {d:.0f}s" if r else e)
-        bad += 0 if r else 1
+        from .llm import GEMINI_URL
+        model = llm.gemini.model
+        print(f"  (modèle essayé : {model}, 25 s max par clé)", flush=True)
+        for i, key in enumerate(keys_from_env("GEMINI"), 1):
+            def ping(k=key):
+                r = requests.post(GEMINI_URL.format(model=model), params={"key": k}, timeout=25,
+                                  json={"contents": [{"parts": [{"text": "Dis ok"}]}]})
+                if r.status_code == 200:
+                    return "répond"
+                try:
+                    msg = r.json().get("error", {}).get("message", "")
+                except ValueError:
+                    msg = r.text
+                raise RuntimeError(f"HTTP {r.status_code} {msg[:110]}")
+            r, e, d = t(ping)
+            line(OK if r else KO, f"Gemini clé {i}", f"{d:.0f}s" if r else e)
+            if not r and i == 1:
+                bad += 0  # une clé en échec ne bloque pas si les autres répondent
     if llm.fallback:
-        r, e, d = t(lambda: llm.fallback.generate_json('Réponds exactement {"ok": true}'))
-        line(OK if r else KO, "LLM de secours (Groq…)", f"{d:.0f}s" if r else e)
+        def ping2():
+            return llm.fallback.http.post(f"{llm.fallback.base}/chat/completions", timeout=25,
+                                          headers={"Authorization": f"Bearer {keys_from_env('FALLBACK_LLM')[0]}"},
+                                          json={"model": llm.fallback.model, "messages": [{"role": "user", "content": "Dis ok"}]})
+        r, e, d = t(ping2)
+        ok_ = r is not None and r.status_code == 200
+        line(OK if ok_ else KO, f"LLM de secours ({llm.fallback.model})", f"{d:.0f}s" if ok_ else (e or f"HTTP {r.status_code} {r.text[:100]}"))
     print("\nVidéos :")
     yk = keys_from_env("YOUTUBE")
     if yk:

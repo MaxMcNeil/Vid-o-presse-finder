@@ -116,7 +116,7 @@ class GeminiClient:
                 raise QuotaExhausted("temps imparti écoulé")
             key = self.pool.acquire()
             if key is None:
-                raise QuotaExhausted("toutes les clés Gemini sont épuisées")
+                raise QuotaExhausted(f"toutes les clés Gemini sont épuisées ou refusées (dernière erreur : {last[:140]})")
             try:
                 r = self.http.post(GEMINI_URL.format(model=self.model), params={"key": key},
                                    json=body, timeout=self.timeout)
@@ -182,7 +182,7 @@ class OpenAICompatClient:
                 raise QuotaExhausted("temps imparti écoulé")
             key = self.pool.acquire()
             if key is None:
-                raise QuotaExhausted("clés de repli épuisées")
+                raise QuotaExhausted(f"clés de repli refusées ou épuisées (dernière erreur : {last or 'aucune'})")
             try:
                 r = self.http.post(f"{self.base}/chat/completions", json=body, timeout=self.timeout,
                                    headers={"Authorization": f"Bearer {key}"})

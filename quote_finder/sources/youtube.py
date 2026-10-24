@@ -115,4 +115,7 @@ def search(pool: KeyPool, query: str, n: int = 25, lang: str | None = None, http
     res = search_api(pool, query, n, lang, http) if pool else None
     if res is None:
         res = search_ytdlp(query, min(n, 20))
+        log.info("YouTube « %s » : API indisponible (clés absentes ou quota atteint) → yt-dlp : %d résultat(s)", query[:50], len(res))
+    else:
+        log.info("YouTube « %s » : API : %d résultat(s)", query[:50], len(res))
     return res

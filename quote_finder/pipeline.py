@@ -178,7 +178,7 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
                 hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, audio=audio, anyone=o.anyone)
                 scan.finish_times(hits, v.duration)
                 return VideoResult(v, hits, "gemini-audio")
-            return VideoResult(v, [], "none", "pas de sous-titres et audio non téléchargeable")
+            return VideoResult(v, [], "none", "pas de sous-titres ; audio : " + (getattr(media.LAST_REASON, "text", "") or "non téléchargeable"))
         return VideoResult(v, [], "none", "pas de transcription disponible (budget d'analyse IA épuisé)")
     except QuotaExhausted as e:
         return VideoResult(v, [], "none", f"quota LLM épuisé ({e})")
