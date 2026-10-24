@@ -11,7 +11,7 @@ from pathlib import Path
 from . import batch, pipeline, quota, report
 from .llm import LLMRouter
 from .pipeline import Options, PlanError, run
-from .util import slugify
+from .util import has_arabic, slugify
 
 TYPES = ["auto", "personne", "pays", "entite", "sujet"]
 
@@ -55,8 +55,11 @@ def _split(s: str) -> list[str]:
 
 def options_for(a, target: str, claim: str, ttype: str) -> Options:
     speakers = "tous" if a.anyone else a.speakers
+    langs = _split(a.langs) or ["fr"]
+    if has_arabic(f"{target} {claim}") and "ar" not in langs:  # recherche écrite en arabe : l'arabe passe en premier
+        langs = ["ar"] + langs
     return Options(target=target.strip(), claim=claim.strip(), target_type=ttype, speakers=speakers, also=_split(a.also),
-                   langs=_split(a.langs) or ["fr"], max_videos=a.max_videos, max_articles=a.max_articles,
+                   langs=langs, max_videos=a.max_videos, max_articles=a.max_articles,
                    authority=a.authority, since=a.since,
                    video_fallback_max=a.video_fallback_max if a.video_fallback_max is not None else a.max_videos,
                    audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict,

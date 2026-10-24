@@ -17,7 +17,9 @@ from .util import normalize
 # ---------------------------------------------------------------- domaines (presse)
 OFFICIAL_SUFFIXES = (".gouv.fr", ".gov", ".gov.uk", ".admin.ch", "admin.ch", ".europa.eu", "europa.eu", ".int",
                      ".gc.ca", ".gov.au", ".bund.de", ".gob.es", ".governo.it", "senat.fr", "assemblee-nationale.fr",
-                     "elysee.fr", "parlament.ch", "un.org", "who.int", "nato.int", "imf.org", "worldbank.org", "oecd.org")
+                     "elysee.fr", "parlament.ch", "un.org", "who.int", "nato.int", "imf.org", "worldbank.org", "oecd.org",
+                     ".gov.sa", ".gov.ae", ".gov.qa", ".gov.kw", ".gov.bh", ".gov.om", ".gov.eg", ".gov.it", "belgium.be",
+                     "europarl.europa.eu", "consilium.europa.eu")
 
 DOMAINS: dict[str, float] = {}
 _TIERS = {

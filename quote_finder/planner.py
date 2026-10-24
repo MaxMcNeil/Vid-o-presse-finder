@@ -40,13 +40,15 @@ Réponds en JSON strict avec exactement ces clés :
   "target_aliases": ["noms et variantes de la cible : nom complet, nom court, gentilé/adjectif (ex. suisse, swiss, helvétique), sigle, variantes de transcription"],
   "official_speakers": ["qui parle AU NOM de la cible, avec noms propres actuels : pour un pays le gouvernement, ministres, porte-parole, administrations concernées par le sujet ; pour une entité ses dirigeants et porte-parole ; pour une personne son entourage officiel (porte-parole) ; vide pour un sujet"],
   "authoritative_sources": ["10 à 20 sources de référence pour CE sujet : agences, médias publics et nationaux du pays concerné, institutions, sites officiels ; noms de chaînes YouTube ET domaines (ex. rts.ch, admin.ch, Reuters, franceinfo)"],
-  "countries": ["codes ISO à 2 lettres des pays directement concernés (ex. CH pour la Suisse ; FR, US...), 1 à 3"],
+  "countries": ["codes ISO à 2 lettres des pays directement concernés (ex. CH pour la Suisse ; FR, US, SA, AE...), 1 à 6 ; pays du Golfe : GCC"],
   "site_query": "4 à 7 mots-clés courts pour chercher ce sujet sur le site d'un média, dans la langue du pays concerné (ex. Confédération Microsoft 365 souveraineté)",
   "youtube_queries": ["6 à 10 requêtes visant des sources sérieuses : journal télévisé, conférence de presse, déclaration officielle, interview, débat parlementaire, nom de média + sujet ; langues variées"],
   "news_queries": ["4 à 6 requêtes pour articles d'agences et grands médias"]
 }}
 Règles : 2 à 4 groupes dans term_groups, chaque groupe = UN concept du SUJET (pas la cible elle-même, sauf si la cible est un SUJET :
-alors 1 à 3 groupes décrivant le sujet). Si le sujet est vide, déduis les concepts de la cible. Pas de requêtes racoleuses."""
+alors 1 à 3 groupes décrivant le sujet). Si le sujet est vide, déduis les concepts de la cible. Pas de requêtes racoleuses.
+Langues : mets les variantes de term_groups et les requêtes dans CHAQUE langue souhaitée ET dans la langue des pays concernés
+(ex. italien pour l'Italie, arabe pour les pays du Golfe). En arabe, donne les formes avec et sans l'article « ال »."""
 
 
 def _heuristic(target: str, claim: str, others: list[str], langs: list[str], ttype: str) -> Plan:

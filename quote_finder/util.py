@@ -5,11 +5,23 @@ import re
 import unicodedata
 
 
+# arabe : variantes d'écriture ramenées à une forme (ى→ي, ة→ه, tatweel supprimé), chiffres arabes-indiens → 0-9
+_AR = str.maketrans({"ى": "ي", "ة": "ه", "ـ": "", "ٱ": "ا", **{chr(0x0660 + i): str(i) for i in range(10)},
+                     **{chr(0x06F0 + i): str(i) for i in range(10)}})
+
+
 def normalize(s: str) -> str:
+    """Minuscules, sans accents ni ponctuation. Garde TOUTES les écritures (latin, arabe, cyrillique...) :
+    l'ancienne version effaçait l'arabe, ce qui rendait toute recherche en arabe impossible."""
     s = unicodedata.normalize("NFKD", s or "")
-    s = "".join(c for c in s if not unicodedata.combining(c))
-    s = re.sub(r"[^a-z0-9]+", " ", s.lower())
+    s = "".join(c for c in s if not unicodedata.combining(c))  # accents latins et voyelles brèves arabes (tashkil)
+    s = s.lower().translate(_AR)
+    s = re.sub(r"[\W_]+", " ", s)
     return re.sub(r"\s+", " ", s).strip()
+
+
+def has_arabic(s: str) -> bool:
+    return bool(re.search(r"[\u0600-\u06FF]", s or ""))
 
 
 def fmt_ts(seconds: float | None) -> str:
@@ -60,7 +72,16 @@ def parse_iso_duration(d: str) -> int | None:
 
 
 def slugify(s: str, n: int = 60) -> str:
-    return re.sub(r"\s+", "-", normalize(s))[:n].strip("-") or "recherche"
+    """Nom de dossier/fichier en ASCII (sûr pour GitHub, artefacts, téléphones). Texte non latin (arabe...) :
+    la partie latine éventuelle + une empreinte courte, stable pour un même texte."""
+    import hashlib
+    words = normalize(s).split()
+    latin = [w for w in words if re.fullmatch(r"[a-z0-9]+", w)]
+    slug = "-".join(latin)[:n].strip("-")
+    if len(latin) < len(words):  # une partie du texte n'est pas en écriture latine
+        h = hashlib.sha1((s or "").encode()).hexdigest()[:6]
+        slug = f"{slug[: max(0, n - 7)].strip('-')}-{h}".strip("-")
+    return slug or "recherche"
 
 
 def call_with_timeout(fn, timeout: float, *a, **k):

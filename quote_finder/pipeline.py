@@ -363,6 +363,11 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     plan = make_plan(llm, o.target, o.claim, o.also, o.langs, o.speakers, o.target_type)
     if o.target_type == "auto":
         o.target_type = plan.target_type
+    # langues des pays concernés ajoutées automatiquement (sous-titres, requêtes) : ex. Italie -> it, Golfe -> ar
+    for c in registry.expand(plan.countries):
+        lg = registry.COUNTRY_LANG.get(c)
+        if lg and lg not in o.langs and len(o.langs) < 4:
+            o.langs.append(lg)
     if o.speakers == "auto":  # une personne : ses propres paroles ; un pays/une entité/un sujet : toute voix qui fait autorité
         o.speakers = "cible" if o.target_type == "personne" else "tous"
     if plan.source == "heuristic" and not o.allow_heuristic and getattr(llm, "has_text", False):

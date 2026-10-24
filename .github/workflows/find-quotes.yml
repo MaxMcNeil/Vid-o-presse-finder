@@ -56,13 +56,13 @@ concurrency:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
       matrix: ${{ steps.p.outputs.matrix }}
       lot: ${{ steps.p.outputs.lot }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: p
         name: Lire les recherches
         env:
@@ -80,7 +80,7 @@ jobs:
 
   search:
     needs: prepare
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
@@ -116,15 +116,15 @@ jobs:
       IN_LANGS: ${{ inputs.langs }}
       IN_SINCE: ${{ inputs.depuis }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
 
       - name: "Cache (transcriptions et réponses IA, économise les quotas)"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .cache
           key: qf-cache-${{ github.run_id }}-${{ matrix.s.id }}
@@ -133,7 +133,7 @@ jobs:
       - name: Dépendances
         run: |
           which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-          pip install -r requirements.txt
+          pip install -r requirements.txt && pip install -U -q yt-dlp   # yt-dlp toujours à jour (YouTube change souvent)
 
       - name: Recherche
         run: |
@@ -142,7 +142,7 @@ jobs:
             --max-videos "${IN_MAXV:-8}" --max-articles "${IN_MAXA:-6}" --langs "${IN_LANGS:-fr,en}" \
             --since "$IN_SINCE" --max-minutes 35 --out results --batch-id "$LOT" --search-id "$S_ID"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: res-${{ matrix.s.id }}
@@ -150,7 +150,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 3
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: quota-${{ matrix.s.id }}
@@ -161,19 +161,19 @@ jobs:
   publish:
     needs: [prepare, search]
     if: always() && needs.prepare.result == 'success'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       LOT: ${{ needs.prepare.outputs.lot }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
         with:
           pattern: res-*
           path: dl
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
         with:
           pattern: quota-*
           path: dlq
@@ -216,16 +216,16 @@ jobs:
   clips:
     needs: [prepare, publish]
     if: inputs.telecharger_extraits && needs.publish.result == 'success'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
       LOT: ${{ needs.prepare.outputs.lot }}
       YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.ref }}
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Télécharger les extraits et assembler un premier montage
@@ -234,7 +234,7 @@ jobs:
           which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           pip install -q "yt-dlp>=2025.1.1"
           python -m quote_finder.clips "results/$LOT/montage.json" --out "clips/$LOT" --max 25 || true
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: extraits-${{ needs.prepare.outputs.lot }}
           path: clips/${{ needs.prepare.outputs.lot }}

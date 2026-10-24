@@ -60,12 +60,40 @@ SOURCES: dict[str, list[Source]] = {
            S("spiegel.de", "Der Spiegel", True, ("DER SPIEGEL",)), S("zeit.de", "Die Zeit"), S("faz.net", "FAZ"),
            S("sueddeutsche.de", "Süddeutsche Zeitung"), S("bundesregierung.de", "Bundesregierung", True, ("Bundesregierung",), True)],
     "AT": [S("orf.at", "ORF", True, ("ORF",)), S("derstandard.at", "Der Standard")],
-    "IT": [S("rainews.it", "Rai News", True, ("Rai News",)), S("ansa.it", "ANSA", True, ("ANSA",)), S("corriere.it", "Corriere della Sera", True),
+    "IT": [S("rainews.it", "Rai News", True, ("Rai News",)), S("tg24.sky.it", "Sky TG24", True, ("Sky TG24",)),
+           S("ilsole24ore.com", "Il Sole 24 Ore"), S("lastampa.it", "La Stampa"), S("quirinale.it", "Quirinale", True, (), True), S("ansa.it", "ANSA", True, ("ANSA",)), S("corriere.it", "Corriere della Sera", True),
            S("repubblica.it", "la Repubblica", True), S("governo.it", "Governo italiano", True, (), True)],
+    # Pays du Golfe (GCC) et grands médias arabophones
+    "SA": [S("spa.gov.sa", "SPA (agence officielle saoudienne)", False, (), True), S("alarabiya.net", "Al Arabiya", True, ("Al Arabiya العربية",)),
+           S("asharq.com", "Asharq News", True, ("Asharq News الشرق للأخبار",)), S("aawsat.com", "Asharq Al-Awsat"),
+           S("arabnews.com", "Arab News", True, ("Arab News",)), S("saudigazette.com.sa", "Saudi Gazette")],
+    "AE": [S("wam.ae", "WAM (agence officielle émirienne)", False, (), True), S("skynewsarabia.com", "Sky News Arabia", True,
+           ("سكاي نيوز عربية Sky News Arabia",)), S("thenationalnews.com", "The National", True, ("The National",)),
+           S("gulfnews.com", "Gulf News", True, ("Gulf News",)), S("khaleejtimes.com", "Khaleej Times", True), S("alkhaleej.ae", "Al Khaleej")],
+    "QA": [S("qna.org.qa", "QNA (agence officielle qatarie)", False, (), True), S("aljazeera.net", "Al Jazeera (arabe)", True,
+           ("الجزيرة Al Jazeera Arabic",)), S("thepeninsulaqatar.com", "The Peninsula"), S("alaraby.co.uk", "Al-Araby Al-Jadeed", True)],
+    "KW": [S("kuna.net.kw", "KUNA (agence officielle koweïtienne)", False, (), True), S("alqabas.com", "Al-Qabas"), S("timeskuwait.com", "Times Kuwait")],
+    "BH": [S("bna.bh", "BNA (agence officielle bahreïnie)", False, (), True), S("gdnonline.com", "Gulf Daily News"), S("alayam.com", "Al Ayam")],
+    "OM": [S("omannews.gov.om", "ONA (agence officielle omanaise)", False, (), True), S("timesofoman.com", "Times of Oman"),
+           S("omanobserver.om", "Oman Observer")],
+    "EG": [S("ahram.org.eg", "Al-Ahram"), S("sis.gov.eg", "Service d'information de l'État égyptien", False, (), True)],
     "ES": [S("rtve.es", "RTVE", True, ("RTVE Noticias",)), S("elpais.com", "El País", True, ("EL PAÍS",)), S("efe.com", "EFE", True, ("Agencia EFE",))],
 }
 
-LANG_COUNTRIES = {"fr": ["FR", "CH", "BE", "CA"], "en": ["US", "GB"], "de": ["DE", "CH", "AT"], "it": ["IT", "CH"], "es": ["ES"]}
+LANG_COUNTRIES = {"fr": ["FR", "CH", "BE", "CA"], "en": ["US", "GB"], "de": ["DE", "CH", "AT"], "it": ["IT", "CH"], "es": ["ES"],
+                  "ar": ["SA", "AE", "QA"]}
+GROUPS = {"GCC": ["SA", "AE", "QA", "KW", "BH", "OM"], "UK": ["GB"], "EU": ["INT"], "UAE": ["AE"], "KSA": ["SA"]}
+COUNTRY_LANG = {"FR": "fr", "BE": "fr", "CH": "fr", "CA": "fr", "US": "en", "GB": "en", "DE": "de", "AT": "de", "IT": "it",
+                "ES": "es", "SA": "ar", "AE": "ar", "QA": "ar", "KW": "ar", "BH": "ar", "OM": "ar", "EG": "ar"}
+
+
+def expand(countries: list[str]) -> list[str]:
+    out = []
+    for c in countries or []:
+        for x in GROUPS.get(str(c).upper().strip(), [str(c).upper().strip()]):
+            if x and x not in out:
+                out.append(x)
+    return out
 
 
 def for_search(countries: list[str], langs: list[str], extra_domains: list[str] | None = None, limit: int = 10) -> list[Source]:
@@ -78,11 +106,14 @@ def for_search(countries: list[str], langs: list[str], extra_domains: list[str] 
         if s.domain not in seen:
             seen.add(s.domain)
             out.append(s)
-    cs = [c.upper() for c in countries if c] or [c for l in langs for c in LANG_COUNTRIES.get(l, [])][:2]
-    # 1) pays concernés : institutions et médias publics vidéo d'abord
-    for c in cs:
-        for s in sorted(SOURCES.get(c, []), key=lambda s: (not s.official, not s.video)):
-            add(s)
+    cs = expand(countries) or [c for l in langs for c in LANG_COUNTRIES.get(l, [])][:2]
+    # 1) pays concernés, à tour de rôle (ex. GCC : 1re source de chaque pays, puis 2e...) ;
+    #    dans chaque pays : institutions, puis médias vidéo, puis presse écrite
+    per = [sorted(SOURCES.get(c, []), key=lambda s: (not s.official, not s.video)) for c in cs]
+    for i in range(max((len(p) for p in per), default=0)):
+        for p in per:
+            if i < len(p):
+                add(p[i])
     # 2) sources proposées par l'IA pour ce sujet (domaines)
     for d in extra_domains or []:
         d = d.lower().strip().removeprefix("https://").removeprefix("http://").removeprefix("www.").split("/")[0]

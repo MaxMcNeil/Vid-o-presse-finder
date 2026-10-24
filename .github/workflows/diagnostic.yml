@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
@@ -24,14 +24,14 @@ jobs:
       FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
       - run: |
           which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-          pip install -r requirements.txt
+          pip install -r requirements.txt && pip install -U -q yt-dlp   # yt-dlp toujours à jour (YouTube change souvent)
       - run: python -m quote_finder.check | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Enregistrer l'état des clés (state/QUOTAS.md)
         if: always()

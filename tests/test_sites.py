@@ -44,3 +44,27 @@ def test_probe_turns_broadcaster_page_into_video(monkeypatch, tmp_path):
     assert by["web"].url == "https://www.rts.ch/info/a.html" and by["web"].published == "2026-09-15" and by["web"].channel == "RTS"
     assert by["youtube"].url == "https://www.youtube.com/watch?v=abcdefghijk"  # vidéo YouTube intégrée dans l'article
     assert len(vids) == 2
+
+
+def test_arabic_text_is_kept_and_matched():
+    from quote_finder import scan
+    from quote_finder.util import normalize, slugify
+    assert normalize("السعودية تعلن رؤية ٢٠٣٠") == normalize("السعوديه تعلن رؤيه 2030")  # variantes d'écriture, chiffres
+    assert scan.term_present(normalize("أعلنت المملكة العربية السعودية اليوم رؤية 2030"), normalize("السعودية"))
+    s = slugify("محمد بن سلمان | رؤية 2030")
+    assert s.isascii() and len(s) >= 6 and s == slugify("محمد بن سلمان | رؤية 2030")
+    assert slugify("La Suisse abandonne Microsoft") == "la-suisse-abandonne-microsoft"
+
+
+def test_gcc_countries_all_represented():
+    doms = [s.domain for s in registry.for_search(["GCC"], ["ar"], limit=8)]
+    assert {"spa.gov.sa", "wam.ae", "qna.org.qa", "kuna.net.kw", "bna.bh", "omannews.gov.om"} <= set(doms)
+    assert authority.score_domain("www.spa.gov.sa")[0] == 1.0 and authority.score_domain("alarabiya.net")[0] >= 0.85
+
+
+def test_languages_follow_countries_and_script():
+    import argparse
+    from quote_finder.cli import options_for, parse_args
+    a = parse_args(["--target", "x"])
+    assert options_for(a, "قطر", "الغاز الطبيعي", "pays").langs[0] == "ar"
+    assert options_for(a, "Italia", "governo", "pays").langs == ["fr", "en"]  # l'italien est ajouté après le plan (pays IT)

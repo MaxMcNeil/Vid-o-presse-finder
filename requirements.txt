@@ -1,6 +1,9 @@
-requests>=2.31
-youtube-transcript-api>=1.0
+# Versions bornées : une future version majeure (qui changerait son fonctionnement) ne cassera pas la recherche.
+# yt-dlp reste toujours à jour exprès : YouTube change souvent, seule la dernière version suit.
+requests>=2.31,<3
+youtube-transcript-api>=1.0,<2
 yt-dlp>=2025.1.1
-trafilatura>=1.12
-rapidfuzz>=3.6
-googlenewsdecoder>=0.1.7
+trafilatura>=1.12,<3
+rapidfuzz>=3.6,<4
+googlenewsdecoder>=0.1.7,<1
+tzdata

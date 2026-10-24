@@ -63,7 +63,7 @@ def gdelt(query: str, n: int = 50, http=None) -> list[ArticleCandidate]:
 
 def google_news(query: str, n: int = 30, lang: str = "en", http=None) -> list[ArticleCandidate]:
     http = http or requests
-    country = {"en": "US", "fr": "FR", "es": "ES", "de": "DE", "it": "IT"}.get(lang, "US")
+    country = {"en": "US", "fr": "FR", "es": "ES", "de": "DE", "it": "IT", "ar": "AE"}.get(lang, "US")
     r = _get(http, "https://news.google.com/rss/search", params={
         "q": query, "hl": f"{lang}-{country}", "gl": country, "ceid": f"{country}:{lang}"})
     if not r:
@@ -96,7 +96,7 @@ def bing_news(query: str, n: int = 20, lang: str = "en", http=None) -> list[Arti
     """Bing Actualités en RSS (sans clé) : liens directs vers les articles, plus fiable que Google News."""
     import urllib.parse as up
     http = http or requests
-    mkt = {"en": "en-US", "fr": "fr-FR", "es": "es-ES", "de": "de-DE", "it": "it-IT"}.get(lang, "en-US")
+    mkt = {"en": "en-US", "fr": "fr-FR", "es": "es-ES", "de": "de-DE", "it": "it-IT", "ar": "ar-XA"}.get(lang, "en-US")
     r = _get(http, "https://www.bing.com/news/search", params={"q": query, "format": "rss", "mkt": mkt, "setlang": lang},
              headers={"User-Agent": "Mozilla/5.0 (compatible; quote-finder)"})
     if not r:
