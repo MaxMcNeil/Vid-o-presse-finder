@@ -1,0 +1,179 @@
+{
+ "date": "2026-10-24 18:23",
+ "cases": [
+  {
+   "id": "A-cipLy-c7s",
+   "transcript_api": {
+    "ok": false,
+    "err": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=A-cipLy-c7s! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+    "s": 1.4
+   },
+   "ytdlp_subs": {
+    "ok": false,
+    "err": "RuntimeError: ERROR: [youtube] A-cipLy-c7s: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for h",
+    "s": 2.3
+   },
+   "ytdlp_audio_section": {
+    "ok": false,
+    "err": "RuntimeError: ERROR: [youtube] A-cipLy-c7s: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for h",
+    "s": 1.7
+   },
+   "gemini_clip_offsets": {
+    "ok": true,
+    "out": {
+     "sentences": [
+      {
+       "start": 0.0,
+       "end": 8.0,
+       "text": "Überraschende Kehrtwende: Der Bund will weg von Microsoft-Produkten, um die Abhängigkeit von den USA zu reduzieren."
+      },
+      {
+       "start": 8.7,
+       "end": 17.5,
+       "text": "Die Software Microsoft 365 wurde erst vor wenigen Monaten an Zehntausenden Arbeitsplätzen des Bundes installiert."
+      },
+      {
+       "start": 17.8,
+       "end": 25.8,
+       "text": "Es gibt nun Bedenken, die Abhängigkeit vom US-Konzern sei zu gross, die Datensicherheit nicht genügend gewährleistet."
+      },
+      {
+       "start": 25.8,
+       "end": 32.5,
+       "text": "Es bestehe zudem ein Risiko, dass US-Behörden den Datenverkehr der Schweiz überwachen könnten."
+      },
+      {
+       "start": 32.5,
+       "end": 40.5,
+       "text": "Wie die NZZ am Sonntag heute schreibt, will der Bund diese Risiken und Abhängigkeiten minimieren und prüft Alternativen."
+      },
+      {
+       "start": 40.5,
+       "end": 50.1,
+       "text": "Politiker respektive IT-Experten von links bis rechts reagieren nun auf den geplanten Strategiewechsel und sind nicht gleicher Meinung."
+      },
+      {
+       "start": 51.3,
+       "end": 53.0,
+       "text": "Ja, ich warne vor diesem Abenteuer."
+      },
+      {
+       "start": 53.0,
+       "end": 57.5,
+       "text": "Es würde nicht nur riesige Summen kosten, es ist auch ein grosses Risiko."
+      },
+      {
+       "start": 57.5,
+       "end": 63.3,
+       "text": "Der Bund hat 54'000 IT-Arbeitsplätze, wo heute Microsoft im Einsatz steht."
+      },
+      {
+       "start": 63.3,
+       "end": 66.2,
+       "text": "Diese Software, er läuft einwandfrei."
+      },
+      {
+       "start": 66.2,
+       "end": 10.0,
+       "text": "Das ist richtig und wichtig, denn..."
+      }
+     ],
+     "quote_start": 8.7,
+     "quote_end": 17.5
+    },
+    "s": 130.2
+   }
+  },
+  {
+   "id": "HUn5SJMJ2fg",
+   "transcript_api": {
+    "ok": false,
+    "err": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=HUn5SJMJ2fg! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+    "s": 0.9
+   },
+   "ytdlp_subs": {
+    "ok": false,
+    "err": "RuntimeError: ERROR: [youtube] HUn5SJMJ2fg: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for h",
+    "s": 1.4
+   },
+   "ytdlp_audio_section": {
+    "ok": false,
+    "err": "RuntimeError: ERROR: [youtube] HUn5SJMJ2fg: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for h",
+    "s": 1.3
+   },
+   "gemini_clip_offsets": {
+    "ok": true,
+    "out": {
+     "sentences": [
+      {
+       "start": 486.0,
+       "end": 488.6,
+       "text": "And, and it wasn't... it wasn't that hard, right?"
+      },
+      {
+       "start": 488.7,
+       "end": 495.7,
+       "text": "You know, it's funny listening to this because I had a Linux... er, I had Linux on my computer when I was at university for like 3 years or something, and there was a lot of writing commands."
+      }
+     ],
+     "quote_start": null,
+     "quote_end": null
+    },
+    "s": 133.8
+   }
+  },
+  {
+   "id": "BffWWGOgcWs",
+   "transcript_api": {
+    "ok": false,
+    "err": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=BffWWGOgcWs! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+    "s": 0.8
+   },
+   "ytdlp_subs": {
+    "ok": false,
+    "err": "RuntimeError: ERROR: [youtube] BffWWGOgcWs: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for h",
+    "s": 1.5
+   },
+   "ytdlp_audio_section": {
+    "ok": false,
+    "err": "RuntimeError: ERROR: [youtube] BffWWGOgcWs: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for h",
+    "s": 1.7
+   },
+   "gemini_clip_offsets": {
+    "ok": true,
+    "out": {
+     "sentences": [
+      {
+       "start": 0.0,
+       "end": 11.8,
+       "text": "\"Switzerland's federal administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step and in the long term,\" a federal chancellery spokesman told NZZ am Sonntag."
+      },
+      {
+       "start": 12.3,
+       "end": 22.0,
+       "text": "This comes as a surprise, as Microsoft 365 was recently installed on some 54,000 administration workstations, despite concerns about data security."
+      },
+      {
+       "start": 22.8,
+       "end": 26.3,
+       "text": "The timing looks like buyer's remorse until you check the spending."
+      },
+      {
+       "start": 26.9,
+       "end": 39.3,
+       "text": "An investigation by SRF showed that the federal government and cantons spent over 1.1 billion Swiss francs, which is about 1.4 billion US dollars, on Microsoft licenses over the past 10 years."
+      },
+      {
+       "start": 39.8,
+       "end": 46.0,
+       "text": "You don't really announce plans to abandon a vendor immediately after a major deployment unless something..."
+      }
+     ],
+     "quote_start": 0.0,
+     "quote_end": 5.5
+    },
+    "s": 93.3
+   }
+  }
+ ]
+}
