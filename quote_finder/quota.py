@@ -145,7 +145,8 @@ class QuotaState:
             extra = f"{e.get('units', 0)} unités / {YT_DAILY_UNITS}" if api == "youtube" else f"{e.get('calls', 0)} appels"
             if e.get("used_models"):
                 extra += " — " + ", ".join(f"{m} ×{n}" for m, n in sorted(e["used_models"].items(), key=lambda x: -x[1])[:3])
-            rows.append(f"| {e.get('label', k)} | {state} | {extra} aujourd'hui | {e.get('errors', 0)} | {e.get('last', '')} |")
+            last = " ".join(str(e.get("last", "")).split()).replace("|", "/")[:90]  # tableau Markdown sur une ligne
+            rows.append(f"| {e.get('label', k)} | {state} | {extra} aujourd'hui | {e.get('errors', 0)} | {last} |")
         return rows
 
     def markdown(self) -> str:

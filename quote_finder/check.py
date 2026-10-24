@@ -45,7 +45,7 @@ def main() -> int:
     ok_g = 0
     for i, key in enumerate(keys_from_env("GEMINI"), 1):
         pool = KeyPool("gemini", [key], 0, persist=True)
-        pool.labels[key] = f"Gemini clé {i}"
+        pool.labels[key] = f"Gemini clé {i}"  # numéro réel dans le secret (et non « clé 1 » à chaque fois)
         st.label("gemini", key, pool.labels[key])
         c = GeminiClient(pool, list(llm.gemini.models), preferred=llm.gemini.preferred, timeout=60)
         r, e, d = t(lambda c=c: c.generate_json('Réponds exactement {"ok": true}', max_attempts=4))

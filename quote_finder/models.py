@@ -34,6 +34,7 @@ class VideoCandidate:
     channel_subs: Optional[int] = None  # abonnés de la chaîne (API YouTube)
     authority: float = 0.0              # 0..1, calculé par authority.score_video
     authority_why: str = ""
+    relevance: float = 0.0              # 0..10, pertinence estimée avant analyse
 
     @property
     def key(self) -> str:
@@ -52,6 +53,7 @@ class ArticleCandidate:
     domain: str = ""        # domaine du média (même si l'URL est une redirection Google News)
     authority: float = 0.0
     authority_why: str = ""
+    relevance: float = 0.0
 
     @property
     def key(self) -> str:

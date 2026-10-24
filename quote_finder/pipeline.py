@@ -92,7 +92,7 @@ def _recent_enough(published: str, since: str) -> bool:
     return not since or not published or published[:10] >= since
 
 
-def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list[VideoCandidate]:
+def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None, llm=None) -> list[VideoCandidate]:
     found: dict[str, VideoCandidate] = {}
 
     def add(vs, q):
@@ -117,26 +117,60 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list
         if "archive" in o.platforms and i < 2:
             add(_safe(other_video.archive_org, q, 8, http), q)
     vids = [v for v in found.values() if (v.duration is None or v.duration < 4 * 3600) and _recent_enough(v.published, o.since)]
+    seen_titles, uniq = set(), []
+    for v in vids:  # même vidéo publiée deux fois (ex. « Le Point » et « Le Point Abonnés »)
+        k = normalize(v.title)[:70]
+        if len(k) >= 15 and k in seen_titles:
+            continue
+        seen_titles.add(k)
+        uniq.append(v)
+    vids = uniq
     for v in vids:
         v.authority, v.authority_why = authority.score_video(v, plan)
-    strong = [v for v in vids if v.authority >= o.min_authority]
-    log.info("%d vidéos candidates, %d avec une autorité suffisante (seuil %.2f, niveau « %s »)",
-             len(vids), len(strong), o.min_authority, o.authority)
     plan.diag["videos_candidates"] = len(vids)
-    plan.diag["videos_low_authority"] = len(vids) - len(strong)
-
-    # Priorité : autorité de la source, puis pertinence (requêtes multiples + indices dans les métadonnées).
-    # Le titre ne sert qu'à ordonner : le contenu est toujours vérifié.
-    def prio(v: VideoCandidate):
-        meta = normalize(f"{v.title} {v.description[:600]}")
-        rel = len(v.found_by) * 1.5 + scan.group_score(meta, plan.term_groups) + \
-            (1.5 if any(a in meta for a in plan.target_aliases) else 0)
-        return -(rel + 6 * v.authority)
-    strong.sort(key=prio)
-    return strong[: o.max_videos]
+    return select(vids, plan, o, llm, kind="vidéos", cap=o.max_videos,
+                  meta=lambda v: (v.title, v.channel, v.published, v.description), diag="videos")
 
 
-def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[ArticleCandidate]:
+def select(items: list, plan: Plan, o: Options, llm, kind: str, cap: int, meta, diag: str) -> list:
+    """Pertinence d'abord (filtre local puis note de l'IA sur les titres), autorité ensuite.
+    Avec l'autorité « forte », si moins de la moitié des places sont remplies par des sources fortes et pertinentes,
+    on complète avec des sources moyennes (≥ 0.4) TRÈS pertinentes ; elles sont signalées dans le rapport."""
+    from . import screen
+    rel = {id(x): screen.local_relevance(meta(x)[0], meta(x)[3], plan, o.target_type) for x in items}
+    floor = min(o.min_authority, 0.4)
+    pool = [x for x in items if x.authority >= floor and rel[id(x)] >= 1.0]
+    pool.sort(key=lambda x: -(rel[id(x)] + 0.5 * len(getattr(x, "found_by", ()) or ()) + 3 * x.authority))
+    pool = pool[:60]
+    scores = screen.llm_scores(llm, plan, o, [meta(x) for x in pool], kind) if pool else None
+    if scores is not None:
+        for i, x in enumerate(pool):
+            x.relevance = scores.get(i, 0.0)
+        pool = [x for x in pool if x.relevance >= 6]
+        log.info("%s : %d pertinentes d'après l'IA (note ≥ 6/10)", kind, len(pool))
+    else:  # IA indisponible : il faut au moins ~60 % des concepts du sujet dans le titre/la description
+        need = scan.needed(plan.term_groups)
+        for x in pool:
+            g = scan.group_score(f"{meta(x)[0]} {meta(x)[3][:800]}", plan.term_groups)
+            x.relevance = 7.0 if g >= need else 3.0
+        pool = [x for x in pool if x.relevance >= 6]
+    pool.sort(key=lambda x: -(x.relevance / 10 * 0.6 + x.authority * 0.4))
+    strong = [x for x in pool if x.authority >= o.min_authority]
+    chosen = strong[:cap]
+    if len(chosen) < max(1, cap // 2) and o.authority == "forte":
+        extra = [x for x in pool if x not in chosen and x.authority >= 0.4 and x.relevance >= 7][: cap - len(chosen)]
+        for x in extra:
+            x.authority_why += " — ajoutée faute de source forte sur ce sujet"
+        chosen += extra
+        if extra:
+            log.info("%s : %d source(s) d'autorité moyenne ajoutée(s) faute de source forte assez pertinente", kind, len(extra))
+    plan.diag[f"{diag}_low_authority"] = sum(1 for x in items if x.authority < o.min_authority)
+    plan.diag[f"{diag}_relevant"] = len(pool)
+    log.info("%s : %d candidates → %d pertinentes → %d retenues", kind, len(items), len(pool), len(chosen))
+    return chosen
+
+
+def discover_articles(plan: Plan, o: Options, pools: dict, http=None, llm=None) -> list[ArticleCandidate]:
     found: dict[str, ArticleCandidate] = {}
     queries = list(plan.news_queries)
     doms = [d for d in plan.authoritative_sources if "." in d and " " not in d][:3]
@@ -157,17 +191,10 @@ def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[Ar
     arts = list(found.values())
     for a in arts:
         a.authority, a.authority_why = authority.score_article(a, plan)
-    strong = [a for a in arts if a.authority >= o.min_authority]
-    log.info("%d articles candidats, %d de sources qui font autorité", len(arts), len(strong))
     plan.diag["articles_candidates"] = len(arts)
-    plan.diag["articles_low_authority"] = len(arts) - len(strong)
-
-    def prio(a: ArticleCandidate):
-        meta = normalize(f"{a.title} {a.snippet}")
-        return -(len(a.found_by) + scan.group_score(meta, plan.term_groups) + (2 if a.text else 0) + 5 * a.authority)
-    strong.sort(key=prio)
     # on en lit 2x plus que demandé : certains seront illisibles (paywall) ou hors sujet
-    return strong[: o.max_articles * 2]
+    return select(arts, plan, o, llm, kind="articles", cap=o.max_articles * 2,
+                  meta=lambda a: (a.title, a.source, a.published, a.snippet or a.text[:300]), diag="articles")
 
 
 # ------------------------------------------------------------------ analyse
@@ -337,7 +364,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries),
                  "queries_news": len(plan.news_queries), "authority": o.authority, "speakers": o.speakers}
 
-    vids = discover_videos(plan, o, yt_pool, http)
+    vids = discover_videos(plan, o, yt_pool, http, llm)
     by_plat: dict[str, int] = {}
     for v in vids:
         by_plat[v.platform] = by_plat.get(v.platform, 0) + 1
@@ -390,7 +417,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     ares: list[ArticleResult] = []
     if o.articles and deadline - time.time() > 90:
         try:
-            arts = discover_articles(plan, o, pools, http)
+            arts = discover_articles(plan, o, pools, http, llm)
 
             def safe_article(a):
                 try:

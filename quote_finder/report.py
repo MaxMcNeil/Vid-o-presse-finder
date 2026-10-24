@@ -177,7 +177,7 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
         v = r.video
         L.append(f"### {v.title or v.id}")
         L.append(f"- **Source** : {v.channel or '?'} · {stars(v.authority)} {v.authority_why} · **{v.platform}** · "
-                 f"upload {v.published[:10] or 'inconnu'}")
+                 f"upload {v.published[:10] or 'inconnu'}" + (f" · pertinence estimée {v.relevance:.0f}/10" if v.relevance else ""))
         L.append(f"- **URL** : {v.url}")
         L.append("- **Analyse** : " + {"transcript": "transcription (horodatage calé sur les sous-titres)",
                                         "gemini-audio": "audio écouté par IA (horodatage ±5 s)"}.get(

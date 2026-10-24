@@ -15,6 +15,9 @@ class FakeLLM:
 
     def generate_json(self, prompt, video_url=None, inline_media=None, media_key=""):
         self.prompts.append((prompt[:40], video_url))
+        if "Tu fais le tri" in prompt:
+            import re
+            return {"scores": [{"i": int(n), "s": 8} for n in re.findall(r"^(\d+)\. «", prompt, re.M)]}
         if "Tu prépares une recherche" in prompt:
             return {"claim_summary": "Saddam aurait des ADM",
                     "term_groups": [["saddam"], ["weapons of mass destruction", "wmd"]],
@@ -34,8 +37,8 @@ class FakeLLM:
 def test_end_to_end(monkeypatch, tmp_path):
     vids = [VideoCandidate("youtube", "AAA", "https://www.youtube.com/watch?v=AAA", "CLINTON-SPEECH 1998", "", "WH", "1998-02-17T00:00:00Z", 3000),
             VideoCandidate("youtube", "BBB", "https://www.youtube.com/watch?v=BBB", "Clinton on WMD (clickbait)", "", "Chan", "2020-01-01T00:00:00Z", 600),
-            VideoCandidate("dailymotion", "DDD", "https://www.dailymotion.com/video/DDD", "DM no subs", "", "BFM", "2026-10-09", 300),
-            VideoCandidate("youtube", "CCC", "https://www.youtube.com/watch?v=CCC", "No captions", "", "Chan", "2021-01-01T00:00:00Z", 600)]
+            VideoCandidate("dailymotion", "DDD", "https://www.dailymotion.com/video/DDD", "DM no subs saddam wmd", "", "BFM", "2026-10-09", 300),
+            VideoCandidate("youtube", "CCC", "https://www.youtube.com/watch?v=CCC", "No captions saddam wmd", "", "Chan", "2021-01-01T00:00:00Z", 600)]
     monkeypatch.setattr(youtube, "search", lambda *a, **k: list(vids))
     monkeypatch.setattr(other_video, "dailymotion", lambda *a, **k: [])
     monkeypatch.setattr(other_video, "archive_org", lambda *a, **k: [])

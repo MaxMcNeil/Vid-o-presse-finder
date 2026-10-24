@@ -101,3 +101,50 @@ def test_llm_call_never_exceeds_its_time_limit():
     with pytest.raises(QuotaExhausted):
         c.generate_json("x", until=time.time() + 1.5)
     assert time.time() - t0 < 6
+
+
+def test_selection_relevance_first_then_authority():
+    """Cas réel du 24/10 : des chaînes sérieuses mais hors sujet passaient devant les vidéos pertinentes."""
+    from quote_finder import pipeline
+    plan = Plan("La Suisse renonce à Microsoft", [["abandonne", "quitte", "ditches", "drops"], ["microsoft", "office 365"],
+                                                   ["securite", "souverainete numerique", "security"]],
+                ["suisse", "la suisse", "switzerland", "swiss"], [], [], ["fr"], target_type="pays")
+    vids = [V("Un clip de campagne choc pour la sécurité routière suisse", "Le Point"),
+            V("Comprendre sa facture de médecin", "Le Temps"),
+            V("La Confédération quitte Microsoft 365 pour la souveraineté numérique", "RTS Info"),
+            V("Switzerland drops Microsoft over security concerns", "Tech News Daily", subs=20_000),
+            V("Recette de la fondue", "RTS Info")]
+    for i, v in enumerate(vids):
+        v.id = str(i)
+        v.authority, v.authority_why = authority.score_video(v, plan)
+
+    class L:
+        def generate_json(self, prompt, **k):
+            assert "sécurité routière" in prompt and "fondue" not in prompt  # filtre local : la fondue n'est même pas notée
+            sc = {"routière": 1, "médecin": 0, "Confédération": 10, "Switzerland drops": 9}
+            import re
+            lines = [l for l in prompt.splitlines() if re.match(r"^\d+\. «", l)]
+            return {"scores": [{"i": int(l.split(".")[0]), "s": next((v for k, v in sc.items() if k in l), 0)} for l in lines]}
+    o = pipeline.Options("La Suisse", "abandonne Microsoft", target_type="pays", max_videos=4)
+    chosen = pipeline.select(vids, plan, o, L(), "vidéos", 4, lambda v: (v.title, v.channel, v.published, v.description), "videos")
+    titles = [v.title for v in chosen]
+    assert titles[0].startswith("La Confédération") and not any("routière" in t or "médecin" in t for t in titles)
+    assert any(t.startswith("Switzerland drops") for t in titles)  # source moyenne mais très pertinente : ajoutée et signalée
+    assert "faute de source forte" in chosen[-1].authority_why
+
+
+def test_selection_without_ai_keeps_only_titles_with_most_concepts():
+    from quote_finder import pipeline
+    plan = Plan("x", [["quitte", "drops"], ["microsoft"], ["securite", "security"]], ["suisse", "switzerland"], [], [], ["fr"],
+                target_type="pays")
+    vids = [V("Un clip de campagne choc pour la sécurité routière suisse", "RTS Info"),
+            V("La Suisse quitte Microsoft pour des raisons de sécurité", "RTS Info")]
+    for v in vids:
+        v.authority = 0.9
+
+    class Down:
+        def generate_json(self, *a, **k):
+            raise RuntimeError("503")
+    out = pipeline.select(vids, plan, pipeline.Options("La Suisse", "x"), Down(), "vidéos", 5,
+                          lambda v: (v.title, v.channel, v.published, v.description), "videos")
+    assert [v.title for v in out] == ["La Suisse quitte Microsoft pour des raisons de sécurité"]

@@ -108,7 +108,10 @@ ou lance *Actions → Diagnostic* qui teste chaque clé de chaque api et donne l
 ## Comment ça marche
 
 1. **Plan (IA)** : type de cible, alias (ex. *Suisse, Swiss, helvétique*), **représentants officiels** (Conseil fédéral, ministres…), **sources de référence** pour ce sujet (ex. RTS, Le Temps, admin.ch), requêtes multilingues orientées vers ces sources.
-2. **Découverte** puis **score d'autorité** de chaque source : liste de médias et d'institutions, domaines officiels (`.gouv.fr`, `admin.ch`, `.gov`, `europa.eu`…), abonnés de la chaîne ; pénalités pour les #shorts et les titres racoleurs. Seules les meilleures sont analysées.
+2. **Tri par pertinence** : un filtre local écarte ce qui n'a rien à voir, puis l'IA note en un seul appel les 60 meilleurs
+   titres (0 à 10) ; seuls ceux notés ≥ 6 sont analysés. Avec l'autorité « forte », si les sources fortes pertinentes manquent,
+   des sources moyennes très pertinentes (≥ 7/10) complètent, signalées dans le rapport.
+3. **Découverte** puis **score d'autorité** de chaque source : liste de médias et d'institutions, domaines officiels (`.gouv.fr`, `admin.ch`, `.gov`, `europa.eu`…), abonnés de la chaîne ; pénalités pour les #shorts et les titres racoleurs. Seules les meilleures sont analysées.
 3. **Le contenu prime sur le titre** : la transcription est lue, un filtre local repère les passages utiles, l'IA juge (à la lettre / dans le sens / simple mention / démenti), dit **qui** parle et son rôle.
 4. **Horodatage calé** sur les lignes de sous-titres, puis classement : sûreté du passage + autorité de la source + rôle du locuteur.
 5. Sans sous-titres : Gemini regarde la vidéo (YouTube) ou écoute l'audio (Dailymotion, Archive).
