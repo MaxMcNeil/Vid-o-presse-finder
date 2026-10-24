@@ -1,0 +1,232 @@
+{
+ "target": "La Suisse",
+ "target_type": "pays",
+ "claim": "abandonne Microsoft pour risque de sécurité",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "La Suisse ou son administration fédérale renoncerait ou limiterait l'utilisation des solutions logicielles et cloud de Microsoft en raison de risques pour la cybersécurité ou la souveraineté numérique.",
+  "term_groups": [
+   [
+    "abandonne",
+    "renonce",
+    "interdit",
+    "rejette",
+    "quitte",
+    "drops",
+    "abandons",
+    "bans",
+    "phases out",
+    "ditching",
+    "verzichtet",
+    "stoppt"
+   ],
+   [
+    "microsoft",
+    "microsoft 365",
+    "office 365",
+    "azure",
+    "ms cloud",
+    "windows"
+   ],
+   [
+    "risque de securite",
+    "cybersecurite",
+    "souverainete numerique",
+    "protection des donnees",
+    "cloud act",
+    "security risk",
+    "cybersecurity",
+    "data privacy",
+    "digital sovereignty",
+    "datenschutz"
+   ]
+  ],
+  "target_aliases": [
+   "suisse",
+   "confederation suisse",
+   "helvetique",
+   "switzerland",
+   "swiss",
+   "schweiz",
+   "svizzera",
+   "berne",
+   "la suisse"
+  ],
+  "youtube_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "RTS Info Suisse Microsoft 365 cloud",
+   "SRF News Schweiz Microsoft Cloud Sicherheit",
+   "Suisse Confédération Microsoft cybersécurité",
+   "Swiss government Microsoft cloud security risk",
+   "Débat parlementaire Suisse Microsoft souveraineté numérique",
+   "Conférence de presse Conseil fédéral Microsoft",
+   "RTS 19h30 administration fédérale Microsoft"
+  ],
+  "news_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "Suisse abandon Microsoft sécurité données",
+   "Switzerland drops Microsoft security concerns",
+   "Confédération suisse cloud Microsoft Cloud Act",
+   "Schweiz Bundesverwaltung Microsoft Datenschutz Risiko",
+   "Swiss administration Microsoft 365 cybersecurity"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "admin.ch",
+    "whitehouse.gov",
+    "parlament.ch",
+    "nytimes.com",
+    "rts.ch",
+    "washingtonpost.com",
+    "srf.ch",
+    "npr.org"
+   ],
+   "site_articles": 21,
+   "site_articles_by_site": {
+    "admin.ch": 10,
+    "parlament.ch": 1,
+    "rts.ch": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Der Bundesrat - Le Conseil fédéral": "?",
+    "The White House": "?",
+    "The New York Times": "?"
+   },
+   "videos_candidates": 105,
+   "videos_low_authority": 91,
+   "videos_relevant": 2,
+   "videos_by_platform": {
+    "youtube": 2
+   },
+   "articles_candidates": 112,
+   "articles_low_authority": 14,
+   "articles_relevant": 2,
+   "elapsed_min": 10.3,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 1,
+      "gemini-3.6-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Conseil fédéral",
+   "Chancellerie fédérale",
+   "Centre national pour la cybersécurité",
+   "NCSC",
+   "OFIT",
+   "Florian Schütz",
+   "Karin Keller-Sutter",
+   "Viktor Rossi"
+  ],
+  "authoritative_sources": [
+   "admin.ch",
+   "ncsc.admin.ch",
+   "rts.ch",
+   "srf.ch",
+   "letemps.ch",
+   "nzz.ch",
+   "agence télégraphique suisse",
+   "keystone-sda.ch",
+   "swissinfo.ch",
+   "heidi.news",
+   "inside-it.ch",
+   "reuters.com",
+   "bloomberg.com",
+   "RTS - Radio Télévision Suisse",
+   "SRF News"
+  ],
+  "site_query": "Confédération Microsoft sécurité données cloud",
+  "countries": [
+   "CH",
+   "US"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 2,
+  "articles_scanned": 2
+ },
+ "videos": [
+  {
+   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
+   "uploaded": "2026-04-21",
+   "platform": "youtube",
+   "channel": "House of El",
+   "url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
+   "method": "gemini-video",
+   "authority": 0.41,
+   "authority_why": "chaîne non répertoriée (294 000 abonnés) — titre racoleur — ajoutée faute de source forte sur ce sujet",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:26",
+     "start_seconds": 0.0,
+     "end_seconds": 26.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:26.000",
+     "duration_seconds": 26.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=BffWWGOgcWs&t=0s",
+     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=27&autoplay=1",
+     "t": 0.0,
+     "quote": "Switzerland's Federal Administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step and in the long term, a Federal Chancellery spokesman told NZZ am Sonntag. This comes as a surprise, as Microsoft 365 was recently installed on some 54,000 administration workstations despite concerns about data security.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "El",
+     "confidence": 0.95,
+     "why": "The speaker explicitly mentions that Switzerland's Federal Administration aims to reduce its dependency on Microsoft in the long term following data security concerns.",
+     "t_end": 26.0,
+     "speaker_role": "expert",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "La Confédération va-t-elle tourner le dos à Microsoft?",
+   "date": "2026-04-20",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNRWlaXzJqRXVVakNZUlRVS1JKeGwzd3FDSzhOWlNwMFVZQV91dllxZHN4NXo5SnVPOXJFOFpVX25JVE9Od3dWYlRfRnFtV2VQNDl6S2hrNDg4SDhMc0NZZk9oUUJ5NUM3d2xwVkxXVzlQZmh6LVVScFRkdUg2M2FRZFU3RWhvcVJJZmpzWDlSXzlRM1lZaktmTGZrTV9pUjk0cGxSck1Kam5tMkp2emlBN3NEWQ?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "La Confédération aura son propre cloud pour stocker les données de la population",
+   "date": "2024-05-23",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNMXc2U1FZLThBVl9pUVV4X3VBc3F3b19rTFJTZk5tMG5Kd2VfUzg5dUFsaEZLRy1wZzZZZEhGVVBhRi16RExJSEluMmwwdlA3M1lCTWQtS18tMXowS1BtQXJya05Dd0k2R19xellqdHVabXJXb1k3YWZJSmE5Ml9xTHVTSC1lVTBaU3pGR243M2g2VzNaY1VLdFFoaHVfZUNwUnBNSHhQU3MtSXFod21tRms5a2twTVNwZVB0dS1KSE01TWlHUW9VNl9mbmpIZEh5OUh6Tw?oc=5",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!",
+   "url": "https://www.youtube.com/watch?v=A-cipLy-c7s",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  }
+ ]
+}

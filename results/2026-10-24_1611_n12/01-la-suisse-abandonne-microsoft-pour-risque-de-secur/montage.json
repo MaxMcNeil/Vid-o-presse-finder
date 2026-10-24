@@ -1,0 +1,42 @@
+{
+ "target": "La Suisse",
+ "target_type": "pays",
+ "claim": "abandonne Microsoft pour risque de sécurité",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "clips": [
+  {
+   "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
+   "target": "La Suisse",
+   "target_type": "pays",
+   "claim": "abandonne Microsoft pour risque de sécurité",
+   "platform": "youtube",
+   "video_id": "BffWWGOgcWs",
+   "source_url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
+   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
+   "channel": "House of El",
+   "uploaded": "2026-04-21",
+   "source_authority": 0.41,
+   "source_authority_why": "chaîne non répertoriée (294 000 abonnés) — titre racoleur — ajoutée faute de source forte sur ce sujet",
+   "start": 0.0,
+   "end": 26.0,
+   "duration": 26.0,
+   "start_tc": "00:00:00.000",
+   "end_tc": "00:00:26.000",
+   "in": 0.0,
+   "out": 28.0,
+   "in_tc": "00:00:00.000",
+   "out_tc": "00:00:28.000",
+   "timing": "ia",
+   "quote": "Switzerland's Federal Administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step and in the long term, a Federal Chancellery spokesman told NZZ am Sonntag. This comes as a surprise, as Microsoft 365 was recently installed on some 54,000 administration workstations despite concerns about data security.",
+   "speaker": "El",
+   "speaker_role": "expert",
+   "who_says": "reported",
+   "verdict": "literal",
+   "confidence": 0.95,
+   "score": 0.641,
+   "link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=27&autoplay=1",
+   "order": 1
+  }
+ ]
+}

@@ -1,0 +1,749 @@
+{
+ "target": "قطر",
+ "target_type": "pays",
+ "claim": "الغاز الطبيعي المسال",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations officielles, analyses de haut niveau et couverture médiatique de référence concernant l'industrie, la production, l'exportation et les contrats de gaz naturel liquéfié (GNL) au Qatar.",
+  "term_groups": [
+   [
+    "الغاز الطبيعي المسال",
+    "غاز مسال",
+    "الغاز المسال",
+    "lng",
+    "liquefied natural gas",
+    "gaz naturel liquefie",
+    "gnl",
+    "liquid natural gas"
+   ],
+   [
+    "حقل الشمال",
+    "توسعه حقل الشمال",
+    "صادرات الغاز",
+    "north field",
+    "north field expansion",
+    "lng exports",
+    "champ nord",
+    "exportations de gnl",
+    "long term contracts",
+    "عقود توريد"
+   ]
+  ],
+  "target_aliases": [
+   "قطر",
+   "دوله قطر",
+   "قطري",
+   "قطريه",
+   "qatar",
+   "state of qatar",
+   "qatari",
+   "qatarien",
+   "qatarienne"
+  ],
+  "youtube_queries": [
+   "قطر الغاز الطبيعي المسال",
+   "قطر للطاقة سعد الكعبي مؤتمر صحفي الغاز المسال",
+   "توسعة حقل الشمال الغاز الطبيعي قطر الجزيرة",
+   "Saad Al-Kaabi QatarEnergy LNG interview Bloomberg",
+   "Qatar liquefied natural gas exports Reuters",
+   "Conférence de presse QatarEnergy gaz naturel liquéfié",
+   "Qatar LNG contracts Europe Asia CNBC"
+  ],
+  "news_queries": [
+   "قطر الغاز الطبيعي المسال",
+   "قطر الغاز الطبيعي المسال توسعة حقل الشمال",
+   "Qatar LNG liquefied natural gas QatarEnergy contracts",
+   "Qatar gaz naturel liquéfié exportations accords",
+   "Saad Al-Kaabi QatarEnergy North Field supply"
+  ],
+  "languages": [
+   "ar",
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 7,
+   "queries_news": 5,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "qna.org.qa",
+    "aljazeera.net",
+    "alaraby.co.uk",
+    "thepeninsulaqatar.com",
+    "qatarenergy.qa",
+    "bloomberg.com",
+    "reuters.com",
+    "ft.com"
+   ],
+   "site_articles": 90,
+   "site_articles_by_site": {
+    "qna.org.qa": 20,
+    "aljazeera.net": 20,
+    "alaraby.co.uk": 20,
+    "qatarenergy.qa": 10,
+    "reuters.com": 20
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "الجزيرة Al Jazeera Arabic": "?",
+    "Reuters": "?",
+    "Associated Press": "?"
+   },
+   "videos_candidates": 218,
+   "videos_low_authority": 98,
+   "videos_relevant": 53,
+   "videos_by_platform": {
+    "youtube": 8
+   },
+   "articles_candidates": 243,
+   "articles_low_authority": 53,
+   "articles_relevant": 59,
+   "elapsed_min": 10.3,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 1,
+      "gemini-3.6-flash": 12
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "سعد بن شريده الكعبي (Saad Sherida Al-Kaabi)",
+   "وزارة شؤون الطاقة القطرية",
+   "قطر للطاقة (QatarEnergy)",
+   "تميم بن حمد آل ثاني (Tamim bin Hamad Al Thani)",
+   "محمد بن عبد الرحمن آل ثاني (Mohammed bin Abdulrahman Al Thani)"
+  ],
+  "authoritative_sources": [
+   "qna.org.qa",
+   "qatarenergy.qa",
+   "aljazeera.net",
+   "bloomberg.com",
+   "reuters.com",
+   "ft.com",
+   "spglobal.com",
+   "asharq.com",
+   "cnbc.com",
+   "lesechos.fr",
+   "lefigaro.fr",
+   "Al Jazeera Arabic قناة الجزيرة",
+   "Reuters",
+   "Bloomberg Technology",
+   "Asharq News الشرق للأخبار",
+   "CNBC Arabia Television"
+  ],
+  "site_query": "قطر الغاز الطبيعي المسال حقل الشمال",
+  "countries": [
+   "QA"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "Qatar Aims to Be World’s Biggest LNG Producer for Next 20 Years",
+   "uploaded": "2021-02-17",
+   "platform": "youtube",
+   "channel": "Bloomberg Television",
+   "url": "https://www.youtube.com/watch?v=_bfN6GYB4Zk",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "02:16",
+     "end": "03:59",
+     "start_seconds": 136.0,
+     "end_seconds": 239.0,
+     "start_tc": "00:02:16.000",
+     "end_tc": "00:03:59.000",
+     "duration_seconds": 103.0,
+     "timestamp": "02:16",
+     "link": "https://www.youtube.com/watch?v=_bfN6GYB4Zk&t=136s",
+     "clip_link": "https://www.youtube.com/embed/_bfN6GYB4Zk?start=136&end=240&autoplay=1",
+     "t": 136.0,
+     "quote": "As far as the North Field expansion projects, we have two projects, North Field East, which we just announced sanctioning, and the North Field South. So the North Field East will take us from 77 million tons to 110 million tons per annum, and then North Field South, which we will announce early next year, will take us to 126 million tons.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "سعد بن شريده الكعبي",
+     "confidence": 1.0,
+     "why": "Le ministre de l'Énergie du Qatar détaille les projets d'expansion du champ North Field pour accroître la production de GNL du Qatar à 126 millions de tonnes par an.",
+     "t_end": 239.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    },
+    {
+     "start": "04:16",
+     "end": "05:47",
+     "start_seconds": 256.0,
+     "end_seconds": 347.0,
+     "start_tc": "00:04:16.000",
+     "end_tc": "00:05:47.000",
+     "duration_seconds": 91.0,
+     "timestamp": "04:16",
+     "link": "https://www.youtube.com/watch?v=_bfN6GYB4Zk&t=256s",
+     "clip_link": "https://www.youtube.com/embed/_bfN6GYB4Zk?start=256&end=348&autoplay=1",
+     "t": 256.0,
+     "quote": "What we did is very unique this time in Qatar. We had never gone 100% QP in the past. Now we have sanctioned this project as 100% QP, but we like the joint venture model where we have international companies join us in developing these projects.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "سعد بن شريده الكعبي",
+     "confidence": 0.95,
+     "why": "Le ministre explique le modèle de coentreprise (joint venture) sélectionné par Qatar Petroleum pour le développement du projet de GNL.",
+     "t_end": 347.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    },
+    {
+     "start": "07:29",
+     "end": "08:25",
+     "start_seconds": 449.0,
+     "end_seconds": 505.0,
+     "start_tc": "00:07:29.000",
+     "end_tc": "00:08:25.000",
+     "duration_seconds": 56.0,
+     "timestamp": "07:29",
+     "link": "https://www.youtube.com/watch?v=_bfN6GYB4Zk&t=449s",
+     "clip_link": "https://www.youtube.com/embed/_bfN6GYB4Zk?start=449&end=506&autoplay=1",
+     "t": 449.0,
+     "quote": "Long term is the best approach. It's the best approach for both sides. It's the best approach for the buyer, it's the best approach for the seller. It has certainty of the demand that is required.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "سعد بن شريده الكعبي",
+     "confidence": 0.95,
+     "why": "Le ministre de l'Énergie du Qatar défend les contrats de livraison de GNL à long terme comme étant la meilleure approche pour les acheteurs et les vendeurs.",
+     "t_end": 505.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Qatar LNG Plant Suffers 'Extensive Damage' After Iran Strike",
+   "uploaded": "2026-03-19",
+   "platform": "youtube",
+   "channel": "Bloomberg Television",
+   "url": "https://www.youtube.com/watch?v=ux4rNZbA7aQ",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:08",
+     "end": "01:45",
+     "start_seconds": 8.0,
+     "end_seconds": 105.0,
+     "start_tc": "00:00:08.000",
+     "end_tc": "00:01:45.000",
+     "duration_seconds": 97.0,
+     "timestamp": "00:08",
+     "link": "https://www.youtube.com/watch?v=ux4rNZbA7aQ&t=8s",
+     "clip_link": "https://www.youtube.com/embed/ux4rNZbA7aQ?start=8&end=106&autoplay=1",
+     "t": 8.0,
+     "quote": "the Qatar's Ras Laffan area was hit last night and that's a huge area which has multiple LNG export trains... they also have there the Pearl GTL plant which is a plant run by Shell... sustained severe damage according to QatarEnergy, the state company, and as well as Shell",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Anthony Di Paola",
+     "confidence": 0.95,
+     "why": "L'intervenant Anthony Di Paola (journaliste Bloomberg) analyse en détail l'impact des frappes sur les infrastructures de gaz naturel liquéfié (GNL) au Qatar à Ras Laffan et mentionne QatarEnergy.",
+     "t_end": 105.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "02:08",
+     "end": "02:34",
+     "start_seconds": 128.0,
+     "end_seconds": 154.0,
+     "start_tc": "00:02:08.000",
+     "end_tc": "00:02:34.000",
+     "duration_seconds": 26.0,
+     "timestamp": "02:08",
+     "link": "https://www.youtube.com/watch?v=ux4rNZbA7aQ&t=128s",
+     "clip_link": "https://www.youtube.com/embed/ux4rNZbA7aQ?start=128&end=155&autoplay=1",
+     "t": 128.0,
+     "quote": "Qatar: Dealing with fire at Ras Laffan Industrial Area... Qatar: World's largest LNG plant suffered extensive damage... ExxonMobil is one of the US companies that's a big shareholder in some of those facilities in Qatar. In fact QatarEnergy even named one of their biggest LNG carriers after Rex Tillerson",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Anthony Di Paola",
+     "confidence": 0.95,
+     "why": "L'intervenant commente l'impact sur les installations de GNL du Qatar et les liens avec QatarEnergy et ExxonMobil.",
+     "t_end": 154.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "قطر توقف انتاج الغاز الطبيعي المسال استنادا إلى حالة القوة القاهرة",
+   "uploaded": "2026-03-05",
+   "platform": "youtube",
+   "channel": "فرانس 24 / FRANCE 24 Arabic",
+   "url": "https://www.youtube.com/watch?v=VG-6Kqh6-8s",
+   "method": "gemini-video",
+   "authority": 0.7,
+   "authority_why": "chaîne non répertoriée (4 560 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:34",
+     "start_seconds": 0.0,
+     "end_seconds": 34.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:34.000",
+     "duration_seconds": 34.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=VG-6Kqh6-8s&t=0s",
+     "clip_link": "https://www.youtube.com/embed/VG-6Kqh6-8s?start=0&end=35&autoplay=1",
+     "t": 0.0,
+     "quote": "شركة قطر للطاقة تضطر إلى تعليق إنتاج الغاز الطبيعي المسال استناداً إلى حالة القوه القاهرة بسبب امتلاء خزاناتها مع تراجع حركة ناقلات النفط عبر مضيق هرمز إلى نحو 90%",
+     "verdict": "literal",
+     "who_says": "journalist",
+     "speaker_name": "ماري زعرور حنا",
+     "confidence": 0.95,
+     "why": "The report explicitly mentions QatarEnergy suspending LNG production due to force majeure and tank capacity limitations.",
+     "t_end": 34.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "00:16",
+     "end": "00:27",
+     "start_seconds": 16.0,
+     "end_seconds": 27.0,
+     "start_tc": "00:00:16.000",
+     "end_tc": "00:00:27.000",
+     "duration_seconds": 11.0,
+     "timestamp": "00:16",
+     "link": "https://www.youtube.com/watch?v=VG-6Kqh6-8s&t=16s",
+     "clip_link": "https://www.youtube.com/embed/VG-6Kqh6-8s?start=16&end=28&autoplay=1",
+     "t": 16.0,
+     "quote": "قطر تعد من أكبر موردي الغاز الطبيعي المسال عالمياً اذ تمثل حوالي 20% من صادرات الغاز الطبيعي المسال في العالم",
+     "verdict": "literal",
+     "who_says": "journalist",
+     "speaker_name": "ماري زعرور حنا",
+     "confidence": 0.95,
+     "why": "The voiceover directly states Qatar's role as one of the world's largest LNG suppliers accounting for ~20% of global exports.",
+     "t_end": 27.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "00:35",
+     "end": "00:47",
+     "start_seconds": 35.0,
+     "end_seconds": 47.0,
+     "start_tc": "00:00:35.000",
+     "end_tc": "00:00:47.000",
+     "duration_seconds": 12.0,
+     "timestamp": "00:35",
+     "link": "https://www.youtube.com/watch?v=VG-6Kqh6-8s&t=35s",
+     "clip_link": "https://www.youtube.com/embed/VG-6Kqh6-8s?start=35&end=48&autoplay=1",
+     "t": 35.0,
+     "quote": "تعتمد دول عديدة على الغاز القطري فإلى جانب الهند وكوريا الجنوبية تأتي الصين التي تعتمد على نحو 24% من الغاز القطري",
+     "verdict": "literal",
+     "who_says": "journalist",
+     "speaker_name": "ماري زعرور حنا",
+     "confidence": 0.95,
+     "why": "The segment details countries relying on Qatari LNG export.",
+     "t_end": 47.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "بعد قصف إيراني لمرافقها.. شركة قطر للطاقة توقف إنتاج الغاز الطبيعي المسال",
+   "uploaded": "2026-03-02",
+   "platform": "youtube",
+   "channel": "AlJazeera Arabic  قناة الجزيرة",
+   "url": "https://www.youtube.com/watch?v=1dV9_sN6lxo",
+   "method": "gemini-video",
+   "authority": 0.7,
+   "authority_why": "chaîne non répertoriée (23 700 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "01:39",
+     "start_seconds": 0.0,
+     "end_seconds": 99.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:01:39.000",
+     "duration_seconds": 99.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=1dV9_sN6lxo&t=0s",
+     "clip_link": "https://www.youtube.com/embed/1dV9_sN6lxo?start=0&end=100&autoplay=1",
+     "t": 0.0,
+     "quote": "إيران تقصف مرافق لشركة طاقة قطرية.. إنتاج الغاز يتوقف وأسعار الغاز في أوروبا ترتفع بنسبة 50%",
+     "verdict": "paraphrase",
+     "who_says": "journalist",
+     "speaker_name": "هديل اليماني",
+     "confidence": 0.95,
+     "why": "La journaliste d'Al Jazeera présente un reportage sur l'impact de l'attaque iranienne sur les installations de QatarEnergy et la suspension de la production de GNL au Qatar.",
+     "t_end": 99.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Qatar Shuts World’s Largest LNG Plant Amid US-Iran Conflict",
+   "uploaded": "2026-03-03",
+   "platform": "youtube",
+   "channel": "Bloomberg News",
+   "url": "https://www.youtube.com/watch?v=voXqVBRWBxY",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:10",
+     "start_seconds": 0.0,
+     "end_seconds": 10.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:10.000",
+     "duration_seconds": 10.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=voXqVBRWBxY&t=0s",
+     "clip_link": "https://www.youtube.com/embed/voXqVBRWBxY?start=0&end=11&autoplay=1",
+     "t": 0.0,
+     "quote": "Qatar shut the world's largest liquefied natural gas (LNG) export facility after it was attacked by an Iranian drone. Here's why that matters as conflict in the Middle East continues after the US and Israel struck Iran.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "Stephen Stapczynski",
+     "confidence": 0.95,
+     "why": "Le journaliste Stephen Stapczynski rapporte la fermeture de la plus grande installation d'exportation de GNL du Qatar après une attaque de drone iranien.",
+     "t_end": 10.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "00:10",
+     "end": "00:20",
+     "start_seconds": 10.0,
+     "end_seconds": 20.0,
+     "start_tc": "00:00:10.000",
+     "end_tc": "00:00:20.000",
+     "duration_seconds": 10.0,
+     "timestamp": "00:10",
+     "link": "https://www.youtube.com/watch?v=voXqVBRWBxY&t=10s",
+     "clip_link": "https://www.youtube.com/embed/voXqVBRWBxY?start=10&end=21&autoplay=1",
+     "t": 10.0,
+     "quote": "The Ras Laffan facility supplies roughly 20% of global LNG, which is used for everything from power generation to fertilizer production, and even supplies gas to households.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "Stephen Stapczynski",
+     "confidence": 0.95,
+     "why": "Le journaliste explique l'importance de l'installation de Ras Laffan au Qatar, qui fournit environ 20% du GNL mondial.",
+     "t_end": 20.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "00:31",
+     "end": "00:41",
+     "start_seconds": 31.0,
+     "end_seconds": 41.0,
+     "start_tc": "00:00:31.000",
+     "end_tc": "00:00:41.000",
+     "duration_seconds": 10.0,
+     "timestamp": "00:31",
+     "link": "https://www.youtube.com/watch?v=voXqVBRWBxY&t=31s",
+     "clip_link": "https://www.youtube.com/embed/voXqVBRWBxY?start=31&end=42&autoplay=1",
+     "t": 31.0,
+     "quote": "LNG ships have stopped traveling through the Strait of Hormuz — the crucial waterway which all LNG from Qatar must pass to get to customers in Europe and Asia.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "Stephen Stapczynski",
+     "confidence": 0.95,
+     "why": "Le journaliste explique que les navires méthaniers ne transitent plus par le détroit d'Hormuz, passage obligé pour le GNL qatari.",
+     "t_end": 41.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "00:48",
+     "end": "01:01",
+     "start_seconds": 48.0,
+     "end_seconds": 61.0,
+     "start_tc": "00:00:48.000",
+     "end_tc": "00:01:01.000",
+     "duration_seconds": 13.0,
+     "timestamp": "00:48",
+     "link": "https://www.youtube.com/watch?v=voXqVBRWBxY&t=48s",
+     "clip_link": "https://www.youtube.com/embed/voXqVBRWBxY?start=48&end=62&autoplay=1",
+     "t": 48.0,
+     "quote": "Four-fifths of Qatar's LNG is exported to buyers across Asia. China took 30% of its LNG from Qatar. India's biggest LNG supplier is Qatar, and Pakistan gets 99% of its LNG from Qatar.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "Stephen Stapczynski",
+     "confidence": 0.95,
+     "why": "Le journaliste détaille la répartition des exportations de GNL du Qatar vers l'Asie (Chine, Inde, Pakistan).",
+     "t_end": 61.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "حصري-مصدران: مشروع توسعة حقل قطري للغاز المسال يبدأ الإنتاج في نوفمبر",
+   "date": "2026-10-07",
+   "source": "Reuters",
+   "domain": "reuters.com",
+   "url": "https://www.reuters.com/ar/business/YEAN6LF43VPBZATJK6DMQRDLDE-2026-10-07/",
+   "verified_on_full_text": false,
+   "authority": 1.0,
+   "authority_why": "agence de presse",
+   "passages": [
+    {
+     "t": null,
+     "quote": "قال مصدران مطلعان إن أول وحدة لإنتاج الغاز الطبيعي المسال في مشروع قطر للطاقة لتوسعة حقل الشمال الشرقي ​بقطر جاهز لبدء التشغيل في نوفمبر تشرين الثاني، مما يتيح لقطر ‌سبيلا لاستعادة بعض الإنتاج المفقود ...",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Reuters",
+     "confidence": 0.95,
+     "why": "L'extrait évoque explicitement le démarrage de la production de la première unité de gaz naturel liquéfié (GNL) du projet d'extension du champ Nord de QatarEnergy.",
+     "t_end": 30.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "قطر للطاقة ترسي عقد الهندسة والمشتريات والإنشاءات لخطوط إنتاج الغاز الطبيعي المسال بمشروع حقل ...",
+   "date": "2026-02-24",
+   "source": "qna",
+   "domain": "qna.org.qa",
+   "url": "https://qna.org.qa/ar-QA/news/news-details?id=%D9%82%D8%B7%D8%B1-%D9%84%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D8%AA%D8%B1%D8%B3%D9%8A-%D8%B9%D9%82%D8%AF-%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA-%D9%88%D8%A7%D9%84%D8%A7%D9%86%D8%B4%D8%A7%D8%A1%D8%A7%D8%AA-%D9%84%D8%AE%D8%B7%D9%88%D8%B7-%D8%A7%D9%86%D8%AA%D8%A7%D8%AC-%D8%A7%D9%84%D8%BA%D8%A7%D8%B2-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D9%8A-%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%84-%D8%A8%D9%85%D8%B4%D8%B1%D9%88%D8%B9-%D8%AD%D9%82%D9%84-%D8%A7%D9%84%D8%B4%D9%85%D8%A7%D9%84-%D8%A7%D9%84%D8%BA%D8%B1%D8%A8%D9%8A&date=25/02/2026",
+   "verified_on_full_text": true,
+   "authority": 1.0,
+   "authority_why": "agence de presse",
+   "passages": [
+    {
+     "t": null,
+     "quote": "أعلنت قطر للطاقة ترسية عقد الهندسة والمشتريات والإنشاءات لخطوط إنتاج الغاز الطبيعي المسال لمشروع حقل الشمال الغربي، الذي يعد أحد المكونات الرئيسة لأكبر توسعة للغاز الطبيعي المسال في العالم، والمشروع الأخير في سلسلة مشاريع التوسعة التي من شأنها أن ترفع إنتاج دولة قطر إلى 142 مليون طن سنويا.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "قطر للطاقة",
+     "confidence": 1.0,
+     "why": "L'extrait annonce l'attribution d'un contrat majeur pour des lignes de production de gaz naturel liquéfié (GNL) au Qatar par QatarEnergy.",
+     "t_end": 0.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "\"قطر للبترول\" تمنح عقدا لبناء مرافق تخزين وتحميل الغاز الطبيعي المسال في مشروع توسعة حقل الشمال",
+   "date": "2021-02-28",
+   "source": "qna",
+   "domain": "qna.org.qa",
+   "url": "https://www.qna.org.qa/ar-QA/News-Area/News/2021-03/01/0035-قطر-للبترول-تمنح-عقدا-لبناء-مرافق-تخزين-وتحميل-الغاز-الطبيعي-المسال-في-مشروع-توسعة-حقل-الشمال",
+   "verified_on_full_text": true,
+   "authority": 1.0,
+   "authority_why": "agence de presse",
+   "passages": [
+    {
+     "t": null,
+     "quote": "أعلنت قطر للبترول عن منح عقد رئيسي لأعمال الهندسة والتوريد والبناء لمؤسسة سامسونغ للإنشاء والتجارة، لتوسعة مرافق تخزين وتحميل الغاز الطبيعي المسال الواقعة في مدينة راس لفان الصناعية، وذلك لصالح مشروع توسعة حقل الشمال الشرقي.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "qna",
+     "confidence": 0.95,
+     "why": "Le texte rapporte directement l'attribution d'un contrat par قطر للبترول pour l'extension des installations de stockage et de chargement de gaz naturel liquéfié (GNL).",
+     "t_end": 45.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "وقال سعادة المهندس سعد بن شريدة الكعبي، وزير الدولة لشؤون الطاقة، العضو المنتدب والرئيس التنفيذي لقطر للبترول، في تصريح له بالمناسبة: \"يعتبر منح عقد أعمال الهندسة والتوريد والبناء هذا خطوة هامة جديدة نحو تطوير مواردنا من الغاز الطبيعي، وتعزيز مكانتنا كأكبر منتج للغاز الطبيعي المسال والأكثر موثوقية في العالم\".",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "سعد بن شريدة الكعبي",
+     "confidence": 0.98,
+     "why": "Déclaration officielle du ministre de l'Énergie du Qatar sur le renforcement de la position du pays en tant que plus grand producteur de GNL au monde.",
+     "t_end": 180.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "قطر للطاقة تبرم شراكة مع توتال إنرجيز لتوسعة حقل الشمال الجنوبي",
+   "date": "2022-09-24",
+   "source": "Reuters",
+   "domain": "reuters.com",
+   "url": "https://www.reuters.com/ar/business/KFZZSNNMYVO3VDZVI3YAPWD37A-2022-09-24/",
+   "verified_on_full_text": false,
+   "authority": 1.0,
+   "authority_why": "agence de presse",
+   "passages": [
+    {
+     "t": null,
+     "quote": "حقل الشمال الجنوبي هو ثاني مرحلة للتوسعة في مشروع الغاز الطبيعي المسال في قطر تستثمر توتال إنرجيز حوالي 1.5 مليار دولار في حقل الشمال الجنوبي ...",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Reuters",
+     "confidence": 0.95,
+     "why": "L'extrait mentionne directement l'extension du projet de gaz naturel liquéfié (GNL) au Qatar et l'investissement de TotalEnergies.",
+     "t_end": 15.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "قطر للبترول توقع عقدا لتوسعة ضخمة للغاز الطبيعي المسال",
+   "date": "2021-02-09",
+   "source": "Reuters",
+   "domain": "reuters.com",
+   "url": "https://www.reuters.com/ar/business/YNMQ7EOTHBJJNLCSP7Z6RD5HUI-2021-02-09/",
+   "verified_on_full_text": false,
+   "authority": 1.0,
+   "authority_why": "agence de presse",
+   "passages": [
+    {
+     "t": null,
+     "quote": "وقعت قطر للبترول، أكبر مورد للغاز الطبيعي المسال في العالم، عقدا للمرحلة الأولى من مشروعها لتوسعة حقل الشمال بهدف ...",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Reuters",
+     "confidence": 0.95,
+     "why": "L'extrait mentionne directement la signature d'un contrat par Qatar Petroleum ( QatarEnergy ) pour l'expansion du projet de gaz naturel liquéfié (GNL).",
+     "t_end": 10.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "/قطر للطاقة/ تزود /سينوبك/ الصينية بـ 4 ملايين طن سنويا من الغاز الطبيعي المسال لمدة 27 عاما",
+   "date": "2022-11-20",
+   "source": "qna",
+   "domain": "qna.org.qa",
+   "url": "https://www.qna.org.qa/ar-QA/newsbulletins/2022-11/21/0035-%D9%82%D8%B7%D8%B1-%D9%84%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D8%AA%D8%B2%D9%88%D8%AF-%D8%B3%D9%8A%D9%86%D9%88%D8%A8%D9%83-%D8%A7%D9%84%D8%B5%D9%8A%D9%86%D9%8A%D8%A9-%D8%A8%D9%80-4-%D9%85%D9%84%D8%A7%D9%8A%D9%8A%D9%86-%D8%B7%D9%86-%D8%B3%D9%86%D9%88%D9%8A%D8%A7-%D9%85%D9%86-%D8%A7%D9%84%D8%BA%D8%A7%D8%B2-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D9%8A-%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%84-%D9%84%D9%85%D8%AF%D8%A9-27-%D8%B9%D8%A7%D9%85%D8%A7",
+   "verified_on_full_text": true,
+   "authority": 1.0,
+   "authority_why": "agence de presse",
+   "passages": [
+    {
+     "t": null,
+     "quote": "وقعت /قطر للطاقة/ اليوم، اتفاقية بيع وشراء مع مؤسسة الصين للبترول والكيماويات /سينوبك/ لتوريد 4 ملايين طن سنويا من الغاز الطبيعي المسال إلى جمهورية الصين الشعبية لمدة 27 عاما، بداية من العام 2026.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "L'article rapporte la signature d'un accord à long terme par QatarEnergy pour la fourniture de GNL à la Chine.",
+     "t_end": 30.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "وقال وزير الدولة لشؤون الطاقة خلال المؤتمر الصحفي الذي عقد اليوم في المبنى الرئيسي لقطر للطاقة في الدوحة: \"إن الاتفاقية ستعزز العلاقات الثنائية المتميزة بين جمهورية الصين الشعبية ودولة قطر، وستساعد على تلبية احتياجات الصين المتزايدة من الطاقة\"",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "سعد بن شريده الكعبي",
+     "confidence": 0.98,
+     "why": "Le ministre d'État qatari aux Affaires de l'énergie commente la portée de l'accord sur le GNL.",
+     "t_end": 70.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "من جهته، قال الدكتور ما يونغشينغ \"تشكل هذه الاتفاقية طويلة الأمد مع قطر للطاقة علامة فارقة وجزءا مهم من التعاون المتكامل بين الجانبين في مشروع توسعة حقل الشمال الشرقي. قطر هي أكبر مورد للغاز الطبيعي المسال في العالم، بينما الصين هي أكبر مستورد للغاز الطبيعي المسال في العالم\"",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "ما يونغشينغ",
+     "confidence": 0.95,
+     "why": "Le président de Sinopec qualifie le Qatar de plus grand fournisseur mondial de GNL dans le cadre de cet accord.",
+     "t_end": 110.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "قطر للطاقة ترسي عقد الهندسة والمشتريات والإنشاءات لخطوط إنتاج الغاز الطبيعي المسال بمشروع حقل الشمال الغربي",
+   "date": "2026-02-25",
+   "source": "Qatar news agency",
+   "url": "https://news.google.com/rss/articles/CBMi4wZBVV95cUxNQWw1dGp1alBQeUhSY0NPMWRjLXhHcVhjYUw5WXBHR2JxdWdTWFM0OWdiTWdSS3FFU2ItYkpBVk83NjFDc1NnWFVnMWhwUno4Z1hDamE0dFVqVUk3REFWajdzUjdidV8tZ01nUVVyTzZyejd1TTJ2U1NRT1NpVF9LdG84d3pQeGFsdzhNVl9WeVY5OUdoVEJmNGZVbUhrVHA5RE9hSnluMmMyd3hEbGJPZTJydFRQdkU0dUFQU09LXzMyWnN4UDc3SEtUUmRDMUtNM01QYXNHdzVaUUFlRzBwbEY2eGNNMEQwV05aeHVDYUdjQ2pTRmVVTHlSSnNZcmJUMm9VcUFobE11YmU3QW1CdXRPNTNudjhONV9Way1iX00tYWtYc0FFZWZ4LUFxcHN0WjExekNlRVdWcko3cDdEQ0paUEZYa01FalpkX240SVVyLTI2TFltemxtWUtmOGpYeDZmVHd0UVd0RFJhTXlnTEZHRm83ZW1yX0RzVXZjNU5Ocm1fUENQdWswejVlenl4VVdzSzJZTllKQzl3NGRycVF2ZGZpQ2tUTGt1VWc3Q1dDeVlIMHNEbVYxU0o5SE1NSzA0Uk9sdDNFc2ZGSzNkZ2dJUlI4alp2UmxqWkxJWE81NkFhT3hIaldxVXlFbWlqUVhUNEd2QlZJWjF0TmdMXzlpWjRUWHVLbEh2SGZFdElnWGI0Q05VdmRhUUZfMWVjTDkyVXlRLU5uYU1zMEQ0R2pNajM1Wm5Qa3oxMXN3VjhwY3dGenN0Rlk5OGVGb0NmQ1ZQTlY2QVRVdm1kZHlQLTgtVnBURHRyNGs0T190R2s4OXJja2xuTXNuSS1Iek01QzBNNkNYamxTck5vaUVBcVZpV0VYVmZMczl0U29IN3hPYjhCalJERlZ0c2kzZmdaYm1LWHYteXpkcHZJUWVlSW9ueG1qQVhPb0hYcmZQdnFoU2prNGhqWlQ4SzhaS1E2cGNISnJEX0tfblNBQlZydVByVzE4LUk4UTBnV1JvZUVuTGE3cFB6elFSdDZTY0ZqVGRPcUV4Sk5UcEZiR0pYUTFsSV9WeUR2R0wxYTdoeTRJYmhUdXhfMGtxYnlFNFYtTjdKWXdtbjdXbldrU1FUU2NLQWtFYVNjZ2xfODNyQVlnTUU?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "الرئيس التنفيذي لشركة قطر للطاقة للغاز الطبيعي المسال: مشروع توسعة حقل الشمال يشهد تقدما ملحوظا",
+   "date": "2023-11-25",
+   "source": "Qatar news agency",
+   "url": "https://news.google.com/rss/articles/CBMi_wVBVV95cUxOTTRyV2kyYU1SVkpwRkY2dVVyYm9IRTRObWlTN0tXaUNXWTdINnkwaXczVGFVTFREaUJCR1VuSGMwS2lMdndnTl9Ha3g5dlVvazdCSUQ0Vjc5bkpyVFlOaVg0X182dGJieUgySGVuVklTc2tqMjNtQ0FnSEdIdUFFaHdULV84YkVDbzVSY0R4WldXNHI5Z2RNXzVXX3hkQWdCQ1RWcWtZb0pYS0wtSDhuSzJnSXRCYkZ4akE3MjFpSHJzajdycWNsbFpOVFJnU0hlaElsMkh1dU5MOFoxRnBFZ1MzNFhLUVZEaFp0R3VKOWphZnZsRGpHV1ZWOG05OVhfeEtjZm5qYVc3OXMtX3NZSnVLeGVYRHFKTnZLUEgxb3pmVUNfWDBLUi1lSmFzX3YxVHNxVHR3N09tLVNoa2o1UDlzRUxSUWRuY2RfcDQyTzBDNjVyaDVjRzRoTEpGWGRGR3pnM1VHQkg2X3dZNndHcEl6YTBBbVpyb2kzQ3JjY0IzR3EwMEszdk1QRU1XcnZGVVluUV9oaGZiczBFeUJyakFvYzAtc3RjbVQ1Mmc2UW14c3YxRTk0bGwwVlROeldBeXpoSTBGRER3RDRQWnpOSnhIalFETWpmUmloZVlIZDBOSWpSaGYzYzdWNDZyLVdnQUFGTk1FdTlYRDdLNXZjWkc3Nk8wcU5fcm10clZuSnV5MktEUDdmUE9kcGlaLTl6b0VxTGJPRFE2NjN5ZTd1dEFqM3RCeFV5R212NkNWM0M0c0dSNnNKbEY4NnVHc1BVM1FHd05JUWotekNvQndxVVc5b0RVRHhPZElUTTRHdEtQUksyLTZlc2hJeVRxRHpDM3dMWmtwSjdIdjNGa0xXWkF0cl81UXIwbTlqc096bWV3SE5oR1FELVBnSnFTaGNrQnFMUW5wSWtjMXZEeG1lTElTd2Q1czZOV2h2RjVDNDFDellJWm9jcGhxcmYyMFBGVV84UF96YUJSU2RBU3d6SnI1QjNaV1ZRMWtGOTZQMA?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "مسؤول: قطر للطاقة ستبدأ إنتاج الغاز الطبيعي المسال من توسعة حقل الشمال في النصف/2 من 2026",
+   "date": "2025-11-03",
+   "source": "Reuters",
+   "url": "https://www.reuters.com/ar/business/BPOWDDOKBZKP3BMCWIQXEHRN3U-2025-11-03/",
+   "authority": 1.0
+  },
+  {
+   "title": "الكعبي: قطر قد توقع جميع عقود الغاز المسال من توسعة حقل الشمال هذا العام",
+   "date": "2023-05-23",
+   "source": "Reuters",
+   "url": "https://www.reuters.com/ar/business/ALWMXJQJIFOMLCUKDW2VUDH6QA-2023-05-23/",
+   "authority": 1.0
+  },
+  {
+   "title": "مسؤول: قطر للطاقة ستبدأ إنتاج الغاز الطبيعي المسال من توسعة حقل الشمال في النصف/2 من 2026",
+   "date": "2025-11-03",
+   "source": "Reuters",
+   "url": "https://www.reuters.com/ar/business/BFQ3E2KUUZJTHBCCBDLNQTWKPE-2026-09-21/",
+   "authority": 1.0
+  },
+  {
+   "title": "Top LNG exporter QatarEnergy in talks to buy US LNG from Woodside's Louisiana plant",
+   "date": "2026-10-23",
+   "source": "Reuters",
+   "url": "https://www.reuters.com/business/energy/top-lng-exporter-qatarenergy-talks-buy-us-lng-woodsides-louisiana-plant-2026-10-23/",
+   "authority": 1.0
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "صادرات قطر من الغاز الطبيعي المسال تتراجع.. ما السبب؟",
+   "url": "https://www.youtube.com/watch?v=nE3b2uV2sak",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  },
+  {
+   "title": "Qatar Energy Minister on Gas Expansion Plan, Carbon Capture",
+   "url": "https://www.youtube.com/watch?v=IrSL6o-l-H8",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  },
+  {
+   "title": "قطر تحتضن إطلاق أكبر شركة لإنتاج الغاز الطبيعي المسال في العالم",
+   "url": "https://www.youtube.com/watch?v=k3WRgUP4STI",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  }
+ ]
+}
