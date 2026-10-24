@@ -68,3 +68,21 @@ def test_languages_follow_countries_and_script():
     a = parse_args(["--target", "x"])
     assert options_for(a, "قطر", "الغاز الطبيعي", "pays").langs[0] == "ar"
     assert options_for(a, "Italia", "governo", "pays").langs == ["fr", "en"]  # l'italien est ajouté après le plan (pays IT)
+
+
+def test_ai_answers_in_any_json_shape_are_accepted():
+    """Cas réel du 24/10 : Gemini a renvoyé une liste au lieu de {"hits": [...]} -> toutes les vidéos plantaient."""
+    from quote_finder import pipeline, scan
+    from quote_finder.models import Plan
+    from quote_finder.util import items_of
+    one = {"t": 12, "quote": "Der Bund will weg von Microsoft", "verdict": "literal", "who_says": "other_named", "confidence": 0.9}
+    for shape in ([one], {"hits": [one]}, [{"hits": [one]}], one, {"hits": one}):
+        assert len(items_of(shape, "hits")) == 1, shape
+    assert items_of(None, "hits") == [] and items_of({"hits": None}, "hits") == [] and items_of("texte", "hits") == []
+
+    class L:
+        def generate_json(self, prompt, **k):
+            return [one]
+    plan = Plan("x", [["microsoft"]], ["schweiz"], [], [], ["de"], target_type="pays")
+    hits = scan.judge_video_direct(L(), plan, pipeline.Options("La Suisse", "x"), "https://www.youtube.com/watch?v=A-cipLy-c7s")
+    assert [h.t for h in hits] == [12]

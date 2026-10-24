@@ -430,7 +430,7 @@ class LLMRouter:
         if self.gemini and self.gemini.pool.available():
             try:
                 out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media, until=until,
-                                                max_attempts=(None if not media else 6))
+                                                max_attempts=(None if not media else 10))
                 cache.put("llm", ck, out)
                 return out
             except QuotaExhausted as e:

@@ -102,3 +102,32 @@ def call_with_timeout(fn, timeout: float, *a, **k):
     if "e" in box:
         raise box["e"]
     return box.get("v")
+
+
+def items_of(d, key: str) -> list:
+    """Liste attendue sous d[key], quelle que soit la forme renvoyée par l'IA :
+    {"hits": [...]}, [...] directement, [{"hits": [...]}], un seul élément {...}, ou rien."""
+    if d is None:
+        return []
+    if isinstance(d, list):
+        if len(d) == 1 and isinstance(d[0], dict) and key in d[0]:
+            return items_of(d[0], key)
+        return [x for x in d if isinstance(x, dict)]
+    if isinstance(d, dict):
+        v = d.get(key)
+        if isinstance(v, list):
+            return [x for x in v if isinstance(x, dict)]
+        if isinstance(v, dict):
+            return [v]
+        if v is None and d and key not in d and any(k in d for k in ("t", "quote", "i", "s")):
+            return [d]  # un seul élément renvoyé sans enveloppe
+    return []
+
+
+def as_dict(d) -> dict:
+    """Objet attendu : accepte aussi [ {...} ]."""
+    if isinstance(d, dict):
+        return d
+    if isinstance(d, list) and d and isinstance(d[0], dict):
+        return d[0]
+    raise ValueError(f"réponse IA inattendue : {type(d).__name__}")

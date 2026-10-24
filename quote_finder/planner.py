@@ -5,7 +5,7 @@ import logging
 import time
 
 from .models import TARGET_TYPES, Plan
-from .util import normalize
+from .util import as_dict, normalize
 
 log = logging.getLogger("qf.planner")
 PLAN_ATTEMPTS, PLAN_WAIT = 4, 25  # le plan est la base de tout : on insiste avant de renoncer
@@ -76,7 +76,9 @@ def make_plan(llm, target: str, claim: str, others: list[str], langs: list[str],
             d = llm.generate_json(PROMPT.format(target=target, type_line=type_line, claim=claim or "(aucun : tout ce qui est "
                                                 "marquant et récent à propos de la cible)", speakers_line=speakers_line,
                                                 others=", ".join(others) or "aucun", langs=", ".join(langs)))
-            groups = [[normalize(t) for t in g if normalize(t)] for g in d.get("term_groups", []) if g]
+            d = as_dict(d)
+            groups = [[normalize(t) for t in (g if isinstance(g, list) else [g]) if isinstance(t, str) and normalize(t)]
+                      for g in d.get("term_groups", []) if g]
             groups = [g for g in groups if g][:4]
             if not groups:
                 raise ValueError("term_groups vide")

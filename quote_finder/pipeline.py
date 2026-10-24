@@ -123,10 +123,15 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None, llm=Non
     if site_arts:
         from . import screen
         ranked = sorted(site_arts, key=lambda a: -screen.local_relevance(a.title, a.snippet, plan, o.target_type))
-        add(_safe(media_sites.videos_from_articles, ranked, 12), "site")
+        sv = _safe(media_sites.videos_from_articles, ranked, 12)
+        plan.diag["site_pages_probed"] = media_sites.LAST.get("probed", 0)
+        plan.diag["site_videos"] = len(sv)
+        add(sv, "site")
     if "youtube" in o.platforms:
         names = registry.youtube_channels(plan.countries, o.langs, 3)
-        add(_safe(media_sites.search_in_channels, yt_pool, names, sq, 8, http), "chaînes")
+        cv = _safe(media_sites.search_in_channels, yt_pool, names, sq, 8, http)
+        plan.diag["official_channels"] = {n: media_sites.LAST.get("channels", {}).get(n, "?") for n in names}
+        add(cv, "chaînes")
     vids = [v for v in found.values() if (v.duration is None or v.duration < 4 * 3600) and _recent_enough(v.published, o.since)]
     seen_titles, uniq = set(), []
     for v in vids:  # même vidéo publiée deux fois (ex. « Le Point » et « Le Point Abonnés »)
@@ -385,6 +390,8 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     sq = plan.site_query or f"{o.target} {' '.join((o.claim or '').split()[:6])}".strip()
     site_arts = _safe(media_sites.search_articles, srcs, sq, o.langs, http)
     plan.diag["reference_sites"] = [x.domain for x in srcs]
+    plan.diag["site_articles"] = len(site_arts)
+    plan.diag["site_articles_by_site"] = media_sites.LAST.get("by_site", {})
     vids = discover_videos(plan, o, yt_pool, http, llm, site_arts)
     by_plat: dict[str, int] = {}
     for v in vids:

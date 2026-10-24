@@ -23,6 +23,7 @@ from ..models import ArticleCandidate, VideoCandidate
 from . import news, youtube
 
 log = logging.getLogger("qf.sites")
+LAST: dict = {}  # compteurs de la dernière recherche, repris dans le diagnostic du rapport
 
 
 def _safe(fn, *a, **k):
@@ -34,6 +35,7 @@ def _safe(fn, *a, **k):
 
 
 def search_articles(sources: list, query: str, langs: list[str], http=None) -> list[ArticleCandidate]:
+    LAST.clear()  # nouvelle recherche : compteurs remis à zéro
     out: dict[str, ArticleCandidate] = {}
     lg = (langs or ["fr"])[0]
     for s in sources:
@@ -47,7 +49,12 @@ def search_articles(sources: list, query: str, langs: list[str], http=None) -> l
             a.source = a.source or s.name
             a.found_by.add(f"site:{s.domain}")
             out.setdefault(a.url, a)
-    log.info("Sources de référence (%s) : %d article(s)", ", ".join(s.domain for s in sources), len(out))
+    by = {}
+    for a in out.values():
+        k = next((s.domain for s in sources if a.domain == s.domain or a.domain.endswith("." + s.domain)), a.domain)
+        by[k] = by.get(k, 0) + 1
+    LAST["by_site"] = by
+    log.info("Sources de référence (%s) : %d article(s) %s", ", ".join(s.domain for s in sources), len(out), by)
     return list(out.values())
 
 
@@ -105,6 +112,7 @@ def videos_from_articles(arts: list[ArticleCandidate], limit: int = 12, workers:
         if src:
             todo.append((a, src.name))
     todo = todo[:limit]
+    LAST["probed"] = len(todo)
     if not todo:
         return []
     from ..pipeline import resolve_google_news  # import tardif : évite une boucle d'import
@@ -139,6 +147,7 @@ def search_in_channels(pool, names: list[str], query: str, per_channel: int = 8,
     out = []
     for name in names:
         cid = channel_id(pool, name, http)
+        LAST.setdefault("channels", {})[name] = "chaîne introuvable" if not cid else 0
         if not cid:
             continue
         url = f"https://www.youtube.com/channel/{cid}/search?query={up.quote(query)}"
@@ -149,5 +158,6 @@ def search_in_channels(pool, names: list[str], query: str, per_channel: int = 8,
             v.channel_id = cid
             v.found_by.add(f"chaîne:{name}")
         out += vs
+        LAST["channels"][name] = len(vs)
         log.info("Chaîne YouTube « %s » : %d vidéo(s) pour « %s »", name, len(vs), query[:40])
     return out

@@ -57,7 +57,8 @@ def llm_scores(llm, plan, o, items: list[tuple[str, str, str, str]], kind: str =
         log.warning("Tri par l'IA indisponible (%s) : tri local seulement", str(e)[:100])
         return None
     out = {}
-    for x in (d or {}).get("scores", []) or []:
+    from .util import items_of
+    for x in items_of(d, "scores"):
         try:
             out[int(x["i"]) - 1] = float(x["s"])
         except (KeyError, TypeError, ValueError):

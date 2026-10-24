@@ -15,7 +15,7 @@ import difflib
 from functools import lru_cache
 
 from .models import Hit, Plan, Segment
-from .util import fmt_ts, normalize, parse_ts
+from .util import fmt_ts, items_of, normalize, parse_ts
 
 log = logging.getLogger("qf.scan")
 
@@ -188,7 +188,7 @@ def judge_excerpts(llm, plan: Plan, o, meta: dict, excerpts: list[Excerpt], kind
                                  date=meta.get("published", ""), desc=(meta.get("description", "") or "")[:500].replace("\n", " "),
                                  excerpts=body, **_context(plan, o))
     d = llm.generate_json(prompt)
-    hits = [h for h in (_hit_from(x) for x in (d or {}).get("hits", [])) if h and h.quote]
+    hits = [h for h in (_hit_from(x) for x in items_of(d, "hits")) if h and h.quote]
     return dedupe_hits(hits)
 
 
@@ -213,7 +213,7 @@ def judge_video_direct(llm, plan: Plan, o, url: str, audio: bytes | None = None)
         d = llm.generate_json(prompt, inline_media=("audio/mp3", audio), media_key=url)
     else:
         d = llm.generate_json(prompt, video_url=url)
-    return dedupe_hits([h for h in (_hit_from(x) for x in (d or {}).get("hits", [])) if h and h.quote])
+    return dedupe_hits([h for h in (_hit_from(x) for x in items_of(d, "hits")) if h and h.quote])
 
 
 def dedupe_hits(hits: list[Hit], gap: float = 8.0) -> list[Hit]:
