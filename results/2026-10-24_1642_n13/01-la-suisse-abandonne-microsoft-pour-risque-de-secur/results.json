@@ -1,0 +1,290 @@
+{
+ "target": "La Suisse",
+ "target_type": "pays",
+ "claim": "abandonne Microsoft pour risque de sécurité",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Des autorités suisses déclarent envisager d'abandonner les produits Microsoft en raison de risques de sécurité.",
+  "term_groups": [
+   [
+    "abandonner microsoft",
+    "quitter microsoft",
+    "cesser d utiliser microsoft",
+    "stop microsoft",
+    "abandonne microsoft",
+    "abandonner microsof",
+    "abandonner micro soft",
+    "stop microsoft"
+   ],
+   [
+    "risque de securite",
+    "danger de securite",
+    "menace securite",
+    "vulnerabilite",
+    "security risk",
+    "security threat",
+    "risk security",
+    "risque securite",
+    "risk of security",
+    "risk security"
+   ],
+   [
+    "souverainete numerique",
+    "digital sovereignty",
+    "souverainete numerique",
+    "digital souverainete",
+    "digital souverainite",
+    "souverainete digitale"
+   ]
+  ],
+  "target_aliases": [
+   "suisse",
+   "switzerland",
+   "swiss",
+   "confederation suisse",
+   "ch",
+   "helvetique",
+   "helvetia",
+   "swiss confederation",
+   "la suisse"
+  ],
+  "youtube_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "RTS Déclaration gouvernement Suisse Microsoft sécurité",
+   "Swiss Federal Council Microsoft risk security",
+   "Confederation suisse abandonner Microsoft",
+   "Interview OFSI sécurité Microsoft Suisse",
+   "Débat parlementaire Suisse souveraineté numérique Microsoft",
+   "SwissInfo Microsoft security risk interview"
+  ],
+  "news_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "Suisse abandon Microsoft sécurité",
+   "Swiss government Microsoft risk",
+   "Confédération suisse Microsoft sécurité",
+   "OFSI Microsoft vulnerability",
+   "Souveraineté numérique Suisse Microsoft"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 7,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "admin.ch",
+    "parlament.ch",
+    "rts.ch",
+    "srf.ch",
+    "rsi.ch",
+    "swissinfo.ch",
+    "nzz.ch",
+    "letemps.ch"
+   ],
+   "site_articles": 23,
+   "site_articles_by_site": {
+    "admin.ch": 7,
+    "parlament.ch": 3,
+    "rts.ch": 3,
+    "letemps.ch": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Der Bundesrat - Le Conseil fédéral": 0,
+    "RTS - Radio Télévision Suisse": 0,
+    "RTS Info": 0
+   },
+   "videos_candidates": 68,
+   "site_videos_scored": [],
+   "videos_low_authority": 46,
+   "videos_relevant": 2,
+   "videos_by_platform": {
+    "youtube": 2
+   },
+   "articles_candidates": 140,
+   "articles_low_authority": 16,
+   "articles_relevant": 2,
+   "elapsed_min": 12.3,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 4,
+      "gemini-3.6-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Conseil fédéral suisse",
+   "Office fédéral de la sécurité de l'information (OFSI)",
+   "Secrétariat d'État à la formation professionnelle, à la recherche et à l'innovation (SEFRI)",
+   "Ministre de la défense suisse",
+   "Porte-parole du gouvernement suisse"
+  ],
+  "authoritative_sources": [
+   "rts.ch",
+   "swissinfo.ch",
+   "letemps.ch",
+   "24heures.ch",
+   "tdg.ch",
+   "admin.ch",
+   "bfs.admin.ch",
+   "bsv.admin.ch",
+   "reuters.com",
+   "afp.com",
+   "bloomberg.com",
+   "theguardian.com"
+  ],
+  "site_query": "abandon microsoft risque sécurité suisse",
+  "countries": [
+   "CH"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 2,
+  "articles_scanned": 2
+ },
+ "videos": [
+  {
+   "title": "Switzerland wants to ditch Microsoft 365, kicks off migration pilot",
+   "uploaded": "2026-09-07",
+   "platform": "youtube",
+   "channel": "Jorebza",
+   "url": "https://www.youtube.com/watch?v=SCJH0f6cdq8",
+   "method": "gemini-video",
+   "authority": 0.42,
+   "authority_why": "chaîne non répertoriée (8 440 abonnés) — ajoutée faute de source forte sur ce sujet",
+   "moments": [
+    {
+     "start": "00:17",
+     "end": "00:35",
+     "start_seconds": 17.0,
+     "end_seconds": 35.0,
+     "start_tc": "00:00:17.000",
+     "end_tc": "00:00:35.000",
+     "duration_seconds": 18.0,
+     "timestamp": "00:17",
+     "link": "https://www.youtube.com/watch?v=SCJH0f6cdq8&t=17s",
+     "clip_link": "https://www.youtube.com/embed/SCJH0f6cdq8?start=17&end=36&autoplay=1",
+     "t": 17.0,
+     "quote": "Now, it looks like Switzerland's government is planning to take the same route. According to reports, Switzerland is migrating away from Microsoft 365 on 3,000 government PCs in a pilot program that aims to adopt and trial open source alternatives.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "La narratrice rapporte que le gouvernement suisse lance un projet pilote pour migrer 3 000 postes de travail hors de Microsoft 365 vers des alternatives open source pour des motifs de souveraineté numérique et de protection des données.",
+     "t_end": 35.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "00:35",
+     "end": "00:51",
+     "start_seconds": 35.0,
+     "end_seconds": 51.0,
+     "start_tc": "00:00:35.000",
+     "end_tc": "00:00:51.000",
+     "duration_seconds": 16.0,
+     "timestamp": "00:35",
+     "link": "https://www.youtube.com/watch?v=SCJH0f6cdq8&t=35s",
+     "clip_link": "https://www.youtube.com/embed/SCJH0f6cdq8?start=35&end=52&autoplay=1",
+     "t": 35.0,
+     "quote": "For my money, the most interesting part is the data protection reasoning, as Professor Matthias Stürmer at Bern University of Applied Sciences described his concerns about the implied risk of leaks from a system controlled by foreign governments.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "Matthias Stürmer",
+     "confidence": 0.95,
+     "why": "Citation des arguments de sécurité et de fuite de données vers des gouvernements étrangers pour justifier la transition hors de Microsoft en Suisse.",
+     "t_end": 51.0,
+     "speaker_role": "expert",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
+   "uploaded": "2026-04-21",
+   "platform": "youtube",
+   "channel": "House of El",
+   "url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
+   "method": "gemini-video",
+   "authority": 0.41,
+   "authority_why": "chaîne non répertoriée (294 000 abonnés) — titre racoleur — ajoutée faute de source forte sur ce sujet",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:22",
+     "start_seconds": 0.0,
+     "end_seconds": 22.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:22.000",
+     "duration_seconds": 22.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=BffWWGOgcWs&t=0s",
+     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=23&autoplay=1",
+     "t": 0.0,
+     "quote": "Switzerland's Federal Administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step in the long term, a Federal Chancellery spokesman told NZZ am Sonntag. This comes after Microsoft 365 was recently installed on some 54,000 Administration workstations despite concerns about data security.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "El",
+     "confidence": 0.95,
+     "why": "La présentatrice rapporte les déclarations d'un porte-parole de la Chancellerie fédérale suisse indiquant que l'administration suisse vise à réduire sa dépendance envers Microsoft à long terme, suite à des inquiétudes sur la sécurité des données.",
+     "t_end": 22.0,
+     "speaker_role": "expert",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Switzerland takes a Swiss Army knife to Microsoft 365",
+   "date": "2026-09-11",
+   "source": "ZDNet",
+   "domain": "zdnet.com",
+   "url": "https://www.zdnet.com/business/switzerland-replaces-microsoft-365-open-source-opendesk/",
+   "verified_on_full_text": true,
+   "authority": 0.75,
+   "authority_why": "média national",
+   "passages": [
+    {
+     "t": null,
+     "quote": "The Swiss government is positioning the project as an exercise in digital sovereignty and crisis resilience rather than an immediate, universal replacement for Microsoft 365. The Federal Chancellery said the independent platform should provide a meaningful fallback for central processes, including if Microsoft 365 becomes unavailable",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "Federal Chancellery",
+     "confidence": 0.85,
+     "why": "Le texte explique que la Suisse prépare un projet d'alternative open-source (openDesk) à Microsoft 365 pour assurer sa souveraineté numérique et pallier les indisponibilités de Microsoft, ce qui correspond à envisager une alternative pour des raisons de sécurité/souveraineté sans être un abandon immédiat.",
+     "t_end": 0.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "La Confédération va-t-elle tourner le dos à Microsoft?",
+   "date": "2026-04-20",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNRWlaXzJqRXVVakNZUlRVS1JKeGwzd3FDSzhOWlNwMFVZQV91dllxZHN4NXo5SnVPOXJFOFpVX25JVE9Od3dWYlRfRnFtV2VQNDl6S2hrNDg4SDhMc0NZZk9oUUJ5NUM3d2xwVkxXVzlQZmh6LVVScFRkdUg2M2FRZFU3RWhvcVJJZmpzWDlSXzlRM1lZaktmTGZrTV9pUjk0cGxSck1Kam5tMkp2emlBN3NEWQ?oc=5",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": []
+}
