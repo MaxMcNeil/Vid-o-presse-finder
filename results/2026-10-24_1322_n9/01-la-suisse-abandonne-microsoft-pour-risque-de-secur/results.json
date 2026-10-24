@@ -1,0 +1,166 @@
+{
+ "target": "La Suisse",
+ "target_type": "pays",
+ "claim": "abandonne Microsoft pour risque de sécurité",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "La Suisse ou son administration fédérale renonce à l'utilisation des produits ou services Microsoft en raison de risques liés à la sécurité informatique, la souveraineté numérique ou la protection des données.",
+  "term_groups": [
+   [
+    "abandonne",
+    "renonce",
+    "quitte",
+    "bannit",
+    "remplace",
+    "abandons",
+    "drops",
+    "ditches",
+    "phases out",
+    "replaces",
+    "leaves"
+   ],
+   [
+    "microsoft",
+    "microsoft 365",
+    "m365",
+    "office 365",
+    "azure",
+    "windows",
+    "cloud microsoft"
+   ],
+   [
+    "risque de securite",
+    "cybersecurite",
+    "souverainete numerique",
+    "protection des donnees",
+    "fuite de donnees",
+    "cloud act",
+    "security risk",
+    "cybersecurity",
+    "data protection",
+    "digital sovereignty"
+   ]
+  ],
+  "target_aliases": [
+   "suisse",
+   "switzerland",
+   "schweiz",
+   "confederation suisse",
+   "swiss confederation",
+   "helvetique",
+   "berne",
+   "administration federale",
+   "swiss government",
+   "la suisse"
+  ],
+  "youtube_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "RTS Suisse Microsoft sécurité",
+   "SRF Schweiz Microsoft Cloud Sicherheit",
+   "Conférence de presse Conseil fédéral cybersécurité Microsoft",
+   "Swissinfo Switzerland Microsoft security risk",
+   "Débat parlementaire Suisse Microsoft souveraineté numérique",
+   "RTS Info administration fédérale informatique Microsoft",
+   "Switzerland drops Microsoft cloud security",
+   "Le Temps Suisse abandon Microsoft"
+  ],
+  "news_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "Suisse administration fédérale abandon Microsoft sécurité",
+   "Switzerland drops Microsoft security concerns cloud",
+   "Confédération suisse Office fédéral informatique Microsoft souveraineté",
+   "NCSC PFPDT Suisse Microsoft cloud risques données",
+   "Swiss government Microsoft cloud act cybersecurity transition"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "videos_candidates": 114,
+   "videos_low_authority": 96,
+   "videos_by_platform": {
+    "youtube": 6,
+    "dailymotion": 2
+   },
+   "articles_candidates": 87,
+   "articles_low_authority": 10,
+   "elapsed_min": 13.2,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 7,
+      "gemini-3.7-flash": 2
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Conseil fédéral",
+   "Chancellerie fédérale",
+   "Centre national pour la cybersécurité",
+   "NCSC",
+   "Office fédéral de l'informatique et de la télécommunication",
+   "OFIT",
+   "Préposé fédéral à la protection des données et à la transparence",
+   "PFPDT",
+   "Florian Schütz",
+   "Adrian Lobsiger"
+  ],
+  "authoritative_sources": [
+   "admin.ch",
+   "ncsc.admin.ch",
+   "bit.admin.ch",
+   "edoeb.admin.ch",
+   "rts.ch",
+   "RTS - Radio Télévision Suisse",
+   "srf.ch",
+   "SRF News",
+   "swissinfo.ch",
+   "SWI swissinfo.ch",
+   "Le Temps",
+   "NZZ",
+   "Neue Zürcher Zeitung",
+   "Keystone-ATS",
+   "Reuters",
+   "Agence France-Presse"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Microsoft Unveils A.I. Cybersecurity Tools",
+   "date": "2026-07-27",
+   "source": "The New York Times",
+   "url": "https://www.nytimes.com/2026/07/27/technology/microsoft-unveils-ai-cybersecurity-tools.html",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Level1 News February 28 2020: Make Avians Glamorous Again",
+   "url": "https://www.youtube.com/watch?v=8gwc42rNCxs",
+   "reason": "quota LLM épuisé (temps imparti écoulé)"
+  }
+ ]
+}

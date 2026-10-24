@@ -1,0 +1,336 @@
+{
+ "target": "La France",
+ "target_type": "pays",
+ "claim": "jeunesse sans espoir",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations et analyses faisant état d'un sentiment de désespoir, de pessimisme ou de manque d'avenir au sein de la jeunesse en France.",
+  "term_groups": [
+   [
+    "jeunesse",
+    "jeunes",
+    "nouvelle generation",
+    "generation z",
+    "adolescents",
+    "youth",
+    "young people",
+    "young generation",
+    "gen z"
+   ],
+   [
+    "sans espoir",
+    "desespoir",
+    "pessimisme",
+    "avenir sombre",
+    "perte de sens",
+    "perte d espoir",
+    "depression",
+    "hopeless",
+    "hopelessness",
+    "despair",
+    "bleak future",
+    "pessimistic"
+   ]
+  ],
+  "target_aliases": [
+   "france",
+   "republique francaise",
+   "francais",
+   "francaise",
+   "french",
+   "l hexagone",
+   "la france"
+  ],
+  "youtube_queries": [
+   "La France jeunesse sans espoir",
+   "franceinfo jeunesse pessimisme avenir",
+   "France Inter mal-être jeunes espoir",
+   "Arte jeunesse avenir incertain France",
+   "Public Sénat santé mentale jeunesse rapport",
+   "C politique jeunesse désespoir crise",
+   "France 2 journal télévisé jeunesse moral",
+   "AFP jeunesse confiance en l'avenir France",
+   "BBC News French youth pessimism future"
+  ],
+  "news_queries": [
+   "La France jeunesse sans espoir",
+   "AFP jeunesse pessimisme avenir France",
+   "Le Monde santé mentale désespoir jeunes",
+   "Franceinfo enquête jeunesse sans espoir",
+   "INSEE moral jeunesse statistiques France",
+   "Reuters France young generation outlook mental health"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "videos_candidates": 307,
+   "videos_low_authority": 129,
+   "videos_by_platform": {
+    "youtube": 8
+   },
+   "articles_candidates": 164,
+   "articles_low_authority": 32,
+   "elapsed_min": 15.8,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 7
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Emmanuel Macron",
+   "Premier ministre",
+   "Ministère de l'Éducation nationale et de la Jeunesse",
+   "Porte-parole du gouvernement",
+   "INSEE",
+   "DREES",
+   "Conseil économique social et environnemental (CESE)"
+  ],
+  "authoritative_sources": [
+   "AFP",
+   "reuters.com",
+   "lemonde.fr",
+   "franceinfo",
+   "France Inter",
+   "france24.com",
+   "lefigaro.fr",
+   "lesechos.fr",
+   "insee.fr",
+   "santepubliquefrance.fr",
+   "gouvernement.fr",
+   "Radio France",
+   "Arte",
+   "Public Sénat",
+   "LCP",
+   "bbc.com"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "« La jeunesse se lève contre le désastre qu’on lui propose »",
+   "uploaded": "2026-10-22",
+   "platform": "youtube",
+   "channel": "Mediapart",
+   "url": "https://www.youtube.com/watch?v=eV-3BFfnDFs",
+   "method": "gemini-video",
+   "authority": 0.75,
+   "authority_why": "média national",
+   "moments": [
+    {
+     "start": "01:55",
+     "end": "02:02",
+     "start_seconds": 115.0,
+     "end_seconds": 122.0,
+     "start_tc": "00:01:55.000",
+     "end_tc": "00:02:02.000",
+     "duration_seconds": 7.0,
+     "timestamp": "01:55",
+     "link": "https://www.youtube.com/watch?v=eV-3BFfnDFs&t=115s",
+     "clip_link": "https://www.youtube.com/embed/eV-3BFfnDFs?start=115&end=123&autoplay=1",
+     "t": 115.0,
+     "quote": "où se cumulent de façon éclatante la question des prix, celle d'une jeunesse sans avenir et depuis des décennies la férocité de la répression.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Mathieu Magnaudeix",
+     "confidence": 0.85,
+     "why": "Le journaliste de Mediapart mentionne explicitement la question d'une 'jeunesse sans avenir' dans le cadre des mouvements sociaux en outre-mer et en France métropolitaine.",
+     "t_end": 122.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "18:29",
+     "end": "18:50",
+     "start_seconds": 1109.0,
+     "end_seconds": 1130.0,
+     "start_tc": "00:18:29.000",
+     "end_tc": "00:18:50.000",
+     "duration_seconds": 21.0,
+     "timestamp": "18:29",
+     "link": "https://www.youtube.com/watch?v=eV-3BFfnDFs&t=1109s",
+     "clip_link": "https://www.youtube.com/embed/eV-3BFfnDFs?start=1109&end=1131&autoplay=1",
+     "t": 1109.0,
+     "quote": "C'est un concept qui va vous mettre en perspective les difficultés contemporaines pour lesquelles les jeunes aujourd'hui en particulier se voient totalement privés d'avenir et ils le voient comme un vol qui a été provoqué par des adultes qui en seraient responsables puisqu'ils n'ont rien fait.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Paolo Stuppia",
+     "confidence": 0.9,
+     "why": "L'expert politiste analyse le fait que les jeunes se voient 'totalement privés d'avenir' et perçoivent cela comme un vol générationnel.",
+     "t_end": 1130.0,
+     "speaker_role": "expert",
+     "timing": "ia"
+    },
+    {
+     "start": "33:24",
+     "end": "34:00",
+     "start_seconds": 2004.0,
+     "end_seconds": 2040.0,
+     "start_tc": "00:33:24.000",
+     "end_tc": "00:34:00.000",
+     "duration_seconds": 36.0,
+     "timestamp": "33:24",
+     "link": "https://www.youtube.com/watch?v=eV-3BFfnDFs&t=2004s",
+     "clip_link": "https://www.youtube.com/embed/eV-3BFfnDFs?start=2004&end=2041&autoplay=1",
+     "t": 2004.0,
+     "quote": "et la deuxième chose, c'est aussi de se cacher, c'est-à-dire de cacher sa propre responsabilité dans le désastre actuel. Et tous ces accusations de manipulation, c'est aussi une façon d'échapper à son propre bilan. Et un des points qui me semble essentiel aujourd'hui dans la fuite en avant autoritaire du macronisme, c'est cette volonté absolue de ne jamais assumer ses responsabilités.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Romaric Godin",
+     "confidence": 0.9,
+     "why": "Le journaliste explique que le gouvernement n'a 'rien à offrir à ces jeunes' face à leur demande légitime d'un avenir viable, illustrant le sentiment d'impasse et de manque de perspectives pour la jeunesse.",
+     "t_end": 2040.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "start": "1:00:01",
+     "end": "1:00:13",
+     "start_seconds": 3601.0,
+     "end_seconds": 3613.0,
+     "start_tc": "01:00:01.000",
+     "end_tc": "01:00:13.000",
+     "duration_seconds": 12.0,
+     "timestamp": "1:00:01",
+     "link": "https://www.youtube.com/watch?v=eV-3BFfnDFs&t=3601s",
+     "clip_link": "https://www.youtube.com/embed/eV-3BFfnDFs?start=3601&end=3614&autoplay=1",
+     "t": 3601.0,
+     "quote": "On est jeune, c'est difficile de trouver du travail, c'est compliqué pour nos parents aussi.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Intervenant",
+     "confidence": 0.85,
+     "why": "Un jeune manifestant en Martinique témoigne du manque d'opportunités d'emploi et des perspectives d'avenir bloquées pour sa génération.",
+     "t_end": 3613.0,
+     "speaker_role": "other",
+     "timing": "ia"
+    },
+    {
+     "start": "1:20:14",
+     "end": "1:20:27",
+     "start_seconds": 4814.0,
+     "end_seconds": 4827.0,
+     "start_tc": "01:20:14.000",
+     "end_tc": "01:20:27.000",
+     "duration_seconds": 13.0,
+     "timestamp": "1:20:14",
+     "link": "https://www.youtube.com/watch?v=eV-3BFfnDFs&t=4814s",
+     "clip_link": "https://www.youtube.com/embed/eV-3BFfnDFs?start=4814&end=4828&autoplay=1",
+     "t": 4814.0,
+     "quote": "Mais au fond, il y a quand même, c'est un mouvement générationnel avec une jeunesse qui est confrontée à l'absence d'avenir, à la précarité, aux violences et à une société où le ruissellement ne fonctionne pas du tout, quoi.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Michel Kokoreff",
+     "confidence": 0.9,
+     "why": "Le sociologue Michel Kokoreff affirme directement que la jeunesse mobilisée est 'confrontée à l'absence d'avenir' et à la précarité.",
+     "t_end": 4827.0,
+     "speaker_role": "expert",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Santé mentale : Le scandale des urgences psychiatriques",
+   "uploaded": "2026-10-01",
+   "platform": "youtube",
+   "channel": "Public Sénat",
+   "url": "https://www.youtube.com/watch?v=9BnLdx-f3Ts",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "30:23",
+     "end": "30:56",
+     "start_seconds": 1823.0,
+     "end_seconds": 1856.0,
+     "start_tc": "00:30:23.000",
+     "end_tc": "00:30:56.000",
+     "duration_seconds": 33.0,
+     "timestamp": "30:23",
+     "link": "https://www.youtube.com/watch?v=9BnLdx-f3Ts&t=1823s",
+     "clip_link": "https://www.youtube.com/embed/9BnLdx-f3Ts?start=1823&end=1857&autoplay=1",
+     "t": 1823.0,
+     "quote": "ce qu'on constate surtout dans la jeunesse c'est qu'elle est dans une grande souffrance mentale et que la situation se dégrade depuis plusieurs années même si on peut trouver des chiffres qui soient un tout petit peu rassurants mais la tendance de fond c'est une dégradation avec une augmentation significative des troubles anxieux, des états dépressifs, des conduites à risque",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Jonathan Bouchet-Petersen",
+     "confidence": 0.85,
+     "why": "Le journaliste évoque la souffrance mentale profonde, l'éco-anxiété et la dégradation de la situation psychologique et du moral des jeunes en France.",
+     "t_end": 1856.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "‘How can France stop Marine Le Pen’? Our Europe columnists answered your questions on protests and politics in France",
+   "date": "2026-10-23",
+   "source": "The Guardian",
+   "domain": "theguardian.com",
+   "url": "https://www.theguardian.com/world/live/2026/oct/21/france-riots-protests-reader-questions-rokhaya-dallio-alexander-hurst",
+   "verified_on_full_text": true,
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Young people cannot be expected to sustain faith in democratic participation indefinitely if the response they run up against systematically is repression.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Rokhaya",
+     "confidence": 0.92,
+     "why": "The statement directly conveys that young people are losing faith because of repression, reflecting a sentiment of hopelessness about their future.",
+     "t_end": 35.0,
+     "speaker_role": "other",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "En Colombie, la jeunesse en première ligne des manifestations sociales",
+   "date": "2021-05-19",
+   "source": "France 24",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOTUdqR3plT0k5NG8wWGJMREcxc0txMlFTeDl4TDBXbEVXVTBlRHlZRkEyLVZhU3VtUGlQQm92aTdmQ1FjS1M0SG95bUVqNUxhSGYtRlNhZUhMQnlkZk80ZXcyaGhNLTJrZXJVOFNNUFZTR0RSTDM3OTRNelBLeS1LZS1aS21Vc25jWC1hRHNZSzd4Uk93a3NPeXZwMDVfWFkzV0otOWJVdDF2cFV6eDNEc1pJOTd6OGlVT1oyV1o1ckZWaGJD?oc=5",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Sida: vers une génération sans sida selon une ONG",
+   "url": "https://www.youtube.com/watch?v=Fzgli_Rpklg",
+   "reason": "quota LLM épuisé (temps imparti écoulé)"
+  },
+  {
+   "title": "Municipales. En France, on n'a pas d'idées mais on a des arbres - Tanguy Pastureau",
+   "url": "https://www.youtube.com/watch?v=l5QCtjEwUMs",
+   "reason": "quota LLM épuisé (temps imparti écoulé)"
+  }
+ ]
+}
