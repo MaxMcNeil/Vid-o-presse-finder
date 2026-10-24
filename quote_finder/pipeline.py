@@ -53,6 +53,7 @@ class Options:
     max_minutes: float = 30          # au-delà, on rend ce qui est déjà trouvé
     allow_heuristic: bool = False
     since: str = ""                  # AAAA-MM-JJ : ignorer ce qui est plus ancien (facultatif)
+    max_video_minutes: int = 60      # au-delà, une vidéo sans sous-titres n'est pas envoyée à Gemini (quota par minute)
     refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
 
     @property
@@ -171,7 +172,10 @@ def select(items: list, plan: Plan, o: Options, llm, kind: str, cap: int, meta, 
             g = scan.group_score(f"{meta(x)[0]} {meta(x)[3][:800]}", plan.term_groups)
             x.relevance = 7.0 if g >= need else 3.0
         pool = [x for x in pool if x.relevance >= 6]
-    pool.sort(key=lambda x: -(x.relevance / 10 * 0.6 + x.authority * 0.4))
+    def _len_penalty(x):
+        d = getattr(x, "duration", None) or 0
+        return 0.15 if d > o.max_video_minutes * 60 else (0.05 if d > 30 * 60 else 0.0)
+    pool.sort(key=lambda x: -(x.relevance / 10 * 0.6 + x.authority * 0.4 - _len_penalty(x)))
     strong = [x for x in pool if x.authority >= o.min_authority]
     chosen = strong[:cap]
     if len(chosen) < max(1, cap // 2) and o.authority == "forte":
@@ -252,6 +256,9 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
             scan.finish_times(hits, v.duration)
             return VideoResult(v, hits, "transcript")
         # pas de transcription : analyse directe de la vidéo par Gemini (YouTube uniquement)
+        if v.platform == "youtube" and v.duration and v.duration > o.max_video_minutes * 60:
+            return VideoResult(v, [], "none", f"vidéo de {v.duration // 60} min : trop longue pour l'analyse IA "
+                                              f"(limite {o.max_video_minutes} min, quotas Gemini)")
         if v.platform == "youtube" and llm.has_video and _take(fallback_budget):
             hits = scan.judge_video_direct(llm, plan, o, v.url)
             scan.finish_times(hits, v.duration)

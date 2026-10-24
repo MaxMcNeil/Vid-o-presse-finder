@@ -138,6 +138,8 @@ python -m pytest -q          # tests (pip install -r requirements-dev.txt)
 ## Limites
 
 - Les sous-titres automatiques n'indiquent pas qui parle : le locuteur est déduit du contexte ; « propos rapportés » et « locuteur incertain » sont signalés.
+- Gemini gratuit limite la quantité de vidéo envoyée **par minute** : les vidéos sont envoyées à 1 image / 4 s (la parole
+  compte, pas l'image), les vidéos de plus de 60 min sans sous-titres sont ignorées, et les vidéos courtes sont préférées.
 - Depuis GitHub, YouTube bloque sous-titres et téléchargements (« Sign in to confirm you're not a bot », vérifié le 24/10/2026).
   Contournement gratuit intégré : Gemini (qui lit la vidéo chez Google) analyse la vidéo, puis **réécoute uniquement
   la fenêtre de chaque passage** pour l'horodater au dixième de seconde (`timing = ia-affiné`) et vérifier qu'il existe.

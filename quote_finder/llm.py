@@ -132,6 +132,10 @@ class GeminiClient:
             part = {"file_data": {"file_uri": video_url}}
             if video_clip:
                 part["video_metadata"] = {"start_offset": f"{int(video_clip[0])}s", "end_offset": f"{int(video_clip[1])}s", "fps": 1}
+            else:
+                # vidéo entière : c'est la parole qui compte ; 1 image toutes les 4 s au lieu de 1/s divise par ~2,5
+                # les jetons envoyés, donc la limite « par minute » de Gemini est atteinte bien moins vite
+                part["video_metadata"] = {"fps": float(os.environ.get("QF_VIDEO_FPS", "0.25"))}
             parts.append(part)
         if inline_media:
             parts.append({"inline_data": {"mime_type": inline_media[0],
@@ -208,6 +212,9 @@ class GeminiClient:
                 continue
             if r.status_code == 400 and "thinking" in low and think < 2:
                 self._think[m] = think + 1
+                continue
+            if r.status_code == 400 and ("video_metadata" in low or "fps" in low) and video_url and not video_clip:
+                parts[0].pop("video_metadata", None)  # option refusée par ce modèle : on s'en passe
                 continue
             if r.status_code == 400 and "mediaresolution" in low:
                 self._no_res = True
@@ -412,7 +419,7 @@ class LLMRouter:
         return cls(gem, fallbacks=fbs)
 
     deadline: float | None = None
-    MEDIA_CALL_MAX = 300.0  # secondes max pour analyser UNE vidéo/un audio (toutes tentatives comprises)
+    MEDIA_CALL_MAX = 420.0  # secondes max pour analyser UNE vidéo/un audio (toutes tentatives comprises)
     TEXT_CALL_MAX = 150.0
 
     def set_deadline(self, t: float | None) -> None:
