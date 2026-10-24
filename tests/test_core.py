@@ -274,3 +274,9 @@ def test_gemini_lowers_thinking_then_falls_back_on_400():
     assert bodies[0]["thinkingConfig"] == {"thinkingLevel": "low"}
     assert bodies[1]["thinkingConfig"] == {"thinkingBudget": 0}
     assert "thinkingConfig" not in bodies[2]
+
+
+def test_hits_after_video_end_are_dropped():
+    hits = [Hit(344, "x y z", "literal", "target", "", 0.9, t_end=246), Hit(217, "a b c", "literal", "target", "", 0.9, t_end=232)]
+    scan.finish_times(hits, duration=246)
+    assert [(h.t, h.t_end) for h in hits] == [(217, 232)]

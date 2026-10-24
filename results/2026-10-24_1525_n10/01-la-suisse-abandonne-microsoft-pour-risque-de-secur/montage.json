@@ -150,39 +150,6 @@
    "uploaded": "2026-04-20",
    "source_authority": 0.41,
    "source_authority_why": "chaîne non répertoriée (6 520 abonnés) — ajoutée faute de source forte sur ce sujet",
-   "start": 344.0,
-   "end": 246.0,
-   "duration": -98.0,
-   "start_tc": "00:05:44.000",
-   "end_tc": "00:04:06.000",
-   "in": 341.5,
-   "out": 246.0,
-   "in_tc": "00:05:41.500",
-   "out_tc": "00:04:06.000",
-   "timing": "ia",
-   "quote": "Der Bundeskanzlei soll laut NZZ am Sonntag eine Machbarkeitsstudie vorliegen. Diese halte eine Ablösung von Microsoft 365 für möglich.",
-   "speaker": "Journaliste",
-   "speaker_role": "journalist",
-   "who_says": "other_named",
-   "verdict": "literal",
-   "confidence": 1.0,
-   "score": 0.714,
-   "link": "https://www.youtube.com/embed/A-cipLy-c7s?start=344&end=247&autoplay=1",
-   "order": 5
-  },
-  {
-   "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
-   "target": "La Suisse",
-   "target_type": "pays",
-   "claim": "abandonne Microsoft pour risque de sécurité",
-   "platform": "youtube",
-   "video_id": "A-cipLy-c7s",
-   "source_url": "https://www.youtube.com/watch?v=A-cipLy-c7s",
-   "title": "Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!",
-   "channel": "Franz Grueter",
-   "uploaded": "2026-04-20",
-   "source_authority": 0.41,
-   "source_authority_why": "chaîne non répertoriée (6 520 abonnés) — ajoutée faute de source forte sur ce sujet",
    "start": 106.0,
    "end": 124.0,
    "duration": 18.0,
@@ -201,7 +168,7 @@
    "confidence": 1.0,
    "score": 0.664,
    "link": "https://www.youtube.com/embed/A-cipLy-c7s?start=106&end=125&autoplay=1",
-   "order": 6
+   "order": 5
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -234,7 +201,7 @@
    "confidence": 1.0,
    "score": 0.664,
    "link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=27&autoplay=1",
-   "order": 7
+   "order": 6
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -267,40 +234,7 @@
    "confidence": 1.0,
    "score": 0.614,
    "link": "https://www.youtube.com/embed/A-cipLy-c7s?start=217&end=233&autoplay=1",
-   "order": 8
-  },
-  {
-   "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
-   "target": "La Suisse",
-   "target_type": "pays",
-   "claim": "abandonne Microsoft pour risque de sécurité",
-   "platform": "youtube",
-   "video_id": "BffWWGOgcWs",
-   "source_url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
-   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
-   "channel": "House of El",
-   "uploaded": "2026-04-21",
-   "source_authority": 0.41,
-   "source_authority_why": "chaîne non répertoriée (294 000 abonnés) — titre racoleur — ajoutée faute de source forte sur ce sujet",
-   "start": 754.0,
-   "end": 635.0,
-   "duration": -119.0,
-   "start_tc": "00:12:34.000",
-   "end_tc": "00:10:35.000",
-   "in": 751.5,
-   "out": 635.0,
-   "in_tc": "00:12:31.500",
-   "out_tc": "00:10:35.000",
-   "timing": "ia",
-   "quote": "Switzerland's digital minister previously said the country, I'm quoting, must not give in to the Big Tech narrative when it comes to artificial intelligence. Now the federal administration is extending that principle to the core infrastructure as well. The step-by-step and in the long term framing signals this is not reversible policy, it is structural transition.",
-   "speaker": "Mel",
-   "speaker_role": "expert",
-   "who_says": "reported",
-   "verdict": "paraphrase",
-   "confidence": 1.0,
-   "score": 0.564,
-   "link": "https://www.youtube.com/embed/BffWWGOgcWs?start=754&end=636&autoplay=1",
-   "order": 9
+   "order": 7
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -333,7 +267,7 @@
    "confidence": 1.0,
    "score": 0.56,
    "link": "https://www.youtube.com/embed/TyIAqNBYxpo?start=106&end=119&autoplay=1",
-   "order": 10
+   "order": 8
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -366,7 +300,7 @@
    "confidence": 1.0,
    "score": 0.56,
    "link": "https://www.youtube.com/embed/TyIAqNBYxpo?start=627&end=740&autoplay=1",
-   "order": 11
+   "order": 9
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -399,7 +333,7 @@
    "confidence": 0.85,
    "score": 0.542,
    "link": "https://www.youtube.com/embed/fl52LnZVnHE?start=47&end=126&autoplay=1",
-   "order": 12
+   "order": 10
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -432,7 +366,7 @@
    "confidence": 1.0,
    "score": 0.46,
    "link": "https://www.youtube.com/embed/TyIAqNBYxpo?start=12&end=38&autoplay=1",
-   "order": 13
+   "order": 11
   },
   {
    "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
@@ -465,40 +399,7 @@
    "confidence": 1.0,
    "score": 0.46,
    "link": "https://www.youtube.com/embed/TyIAqNBYxpo?start=443&end=537&autoplay=1",
-   "order": 14
-  },
-  {
-   "search": "01-la-suisse-abandonne-microsoft-pour-risque-de-secur",
-   "target": "La Suisse",
-   "target_type": "pays",
-   "claim": "abandonne Microsoft pour risque de sécurité",
-   "platform": "youtube",
-   "video_id": "TyIAqNBYxpo",
-   "source_url": "https://www.youtube.com/watch?v=TyIAqNBYxpo",
-   "title": "La Suisse commence à larguer Microsoft !",
-   "channel": "Actualia tech",
-   "uploaded": "2026-09-12",
-   "source_authority": 0.4,
-   "source_authority_why": "chaîne non répertoriée (5 210 abonnés) — ajoutée faute de source forte sur ce sujet",
-   "start": 827.0,
-   "end": 772.0,
-   "duration": -55.0,
-   "start_tc": "00:13:47.000",
-   "end_tc": "00:12:52.000",
-   "in": 824.5,
-   "out": 772.0,
-   "in_tc": "00:13:44.500",
-   "out_tc": "00:12:52.000",
-   "timing": "ia",
-   "quote": "En décembre 2025, le Conseil fédéral a remis une couche en faisant de la souveraineté numérique une priorité absolue. Leur définition est simple et percutante : c'est la capacité de l'État à assurer ses missions fondamentales sans être à la merci d'un prestataire ou d'un pays tiers. Bref, en clair, se sevrer des GAFAM.",
-   "speaker": "Sébastien",
-   "speaker_role": "journalist",
-   "who_says": "reported",
-   "verdict": "paraphrase",
-   "confidence": 1.0,
-   "score": 0.46,
-   "link": "https://www.youtube.com/embed/TyIAqNBYxpo?start=827&end=773&autoplay=1",
-   "order": 15
+   "order": 12
   }
  ]
 }

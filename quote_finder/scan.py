@@ -341,7 +341,13 @@ def refine_times(hits: list[Hit], segs: list[Segment], radius: float = 90.0) -> 
 
 
 def finish_times(hits: list[Hit], duration: float | None = None) -> None:
-    """Garantit un intervalle [début, fin] exploitable : fin estimée d'après la longueur de la citation si besoin."""
+    """Garantit un intervalle [début, fin] exploitable : fin estimée d'après la longueur de la citation si besoin.
+    Un passage qui commencerait après la fin de la vidéo est un horodatage inventé par l'IA : il est retiré."""
+    if duration:
+        bad = [h for h in hits if h.t is not None and h.t >= float(duration) - 1]
+        if bad:
+            log.info("%d passage(s) horodaté(s) après la fin de la vidéo (%ss) : retirés", len(bad), duration)
+        hits[:] = [h for h in hits if h not in bad]
     for h in hits:
         if h.t is None:
             continue
@@ -350,3 +356,5 @@ def finish_times(hits: list[Hit], duration: float | None = None) -> None:
             h.t_end = h.t + est
         if duration:
             h.t_end = min(h.t_end, float(duration))
+        if h.t_end <= h.t:  # garde-fou final : jamais de durée nulle ou négative
+            h.t_end = h.t + est

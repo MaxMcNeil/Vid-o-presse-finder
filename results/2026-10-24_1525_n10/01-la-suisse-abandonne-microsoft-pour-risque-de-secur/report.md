@@ -4,7 +4,7 @@
 
 _La Suisse ou ses administrations publiques envisagent ou décident d'abandonner les solutions Microsoft pour des raisons de sécurité, de souveraineté numérique ou de protection des données._
 
-**5 vidéo(s)**, **15 extrait(s) pour le montage** et **1 article(s)** retenus (sur 6 vidéos et 5 articles analysés).
+**5 vidéo(s)**, **12 extrait(s) pour le montage** et **1 article(s)** retenus (sur 6 vidéos et 5 articles analysés).
 
 ## Vidéos
 
@@ -31,8 +31,6 @@ _La Suisse ou ses administrations publiques envisagent ou décident d'abandonner
     > Bei Bundesverwaltung und Schweizer Botschaften sind etwa 54.000 Arbeitsplätze mit Microsoft-Software ausgerüstet. [...] Trotzdem will der Bund also schrittweise und langfristig unabhängiger werden vom US-Konzern.
   - [03:37 → 03:52](https://www.youtube.com/embed/A-cipLy-c7s?start=217&end=233&autoplay=1) (15 s) — dans le sens, autre locuteur identifié (Journaliste, journaliste), confiance 100%
     > Als der Bund vor ein paar Jahren Microsoft 365 einführte, gab es Befürchtungen, die USA könnten den Datenverkehr überwachen oder der Schweiz gar den Stecker ziehen. Deshalb müsse man Alternativen vorantreiben, hieß es aus Teilen der Politik.
-  - [05:44 → 04:06](https://www.youtube.com/embed/A-cipLy-c7s?start=344&end=247&autoplay=1) (-98 s) — à la lettre, autre locuteur identifié (Journaliste, journaliste), confiance 100%
-    > Der Bundeskanzlei soll laut NZZ am Sonntag eine Machbarkeitsstudie vorliegen. Diese halte eine Ablösung von Microsoft 365 für möglich.
 
 ### Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year
 - **Source** : House of El · ★☆☆ chaîne non répertoriée (294 000 abonnés) — titre racoleur — ajoutée faute de source forte sur ce sujet · **youtube** · upload 2026-04-21 · pertinence estimée 10/10
@@ -41,8 +39,6 @@ _La Suisse ou ses administrations publiques envisagent ou décident d'abandonner
 - **Extraits** :
   - [00:00 → 00:26](https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=27&autoplay=1) (26 s) — à la lettre, propos rapportés par un tiers (Mel, expert), confiance 100%
     > Switzerland's federal administration, I'm quoting here, aims to reduce its dependency on Microsoft step-by-step in the long term, a federal chancellery spokesman told NZZ am Sonntag. This comes after Microsoft 365 was recently installed on some 54,000 administration workstations despite concerns about data security.
-  - [12:34 → 10:35](https://www.youtube.com/embed/BffWWGOgcWs?start=754&end=636&autoplay=1) (-119 s) — dans le sens, propos rapportés par un tiers (Mel, expert), confiance 100%
-    > Switzerland's digital minister previously said the country, I'm quoting, must not give in to the Big Tech narrative when it comes to artificial intelligence. Now the federal administration is extending that principle to the core infrastructure as well. The step-by-step and in the long term framing signals this is not reversible policy, it is structural transition.
 
 ### La Suisse commence à larguer Microsoft !
 - **Source** : Actualia tech · ★☆☆ chaîne non répertoriée (5 210 abonnés) — ajoutée faute de source forte sur ce sujet · **youtube** · upload 2026-09-12 · pertinence estimée 10/10
@@ -57,8 +53,6 @@ _La Suisse ou ses administrations publiques envisagent ou décident d'abandonner
     > Pour comprendre, il faut écouter Matthias Stürmer, prof à la Haute école spécialisée bernoise, la BFH. Selon lui, confier à l'État les clés de l'État à un géant américain pose trois énormes soucis : l'espionnage légal ou l'accès étranger car grâce aux lois américaines sur le cloud, coucou le Cloud Act, les autorités des États-Unis peuvent en théorie jeter un œil aux données stockées sur des serveurs gérés par des firmes américaines. Donc pour un gouvernement souverain qu'est le gouvernement suisse, savoir que des données d'État sensibles peuvent finir sur un bureau à Washington, bah ça fout les boules quoi.
   - [10:27 → 12:19](https://www.youtube.com/embed/TyIAqNBYxpo?start=627&end=740&autoplay=1) (112 s) — à la lettre, locuteur non identifié avec certitude (Sébastien, journaliste), confiance 100%
     > Pendant ce temps-là, l'armée suisse est déjà en mode commando... Le cyber-command, l'unité de cybersécurité de l'armée suisse, a décidé de doubler tout le monde sur l'autoroute. Eux n'attendent pas le bilan du projet civil, ils sont déjà parés pour basculer intégralement de Microsoft 365 à OpenDesk dès octobre 2026... La raison est limpide : pas question de risquer la moindre fuite d'informations stratégiques ou de secrets de défense sur des tuyaux sous juridiction étrangère, voyez là dans ce cas américaine.
-  - [13:47 → 12:52](https://www.youtube.com/embed/TyIAqNBYxpo?start=827&end=773&autoplay=1) (-55 s) — dans le sens, propos rapportés par un tiers (Sébastien, journaliste), confiance 100%
-    > En décembre 2025, le Conseil fédéral a remis une couche en faisant de la souveraineté numérique une priorité absolue. Leur définition est simple et percutante : c'est la capacité de l'État à assurer ses missions fondamentales sans être à la merci d'un prestataire ou d'un pays tiers. Bref, en clair, se sevrer des GAFAM.
 
 ### Альпийские хроники
 - **Source** : Швейцария без фильтров  · ★☆☆ chaîne non répertoriée (5 810 abonnés) — ajoutée faute de source forte sur ce sujet · **youtube** · upload 2026-01-16 · pertinence estimée 9/10
