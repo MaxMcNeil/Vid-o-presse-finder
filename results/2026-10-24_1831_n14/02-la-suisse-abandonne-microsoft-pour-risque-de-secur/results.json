@@ -1,0 +1,220 @@
+{
+ "target": "La Suisse",
+ "target_type": "pays",
+ "claim": "abandonne Microsoft pour risque de sécurité",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Des autorités suisses déclarent qu’elles envisagent d’abandonner les produits Microsoft en raison de risques de sécurité.",
+  "term_groups": [
+   [
+    "abandonner microsoft",
+    "quitter microsoft",
+    "cesser d utiliser microsoft",
+    "stop microsoft",
+    "depart microsoft",
+    "abandon microsoft",
+    "abandonner ms",
+    "stop ms",
+    "cesser ms"
+   ],
+   [
+    "risque de securite",
+    "danger securite",
+    "menace securite",
+    "vulnerabilite",
+    "failles de securite",
+    "security risk",
+    "security threat",
+    "security vulnerability",
+    "risk security"
+   ],
+   [
+    "souverainete numerique",
+    "digital sovereignty",
+    "independance technologique",
+    "autonomie numerique",
+    "technologie souveraine"
+   ]
+  ],
+  "target_aliases": [
+   "suisse",
+   "swiss",
+   "helvetique",
+   "ch",
+   "confederation suisse",
+   "svizzera",
+   "la suisse"
+  ],
+  "youtube_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "RTS Suisse abandon Microsoft sécurité",
+   "Swiss Federal Council Microsoft risk",
+   "FOITT déclaration Microsoft vulnérabilité",
+   "Le Temps interview sécurité Microsoft",
+   "SwissInfo vidéo souveraineté numérique Microsoft",
+   "BBC French Suisse Microsoft security"
+  ],
+  "news_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "Suisse abandon Microsoft sécurité",
+   "Swiss government Microsoft risk",
+   "Microsoft vulnérabilité Suisse",
+   "Souveraineté numérique Suisse Microsoft"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 7,
+   "queries_news": 5,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "admin.ch",
+    "parlament.ch",
+    "rts.ch",
+    "srf.ch",
+    "rsi.ch",
+    "swissinfo.ch",
+    "nzz.ch",
+    "letemps.ch"
+   ],
+   "site_articles": 24,
+   "site_articles_by_site": {
+    "admin.ch": 8,
+    "parlament.ch": 3,
+    "rts.ch": 3,
+    "letemps.ch": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Der Bundesrat - Le Conseil fédéral": 0,
+    "RTS - Radio Télévision Suisse": 0,
+    "RTS Info": 0
+   },
+   "videos_candidates": 113,
+   "site_videos_scored": [],
+   "videos_low_authority": 71,
+   "videos_relevant": 2,
+   "videos_by_platform": {
+    "youtube": 2
+   },
+   "articles_candidates": 142,
+   "articles_low_authority": 19,
+   "articles_relevant": 4,
+   "timing": {
+    "ia-affiné": 1
+   },
+   "elapsed_min": 6.7,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.6-flash": 4,
+      "gemini-3.5-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Conseil fédéral (gouvernement suisse)",
+   "Secrétaire d'État à la défense (EDA)",
+   "Office fédéral de la technologie de l'information (FOITT)",
+   "Porte-parole du Département fédéral de l'intérieur (DFI)"
+  ],
+  "authoritative_sources": [
+   "rts.ch",
+   "srf.ch",
+   "swissinfo.ch",
+   "letemps.ch",
+   "20min.ch",
+   "nzz.ch",
+   "bloomberg.com",
+   "reuters.com",
+   "afp.com",
+   "bbc.com",
+   "euronews.com",
+   "theguardian.com"
+  ],
+  "site_query": "abandon microsoft risque sécurité suisse",
+  "countries": [
+   "CH"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 2,
+  "articles_scanned": 4
+ },
+ "videos": [
+  {
+   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
+   "uploaded": "2026-04-21",
+   "platform": "youtube",
+   "channel": "House of El",
+   "url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
+   "method": "gemini-video",
+   "authority": 0.41,
+   "authority_why": "chaîne non répertoriée (294 000 abonnés) — titre racoleur — ajoutée faute de source forte sur ce sujet",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:22",
+     "start_seconds": 0.0,
+     "end_seconds": 22.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:22.000",
+     "duration_seconds": 22.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=BffWWGOgcWs&t=0s",
+     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=23&autoplay=1",
+     "t": 0.0,
+     "quote": "Switzerland's federal administration aims to reduce its dependency on Microsoft step by step and in the long term, a federal chancellery spokesman told NZZ am Sonntag. This comes after Microsoft 365 was recently installed on some 54,000 administration workstations, despite concerns about data security.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "House of El",
+     "confidence": 0.95,
+     "why": "The speaker directly cites a statement from a Swiss federal chancellery spokesman reporting that Switzerland's federal administration aims to reduce its dependency on Microsoft over data security concerns.",
+     "t_end": 22.0,
+     "speaker_role": "expert",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "La Confédération va-t-elle tourner le dos à Microsoft?",
+   "date": "2026-04-20",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNRWlaXzJqRXVVakNZUlRVS1JKeGwzd3FDSzhOWlNwMFVZQV91dllxZHN4NXo5SnVPOXJFOFpVX25JVE9Od3dWYlRfRnFtV2VQNDl6S2hrNDg4SDhMc0NZZk9oUUJ5NUM3d2xwVkxXVzlQZmh6LVVScFRkdUg2M2FRZFU3RWhvcVJJZmpzWDlSXzlRM1lZaktmTGZrTV9pUjk0cGxSck1Kam5tMkp2emlBN3NEWQ?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "La Confédération explore des alternatives à Microsoft 365",
+   "date": "2026-04-19",
+   "source": "20 Minuten",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPYzg2MmYyRG9FanZzVThuaWhUM0FlZGxxOTVpWFF2WjliazlLalBQNjNDVnZ6Y0hNcVp6VzMwbnZNeHhBYTRjUlBSaGk0ZVNwWkRYY2N6M2IwbkgyYzBPMjVHcU5CdGdJZFdNOFY4OThyTmxqVEVSNU5OREk0aldFVW9LUEpXcnhjcHZiOE9NN2hJOVhkS3pjNG9rd3dHbVMwVUxEWXlZMXc3QQ?oc=5",
+   "authority": 0.8
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Life without Big Tech: a Swiss experiment",
+   "url": "https://www.youtube.com/watch?v=HUn5SJMJ2fg",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  }
+ ]
+}

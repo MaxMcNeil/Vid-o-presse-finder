@@ -1,0 +1,374 @@
+{
+ "target": "Emmanuel Macron",
+ "target_type": "personne",
+ "claim": "souveraineté numérique européenne",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations et prises de position d'Emmanuel Macron concernant la souveraineté numérique et technologique de l'Europe face aux puissances étrangères.",
+  "term_groups": [
+   [
+    "souverainete numerique",
+    "souverainete technologique",
+    "autonomie strategique",
+    "independance numerique",
+    "digital sovereignty",
+    "technological sovereignty",
+    "strategic autonomy",
+    "digital independence"
+   ],
+   [
+    "europeenne",
+    "europeen",
+    "union europeenne",
+    "europe",
+    "european",
+    "eu",
+    "european union"
+   ],
+   [
+    "cloud souverain",
+    "intelligence artificielle",
+    "semi conducteurs",
+    "technologies critiques",
+    "ia",
+    "ai",
+    "chips act",
+    "critical technologies"
+   ]
+  ],
+  "target_aliases": [
+   "emmanuel macron",
+   "macron",
+   "president macron",
+   "emmanuel jean michel frederic macron"
+  ],
+  "youtube_queries": [
+   "Emmanuel Macron souveraineté numérique européenne",
+   "Macron discours technologie Europe Sorbonne",
+   "Emmanuel Macron VivaTech souveraineté",
+   "Macron digital sovereignty Europe speech",
+   "Macron conférence de presse autonomie stratégique numérique",
+   "Emmanuel Macron interview IA souveraineté européenne",
+   "Macron intelligence artificielle Europe déclaration"
+  ],
+  "news_queries": [
+   "Emmanuel Macron souveraineté numérique européenne",
+   "Emmanuel Macron souveraineté numérique Europe",
+   "Macron European digital sovereignty",
+   "discours Macron autonomie stratégique technologique",
+   "Emmanuel Macron cloud européen IA souveraineté",
+   "Macron Sorbonne souveraineté technologique UE"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 7,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "cible",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "senat.fr",
+    "vie-publique.fr",
+    "francetvinfo.fr",
+    "radiofrance.fr",
+    "lemonde.fr"
+   ],
+   "site_articles": 62,
+   "site_articles_by_site": {
+    "elysee.fr": 10,
+    "assemblee-nationale.fr": 10,
+    "senat.fr": 10,
+    "vie-publique.fr": 10,
+    "radiofrance.fr": 10,
+    "lemonde.fr": 12
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 8,
+    "Gouvernement": 0,
+    "franceinfo": 1
+   },
+   "videos_candidates": 243,
+   "site_videos_scored": [
+    "Révolution numérique sur notre société et notre démocratie : (0/10)",
+    "Conférence de presse conjointe sur la réponse européenne à l (0/10)",
+    "Présentation du projet de loi confortant le respect des prin (0/10)",
+    "Rétablir les frontières dans l'espace Schengen : \"un mythe d (0/10)"
+   ],
+   "videos_low_authority": 114,
+   "videos_relevant": 29,
+   "videos_by_platform": {
+    "youtube": 8
+   },
+   "articles_candidates": 235,
+   "articles_low_authority": 30,
+   "articles_relevant": 19,
+   "timing": {
+    "ia-affiné": 2
+   },
+   "elapsed_min": 16.4,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 1,
+      "gemini-3.6-flash": 8
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "personne",
+  "official_speakers": [
+   "Emmanuel Macron",
+   "Élysée",
+   "Présidence de la République",
+   "Porte-parole du gouvernement"
+  ],
+  "authoritative_sources": [
+   "elysee.fr",
+   "vie-publique.fr",
+   "franceinfo",
+   "AFP",
+   "Reuters",
+   "lemonde.fr",
+   "lesechos.fr",
+   "lefigaro.fr",
+   "ft.com",
+   "politico.eu",
+   "euractiv.com",
+   "France Inter",
+   "Euronews",
+   "Public Sénat",
+   "LCP"
+  ],
+  "site_query": "Macron souveraineté numérique européenne technologie",
+  "countries": [
+   "FR",
+   "EU"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "Numérique : Macron appelle l'Europe à ne pas être simple \"cliente\" des États-Unis et de la Chine",
+   "uploaded": "2025-11-19",
+   "platform": "youtube",
+   "channel": "euronews (en français)",
+   "url": "https://www.youtube.com/watch?v=o5TgAgNAD28",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "01:30",
+     "end": "02:00",
+     "start_seconds": 90.0,
+     "end_seconds": 120.7,
+     "start_tc": "00:01:30.000",
+     "end_tc": "00:02:00.700",
+     "duration_seconds": 30.7,
+     "timestamp": "01:30",
+     "link": "https://www.youtube.com/watch?v=o5TgAgNAD28&t=90s",
+     "clip_link": "https://www.youtube.com/embed/o5TgAgNAD28?start=90&end=121&autoplay=1",
+     "t": 90.0,
+     "quote": "Europe doesn't want to be the client of the big entrepreneurs or the big solutions being provided either from US or from China. We clearly want to design our own solutions. Not to say that we don't want to cooperate. Being more sovereign and more independent doesn't mean you want to be in autarky. No, but it means on the key pillars, on the key building blocks, you want to preserve your sovereignty.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Emmanuel Macron",
+     "confidence": 0.98,
+     "why": "Emmanuel Macron exprime directement la nécessité pour l'Europe de préserver sa souveraineté numérique et de concevoir ses propres solutions face aux États-Unis et à la Chine.",
+     "t_end": 120.7,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Macron : \"Depuis 7 ans, l’Europe a commencé à sortir de cette naïveté technologique et industrielle\"",
+   "uploaded": "2024-04-25",
+   "platform": "youtube",
+   "channel": "Public Sénat",
+   "url": "https://www.youtube.com/watch?v=F_YBDMAJcGA",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:21",
+     "start_seconds": 0.3,
+     "end_seconds": 21.6,
+     "start_tc": "00:00:00.300",
+     "end_tc": "00:00:21.600",
+     "duration_seconds": 21.3,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=F_YBDMAJcGA&t=0s",
+     "clip_link": "https://www.youtube.com/embed/F_YBDMAJcGA?start=0&end=22&autoplay=1",
+     "t": 0.3,
+     "quote": "Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aurait accepté autant que nous de dépendre des autres sur des produits vitaux, des composantes essentielles.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Emmanuel Macron",
+     "confidence": 0.95,
+     "why": "Emmanuel Macron évoque la souveraineté technologique et industrielle de l'Europe et la réduction de la dépendance envers les autres puissances.",
+     "t_end": 21.6,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Macron defends EU AI rules and vows crackdown on child ‘digital abuse’",
+   "date": "2026-02-19",
+   "source": "The Guardian",
+   "domain": "theguardian.com",
+   "url": "https://www.theguardian.com/technology/2026/feb/19/emmanuel-macron-eu-ai-rules-child-safety-digital-abuse",
+   "verified_on_full_text": true,
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Opposite to what some misinformed friends have been saying, Europe is not blindly focused on regulation. Europe is a space for innovation and investment, but it is a safe space, and safe spaces win in the long run.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Emmanuel Macron",
+     "confidence": 0.9,
+     "why": "Emmanuel Macron défend le modèle de régulation et d'innovation de l'Europe face aux critiques américaines, affirmant la position et la souveraineté technologique/numérique européenne.",
+     "t_end": 0.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Macron, Merz push for Europe’s digital sovereignty as AI race accelerates",
+   "date": "2025-11-18",
+   "source": "Radio France Internationale",
+   "domain": "rfi.fr",
+   "url": "https://www.rfi.fr/en/international/20251118-macron-merz-push-for-europe-s-digital-sovereignty-as-ai-race-accelerates",
+   "verified_on_full_text": true,
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Rather, it is focused on exploring “how we protect our core sovereignty and what rules need to be established, especially at the European level”.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "",
+     "confidence": 0.9,
+     "why": "Un haut responsable de la présidence française (représentant officiel d'Emmanuel Macron) s'exprime directement sur la protection de la souveraineté essentielle au niveau européen.",
+     "t_end": 0.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "Sommet sur la souveraineté numérique européenne à Berlin. |",
+   "date": "2025-11-18",
+   "source": "elysee.fr",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdDRyWVJBa092MnZhZFctNWdTemlyenZpT1pxWXc0bE45cTVnaE91czZfTk53ZFA2UGxCTXQ2M1JjSW5FbzhoV3JUbHU4bjJtT0dCRVRFMU1zSVpheDJPLXVvdnJLVGx2MDhkYVE3dG9VNUZMcE5lb3JpcEF4UWZJODdnY255OUVYUGMyWXVBQnBYWWF3WnJmbmZ1bWhlcTIxYXNoQ0syZlo?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Sommet sur la souveraineté numérique européenne : des engage",
+   "date": "2025-11-18",
+   "source": "elysee.fr",
+   "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxOMVRURzhoSWJjc1ZqaEZEaHBDMWFmcGpoX3RWU3Mya3ZKTHFKTWVtX0RiSG9XVXUtMi1fckV6RWdFU25lU1JvMXEtZldsZE5GaVpZRU1BeU8zY2doYjM4ODJ6ZXo1dHZ2QUxjY0U3RmxTVFZpS3BMUFk1QURnNzJnWUR6a0RTRFowTXRrajVtaVVaMUhHLWhDVHd1dlVoNjRZQUcxcVdxTmlhcnRlZ1Z4TjB4QmZWVmthLWE5bjU3Zzl6bFg3aVhhdU53amhDWC1BbEFKbXNRdWc2TzlPb3p2Y05VWFIyMUFYT0hnM1RJUGhwZnJlU1RnUnhHMm5IX0x2QVFV?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Summit on European Digital Sovereignty delivers landmark commitments",
+   "date": "2025-11-18",
+   "source": "La France au Royaume-Uni",
+   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOTGlzVzhFdTFYbGdNT0trT3lmSlB3NGc3MXBfa2U3dzVWV25SeTBQRjBOZkcwSmpoZnRxQm05OVo1bm54VWZuVktYQmNhN1RmOWp1R1RKdUxsSVh4QTV2aGM1aS1tZ0F2b1lFWVViQVFKWXRzQzRmMk55STNvOXNFVkJJUFB6MDVjN2swOFd6dGV1NU1aX3J2S3JlSkpfNzQ?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Assurer la souveraineté européenne pour les données et l’informatique en nuage.",
+   "date": "2025-11-18",
+   "source": "elysee.fr",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQNDNvM3c0cGF2ZjllYnUtU3JNM0c3QXlEcng3WTV3X0xaM2IxYkx3RWd6NEZmM2E0NXJfVmFZQlZsRmlaRzA4b00wNjcwRVJ0WkpMRGJQZ2tsQ3JGbGs5MWE0blRhQVIxZW9OV3RwazY3NDFucWt1QjZpQUFpYmlEN0E1RkdsOXUxMEN1ell1VWZ4ZDBhOEtGaGFpSk1GZjg0cUV1RTMzU3hOd0xmWkxZUzQwUUhaVWRBZHJIcU1PNVVVd0Ez?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Il est temps pour l’Europe d’avoir sa propre souveraineté te",
+   "date": "2020-12-09",
+   "source": "Elysee.fr",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPcHpnQWM0eGtvbHZjcGVlVmktTkoyYVJBTmdqRjJlRVhXSjBDOWdHd3pSenNOYVp6eE5Ha1Q1UUJNeV9YMV9tVndTaTRabEpHb1R1aDRIaU05Y3BNLXRzdzdpWTdxSmJSOXVGVDFKTkFxazdaYzd4NU9oY3lYMTZVTVRHMDFSYWM2dlBmWkJXdlZsRVBXdG5lUFJVZnJ3aG50aXhhZHUyMDNPaXNLbGR2TFFvM0Y3NG9oTVE?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Discours du Président Emmanuel Macron aux acteurs du numériq",
+   "date": "2020-09-14",
+   "source": "elysee.fr",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPSVpYZ3NHVjlmNVNrSGtrWmRMeWhZS0hBcDNUcHNxd2lGSjB5WW5pTS00TFZ1QzlRdElaMEpYSG9ZNUN2eHZ3Nk8wWUdmc00tMm1nUDRuYXpZVmNJM2hyTi1LOThkVjJoV1J5aTlUTFlwTC0yUlpTcjhjWlMyNlRiSkpiX0UtbzQ5V3RUN2JidDNFY1ozM3RMVTZxQmN2c3NjamwwLWc1dVpHTDhoczlQcw?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Forum européen sur la puissance de calcul, les sciences et technologies quantiques et les semi-conducteurs.",
+   "date": "2026-05-22",
+   "source": "elysee.fr",
+   "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNeFRRV1JWeW9SaGxVSmVVRldaM0xuQUFRTlY1Q2UzQzhsQTdfa2hydFlIajB2ZG9EZ3UyRkZsU0FvSnFCdGVhVUpvSG1MM2NNQ1dWX3RzRE5iTUdaRkhwNW91cE1YR2J2YmVTR1RKU0s4WEZvRE9SNy15ck5zNEd3Mm5HQlltMjU2dXZOWF80SGxnaWplSjZlc3YtT3JzTkZ4RG9kQi1INzh5WklKYkNLc2dKTXhfeWJDLXRTY0Q1eHJwd1ZxVGhFbmY2Z2MyR3lpS2R2NGI5OEttRUFwM3hyRmxnTldnTTNvMmc?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "« Il faut consolider l'écosystème » : pour Emmanuel Macron, la souveraineté numérique européenne passe par plus de collaborations entre grands groupes et start-up",
+   "date": "2026-09-03",
+   "source": "Les Echos",
+   "url": "https://www.lesechos.fr/politique-societe/emmanuel-macron-president/menace-russe-plus-elevee-crise-des-carburants-ce-quil-faut-retenir-de-lintervention-demmanuel-macron-2252408",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Il est temps pour l’Europe d’avoir sa propre souveraineté technologique !",
+   "url": "https://www.youtube.com/watch?v=zVadD951mIY",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.8-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  },
+  {
+   "title": "Berlin AI Summit LIVE: Macron, Merz to Push for European Digital 'Sovereignty' at Berlin AI Summit",
+   "url": "https://www.youtube.com/watch?v=wB9q_wGY3Wc",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  },
+  {
+   "title": "Sommet sur la souveraineté numérique européenne à Berlin : le discours du Président Emmanuel Macron.",
+   "url": "https://www.youtube.com/watch?v=kRUU6awEoHk",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.8-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  },
+  {
+   "title": "Le discours d'Emmanuel Macron sur l'Europe à la Sorbonne",
+   "url": "https://www.youtube.com/watch?v=I1Lh2mUakKQ",
+   "reason": "erreur LLM: HTTP 429 (gemini-3.7-flash): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please che"
+  },
+  {
+   "title": "LIVE: German Chancellor Friedrich Merz & French President Emmanuel Macron Speak at EU Digital Summit",
+   "url": "https://www.youtube.com/watch?v=T25F6Ai9cnw",
+   "reason": "quota LLM épuisé (temps imparti écoulé)"
+  }
+ ]
+}
