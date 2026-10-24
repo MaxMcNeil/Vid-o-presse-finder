@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 
 import requests
 
+from ..authority import domain_of
 from ..keys import KeyPool
 from ..models import ArticleCandidate
 
@@ -56,7 +57,7 @@ def gdelt(query: str, n: int = 50, http=None) -> list[ArticleCandidate]:
     for a in arts:
         sd = a.get("seendate", "")
         pub = f"{sd[:4]}-{sd[4:6]}-{sd[6:8]}" if len(sd) >= 8 else ""
-        out.append(ArticleCandidate(a.get("domain", "gdelt"), a["url"], a.get("title", ""), pub))
+        out.append(ArticleCandidate(a.get("domain", "gdelt"), a["url"], a.get("title", ""), pub, domain=domain_of(a["url"])))
     return out
 
 
@@ -79,8 +80,13 @@ def google_news(query: str, n: int = 30, lang: str = "en", http=None) -> list[Ar
                 pub = email.utils.parsedate_to_datetime(it.findtext("pubDate")).strftime("%Y-%m-%d")
             except (TypeError, ValueError):
                 pass
-        src = it.findtext("source") or "Google News"
-        out.append(ArticleCandidate(src, it.findtext("link") or "", it.findtext("title") or "", pub))
+        src_el = it.find("source")
+        src = (src_el.text if src_el is not None else "") or "Google News"
+        dom = domain_of(src_el.get("url", "")) if src_el is not None else ""
+        title = it.findtext("title") or ""
+        if src and title.endswith(" - " + src):
+            title = title[: -len(src) - 3]
+        out.append(ArticleCandidate(src, it.findtext("link") or "", title, pub, domain=dom))
         if len(out) >= n:
             break
     return out
@@ -114,7 +120,7 @@ def bing_news(query: str, n: int = 20, lang: str = "en", http=None) -> list[Arti
             if ch.tag.endswith("Source"):
                 src = ch.text or ""
         out.append(ArticleCandidate(src or up.urlparse(real).netloc, real, it.findtext("title") or "", pub,
-                                    snippet=it.findtext("description") or ""))
+                                    snippet=it.findtext("description") or "", domain=domain_of(real)))
         if len(out) >= n:
             break
     return out
@@ -135,7 +141,8 @@ def guardian(pool: KeyPool, query: str, n: int = 30, http=None) -> list[ArticleC
     for a in ((r.json() or {}).get("response") or {}).get("results") or []:
         f = a.get("fields") or {}
         out.append(ArticleCandidate("The Guardian", a["webUrl"], f.get("headline") or a.get("webTitle", ""),
-                                    (a.get("webPublicationDate") or "")[:10], text=f.get("bodyText", "")))
+                                    (a.get("webPublicationDate") or "")[:10], text=f.get("bodyText", ""),
+                                    domain="theguardian.com"))
     return out
 
 
@@ -153,5 +160,5 @@ def nyt(pool: KeyPool, query: str, n: int = 10, http=None) -> list[ArticleCandid
     for d in (((r.json() or {}).get("response") or {}).get("docs") or [])[:n]:
         snip = " ".join(filter(None, [d.get("abstract"), d.get("lead_paragraph"), d.get("snippet")]))
         out.append(ArticleCandidate("The New York Times", d["web_url"], (d.get("headline") or {}).get("main", ""),
-                                    (d.get("pub_date") or "")[:10], snippet=snip))
+                                    (d.get("pub_date") or "")[:10], snippet=snip, domain="nytimes.com"))
     return out

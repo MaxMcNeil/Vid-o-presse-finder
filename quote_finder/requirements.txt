@@ -1,6 +1,0 @@
-requests>=2.31
-youtube-transcript-api>=1.0
-yt-dlp>=2025.1.1
-trafilatura>=1.12
-rapidfuzz>=3.6
-googlenewsdecoder>=0.1.7

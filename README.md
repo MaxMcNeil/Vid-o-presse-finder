@@ -1,88 +1,110 @@
-# Quote Finder
+# Vidéo-presse finder
 
-Entre une **personne** et un **sujet / une affirmation** (un mot, une phrase, un thème, un pays, une affirmation, court ou long).
-L'automate trouve **où et quand** elle le dit : vidéos (YouTube, Dailymotion, Internet Archive) et articles de presse. Gratuit, aucune API payante.
+Tu donnes une **cible** (une **personne**, un **pays**, une **entité** ou un **sujet**) et, si tu veux, un **sujet précis**.
+L'automate trouve **où et quand** c'est dit, dans des vidéos (YouTube, Dailymotion, Internet Archive) et des articles de presse.
+Il garde **peu de résultats, mais solides** : agences, grands médias, chaînes officielles, institutions.
+Tout tourne sur **GitHub** et les résultats sont enregistrés **uniquement dans le dépôt** (`results/`).
 
-Exemple : `Bill Clinton` + `Saddam a des armes de destruction massive`.
+## Lancer une ou plusieurs recherches (depuis le téléphone)
 
-## Ce que tu obtiens
+*Actions → Find quotes → Run workflow*, puis remplis le champ **recherches** :
 
-**Vidéos** : titre · date d'upload · timestamp(s) (un lien cliquable `&t=…s` par occurrence si la phrase est répétée) · URL · citation · « à la lettre » ou « dans le sens » · qui parle · confiance.
-**Articles** : titre · date · source · URL (+ avertissement si seul le chapô a pu être lu).
-Fichiers générés dans `results/<recherche>/` : `report.md`, `results.json`, `videos.csv`, `articles.csv`.
+```
+La Suisse | abandonne Microsoft pour la souveraineté numérique | pays ; Jordan Bardella | mensonges ; Microsoft | espionnage des données | entite
+```
 
-## Utilisation (100 % depuis GitHub, même sur mobile)
+- Une recherche = `cible | sujet | type`. Plusieurs recherches : sépare-les par `;` (10 maximum par lancement).
+- Le **sujet** est facultatif (`souveraineté numérique européenne` seul est une recherche de type sujet).
+- Le **type** est facultatif : `personne`, `pays`, `entite`, `sujet`. Sans type, l'IA le devine.
+- Champ vide : les recherches du fichier `recherches.txt` sont utilisées (une par ligne, modifiable sur GitHub).
 
-1. Ajoute les secrets : *Settings → Secrets and variables → Actions → New repository secret*
-2. *Actions → Find quotes → Run workflow*, remplis personne + sujet.
-3. Résultat dans le résumé du job, dans `results/` (commit automatique) et dans l'artefact `resultats`.
+Les autres réglages du formulaire :
 
-Options du formulaire : autres locuteurs acceptés (`Colin Powell, Tony Blair`), « n'importe qui » (`anyone`), langues, nombre de vidéos, `strict` (exclut les propos rapportés par un tiers), articles oui/non.
+| Réglage | Défaut | Rôle |
+|---|---|---|
+| `locuteurs` | auto | `cible` : seulement la cible (ou, pour un pays/une entité, ses représentants officiels : gouvernement, ministres, PDG…). `tous` : n'importe qui, à condition de faire autorité. `auto` : `cible` pour une personne, `tous` sinon |
+| `autorite` | forte | `forte` : agences, médias de référence, officiels. `moyenne` : élargit aux médias nationaux et aux grosses chaînes. `toutes` : aucun filtre |
+| `videos_par_recherche` | 8 | vidéos analysées (les plus solides) |
+| `articles_par_recherche` | 6 | articles retenus |
+| `langs` | fr,en | langues des requêtes et des sous-titres |
+| `depuis` | — | ignore ce qui est plus ancien (AAAA-MM-JJ) |
+| `telecharger_extraits` | non | télécharge les extraits vidéo et un premier `montage.mp4`, fournis en **artefact** GitHub (14 jours, jamais dans le dépôt) |
+| `en_parallele` | 2 | recherches menées en même temps (les quotas Gemini sont partagés : 2 ou 3 maximum) |
 
-En local : `pip install -r requirements.txt` puis
-`python -m quote_finder --person "Bill Clinton" --claim "Saddam a des armes de destruction massive" --also "Colin Powell"`
+Chaque recherche tourne dans son propre job (visible séparément dans *Actions*). Un dernier job rassemble tout et fait **un seul commit**.
 
-## Secrets à créer (plusieurs clés par secret : une par ligne ou séparées par des virgules)
+## Où sont les résultats
+
+```
+results/
+  README.md                        ← liste des lots, le plus récent en haut
+  2026-10-24_1415_n12/             ← un lot = un lancement
+    INDEX.md                       ← tableau des recherches + meilleurs extraits
+    montage.json / montage.csv     ← TOUS les extraits du lot, du plus solide au moins solide
+    01-la-suisse-abandonne-microsoft/
+      report.md                    ← rapport lisible
+      montage.json / montage.csv   ← extraits de cette recherche
+      moments.csv, videos.csv, articles.csv, results.json
+```
+
+Le résumé du job (*Actions → le lancement → Summary*) affiche aussi l'index et les rapports.
+
+## Timestamps pour le montage
+
+Chaque extrait de `montage.json` / `montage.csv` contient :
+
+| Champ | Contenu |
+|---|---|
+| `start`, `end` (+ `start_tc`, `end_tc`) | début et fin **exacts** de la déclaration, en secondes et en `HH:MM:SS.mmm` |
+| `in`, `out` (+ `in_tc`, `out_tc`) | mêmes points **avec marges** (prêts à couper) |
+| `timing` | `sous-titres` : calé sur la ligne de transcription où la phrase commence et finit (±1–2 s, marges 1 s / 0,8 s) ; `ia` : estimé par l'IA quand la vidéo n'a pas de sous-titres (±5 s, marges 2,5 s / 2 s) |
+| `video_id`, `source_url`, `platform` | pour télécharger la source |
+| `quote`, `speaker`, `speaker_role`, `verdict`, `confidence` | ce qui est dit, par qui (officiel, expert, journaliste…) |
+| `source_authority`, `score`, `order` | solidité de la source et ordre conseillé |
+
+Exemple pour couper un extrait à la main : `yt-dlp --download-sections "*102.2-117.8" <source_url>`.
+Automatiquement : `python -m quote_finder.clips results/<lot>/montage.json` (ou l'option `telecharger_extraits`).
+
+## Secrets à créer
+
+*Settings → Secrets and variables → Actions → New repository secret* (plusieurs clés par secret : une par ligne ou séparées par des virgules).
 
 | Secret | Rôle | Obligatoire |
 |---|---|---|
 | `GEMINI_API_KEYS` | comprendre la recherche, juger le contenu, analyser les vidéos sans sous-titres | oui |
-| `YOUTUBE_API_KEYS` | recherche YouTube (sans clé : repli yt-dlp, moins fiable depuis GitHub) | recommandé |
-| `FALLBACK_LLM_KEYS` + variable `FALLBACK_LLM_PROVIDER` (`groq`, `cerebras` ou `openrouter`) | relais gratuit quand Gemini est à court de quota (texte seulement) | recommandé |
-| `GUARDIAN_API_KEYS` | archives presse complètes depuis 1999, texte intégral | optionnel |
+| `YOUTUBE_API_KEYS` | recherche YouTube + nombre d'abonnés des chaînes (sert au score d'autorité) | fortement conseillé |
+| `FALLBACK_LLM_KEYS` + variable `FALLBACK_LLM_PROVIDER` (`groq`, `cerebras` ou `openrouter`) | relais gratuit quand Gemini est à court de quota (texte seulement) | conseillé |
+| `GUARDIAN_API_KEYS` | archives du Guardian, texte intégral | optionnel |
 | `NYT_API_KEYS` | archives du New York Times (résumés) | optionnel |
 | `YT_PROXY_URL` | proxy si YouTube bloque les transcriptions depuis GitHub | optionnel |
 
-Variable optionnelle `GEMINI_MODEL` (défaut `gemini-2.5-flash`) : à changer si Google renomme ses modèles gratuits.
+Les anciens secrets `NTFY_TOPIC` et `PHONE_SECRET` ne servent plus : tu peux les supprimer.
 
 ## Comment ça marche
 
-1. **Plan (Gemini)** : reformule la recherche, génère requêtes multilingues, synonymes, variantes de transcription.
-2. **Découverte** : YouTube (API en rotation de clés, repli yt-dlp), Dailymotion, Internet Archive ; presse : GDELT, Bing Actualités, Google News, Guardian, NYT.
-3. **Le contenu prime sur le titre** : la transcription de chaque vidéo est lue. Un filtre local gratuit repère les passages contenant les concepts recherchés (tolère les erreurs de transcription auto), puis Gemini ne juge que ces passages : affirmation à la lettre / dans le sens / simple mention / démenti, et **qui** parle (la personne elle-même, un tiers, ou propos rapportés).
-4. **Sans transcription** : YouTube → Gemini analyse directement la vidéo (`--video-fallback-max`) ; Dailymotion/Archive → l'audio est téléchargé (yt-dlp + ffmpeg) puis écouté par Gemini (`--audio-fallback-max`, vidéos de 45 min max).
-5. **Quotas** : rotation des clés, cadence par clé, quarantaine sur quota journalier, bascule vers le LLM de repli, cache des transcriptions et réponses entre exécutions.
-
-## Limites à connaître
-
-- Les sous-titres automatiques n'identifient pas le locuteur : il est déduit du contexte. Les propos « rapportés » ou « locuteur incertain » sont étiquetés ; `strict` les exclut.
-- YouTube bloque parfois les IP de GitHub pour les transcriptions : le repli yt-dlp, l'analyse vidéo Gemini ou `YT_PROXY_URL` compensent. Les vidéos non vérifiables sont listées à part.
-- GDELT ne couvre que ~3 mois ; pour les archives anciennes (ex. 1998), les clés Guardian/NYT sont utiles.
-- Si Gemini est surchargé (erreur 503), le programme change de modèle automatiquement ; garde quand même `FALLBACK_LLM_KEYS` (Groq) comme filet de sécurité.
-- Articles sous paywall : vérifiés sur le chapô seulement (signalé).
-
-## Version Termux (téléphone, adresse IP non bloquée par YouTube)
-
-```bash
-cd ~/vpf && bash termux/install.sh   # une seule fois
-qf keys                              # enregistre tes clés (stockées dans ~/.quote_finder/keys.env)
-qf                                   # recherche interactive
-qf "Bill Clinton" "Saddam a des armes de destruction massive" "" n 30   # ou en une ligne
-qf update                            # récupère la dernière version
-```
-Le rapport est copié dans Téléchargements et peut être envoyé sur GitHub. Sans compilation : `rapidfuzz` et `trafilatura` sont optionnels (repli en Python pur).
-
-## Déclenchement automatique du téléphone depuis GitHub
-
-*Run workflow* envoie une demande **signée** (HMAC, valable 10 min) au téléphone via ntfy.sh. Termux (`qf listen`) la reçoit, lance la recherche, pousse les résultats dans le dépôt et copie le rapport dans Téléchargements. Sans accusé de réception sous 100 s, GitHub fait la recherche lui-même (option `where` : `phone-then-github` par défaut, `github` ou `phone`).
-
-1. Sur le téléphone : `qf phone-setup` (affiche `NTFY_TOPIC` et `PHONE_SECRET`) puis ajoute-les comme **secrets** GitHub.
-2. `qf listen` laisse Termux à l'écoute (`qf autostart` pour le lancer au démarrage, avec l'appli Termux:Boot).
-3. Android : *Paramètres → Applis → Termux → Batterie → Sans restriction*, sinon le système tue l'écoute en arrière-plan.
-
-Sécurité : le sujet ntfy est aléatoire et chaque message est signé avec `PHONE_SECRET` ; un message non signé, modifié ou ancien est ignoré. Les arguments ne passent jamais par un shell.
-
-## Extraits pour le montage
-
-Chaque passage trouvé a un **début** et une **fin** (rapport, `results.json`, et `moments.csv` : une ligne par extrait avec `debut`, `fin`, `duree_s`, `citation`, `lien_extrait`). Les fins non fournies par l'IA sont estimées d'après la longueur de la citation ; les horodatages d'une analyse vidéo/audio par IA peuvent varier de quelques secondes, d'où les marges ajoutées au téléchargement.
-
-Télécharger **uniquement** ces extraits (avec 2 s avant et 1 s après), sur le téléphone :
-```bash
-qf clips                                   # derniers résultats
-qf clips --own-voice-only --min-confidence 0.9
-```
-Ils sont copiés dans `Movies` (ou Téléchargements) avec un fichier `montage_list.txt` : `ffmpeg -f concat -safe 0 -i montage_list.txt -c copy montage.mp4`. En local : `python -m quote_finder.clips results/<recherche>/results.json`.
+1. **Plan (IA)** : type de cible, alias (ex. *Suisse, Swiss, helvétique*), **représentants officiels** (Conseil fédéral, ministres…), **sources de référence** pour ce sujet (ex. RTS, Le Temps, admin.ch), requêtes multilingues orientées vers ces sources.
+2. **Découverte** puis **score d'autorité** de chaque source : liste de médias et d'institutions, domaines officiels (`.gouv.fr`, `admin.ch`, `.gov`, `europa.eu`…), abonnés de la chaîne ; pénalités pour les #shorts et les titres racoleurs. Seules les meilleures sont analysées.
+3. **Le contenu prime sur le titre** : la transcription est lue, un filtre local repère les passages utiles, l'IA juge (à la lettre / dans le sens / simple mention / démenti), dit **qui** parle et son rôle.
+4. **Horodatage calé** sur les lignes de sous-titres, puis classement : sûreté du passage + autorité de la source + rôle du locuteur.
+5. Sans sous-titres : Gemini regarde la vidéo (YouTube) ou écoute l'audio (Dailymotion, Archive).
+6. Garde-fous : 5 min max par vidéo analysée par IA, 35 min max par recherche, une recherche en échec n'empêche pas les autres d'être enregistrées.
 
 ## Diagnostic
 
-`qf check` (ou `python -m quote_finder.check`) teste, depuis le téléphone, chaque clé et chaque service (Gemini, Groq, YouTube, sous-titres, Dailymotion, audio, presse, ntfy) et dit ce qui ne marche pas. Chaque `report.md` se termine par une section **Diagnostic** (plan IA ou de secours, vidéos par plateforme, méthodes d'analyse, durée). Une recherche est limitée à 40 min (`--max-minutes`) et s'arrête franchement si l'IA ne répond pas pour établir le plan.
+*Actions → Diagnostic → Run workflow* teste chaque clé et chaque service depuis GitHub et dit ce qui ne marche pas.
+
+## En local (facultatif)
+
+```bash
+pip install -r requirements.txt
+python -m quote_finder --target "La Suisse" --claim "abandonne Microsoft" --type pays
+python -m quote_finder --batch "La Suisse | abandonne Microsoft | pays ; Jordan Bardella | mensonges"
+python -m pytest -q          # tests (pip install -r requirements-dev.txt)
+```
+
+## Limites
+
+- Les sous-titres automatiques n'indiquent pas qui parle : le locuteur est déduit du contexte ; « propos rapportés » et « locuteur incertain » sont signalés.
+- YouTube bloque parfois les transcriptions depuis GitHub : l'analyse vidéo par Gemini prend le relais (horodatage moins précis, `timing = ia`).
+- Avec `autorite = forte`, une recherche sur un sujet peu couvert peut ne rien rendre : relance en `moyenne`. Le rapport indique combien de sources ont été écartées pour autorité insuffisante.
+- Articles sous paywall : vérifiés sur le chapô seulement (signalé), ou listés « à vérifier à la main ».

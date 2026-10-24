@@ -12,16 +12,16 @@ import requests
 
 try:
     import trafilatura
-except ImportError:  # Termux : extraction simplifiée
+except ImportError:  # extraction simplifiée
     trafilatura = None
 
-from . import media, scan, transcripts
+from . import authority, media, scan, transcripts
 from .keys import KeyPool, keys_from_env
 from .llm import LLMError, QuotaExhausted
 from .models import ArticleCandidate, Hit, Plan, Segment, VideoCandidate
 from .planner import make_plan
 from .sources import news, other_video, youtube
-from .util import normalize
+from .util import call_with_timeout, normalize
 
 log = logging.getLogger("qf.pipeline")
 TIMED_OUT = threading.Event()
@@ -33,22 +33,33 @@ class PlanError(Exception):
 
 @dataclass
 class Options:
-    person: str
-    claim: str
+    target: str                      # personne, pays, entité ou sujet
+    claim: str = ""                  # affirmation / sujet précis (facultatif si la cible est un sujet)
+    target_type: str = "auto"        # auto | personne | pays | entite | sujet
+    speakers: str = "auto"           # auto | cible (la cible ou ses représentants) | tous (toute voix qui fait autorité)
     also: list[str] = field(default_factory=list)
-    anyone: bool = False
-    langs: list[str] = field(default_factory=lambda: ["en", "fr"])
-    max_videos: int = 40
-    max_articles: int = 25
-    video_fallback_max: int = 15  # vidéos YouTube sans transcription analysées directement par Gemini
-    audio_fallback_max: int = 10  # vidéos sans transcription (Dailymotion...) : audio écouté par Gemini
-    min_confidence: float = 0.55
+    langs: list[str] = field(default_factory=lambda: ["fr", "en"])
+    max_videos: int = 8              # vidéos analysées (les plus solides seulement)
+    max_articles: int = 6            # articles retenus au maximum
+    authority: str = "forte"         # forte | moyenne | toutes
+    video_fallback_max: int = 8      # vidéos YouTube sans transcription analysées directement par Gemini
+    audio_fallback_max: int = 4      # vidéos sans transcription (Dailymotion...) : audio écouté par Gemini
+    min_confidence: float = 0.6
     strict: bool = False
     platforms: list[str] = field(default_factory=lambda: ["youtube", "dailymotion", "archive"])
     articles: bool = True
-    workers: int = 4
-    max_minutes: int = 40       # durée maximale : au-delà, on rend ce qui est déjà trouvé
+    workers: int = 3
+    max_minutes: float = 30          # au-delà, on rend ce qui est déjà trouvé
     allow_heuristic: bool = False
+    since: str = ""                  # AAAA-MM-JJ : ignorer ce qui est plus ancien (facultatif)
+
+    @property
+    def person(self) -> str:  # compatibilité
+        return self.target
+
+    @property
+    def min_authority(self) -> float:
+        return authority.LEVELS.get(self.authority, 0.6)
 
 
 @dataclass
@@ -77,6 +88,10 @@ def _safe(fn, *a, **k):
         return []
 
 
+def _recent_enough(published: str, since: str) -> bool:
+    return not since or not published or published[:10] >= since
+
+
 def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list[VideoCandidate]:
     found: dict[str, VideoCandidate] = {}
 
@@ -84,56 +99,75 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list
         for v in vs:
             cur = found.setdefault(v.key, v)
             cur.found_by.add(q)
-            for attr in ("title", "description", "channel", "published", "duration"):
+            for attr in ("title", "description", "channel", "published", "duration", "channel_id", "channel_subs"):
                 if not getattr(cur, attr) and getattr(v, attr):
                     setattr(cur, attr, getattr(v, attr))
 
-    for i, q in enumerate(plan.youtube_queries):
+    queries = list(plan.youtube_queries)
+    # requêtes ciblant directement les sources de référence (ex. « RTS Suisse Microsoft »)
+    short = " ".join((o.claim or "").split()[:6])
+    for name in [s for s in plan.authoritative_sources if "." not in s][:3]:
+        queries.append(f"{name} {o.target} {short}".strip())
+    for i, q in enumerate(queries):
         lang = o.langs[i % len(o.langs)] if o.langs else None
         if "youtube" in o.platforms:
-            add(_safe(youtube.search, yt_pool, q, 25, lang, http), q)
-        if "dailymotion" in o.platforms and i < 4:
-            add(_safe(other_video.dailymotion, q, 12, http), q)
-        if "archive" in o.platforms and i < 3:
-            add(_safe(other_video.archive_org, q, 10, http), q)
-    vids = list(found.values())
-    log.info("%d vidéos candidates", len(vids))
-    # Priorité (pas d'exclusion sur le titre, qui peut mentir) : trouvées par plusieurs requêtes + indices dans les métadonnées.
+            add(_safe(youtube.search, yt_pool, q, 15, lang, http), q)
+        if "dailymotion" in o.platforms and i < 3:
+            add(_safe(other_video.dailymotion, q, 10, http), q)
+        if "archive" in o.platforms and i < 2:
+            add(_safe(other_video.archive_org, q, 8, http), q)
+    vids = [v for v in found.values() if (v.duration is None or v.duration < 4 * 3600) and _recent_enough(v.published, o.since)]
+    for v in vids:
+        v.authority, v.authority_why = authority.score_video(v, plan)
+    strong = [v for v in vids if v.authority >= o.min_authority]
+    log.info("%d vidéos candidates, %d avec une autorité suffisante (seuil %.2f, niveau « %s »)",
+             len(vids), len(strong), o.min_authority, o.authority)
+    plan.diag["videos_candidates"] = len(vids)
+    plan.diag["videos_low_authority"] = len(vids) - len(strong)
+
+    # Priorité : autorité de la source, puis pertinence (requêtes multiples + indices dans les métadonnées).
+    # Le titre ne sert qu'à ordonner : le contenu est toujours vérifié.
     def prio(v: VideoCandidate):
         meta = normalize(f"{v.title} {v.description[:600]}")
-        return -(len(v.found_by) * 2 + scan.group_score(meta, plan.term_groups) +
-                 (2 if any(a in meta for a in plan.person_aliases) else 0))
-    vids.sort(key=prio)
-    vids = [v for v in vids if v.duration is None or v.duration < 4 * 3600]
-    return vids[: o.max_videos]
+        rel = len(v.found_by) * 1.5 + scan.group_score(meta, plan.term_groups) + \
+            (1.5 if any(a in meta for a in plan.target_aliases) else 0)
+        return -(rel + 6 * v.authority)
+    strong.sort(key=prio)
+    return strong[: o.max_videos]
 
 
 def discover_articles(plan: Plan, o: Options, pools: dict, http=None) -> list[ArticleCandidate]:
     found: dict[str, ArticleCandidate] = {}
-    for i, q in enumerate(plan.news_queries):
+    queries = list(plan.news_queries)
+    doms = [d for d in plan.authoritative_sources if "." in d and " " not in d][:3]
+    base = f"{o.target} {' '.join((o.claim or '').split()[:6])}".strip()
+    queries += [f"{base} site:{authority.domain_of('https://' + d.split('//')[-1])}" for d in doms]
+    for i, q in enumerate(queries):
         lg = o.langs[i % len(o.langs)] if o.langs else "en"
-        batch = _safe(news.gdelt, q, 40, http) if i < 3 else []
+        batch = _safe(news.gdelt, q, 30, http) if i < 2 else []
         batch += _safe(news.bing_news, q, 20, lg, http)
-        if i < 4:
+        if i < 4 or "site:" in q:
             batch += _safe(news.google_news, q, 20, lg, http)
-            batch += _safe(news.guardian, pools["guardian"], q, 25, http)
         if i < 3:
+            batch += _safe(news.guardian, pools["guardian"], q, 15, http)
             batch += _safe(news.nyt, pools["nyt"], q, 10, http)
         for a in batch:
-            if a.url:
+            if a.url and _recent_enough(a.published, o.since):
                 found.setdefault(a.url, a).found_by.add(q)
     arts = list(found.values())
-    by_src: dict[str, int] = {}
     for a in arts:
-        k = "google" if "news.google.com" in a.url else a.source.split(".")[0][:14]
-        by_src[k] = by_src.get(k, 0) + 1
-    log.info("%d articles candidats : %s", len(arts), dict(sorted(by_src.items(), key=lambda x: -x[1])[:8]))
+        a.authority, a.authority_why = authority.score_article(a, plan)
+    strong = [a for a in arts if a.authority >= o.min_authority]
+    log.info("%d articles candidats, %d de sources qui font autorité", len(arts), len(strong))
+    plan.diag["articles_candidates"] = len(arts)
+    plan.diag["articles_low_authority"] = len(arts) - len(strong)
 
     def prio(a: ArticleCandidate):
         meta = normalize(f"{a.title} {a.snippet}")
-        return -(len(a.found_by) + scan.group_score(meta, plan.term_groups) + (3 if a.text else 0))
-    arts.sort(key=prio)
-    return arts[: o.max_articles]
+        return -(len(a.found_by) + scan.group_score(meta, plan.term_groups) + (2 if a.text else 0) + 5 * a.authority)
+    strong.sort(key=prio)
+    # on en lit 2x plus que demandé : certains seront illisibles (paywall) ou hors sujet
+    return strong[: o.max_articles * 2]
 
 
 # ------------------------------------------------------------------ analyse
@@ -163,19 +197,20 @@ def analyze_video(v: VideoCandidate, plan: Plan, o: Options, llm, fallback_budge
             ex = scan.find_excerpts(t.segments, plan)
             if not ex:
                 return VideoResult(v, [], "transcript", "aucun passage ne contient les termes recherchés")
-            hits = scan.judge_excerpts(llm, plan, o.person, o.also, o.claim, meta, ex,
-                                       "sous-titres automatiques" if "auto" in t.kind else "sous-titres", o.anyone)
+            hits = scan.judge_excerpts(llm, plan, o, meta, ex,
+                                       "sous-titres automatiques" if "auto" in t.kind else "sous-titres")
+            scan.refine_times(hits, t.segments)  # début/fin calés sur la transcription réelle
             scan.finish_times(hits, v.duration)
             return VideoResult(v, hits, "transcript")
         # pas de transcription : analyse directe de la vidéo par Gemini (YouTube uniquement)
         if v.platform == "youtube" and llm.has_video and _take(fallback_budget):
-            hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, anyone=o.anyone)
+            hits = scan.judge_video_direct(llm, plan, o, v.url)
             scan.finish_times(hits, v.duration)
             return VideoResult(v, hits, "gemini-video")
         if v.platform != "youtube" and llm.has_video and audio_budget is not None and _take(audio_budget):
             audio = media.fetch_audio(v.url)
             if audio:
-                hits = scan.judge_video_direct(llm, plan, o.person, o.also, o.claim, v.url, audio=audio, anyone=o.anyone)
+                hits = scan.judge_video_direct(llm, plan, o, v.url, audio=audio)
                 scan.finish_times(hits, v.duration)
                 return VideoResult(v, hits, "gemini-audio")
             return VideoResult(v, [], "none", "pas de sous-titres ; audio : " + (getattr(media.LAST_REASON, "text", "") or "non téléchargeable"))
@@ -225,21 +260,35 @@ def fetch_article_text(url: str) -> str:
         return ""
 
 
+def resolve_google_news(a: ArticleCandidate, http=None) -> str:
+    """Lien Google News -> lien réel de l'article. 1) décodeur ; 2) recherche du titre exact sur Bing, même média."""
+    try:
+        from googlenewsdecoder import gnewsdecoder
+        dec = call_with_timeout(gnewsdecoder, 30, a.url, interval=1)
+        if dec and dec.get("status"):
+            a.url = dec["decoded_url"]
+            a.domain = authority.domain_of(a.url)
+            return a.url
+        log.info("lien Google News non décodé : %s", str((dec or {}).get("message"))[:100])
+    except Exception as e:  # noqa: BLE001
+        log.info("décodeur Google News en erreur : %s", type(e).__name__)
+    if a.title:
+        for lg in ("fr", "en"):
+            for b in _safe(news.bing_news, f'"{a.title[:150]}"', 5, lg, http):
+                same_site = a.domain and (b.domain == a.domain or b.domain.endswith("." + a.domain))
+                if same_site or scan.term_present(normalize(b.title), normalize(a.title)[:80]):
+                    a.url, a.domain = b.url, b.domain or a.domain
+                    return a.url
+    return ""
+
+
 def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None) -> ArticleResult:
     text = a.text
     if not text:
         try:
             url = a.url
             if "news.google.com" in url:
-                try:
-                    from googlenewsdecoder import gnewsdecoder
-                    dec = gnewsdecoder(url, interval=1)
-                    if dec.get("status"):
-                        url = a.url = dec["decoded_url"]
-                    else:
-                        log.info("lien Google News non décodé : %s", str(dec.get("message"))[:100])
-                except Exception as e:  # noqa: BLE001
-                    log.info("décodeur Google News en erreur : %s", type(e).__name__)
+                url = resolve_google_news(a, http) or url
             text = fetch_article_text(url) if "news.google.com" not in url else ""
         except Exception:  # noqa: BLE001
             text = ""
@@ -255,9 +304,10 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
         return ArticleResult(a, [], verified, "")
     for e in ex:
         e.text = "\n".join(l.split("] ", 1)[-1] for l in e.text.splitlines())
-    meta = {"title": a.title, "channel": a.source, "published": a.published, "description": ""}
+    meta = {"title": a.title, "channel": f"{a.source} ({a.domain})" if a.domain else a.source,
+            "published": a.published, "description": ""}
     try:
-        hits = scan.judge_excerpts(llm, plan, o.person, o.also, o.claim, meta, ex, "article de presse", o.anyone)
+        hits = scan.judge_excerpts(llm, plan, o, meta, ex, "article de presse")
     except LLMError as e:
         return ArticleResult(a, [], verified, f"erreur LLM: {str(e)[:100]}")
     for h in hits:
@@ -270,15 +320,22 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     deadline = t0 + o.max_minutes * 60
     if hasattr(llm, "set_deadline"):
         llm.set_deadline(deadline)
-    plan = make_plan(llm, o.person, o.claim, o.also, o.langs, o.anyone)
+    TIMED_OUT.clear()
+    plan = make_plan(llm, o.target, o.claim, o.also, o.langs, o.speakers, o.target_type)
+    if o.target_type == "auto":
+        o.target_type = plan.target_type
+    if o.speakers == "auto":  # une personne : ses propres paroles ; un pays/une entité/un sujet : toute voix qui fait autorité
+        o.speakers = "cible" if o.target_type == "personne" else "tous"
     if plan.source == "heuristic" and not o.allow_heuristic and getattr(llm, "has_text", False):
         raise PlanError("L'IA (Gemini et le LLM de secours) n'a pas répondu pour préparer la recherche. "
                         "Rien n'a été cherché pour ne pas produire de résultats médiocres : relance dans quelques minutes.")
-    log.info("Plan (%s) : %s | groupes : %s", plan.source, plan.claim_summary, plan.term_groups)
+    log.info("Plan (%s) : cible %s (%s), locuteurs : %s | %s | groupes : %s", plan.source, o.target, o.target_type,
+             o.speakers, plan.claim_summary, plan.term_groups)
     yt_pool = KeyPool("youtube", keys_from_env("YOUTUBE"))
     pools = {"guardian": KeyPool("guardian", keys_from_env("GUARDIAN"), 1.0),
              "nyt": KeyPool("nyt", keys_from_env("NYT"), 13.0)}
-    plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries), "queries_news": len(plan.news_queries)}
+    plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries),
+                 "queries_news": len(plan.news_queries), "authority": o.authority, "speakers": o.speakers}
 
     vids = discover_videos(plan, o, yt_pool, http)
     by_plat: dict[str, int] = {}
@@ -286,7 +343,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
         by_plat[v.platform] = by_plat.get(v.platform, 0) + 1
     plan.diag["videos_by_platform"] = by_plat
     if "youtube" in o.platforms and not by_plat.get("youtube"):
-        log.warning("AUCUNE vidéo YouTube trouvée (clés YouTube : %d). Lance `qf check` pour tester.", len(yt_pool._next_ok))
+        log.warning("AUCUNE vidéo YouTube retenue (clés YouTube : %d). Lance le workflow « Diagnostic ».", len(yt_pool._next_ok))
     budget = [o.video_fallback_max]
     abudget = [o.audio_fallback_max]
     vres: list[VideoResult] = []
@@ -319,7 +376,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     for r in vres:
         kept = []
         for h in r.hits:
-            if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict):
+            if scan.keep_hit(h, plan, o):
                 kept.append(h)
             else:
                 log.info("  écarté (%s, %s, %s, conf %.2f) : %s", h.verdict, h.who_says, h.speaker_name or "?", h.confidence,
@@ -351,10 +408,13 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
             finally:
                 ex.shutdown(wait=False, cancel_futures=True)
             for r in ares:
-                r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict)]
+                r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o)]
                 tn = normalize(r.article.title)
                 r.relevant_title = scan.group_score(r.article.title, plan.term_groups) >= 1 and \
-                    any(a and a in tn for a in plan.person_aliases)
+                    (o.target_type == "sujet" or any(a and a in tn for a in plan.target_aliases))
+            ares.sort(key=lambda r: (not r.hits, -r.article.authority))
+            kept = [r for r in ares if r.hits][: o.max_articles]
+            ares = kept + [r for r in ares if not r.hits]
         except Exception as e:  # noqa: BLE001 - les résultats vidéo sont conservés quoi qu'il arrive
             log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
     elif o.articles:

@@ -1,11 +1,10 @@
-"""Comprend la recherche (mot, phrase, affirmation...) et prépare requêtes + termes à repérer."""
+"""Comprend la recherche (cible = personne, pays, entité ou sujet) et prépare requêtes + termes à repérer."""
 from __future__ import annotations
 
 import logging
-import re
 import time
 
-from .models import Plan
+from .models import TARGET_TYPES, Plan
 from .util import normalize
 
 log = logging.getLogger("qf.planner")
@@ -19,59 +18,80 @@ el los las una unos y o en por con es son lo del al
 der die das ein eine und oder ist sind mit von zu im
 il lo gli di che e è sono con per del della dei""".split())
 
-PROMPT = """Tu prépares une recherche de citations dans des vidéos (transcriptions) et des articles de presse.
+TYPE_LABEL = {"personne": "une PERSONNE", "pays": "un PAYS (ou une ville / région)",
+              "entite": "une ENTITÉ (entreprise, institution, parti, organisation...)", "sujet": "un SUJET / thème"}
 
-PERSONNE CIBLE : {person}
-AUTRES LOCUTEURS ACCEPTÉS : {others}
-{anyone_line}AFFIRMATION / SUJET RECHERCHÉ (peut être un mot, une phrase, un thème, un pays, une affirmation...) :
+PROMPT = """Tu prépares une recherche de déclarations dans des vidéos (transcriptions) et des articles de presse.
+On veut PEU de résultats mais avec une AUTORITÉ FORTE : sources officielles, agences, grands médias, experts reconnus.
+
+CIBLE : {target}
+TYPE DE CIBLE : {type_line}
+SUJET / AFFIRMATION RECHERCHÉ (mot, phrase, thème, affirmation... peut être vide) :
 \"\"\"{claim}\"\"\"
-LANGUES SOUHAITÉES POUR LES REQUÊTES : {langs}
+QUI DOIT PARLER : {speakers_line}
+AUTRES LOCUTEURS ACCEPTÉS : {others}
+LANGUES SOUHAITÉES : {langs}
 
 Réponds en JSON strict avec exactement ces clés :
 {{
+  "target_type": "personne" | "pays" | "entite" | "sujet",
   "claim_summary": "reformulation neutre et précise de ce qu'on cherche (1-2 phrases)",
   "term_groups": [["synonymes/formulations d'un concept clé, dans toutes les langues utiles, 4 à 12 variantes courtes, en minuscules, y compris les erreurs courantes de transcription automatique"], ...],
-  "person_aliases": ["nom complet", "nom court", "titre + nom", "variantes de transcription"],
-  "youtube_queries": ["8 à 14 requêtes de recherche variées : discours, interview, conférence de presse, extrait, avec/sans année, langues différentes"],
-  "news_queries": ["4 à 8 requêtes pour articles/agences : citations entre guillemets, noms d'agences"]
+  "target_aliases": ["noms et variantes de la cible : nom complet, nom court, gentilé/adjectif (ex. suisse, swiss, helvétique), sigle, variantes de transcription"],
+  "official_speakers": ["qui parle AU NOM de la cible, avec noms propres actuels : pour un pays le gouvernement, ministres, porte-parole, administrations concernées par le sujet ; pour une entité ses dirigeants et porte-parole ; pour une personne son entourage officiel (porte-parole) ; vide pour un sujet"],
+  "authoritative_sources": ["10 à 20 sources de référence pour CE sujet : agences, médias publics et nationaux du pays concerné, institutions, sites officiels ; noms de chaînes YouTube ET domaines (ex. rts.ch, admin.ch, Reuters, franceinfo)"],
+  "youtube_queries": ["6 à 10 requêtes visant des sources sérieuses : journal télévisé, conférence de presse, déclaration officielle, interview, débat parlementaire, nom de média + sujet ; langues variées"],
+  "news_queries": ["4 à 6 requêtes pour articles d'agences et grands médias"]
 }}
-Règles : 2 à 5 groupes dans term_groups, chaque groupe = UN concept (ex. l'objet, l'action, le sujet). Ne mets pas le nom de la personne dans term_groups. Si l'affirmation est un simple mot, un seul groupe avec ses variantes et traductions suffit."""
+Règles : 2 à 4 groupes dans term_groups, chaque groupe = UN concept du SUJET (pas la cible elle-même, sauf si la cible est un SUJET :
+alors 1 à 3 groupes décrivant le sujet). Si le sujet est vide, déduis les concepts de la cible. Pas de requêtes racoleuses."""
 
 
-def _heuristic(person: str, claim: str, others: list[str], langs: list[str]) -> Plan:
-    words = [w for w in normalize(claim).split() if w not in STOP and len(w) > 2]
-    groups = [[w] for w in dict.fromkeys(words)][:5] or [[normalize(claim)]]
-    names = [person] + others
-    yt = [f"{person} {claim}", f"{person} {claim} interview", f"{person} {claim} speech",
-          f"{person} says {claim}", f'"{claim}" {person}']
-    return Plan(claim, groups, [normalize(n) for n in names if n], yt,
-                [f'"{person}" {claim}', f"{person} {claim}"], langs, source="heuristic")
+def _heuristic(target: str, claim: str, others: list[str], langs: list[str], ttype: str) -> Plan:
+    words = [w for w in normalize(claim or target).split() if w not in STOP and len(w) > 2]
+    groups = [[w] for w in dict.fromkeys(words)][:4] or [[normalize(claim or target)]]
+    q = f"{target} {claim}".strip()
+    yt = [q, f"{q} interview", f"{q} conférence de presse", f"{q} journal"]
+    return Plan(claim or target, groups, [normalize(n) for n in [target] + others if n], yt,
+                [f'"{target}" {claim}'.strip(), q], langs, source="heuristic", target_type=ttype if ttype in TARGET_TYPES else "sujet")
 
 
-def make_plan(llm, person: str, claim: str, others: list[str], langs: list[str], anyone: bool = False) -> Plan:
+def make_plan(llm, target: str, claim: str, others: list[str], langs: list[str], speakers: str = "tous",
+              target_type: str = "auto") -> Plan:
     if llm is None or not llm.has_text:
         log.warning("Pas de LLM : plan heuristique (moins précis)")
-        return _heuristic(person, claim, others, langs)
+        return _heuristic(target, claim, others, langs, target_type)
+    type_line = TYPE_LABEL.get(target_type, "à déterminer (personne, pays, entité ou sujet)")
+    anyone = ("n'importe qui, à condition d'être une voix qui fait autorité (officiel, expert, grand média) ; "
+              "la cible est le SUJET des propos")
+    speakers_line = {"cible": "la CIBLE elle-même (ou, pour un pays/une entité, ses représentants officiels)",
+                     "tous": anyone}.get(speakers, "si la cible est une personne : ses propres propos ; sinon : " + anyone)
     last = None
     for attempt in range(PLAN_ATTEMPTS):
         try:
-            d = llm.generate_json(PROMPT.format(person=person, others=", ".join(others) or "aucun", claim=claim,
-                                                langs=", ".join(langs),
-                                                anyone_line=("TOUT LOCUTEUR EST ACCEPTÉ : la personne cible est le SUJET de l'affirmation, "
-                                                             "pas forcément celui qui parle (ex. des gens qui disent que cette personne ment).\n") if anyone else ""))
+            d = llm.generate_json(PROMPT.format(target=target, type_line=type_line, claim=claim or "(aucun : tout ce qui est "
+                                                "marquant et récent à propos de la cible)", speakers_line=speakers_line,
+                                                others=", ".join(others) or "aucun", langs=", ".join(langs)))
             groups = [[normalize(t) for t in g if normalize(t)] for g in d.get("term_groups", []) if g]
-            groups = [g for g in groups if g][:5]
+            groups = [g for g in groups if g][:4]
             if not groups:
                 raise ValueError("term_groups vide")
-            aliases = [normalize(a) for a in d.get("person_aliases", []) if a] + [normalize(person)] + \
-                      [normalize(o) for o in others]
+            ttype = target_type if target_type in TARGET_TYPES else str(d.get("target_type", "")).lower().replace("é", "e")
+            if ttype not in TARGET_TYPES:
+                ttype = "sujet"
+            aliases = [normalize(a) for a in (d.get("target_aliases") or d.get("person_aliases") or []) if a] + \
+                      [normalize(target)] + [normalize(o) for o in others]
+            base_q = f"{target} {claim}".strip()
             return Plan(
-                claim_summary=str(d.get("claim_summary") or claim),
+                claim_summary=str(d.get("claim_summary") or claim or target),
                 term_groups=groups,
-                person_aliases=list(dict.fromkeys(a for a in aliases if a)),
-                youtube_queries=list(dict.fromkeys([f"{person} {claim}"] + [q for q in d.get("youtube_queries", []) if q]))[:16],
-                news_queries=list(dict.fromkeys([f'"{person}" {claim}'] + [q for q in d.get("news_queries", []) if q]))[:10],
+                target_aliases=list(dict.fromkeys(a for a in aliases if a)),
+                youtube_queries=list(dict.fromkeys([base_q] + [q for q in d.get("youtube_queries", []) if q]))[:10],
+                news_queries=list(dict.fromkeys([base_q] + [q for q in d.get("news_queries", []) if q]))[:6],
                 languages=langs,
+                target_type=ttype,
+                official_speakers=[str(s) for s in (d.get("official_speakers") or []) if s][:15],
+                authoritative_sources=[str(s) for s in (d.get("authoritative_sources") or []) if s][:25],
             )
         except Exception as e:  # noqa: BLE001
             last = e
@@ -79,4 +99,4 @@ def make_plan(llm, person: str, claim: str, others: list[str], langs: list[str],
             if attempt + 1 < PLAN_ATTEMPTS:
                 time.sleep(PLAN_WAIT)
     log.error("Planification impossible après %d essais (%s) : plan heuristique", PLAN_ATTEMPTS, str(last)[:100])
-    return _heuristic(person, claim, others, langs)
+    return _heuristic(target, claim, others, langs, target_type)

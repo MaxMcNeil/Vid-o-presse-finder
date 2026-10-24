@@ -15,6 +15,7 @@ import requests
 
 from . import cache
 from .models import Segment, Transcript, VideoCandidate
+from .util import call_with_timeout
 
 log = logging.getLogger("qf.transcripts")
 
@@ -105,7 +106,7 @@ def _ytdlp_subs(url: str, langs: list[str]) -> Transcript | None:
         cmd = [sys.executable, "-m", "yt_dlp", "--skip-download", "--write-subs", "--write-auto-subs",
                "--sub-langs", sl, "--sub-format", "vtt/srt/best", "--no-warnings", "-o", os.path.join(d, "s.%(ext)s"), url]
         try:
-            subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            subprocess.run(cmd, capture_output=True, text=True, timeout=90)
         except (subprocess.SubprocessError, OSError):
             return None
         files = sorted(glob.glob(os.path.join(d, "s.*.vtt")) + glob.glob(os.path.join(d, "s.*.srt")))
@@ -146,7 +147,7 @@ def get_transcript(v: VideoCandidate, langs: list[str]) -> Transcript | None:
     t = None
     if v.platform == "youtube":
         try:
-            t = _yt_api(v.id, langs)
+            t = call_with_timeout(_yt_api, 45, v.id, langs)
         except Exception as e:  # noqa: BLE001 (blocage IP, sous-titres désactivés...)
             log.info("transcript API %s: %s", v.id, type(e).__name__)
         if t is None:

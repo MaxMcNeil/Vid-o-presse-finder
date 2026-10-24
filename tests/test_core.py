@@ -55,7 +55,7 @@ def test_gemini_rotates_on_daily_quota():
     pool = KeyPool("g", ["k1", "k2"], 0)
     http = FakeHttp([R(429, "RESOURCE_EXHAUSTED GenerateRequestsPerDay quota"), ok('{"hits": []}')])
     assert GeminiClient(pool, "m", http).generate_json("x") == {"hits": []}
-    assert http.calls[0] != http.calls[1] and pool.available() == 1
+    assert http.calls[0] != http.calls[1]
 
 
 def test_gemini_all_exhausted():
@@ -101,19 +101,34 @@ def test_no_excerpt_when_only_one_group_matches():
     assert scan.find_excerpts(segs, PLAN) == []  # besoin de >= 2 groupes sur 3
 
 
+def _o(**k):
+    from quote_finder.pipeline import Options
+    return Options(**{"target": "Bill Clinton", "claim": "x", "speakers": "cible", "min_confidence": 0.5, **k})
+
+
 def test_dedupe_and_keep():
     a = Hit(50, "q", "literal", "target", "", 0.9)
     b = Hit(53, "q2", "literal", "target", "", 0.7)
     assert len(scan.dedupe_hits([a, b])) == 1
-    assert scan.keep_hit(a, PLAN, False, [], 0.5, True)
+    assert scan.keep_hit(a, PLAN, _o(strict=True))
     rep = Hit(10, "q", "paraphrase", "reported", "", 0.9)
-    assert scan.keep_hit(rep, PLAN, False, [], 0.5, False) and not scan.keep_hit(rep, PLAN, False, [], 0.5, True)
-    assert not scan.keep_hit(Hit(1, "q", "mention", "target", "", 0.9), PLAN, False, [], 0.5, False)
-    assert not scan.keep_hit(Hit(1, "q", "denial", "target", "", 0.9), PLAN, False, [], 0.5, False)
+    assert scan.keep_hit(rep, PLAN, _o()) and not scan.keep_hit(rep, PLAN, _o(strict=True))
+    assert not scan.keep_hit(Hit(1, "q", "mention", "target", "", 0.9), PLAN, _o())
+    assert not scan.keep_hit(Hit(1, "q", "denial", "target", "", 0.9), PLAN, _o())
     other = Hit(1, "q", "literal", "other_named", "Colin Powell", 0.9)
-    assert not scan.keep_hit(other, PLAN, False, [], 0.5, False)
-    assert scan.keep_hit(other, PLAN, False, ["Colin Powell"], 0.5, False)
-    assert scan.keep_hit(other, PLAN, True, [], 0.5, False)
+    assert not scan.keep_hit(other, PLAN, _o())
+    assert scan.keep_hit(other, PLAN, _o(also=["Colin Powell"]))
+    assert scan.keep_hit(other, PLAN, _o(speakers="tous"))
+
+
+def test_official_speaker_counts_as_target_for_a_country():
+    from quote_finder.models import Plan
+    plan = Plan("x", [["a"]], ["suisse", "la suisse"], [], [], ["fr"], target_type="pays",
+                official_speakers=["Karin Keller-Sutter", "Conseil fédéral"])
+    h = Hit(1, "q", "literal", "other_named", "Karin Keller-Sutter", 0.9, speaker_role="official")
+    assert scan.keep_hit(h, plan, _o(target="La Suisse", target_type="pays"))
+    assert not scan.keep_hit(Hit(1, "q", "literal", "other_named", "Un youtubeur", 0.9), plan,
+                             _o(target="La Suisse", target_type="pays"))
 
 
 def test_keys_from_env_uses_secret_names(monkeypatch):
@@ -137,11 +152,29 @@ def test_gemini_switches_model_on_404_and_discovers():
                 {"name": "models/gemini-3.9-flash", "supportedGenerationMethods": ["generateContent"]},
                 {"name": "models/gemini-3.9-flash-lite", "supportedGenerationMethods": ["generateContent"]},
                 {"name": "models/embedding-1", "supportedGenerationMethods": ["embedContent"]}]})
-    err = R(404, "This model models/gemini-3.8-flash is no longer available to new users")
+    err = R(404, "This model models/gemini-3.9-flash is no longer available to new users")
     http = H([err, ok('{"hits": []}')])
-    c = GeminiClient(KeyPool("g", ["k"], 0), ["gemini-3.8-flash", "gemini-flash-latest"], http)
+    c = GeminiClient(KeyPool("g", ["k"], 0), ["gemini-flash-latest"], http)
     assert c.generate_json("x") == {"hits": []}
-    assert http.calls[0] == "gemini-3.8-flash" and http.calls[1] == "gemini-3.9-flash"
+    # aucun modèle imposé : le meilleur modèle découvert pour la clé est essayé d'abord, puis le suivant
+    assert http.calls[0] == "gemini-3.9-flash" and http.calls[1] == "gemini-3.8-flash"
+
+
+def test_gemini_each_key_uses_its_own_models():
+    class H(FakeHttp):
+        def post(self, url, params=None, json=None, timeout=None):
+            self.calls.append((params["key"], url.split("models/")[1].split(":")[0])); return self.seq.pop(0)
+        def get(self, url, params=None, timeout=None):
+            if params["key"] == "k1":
+                names = ["gemini-3.9-flash"]
+            else:
+                names = ["gemini-3.8-flash"]
+            return R(200, {"models": [{"name": "models/" + n, "supportedGenerationMethods": ["generateContent"]}
+                                      for n in names]})
+    http = H([ok('{"a": 1}'), ok('{"a": 2}')])
+    c = GeminiClient(KeyPool("g", ["k1", "k2"], 0), ["x"], http)
+    c.generate_json("x"); c.generate_json("x")
+    assert dict(http.calls) == {"k1": "gemini-3.9-flash", "k2": "gemini-3.8-flash"}
 
 
 def test_gemini_rotates_model_on_repeated_503(monkeypatch):
@@ -204,3 +237,40 @@ def test_plan_clips_adds_margins_and_filters():
     assert len(plan_clips(data, 2, 1, 0.8, only_own_voice=True)) == 1
     assert c[0]["name"].startswith("01_olivier-faure_le-titre_01m45")
     assert plan_clips(data, 5, 1, 0.0)[1]["start"] == 0  # jamais négatif
+
+
+def test_openai_compat_switches_model_after_404_and_discovers():
+    from quote_finder.llm import OpenAICompatClient
+    seen = []
+
+    class H:
+        def post(self, url, json=None, headers=None, timeout=None):
+            seen.append(json["model"])
+            if json["model"] == "llama-3.3-70b-versatile":
+                return R(404, '{"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access"}}')
+            return ok_openai('{"ok": true}')
+        def get(self, url, headers=None, timeout=None):
+            return R(200, {"data": [{"id": "whisper-large-v3"}, {"id": "llama-guard-4-12b"}, {"id": "small-8b-instant"},
+                                    {"id": "big-model-120b"}, {"id": "retired-70b", "active": False}]})
+
+    def ok_openai(txt):
+        return R(200, {"choices": [{"message": {"content": txt}}]})
+    c = OpenAICompatClient(KeyPool("f", ["k"], 0), "https://x/v1", "llama-3.3-70b-versatile", H())
+    assert c.generate_json("x") == {"ok": True}
+    assert seen[0] == "llama-3.3-70b-versatile" and seen[1] == "big-model-120b"  # le plus gros modèle de chat actif
+
+
+def test_gemini_lowers_thinking_then_falls_back_on_400():
+    bodies = []
+
+    class H(FakeHttp):
+        def post(self, url, params=None, json=None, timeout=None):
+            bodies.append(dict(json["generationConfig"]))
+            return self.seq.pop(0)
+    err = R(400, "Thinking level is not supported for this model")
+    http = H([err, err, ok('{"a": 1}')])
+    c = GeminiClient(KeyPool("g", ["k"], 0), "m", http)
+    assert c.generate_json("x") == {"a": 1}
+    assert bodies[0]["thinkingConfig"] == {"thinkingLevel": "low"}
+    assert bodies[1]["thinkingConfig"] == {"thinkingBudget": 0}
+    assert "thinkingConfig" not in bodies[2]

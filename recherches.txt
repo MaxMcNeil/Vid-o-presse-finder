@@ -1,0 +1,4 @@
+# Recherches utilisées quand le champ « recherches » du formulaire est vide.
+# Une ligne = une recherche :  cible | sujet | type   (type : personne, pays, entite, sujet ; facultatif)
+# Les lignes qui commencent par # sont ignorées. 10 recherches maximum par lancement.
+La Suisse | abandonne Microsoft pour la souveraineté numérique et la sécurité | pays

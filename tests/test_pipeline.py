@@ -18,7 +18,7 @@ class FakeLLM:
         if "Tu prépares une recherche" in prompt:
             return {"claim_summary": "Saddam aurait des ADM",
                     "term_groups": [["saddam"], ["weapons of mass destruction", "wmd"]],
-                    "person_aliases": ["Bill Clinton"], "youtube_queries": ["clinton saddam wmd"], "news_queries": ["clinton wmd"]}
+                    "target_aliases": ["Bill Clinton"], "youtube_queries": ["clinton saddam wmd"], "news_queries": ["clinton wmd"]}
         if inline_media:
             return {"hits": [{"t": 36, "quote": "il ment", "verdict": "paraphrase", "who_says": "other_named", "speaker_name": "X", "confidence": 0.9}]}
         if video_url:
@@ -56,7 +56,8 @@ def test_end_to_end(monkeypatch, tmp_path):
 
     monkeypatch.setattr(pipeline.media, "fetch_audio", lambda url, **k: b"audio")
     llm = FakeLLM()
-    o = pipeline.Options("Bill Clinton", "Saddam has weapons of mass destruction", workers=1)
+    o = pipeline.Options("Bill Clinton", "Saddam has weapons of mass destruction", workers=1, authority="toutes",
+                         target_type="personne")
     plan, vres, ares = pipeline.run(o, llm)
     by = {r.video.id: r for r in vres}
     assert [h.t for h in by["AAA"].hits] == [50, 500]            # deux occurrences dans la même vidéo
@@ -68,7 +69,7 @@ def test_end_to_end(monkeypatch, tmp_path):
     assert len(ares) == 2 and any(r.hits for r in ares)
 
     out = tmp_path / "r"
-    p = report.build(o.person, o.claim, plan, vres, ares, out, {"videos_scanned": 3, "articles_scanned": 2})
+    p = report.build(o, plan, vres, ares, out, {"videos_scanned": 3, "articles_scanned": 2})
     md = p.read_text()
     assert "start=50&end=" in md and "start=500&end=" in md and "00:50 → " in md and "1998-02-17" in md and "https://www.youtube.com/watch?v=AAA" in md
     data = json.loads((out / "results.json").read_text())
@@ -107,9 +108,9 @@ def test_anyone_mode_is_announced_to_the_judge():
             return {"hits": []}
     plan = Plan("x", [["a"]], ["bardella"], [], [], ["fr"])
     ex = [scan.Excerpt(0, 10, 1, "[00:00] a")]
-    scan.judge_excerpts(L(), plan, "Bardella", [], "il ment", {}, ex, anyone=True)
+    scan.judge_excerpts(L(), plan, pipeline.Options("Bardella", "il ment", speakers="tous"), {}, ex)
     assert "TOUT LOCUTEUR EST ACCEPTÉ" in seen["p"]
-    scan.judge_excerpts(L(), plan, "Bardella", [], "il ment", {}, ex, anyone=False)
+    scan.judge_excerpts(L(), plan, pipeline.Options("Bardella", "il ment", speakers="cible"), {}, ex)
     assert "TOUT LOCUTEUR EST ACCEPTÉ" not in seen["p"]
 
 
@@ -134,7 +135,7 @@ def test_time_budget_returns_partial_results(monkeypatch):
     monkeypatch.setattr(pipeline, "analyze_video", lambda *a, **k: time.sleep(8))
     pipeline.TIMED_OUT.clear()
     t0 = time.time()
-    o = pipeline.Options("A", "B", articles=False, max_minutes=0.04, workers=2)
+    o = pipeline.Options("A", "B", articles=False, max_minutes=0.04, workers=2, authority="toutes")
     plan, vres, ares = pipeline.run(o, FakeLLM())
     assert time.time() - t0 < 6 and pipeline.TIMED_OUT.is_set()
     assert len(vres) == 3 and all("temps imparti" in r.note for r in vres)

@@ -49,9 +49,24 @@ def _details_api(pool, ids: list[str], http) -> dict[str, dict]:
             out[it["id"]] = {
                 "title": sn.get("title", ""), "description": sn.get("description", ""),
                 "channel": sn.get("channelTitle", ""), "published": sn.get("publishedAt", ""),
+                "channel_id": sn.get("channelId", ""),
                 "duration": parse_iso_duration(it.get("contentDetails", {}).get("duration", "")),
             }
     return out
+
+
+_subs_cache: dict[str, int | None] = {}
+
+
+def channel_subs(pool, channel_ids: list[str], http) -> dict[str, int | None]:
+    """Nombre d'abonnés par chaîne (1 unité de quota pour 50 chaînes)."""
+    todo = [c for c in dict.fromkeys(channel_ids) if c and c not in _subs_cache]
+    for i in range(0, len(todo), 50):
+        d = _call(pool, "channels", {"part": "statistics", "id": ",".join(todo[i:i + 50])}, http)
+        for it in (d or {}).get("items", []):
+            st = it.get("statistics") or {}
+            _subs_cache[it["id"]] = None if st.get("hiddenSubscriberCount") else int(st.get("subscriberCount", 0) or 0)
+    return {c: _subs_cache.get(c) for c in channel_ids}
 
 
 def search_api(pool: KeyPool, query: str, n: int = 25, lang: str | None = None, http=None) -> list[VideoCandidate] | None:
@@ -66,12 +81,14 @@ def search_api(pool: KeyPool, query: str, n: int = 25, lang: str | None = None, 
         return None
     ids = [it["id"]["videoId"] for it in d.get("items", []) if it.get("id", {}).get("videoId")]
     det = _details_api(pool, ids, http) if ids else {}
+    subs = channel_subs(pool, [x.get("channel_id", "") for x in det.values()], http) if det else {}
     res = []
     for vid in ids:
         x = det.get(vid, {})
         res.append(VideoCandidate("youtube", vid, f"https://www.youtube.com/watch?v={vid}",
                                   x.get("title", ""), x.get("description", ""), x.get("channel", ""),
-                                  x.get("published", ""), x.get("duration")))
+                                  x.get("published", ""), x.get("duration"), channel_id=x.get("channel_id", ""),
+                                  channel_subs=subs.get(x.get("channel_id", ""))))
     return res
 
 
@@ -98,7 +115,8 @@ def _from_ytdlp(d: dict) -> VideoCandidate:
     vid = d.get("id", "")
     return VideoCandidate("youtube", vid, d.get("webpage_url") or f"https://www.youtube.com/watch?v={vid}",
                           d.get("title", ""), d.get("description", "") or "", d.get("channel") or d.get("uploader") or "",
-                          pub, int(d["duration"]) if d.get("duration") else None)
+                          pub, int(d["duration"]) if d.get("duration") else None, channel_id=d.get("channel_id") or "",
+                          channel_subs=d.get("channel_follower_count"))
 
 
 def search_ytdlp(query: str, n: int = 20) -> list[VideoCandidate]:

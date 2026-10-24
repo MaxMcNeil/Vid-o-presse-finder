@@ -8,7 +8,7 @@ from dataclasses import dataclass
 try:
     from rapidfuzz import fuzz
     HAVE_RAPIDFUZZ = True
-except ImportError:  # Termux : pas de compilation, repli pur Python (difflib)
+except ImportError:  # sans compilation : repli pur Python (difflib)
     fuzz = None
     HAVE_RAPIDFUZZ = False
 import difflib
@@ -111,11 +111,38 @@ def find_excerpts(segs: list[Segment], plan: Plan, max_excerpts: int = 8, max_ch
     return out
 
 
-JUDGE_PROMPT = """Tu vérifies si une personne AFFIRME quelque chose, à partir d'extraits de transcription ({kind}) d'un contenu.
 
-PERSONNE CIBLE : {person}  (alias : {aliases})
+# ------------------------------------------------------------------ jugement par l'IA
+TYPE_WORD = {"personne": "personne", "pays": "pays", "entite": "entité", "sujet": "sujet"}
+
+
+def _context(plan: Plan, o) -> dict:
+    ttype = plan.target_type or getattr(o, "target_type", "personne")
+    official = ", ".join(plan.official_speakers) or "aucun connu"
+    if getattr(o, "speakers", "cible") == "cible" and ttype != "sujet":
+        who = (f"Seuls comptent les propos tenus PAR la cible elle-même"
+               + ("" if ttype == "personne" else f" ou par ses représentants officiels ({official})")
+               + ". who_says = \"target\" dans ce cas.")
+    else:
+        who = ("TOUT LOCUTEUR EST ACCEPTÉ (officiel, expert, journaliste, adversaire...) : la cible est le SUJET des propos, "
+               "pas forcément celle qui parle ; renseigne toujours speaker_name et speaker_role. "
+               f"Représentants officiels de la cible : {official} (who_says = \"target\" s'ils parlent).")
+    return dict(target=o.target, ttype=TYPE_WORD.get(ttype, ttype), aliases=", ".join(plan.target_aliases[:12]),
+                others=", ".join(getattr(o, "also", []) or []) or "aucun", who=who,
+                claim=o.claim or "(tout propos marquant sur la cible)", summary=plan.claim_summary)
+
+
+FIELDS = """- "speaker_name": nom du locuteur UNIQUEMENT s'il est cité dans le contenu, la description, le titre ou un bandeau ; n'invente jamais un nom, sinon ""
+- "speaker_role": "official" (gouvernement, élu en fonction, porte-parole, dirigeant d'institution/entreprise) | "expert" (chercheur, spécialiste reconnu) | "politician" | "journalist" | "other"
+- "confidence": nombre de 0 à 1
+- "why": une phrase justifiant le jugement"""
+
+JUDGE_PROMPT = """Tu vérifies, à partir d'extraits de transcription ({kind}) d'un contenu, si l'affirmation / le sujet recherché y est exprimé.
+
+CIBLE ({ttype}) : {target}  (alias : {aliases})
 AUTRES LOCUTEURS ACCEPTÉS : {others}
-{anyone_line}AFFIRMATION RECHERCHÉE : {claim}
+{who}
+AFFIRMATION / SUJET RECHERCHÉ : {claim}
 (Reformulation : {summary})
 
 CONTENU : titre « {title} » — chaîne/source : {channel} — date : {date}
@@ -123,7 +150,7 @@ Description : {desc}
 ATTENTION : le titre et la description peuvent être trompeurs ; juge uniquement d'après les extraits.
 
 Les extraits sont horodatés. Les transcriptions automatiques n'indiquent PAS qui parle : déduis le locuteur du contexte
-(présentation, questions/réponses, « je », « nous », « mon administration », description). Si tu ne peux pas savoir, mets "unknown".
+(présentation, questions/réponses, « je », « nous », « mon gouvernement », description). Si tu ne peux pas savoir, mets "unknown".
 
 EXTRAITS :
 {excerpts}
@@ -135,64 +162,53 @@ Champs :
 - "t": horodatage en secondes du DÉBUT de la déclaration (lu sur les [mm:ss] de l'extrait)
 - "t_end": horodatage en secondes de la FIN de la déclaration : le [mm:ss] de la ligne qui suit la dernière phrase concernée
   (si la déclaration va jusqu'au bout de l'extrait, estime-la). La déclaration doit être complète : début de la phrase jusqu'à sa conclusion
-- "quote": citation EXACTE copiée de l'extrait (max 300 caractères)
-- "verdict": "literal" (formulation quasi identique) | "paraphrase" (même sens, autres mots) | "mention" (le sujet est évoqué mais sans affirmer) | "denial" (la personne nie/conteste l'affirmation)
-- "who_says": "target" (la personne cible parle elle-même) | "other_named" (un autre locuteur identifiable parle) | "reported" (un narrateur/journaliste RAPPORTE que quelqu'un a dit cela) | "unknown"
-- "speaker_name": nom du locuteur UNIQUEMENT s'il est cité dans l'extrait, la description ou le titre ; n'invente jamais un nom, sinon "" 
-- "confidence": nombre de 0 à 1
-- "why": une phrase justifiant le jugement
+- "quote": citation EXACTE copiée de l'extrait, de la première à la dernière phrase de la déclaration (max 400 caractères)
+- "verdict": "literal" (formulation quasi identique) | "paraphrase" (même sens, autres mots) | "mention" (le sujet est évoqué sans être affirmé) | "denial" (le locuteur nie/conteste)
+- "who_says": "target" (la cible ou son représentant officiel parle) | "other_named" (un autre locuteur identifiable parle) | "reported" (un narrateur RAPPORTE les propos de quelqu'un) | "unknown"
+{fields}
 N'invente rien : si aucun passage ne convient, renvoie {{"hits": []}}.
 Réponds en JSON : {{"hits": [...]}}"""
 
 
-def _hit_from(d: dict, offset_ok=True) -> Hit | None:
+def _hit_from(d: dict) -> Hit | None:
     try:
-        t = parse_ts(d.get("t"))
-        return Hit(t=t, t_end=parse_ts(d.get("t_end")), quote=str(d.get("quote", "")).strip(), verdict=str(d.get("verdict", "")).lower(),
-                   who_says=str(d.get("who_says", "unknown")).lower(), speaker_name=str(d.get("speaker_name", "") or ""),
-                   confidence=float(d.get("confidence", 0) or 0), why=str(d.get("why", "")))
+        return Hit(t=parse_ts(d.get("t")), t_end=parse_ts(d.get("t_end")), quote=str(d.get("quote", "")).strip(),
+                   verdict=str(d.get("verdict", "")).lower(), who_says=str(d.get("who_says", "unknown")).lower(),
+                   speaker_name=str(d.get("speaker_name", "") or ""), confidence=float(d.get("confidence", 0) or 0),
+                   why=str(d.get("why", "")), speaker_role=str(d.get("speaker_role", "") or "").lower())
     except (TypeError, ValueError):
         return None
 
 
-ANYONE = ("TOUT LOCUTEUR EST ACCEPTÉ : relève l'affirmation quel que soit celui qui la fait (journaliste, adversaire, "
-          "invité...). La « personne cible » est alors le SUJET de l'affirmation, pas forcément celui qui parle ; "
-          "renseigne toujours speaker_name.\n")
-
-
-def judge_excerpts(llm, plan: Plan, person: str, others: list[str], claim: str, meta: dict,
-                   excerpts: list[Excerpt], kind: str = "vidéo", anyone: bool = False) -> list[Hit]:
+def judge_excerpts(llm, plan: Plan, o, meta: dict, excerpts: list[Excerpt], kind: str = "vidéo") -> list[Hit]:
     if not excerpts:
         return []
     body = "\n\n".join(f"--- EXTRAIT {i + 1} ---\n{e.text}" for i, e in enumerate(excerpts))
-    prompt = JUDGE_PROMPT.format(
-        kind=kind, person=person, aliases=", ".join(plan.person_aliases), others=", ".join(others) or "aucun",
-        claim=claim, anyone_line=ANYONE if anyone else "", summary=plan.claim_summary, title=meta.get("title", ""), channel=meta.get("channel", ""),
-        date=meta.get("published", ""), desc=(meta.get("description", "") or "")[:500].replace("\n", " "), excerpts=body)
+    prompt = JUDGE_PROMPT.format(kind=kind, fields=FIELDS, title=meta.get("title", ""), channel=meta.get("channel", ""),
+                                 date=meta.get("published", ""), desc=(meta.get("description", "") or "")[:500].replace("\n", " "),
+                                 excerpts=body, **_context(plan, o))
     d = llm.generate_json(prompt)
     hits = [h for h in (_hit_from(x) for x in (d or {}).get("hits", [])) if h and h.quote]
     return dedupe_hits(hits)
 
 
 VIDEO_PROMPT = """{medium}
-PERSONNE CIBLE : {person} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {others}.
-{anyone_line}AFFIRMATION RECHERCHÉE : {claim}  (Reformulation : {summary})
+CIBLE ({ttype}) : {target} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {others}.
+{who}
+AFFIRMATION / SUJET RECHERCHÉ : {claim}  (Reformulation : {summary})
 Le titre peut être trompeur : juge uniquement ce qui est réellement dit.
 Liste CHAQUE moment où l'affirmation est faite, à la lettre ou dans le sens, avec l'horodatage exact (début de la phrase).
 Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vidéo : DÉBUT de la déclaration), "t_end" (secondes : FIN de la
 déclaration, juste après sa dernière phrase ; la déclaration doit être complète), "quote" (propos tenus, au plus près),
 "verdict" ("literal"|"paraphrase"|"mention"|"denial"), "who_says" ("target"|"other_named"|"reported"|"unknown"),
-"speaker_name" (UNIQUEMENT si le nom est prononcé ou affiché à l'écran, p. ex. bandeau ; n'invente jamais un nom : sinon "Journaliste" ou "Intervenant"), "confidence" (0-1), "why".
+{fields}
+(pour speaker_name : nom prononcé ou affiché à l'écran, p. ex. bandeau ; sinon "Journaliste" ou "Intervenant").
 Si rien ne correspond : {{"hits": []}}. Réponds en JSON : {{"hits": [...]}}"""
 
 
-def judge_video_direct(llm, plan: Plan, person: str, others: list[str], claim: str, url: str,
-                       audio: bytes | None = None, anyone: bool = False) -> list[Hit]:
-    medium = ("Écoute cet enregistrement audio en entier." if audio
-              else "Regarde et écoute cette vidéo en entier.")
-    prompt = VIDEO_PROMPT.format(medium=medium, person=person, aliases=", ".join(plan.person_aliases),
-                                 others=", ".join(others) or "aucun", claim=claim, summary=plan.claim_summary,
-                                 anyone_line=ANYONE if anyone else "")
+def judge_video_direct(llm, plan: Plan, o, url: str, audio: bytes | None = None) -> list[Hit]:
+    medium = "Écoute cet enregistrement audio en entier." if audio else "Regarde et écoute cette vidéo en entier."
+    prompt = VIDEO_PROMPT.format(medium=medium, fields=FIELDS, **_context(plan, o))
     if audio:
         d = llm.generate_json(prompt, inline_media=("audio/mp3", audio), media_key=url)
     else:
@@ -214,44 +230,123 @@ def dedupe_hits(hits: list[Hit], gap: float = 8.0) -> list[Hit]:
     return out
 
 
-def speaker_ok(h: Hit, plan: Plan, anyone: bool, others: list[str]) -> bool:
-    """La personne voulue (ou un locuteur autorisé) est-elle bien celle qui affirme ?"""
-    if anyone:
+# ------------------------------------------------------------------ filtrage / classement
+def _names(plan: Plan, others: list[str]) -> list[str]:
+    return [a for a in plan.target_aliases + [normalize(x) for x in plan.official_speakers + list(others or [])] if a]
+
+
+def speaker_ok(h: Hit, plan: Plan, o) -> bool:
+    """Le bon locuteur parle-t-il ? (mode « cible » : la cible ou son représentant officiel)"""
+    if getattr(o, "speakers", "cible") != "cible" or plan.target_type == "sujet":
         return True
     if h.who_says == "target":
         return True
     name = normalize(h.speaker_name)
-    if name:
-        for a in plan.person_aliases + [normalize(o) for o in others]:
-            if a and (a in name or name in a):
-                return True
-    return h.who_says == "reported" or h.who_says == "unknown"  # gardés mais étiquetés (voir rapport)
+    if name and any(a in name or name in a for a in _names(plan, o.also)):
+        return True
+    return h.who_says in ("reported", "unknown")  # gardés mais étiquetés (voir rapport) ; --strict les exclut
 
 
-def keep_hit(h: Hit, plan: Plan, anyone: bool, others: list[str], min_conf: float, strict: bool) -> bool:
-    if h.verdict not in ("literal", "paraphrase") or h.confidence < min_conf:
+def keep_hit(h: Hit, plan: Plan, o) -> bool:
+    if h.verdict not in ("literal", "paraphrase") or h.confidence < o.min_confidence:
         return False
-    if not speaker_ok(h, plan, anyone, others):
+    if not speaker_ok(h, plan, o):
         return False
-    if strict and not anyone and h.who_says not in ("target",) and not any(
-            a and a in normalize(h.speaker_name) for a in plan.person_aliases + [normalize(o) for o in others]):
-        return False
+    if o.strict:
+        if h.who_says in ("reported", "unknown"):
+            return False
     return True
 
 
-def rank_key(h: Hit):
-    own = 0 if h.who_says in ("target", "other_named") else 1
-    lit = 0 if h.verdict == "literal" else 1
-    return (own, lit, -h.confidence)
+ROLE_BONUS = {"official": 0.15, "expert": 0.1, "politician": 0.05, "journalist": 0.0, "other": -0.1}
+
+
+def hit_score(h: Hit, source_authority: float = 0.5) -> float:
+    """Score global pour le montage : sûreté du passage + autorité de la source + rôle du locuteur."""
+    s = 0.45 * h.confidence + 0.4 * source_authority + ROLE_BONUS.get(h.speaker_role, 0.0)
+    s += 0.1 if h.verdict == "literal" else 0.0
+    s -= 0.15 if h.who_says in ("reported", "unknown") else 0.0
+    return round(max(0.0, min(1.0, s)), 3)
+
+
+def rank_key(h: Hit, source_authority: float = 0.5):
+    return (-hit_score(h, source_authority),)
+
+
+# ------------------------------------------------------------------ horodatage précis
+def _pr(a: str, b: str) -> float:
+    """Similarité partielle 0-100 (a contenu dans b, à quelques fautes près)."""
+    if not a or not b:
+        return 0.0
+    if a in b:
+        return 100.0
+    if HAVE_RAPIDFUZZ:
+        return float(fuzz.partial_ratio(a, b))
+    aw, bw = a.split(), b.split()
+    n = len(aw)
+    best = 0.0
+    for i in range(max(1, len(bw) - n + 1)):
+        best = max(best, difflib.SequenceMatcher(None, a, " ".join(bw[i:i + n])).ratio() * 100)
+    return best
+
+
+def refine_times(hits: list[Hit], segs: list[Segment], radius: float = 90.0) -> None:
+    """Cale début et fin sur les lignes de la transcription qui contiennent vraiment la citation (±1-2 s),
+    au lieu de l'horodatage lu par l'IA. Sans correspondance sûre, l'horodatage IA est conservé."""
+    if not segs:
+        return
+    norm = [normalize(s.text) for s in segs]
+    for h in hits:
+        if h.t is None:
+            continue
+        words = normalize(h.quote).split()
+        if len(words) < 3:
+            continue
+        head, tail = " ".join(words[:6]), " ".join(words[-6:])
+        first = " ".join(words[:2])
+        idx = [i for i, s in enumerate(segs) if abs(s.start - h.t) <= radius]
+        if not idx:
+            continue
+        best_i, best = None, 0.0
+        for i in idx:
+            # la déclaration doit COMMENCER dans cette ligne : son 1er mot y figure (à une faute près)
+            if not term_present(norm[i], words[0]) and not (len(words[0]) < 5 and words[0] in norm[i].split()):
+                continue
+            if _pr(first, norm[i] + " " + (norm[i + 1] if i + 1 < len(norm) else "")) < 80:
+                continue
+            sc = _pr(head, " ".join(norm[i:i + 3]))
+            closer = best_i is not None and abs(sc - best) <= 0.5 and abs(segs[i].start - h.t) < abs(segs[best_i].start - h.t)
+            if sc > best + 0.5 or closer:
+                best_i, best = i, sc
+        if best_i is None or best < 82:
+            continue
+        end_j, best_e = None, 0.0
+        for j in range(best_i, min(len(segs), best_i + 60)):
+            if segs[j].start - segs[best_i].start > 240:
+                break
+            win = " ".join(norm[max(best_i, j - 2):j + 1])
+            # la déclaration doit FINIR dans cette ligne : son dernier mot y figure
+            if not term_present(norm[j], words[-1]) and not (len(words[-1]) < 5 and words[-1] in norm[j].split()):
+                continue
+            sc = _pr(tail, win)
+            if sc >= best_e:
+                end_j, best_e = j, sc
+            if sc >= 99:
+                break
+        h.t = segs[best_i].start
+        if end_j is not None and best_e >= 80:
+            nxt = segs[end_j + 1].start if end_j + 1 < len(segs) else segs[end_j].start + 4.0
+            h.t_end = max(nxt, h.t + 1.0)
+        h.timing = "sous-titres"
 
 
 def finish_times(hits: list[Hit], duration: float | None = None) -> None:
-    """Garantit un intervalle [début, fin] exploitable : fin estimée d'après la longueur de la citation si le LLM n'en donne pas."""
+    """Garantit un intervalle [début, fin] exploitable : fin estimée d'après la longueur de la citation si besoin."""
     for h in hits:
         if h.t is None:
             continue
         est = max(4.0, len(h.quote.split()) / 2.5 + 1.5)
-        if h.t_end is None or h.t_end <= h.t or h.t_end - h.t > 240 or h.t_end - h.t < 0.6 * est:
+        if h.t_end is None or h.t_end <= h.t or h.t_end - h.t > 240 or (h.timing != "sous-titres" and h.t_end - h.t < 0.6 * est):
             h.t_end = h.t + est
         if duration:
             h.t_end = min(h.t_end, float(duration))

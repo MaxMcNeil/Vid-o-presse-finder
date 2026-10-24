@@ -3,44 +3,49 @@ name: Find quotes
 on:
   workflow_dispatch:
     inputs:
-      person:
-        description: "Personne (ex: Bill Clinton)"
-        required: true
-      claim:
-        description: "Sujet / affirmation (mot, phrase, thème... ex: Saddam a des armes de destruction massive)"
-        required: true
-      also:
-        description: "Autres locuteurs acceptés, séparés par des virgules (optionnel)"
+      recherches:
+        description: "Recherche(s) : cible | sujet | type — plusieurs séparées par ;  (ex : La Suisse | abandonne Microsoft | pays ; Jordan Bardella | mensonges). Vide = fichier recherches.txt"
         required: false
         default: ""
-      anyone:
-        description: "Accepter n'importe qui qui fait cette affirmation"
-        type: boolean
-        default: false
-      langs:
-        description: "Langues (ex: en,fr)"
-        required: false
-        default: "en,fr"
-      max_videos:
-        description: "Nombre max de vidéos analysées (30 conseillé)"
-        required: false
-        default: "30"
-      strict:
-        description: "Exclure les propos rapportés par un tiers"
-        type: boolean
-        default: false
-      articles:
-        description: "Chercher aussi les articles de presse"
-        type: boolean
-        default: true
-      where:
-        description: "Où traiter : téléphone d'abord puis GitHub en secours / GitHub seul / téléphone seul"
+      type_par_defaut:
+        description: "Type de cible si non précisé (auto = deviné par l'IA)"
         type: choice
-        options:
-          - phone-then-github
-          - github
-          - phone
-        default: phone-then-github
+        options: [auto, personne, pays, entite, sujet]
+        default: auto
+      locuteurs:
+        description: "Qui doit parler ? auto = la personne elle-même / pour pays-entité-sujet : toute voix qui fait autorité"
+        type: choice
+        options: [auto, cible, tous]
+        default: auto
+      autorite:
+        description: "Exigence sur les sources (forte = agences, grands médias, officiels)"
+        type: choice
+        options: [forte, moyenne, toutes]
+        default: forte
+      videos_par_recherche:
+        description: "Vidéos analysées par recherche"
+        required: false
+        default: "8"
+      articles_par_recherche:
+        description: "Articles retenus par recherche"
+        required: false
+        default: "6"
+      langs:
+        description: "Langues (ex : fr,en,de)"
+        required: false
+        default: "fr,en"
+      depuis:
+        description: "Seulement après cette date (AAAA-MM-JJ, facultatif)"
+        required: false
+        default: ""
+      telecharger_extraits:
+        description: "Télécharger aussi les extraits vidéo + premier montage (artefact GitHub, 14 jours)"
+        type: boolean
+        default: false
+      en_parallele:
+        description: "Recherches lancées en même temps (2 conseillé : les quotas Gemini sont partagés)"
+        required: false
+        default: "2"
 
 permissions:
   contents: write
@@ -50,33 +55,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  route:
+  prepare:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
-      run_github: ${{ steps.r.outputs.run_github }}
-    env:
-      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-      PHONE_SECRET: ${{ secrets.PHONE_SECRET }}
-      WHERE: ${{ inputs.where }}
-      IN_PERSON: ${{ inputs.person }}
-      IN_CLAIM: ${{ inputs.claim }}
-      IN_ALSO: ${{ inputs.also }}
-      IN_LANGS: ${{ inputs.langs }}
-      IN_MAX: ${{ inputs.max_videos }}
-      IN_ANYONE: ${{ inputs.anyone }}
-      IN_STRICT: ${{ inputs.strict }}
+      matrix: ${{ steps.p.outputs.matrix }}
+      lot: ${{ steps.p.outputs.lot }}
     steps:
       - uses: actions/checkout@v4
-      - id: r
-        name: Envoyer la demande au téléphone (secours GitHub si pas de réponse)
-        run: python3 scripts/route_to_phone.py
+      - id: p
+        name: Lire les recherches
+        env:
+          IN_SEARCHES: ${{ inputs.recherches }}
+          IN_TYPE: ${{ inputs.type_par_defaut }}
+        run: |
+          m=$(python3 -m quote_finder.batch matrix "$IN_SEARCHES" recherches.txt "$IN_TYPE")
+          echo "Recherches : $m"
+          if [ "$m" = "[]" ]; then
+            echo "::error::Aucune recherche. Remplis le champ « recherches » (cible | sujet | type) ou le fichier recherches.txt"
+            exit 1
+          fi
+          echo "matrix=$m" >> "$GITHUB_OUTPUT"
+          echo "lot=$(date -u +%Y-%m-%d_%H%M)_n${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
 
   search:
-    needs: route
-    if: needs.route.outputs.run_github == 'true'
+    needs: prepare
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJSON(inputs.en_parallele || '2') }}
+      matrix:
+        s: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    name: "${{ matrix.s.target }} — ${{ matrix.s.claim }}"
     env:
       YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
       GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
@@ -88,14 +99,17 @@ jobs:
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
       QF_CACHE_DIR: .cache
       # entrées passées par variables d'environnement (jamais interpolées dans le shell)
-      IN_PERSON: ${{ inputs.person }}
-      IN_CLAIM: ${{ inputs.claim }}
-      IN_ALSO: ${{ inputs.also }}
+      S_TARGET: ${{ matrix.s.target }}
+      S_CLAIM: ${{ matrix.s.claim }}
+      S_TYPE: ${{ matrix.s.type }}
+      S_ID: ${{ matrix.s.id }}
+      LOT: ${{ needs.prepare.outputs.lot }}
+      IN_SPEAKERS: ${{ inputs.locuteurs }}
+      IN_AUTH: ${{ inputs.autorite }}
+      IN_MAXV: ${{ inputs.videos_par_recherche }}
+      IN_MAXA: ${{ inputs.articles_par_recherche }}
       IN_LANGS: ${{ inputs.langs }}
-      IN_MAX: ${{ inputs.max_videos }}
-      IN_ANYONE: ${{ inputs.anyone }}
-      IN_STRICT: ${{ inputs.strict }}
-      IN_ARTICLES: ${{ inputs.articles }}
+      IN_SINCE: ${{ inputs.depuis }}
     steps:
       - uses: actions/checkout@v4
 
@@ -108,30 +122,96 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .cache
-          key: qf-cache-${{ github.run_id }}
+          key: qf-cache-${{ github.run_id }}-${{ matrix.s.id }}
           restore-keys: qf-cache-
 
-      - name: Dépendances (ffmpeg pour écouter l'audio des vidéos sans sous-titres)
+      - name: Dépendances
         run: |
           which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           pip install -r requirements.txt
 
       - name: Recherche
         run: |
-          args=(--person "$IN_PERSON" --claim "$IN_CLAIM" --also "$IN_ALSO" --langs "$IN_LANGS" --max-videos "$IN_MAX" --out results)
-          [ "$IN_ANYONE" = "true" ] && args+=(--anyone)
-          [ "$IN_STRICT" = "true" ] && args+=(--strict)
-          [ "$IN_ARTICLES" = "false" ] && args+=(--no-articles)
-          python -m quote_finder "${args[@]}"
+          python -m quote_finder --target "$S_TARGET" --claim "$S_CLAIM" --type "$S_TYPE" \
+            --speakers "${IN_SPEAKERS:-auto}" --authority "${IN_AUTH:-forte}" \
+            --max-videos "${IN_MAXV:-8}" --max-articles "${IN_MAXA:-6}" --langs "${IN_LANGS:-fr,en}" \
+            --since "$IN_SINCE" --max-minutes 35 --out results --batch-id "$LOT" --search-id "$S_ID"
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: resultats
-          path: results/
+          name: res-${{ matrix.s.id }}
+          path: results/${{ needs.prepare.outputs.lot }}/${{ matrix.s.id }}
+          if-no-files-found: ignore
+          retention-days: 3
+
+  publish:
+    needs: [prepare, search]
+    if: always() && needs.prepare.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      LOT: ${{ needs.prepare.outputs.lot }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: res-*
+          path: dl
+
+      - name: Rassembler (index + montage global du lot)
+        env:
+          FIRST_ID: ${{ fromJSON(needs.prepare.outputs.matrix)[0].id }}
+        run: |
+          [ -d dl ] || { echo "::error::Aucun résultat produit (voir les étapes « Recherche »)"; exit 1; }
+          mkdir -p "results/$LOT"
+          if ls dl/res-* >/dev/null 2>&1; then
+            for d in dl/res-*; do n=$(basename "$d"); rm -rf "results/$LOT/${n#res-}"; mv "$d" "results/$LOT/${n#res-}"; done
+          else
+            mv dl "results/$LOT/$FIRST_ID"   # un seul artefact décompressé directement
+          fi
+          rm -rf dl
+          python3 -m quote_finder.batch merge "results/$LOT"
+          cat "results/$LOT/INDEX.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Enregistrer les résultats dans le dépôt
         run: |
           git config user.name "quote-finder-bot"
           git config user.email "actions@users.noreply.github.com"
           git add results
-          git diff --cached --quiet || (git commit -m "résultats: ${GITHUB_RUN_ID}" && git pull --rebase -q && git push)
+          git diff --cached --quiet && exit 0
+          git commit -q -m "résultats : $LOT"
+          for i in 1 2 3 4 5; do
+            git pull --rebase -q && git push -q && exit 0
+            sleep $((i * 5))
+          done
+          echo "::error::Impossible d'enregistrer les résultats dans le dépôt"; exit 1
+
+  clips:
+    needs: [prepare, publish]
+    if: inputs.telecharger_extraits && needs.publish.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      LOT: ${{ needs.prepare.outputs.lot }}
+      YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Télécharger les extraits et assembler un premier montage
+        run: |
+          git pull -q
+          which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          pip install -q "yt-dlp>=2025.1.1"
+          python -m quote_finder.clips "results/$LOT/montage.json" --out "clips/$LOT" --max 25 || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extraits-${{ needs.prepare.outputs.lot }}
+          path: clips/${{ needs.prepare.outputs.lot }}
+          if-no-files-found: warn
+          retention-days: 14

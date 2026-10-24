@@ -1,0 +1,28 @@
+name: Diagnostic
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+      GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
+      FALLBACK_LLM_KEYS: ${{ secrets.FALLBACK_LLM_KEYS }}
+      GUARDIAN_API_KEYS: ${{ secrets.GUARDIAN_API_KEYS }}
+      NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
+      YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
+      FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
+      GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: |
+          which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          pip install -r requirements.txt
+      - run: python -m quote_finder.check | tee -a "$GITHUB_STEP_SUMMARY"

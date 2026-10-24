@@ -61,3 +61,23 @@ def parse_iso_duration(d: str) -> int | None:
 
 def slugify(s: str, n: int = 60) -> str:
     return re.sub(r"\s+", "-", normalize(s))[:n].strip("-") or "recherche"
+
+
+def call_with_timeout(fn, timeout: float, *a, **k):
+    """Exécute fn dans un fil séparé ; TimeoutError si trop long (le fil est abandonné, jamais attendu)."""
+    import threading
+    box: dict = {}
+
+    def run():
+        try:
+            box["v"] = fn(*a, **k)
+        except BaseException as e:  # noqa: BLE001
+            box["e"] = e
+    th = threading.Thread(target=run, daemon=True)
+    th.start()
+    th.join(timeout)
+    if th.is_alive():
+        raise TimeoutError(f"plus de {timeout:.0f} s")
+    if "e" in box:
+        raise box["e"]
+    return box.get("v")
