@@ -2,110 +2,249 @@
  "person": "La Suisse",
  "claim": "la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
  "plan": {
-  "claim_summary": "la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
+  "claim_summary": "La Suisse abandonnerait ou remplacerait les logiciels et services Microsoft pour des motifs d'espionnage, de vulnérabilités de sécurité ou d'enjeux de souveraineté numérique.",
   "term_groups": [
    [
-    "suisse"
+    "abandonne",
+    "quitte",
+    "remplace",
+    "interdit",
+    "bannit",
+    "drops",
+    "ditches",
+    "bans",
+    "phases out",
+    "replaces",
+    "migrates away"
    ],
    [
-    "abandonne"
+    "microsoft",
+    "micro soft",
+    "office 365",
+    "m365",
+    "windows",
+    "azure",
+    "teams"
    ],
    [
-    "microsoft"
-   ],
-   [
-    "cause"
-   ],
-   [
-    "espionnage"
+    "espionnage",
+    "failles de securite",
+    "souverainete numerique",
+    "cybersecurite",
+    "spying",
+    "espionage",
+    "security flaws",
+    "vulnerabilities",
+    "digital sovereignty",
+    "data privacy"
    ]
   ],
   "person_aliases": [
-   "la suisse"
+   "la suisse",
+   "suisse",
+   "confederation suisse",
+   "administration federale suisse",
+   "conseil federal",
+   "switzerland",
+   "swiss government",
+   "swiss federal administration"
   ],
   "youtube_queries": [
    "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
-   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique interview",
-   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique speech",
-   "La Suisse says la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
-   "\"la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique\" La Suisse"
+   "suisse abandonne microsoft",
+   "switzerland ditch microsoft",
+   "la suisse quitte microsoft souveraineté numérique",
+   "switzerland drops microsoft security flaws",
+   "suisse microsoft espionnage",
+   "swiss administration migrating from microsoft",
+   "suisse souveraineté numérique microsoft",
+   "switzerland ban microsoft 365 privacy",
+   "conseil fédéral suisse microsoft",
+   "switzerland digital sovereignty cloud 2024"
   ],
   "news_queries": [
    "\"La Suisse\" la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique",
-   "La Suisse la Suisse abandonne Microsoft a cause de l'espionnage, failles de sécurité , souveraineté numérique"
+   "\"Suisse\" \"Microsoft\" \"espionnage\"",
+   "\"Switzerland\" \"Microsoft\" \"digital sovereignty\"",
+   "\"Suisse\" \"Microsoft\" \"souveraineté numérique\"",
+   "\"Switzerland\" \"drops Microsoft\" OR \"bans Microsoft\"",
+   "\"Confédération suisse\" \"Microsoft\" Keystone-ATS OR Reuters",
+   "\"Swiss government\" \"Microsoft\" cloud privacy"
   ],
   "languages": [
    "en",
    "fr"
-  ]
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 11,
+   "queries_news": 7,
+   "videos_by_platform": {
+    "youtube": 29,
+    "dailymotion": 1
+   },
+   "elapsed_min": 50.6,
+   "timed_out": true
+  }
  },
  "stats": {
-  "videos_scanned": 16,
-  "articles_scanned": 1
+  "videos_scanned": 30,
+  "articles_scanned": 0
  },
  "videos": [],
  "articles": [],
  "unreadable_articles": [],
  "unverifiable_videos": [
   {
-   "title": "La Suisse ouvre ses bunkers au numérique",
-   "url": "https://www.dailymotion.com/video/x1agjnw",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Switzerland Ditching Microsoft! 3,000 Government PCs Switch to Open Source",
+   "url": "https://www.youtube.com/watch?v=cNT-_jo2KnU",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "Jura: une station fermée faute de passagers",
-   "url": "https://www.dailymotion.com/video/x8g9v2u",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Switzerland's $20M Bet: Ditching Microsoft for Open Source (2026)",
+   "url": "https://www.youtube.com/watch?v=JWTh3qlWlFg",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "L'actu du numérique 20.07.12 : Windows Phone 8 / Dropbox / Nexus 7",
-   "url": "https://www.dailymotion.com/video/x5hgf3x",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Switzerland ditches Windows, Omarchy now raised $18.5M - Linux & Open Source News Weekly",
+   "url": "https://www.youtube.com/watch?v=sNRaukxVI2Y",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "Crans-Montana: Le chargé de sécurité en Suisse aurait dû interdire l'exploitation du bar dès la deuxième année\", affirme David Gruberg, consultant en sécurité incendie",
-   "url": "https://www.dailymotion.com/video/x9ysvtg",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Germany Is Replacing Microsoft Office Forever — Here's How It Works",
+   "url": "https://www.youtube.com/watch?v=39wnTaCjw5k",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "Le coronavirus paralyse la tech mondiale - DQJMM (1/2)",
-   "url": "https://www.dailymotion.com/video/x7siwt7",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Pourquoi l'Europe veut débrancher Microsoft",
+   "url": "https://www.youtube.com/watch?v=Mhx0DBtBDdI",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "En Suisse, une fillette de 7 ans fuit ses parents... et se retrouve dans un avion",
-   "url": "https://www.dailymotion.com/video/x67e21p",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Engagement sincère ou opération marketing ?",
+   "url": "https://www.youtube.com/watch?v=6FxCcmu1Rz0",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "Solar Impulse : \"nous ne sommes pas des casse-cou, mais des explorateurs\"",
-   "url": "https://www.dailymotion.com/video/x2sacan",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Switzerland wants to ditch Microsoft 365, kicks off migration pilot",
+   "url": "https://www.youtube.com/watch?v=SCJH0f6cdq8",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "L'invité de la rédaction - Jean-Luc Vez",
-   "url": "https://www.dailymotion.com/video/x460hbz",
-   "reason": "pas de sous-titres et audio non téléchargeable"
+   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
+   "url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "Apple victime d'une énorme faille de sécurité sur ses Mac DQJMM (1/2)",
-   "url": "https://www.dailymotion.com/video/x6awbyo",
-   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+   "title": "Switzerland Wants to Ditch Microsoft 365!",
+   "url": "https://www.youtube.com/watch?v=tx-JNCazArc",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "L'invité de la rédaction - François-Bernard Huygue",
-   "url": "https://www.dailymotion.com/video/x577hk0",
-   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+   "title": "Europe Keeps Replacing Microsoft and I Kind of Get It.",
+   "url": "https://www.youtube.com/watch?v=uu-JgHOPWJM",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "24h dans la Tech: Emmanuel Macron à Station F - 09/10",
-   "url": "https://www.dailymotion.com/video/x6v5i4a",
-   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+   "title": "Swiss Government Ditches Microsoft 365 For Open Source! #opensource #microsoft365 #tech #linux",
+   "url": "https://www.youtube.com/watch?v=lhZtWPHFKCg",
+   "reason": "temps imparti écoulé"
   },
   {
-   "title": "De Tchap à WhatsApp, la démocratie européenne par messageries interposées",
-   "url": "https://www.dailymotion.com/video/x76i432",
-   "reason": "pas de transcription disponible (budget d'analyse IA épuisé)"
+   "title": "La Suisse commence à larguer Microsoft !",
+   "url": "https://www.youtube.com/watch?v=TyIAqNBYxpo",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Les données personnelles des Suisses sont stockées aux USA et en Chine | Suisse sous Couverture",
+   "url": "https://www.youtube.com/watch?v=F3I-5vsZdyA",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Credit Suisse's board made a terrible decision: Eminence CEO",
+   "url": "https://www.youtube.com/watch?v=xYBBV1_tJHE",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Souveraineté numérique suisse : à l'âge du bronze ou à l'âge du cloud?",
+   "url": "https://www.youtube.com/watch?v=c0QG9IRuIsE",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Microsoft JUST LOST Switzerland — Government PCs Are ABANDONING Windows",
+   "url": "https://www.youtube.com/watch?v=wYZRuFJi868",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "$11 Million to Quit Microsoft? Switzerland Makes a Major Software Switch",
+   "url": "https://www.youtube.com/watch?v=1OioAVgsCeo",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "France Bans Microsoft",
+   "url": "https://www.youtube.com/watch?v=fEzH1TKRAM8",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "La Suisse abandonne Microsoft. Vous êtes suivants. #shorts",
+   "url": "https://www.youtube.com/watch?v=oMnoxqhRAmM",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Pourquoi Tesla a quitté le Bitcoin – La vérité derrière ce revirement crypto",
+   "url": "https://www.youtube.com/watch?v=YrsPIgSym2s",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Your Computer Isn't Dead — Microsoft Just Wants You to Think It Is\"",
+   "url": "https://www.youtube.com/watch?v=gkBu0DCPsw8",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Switzerland Just Deleted Microsoft From Government PCs #Shorts",
+   "url": "https://www.youtube.com/watch?v=hszA5G6fhvo",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Switzerland Ditches Microsoft, Tracking Your Farts & Who Should Control Education?",
+   "url": "https://www.youtube.com/watch?v=7SlIjuH9KSI",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Swiss Government Warns: Stop Using Microsoft 365! 🔒🇨🇭 | KS Facts Switzerland | #shorts #facts #viral",
+   "url": "https://www.youtube.com/watch?v=nL7Gii4SBJQ",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Europe : la souveraineté numérique otage des GAFAM [Christine Kerdellant]",
+   "url": "https://www.dailymotion.com/video/x9mprpu",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Why Germany and Switzerland Are Ditching Microsoft Right Now #germany #tech #microsoft",
+   "url": "https://www.youtube.com/watch?v=TM4f6HPgcYs",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Cyberattacks are on the increase, including against the UN: How can we fight them ?",
+   "url": "https://www.youtube.com/watch?v=xZ3fbYuQ5CA",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "When Windows breaks and chips crack.",
+   "url": "https://www.youtube.com/watch?v=RcPIcO90DLA",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Microsoft JUST LOST Switzerland — Government PCs Are ABANDONING Windows",
+   "url": "https://www.youtube.com/watch?v=L0CCR1mUccU",
+   "reason": "temps imparti écoulé"
+  },
+  {
+   "title": "Can Europe Go Open Source? What Makes Government Switches Last",
+   "url": "https://www.youtube.com/watch?v=c__ktcZGqYk",
+   "reason": "temps imparti écoulé"
   }
  ]
 }
