@@ -1,0 +1,282 @@
+{
+ "target": "La Suisse",
+ "target_type": "pays",
+ "claim": "abandonne Microsoft pour risque de sécurité",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "La Suisse ou son administration fédérale renonce à utiliser les services et logiciels Microsoft en raison de risques pour la sécurité ou la souveraineté des données.",
+  "term_groups": [
+   [
+    "abandonne",
+    "renonce",
+    "interdit",
+    "bannit",
+    "remplace",
+    "drops",
+    "abandons",
+    "bans",
+    "phases out",
+    "ditching"
+   ],
+   [
+    "microsoft",
+    "microsoft 365",
+    "office 365",
+    "azure",
+    "cloud microsoft",
+    "m365"
+   ],
+   [
+    "securite",
+    "securite des donnees",
+    "souverainete numerique",
+    "cloud act",
+    "espionnage",
+    "cybersecurity",
+    "data security",
+    "data privacy"
+   ]
+  ],
+  "target_aliases": [
+   "suisse",
+   "switzerland",
+   "schweiz",
+   "confederation suisse",
+   "swiss",
+   "helvetique",
+   "berne",
+   "la suisse"
+  ],
+  "youtube_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "RTS Suisse Microsoft sécurité",
+   "Confédération suisse Microsoft cloud 365",
+   "SRF Tagesschau Microsoft Bund Sicherheit",
+   "Switzerland drops Microsoft security concerns",
+   "Conférence de presse Conseil fédéral Microsoft",
+   "Débat parlementaire Suisse Microsoft cloud",
+   "Swiss government Microsoft data privacy"
+  ],
+  "news_queries": [
+   "La Suisse abandonne Microsoft pour risque de sécurité",
+   "Suisse administration abandonne Microsoft sécurité",
+   "Confédération suisse Microsoft 365 souveraineté données",
+   "Switzerland ban Microsoft cloud security risk",
+   "Swiss government Microsoft 365 data protection",
+   "Administration fédérale suisse transition open source Microsoft"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "admin.ch",
+    "parlament.ch",
+    "rts.ch",
+    "srf.ch",
+    "rsi.ch",
+    "swissinfo.ch",
+    "nzz.ch",
+    "letemps.ch"
+   ],
+   "videos_candidates": 149,
+   "videos_low_authority": 131,
+   "videos_relevant": 3,
+   "videos_by_platform": {
+    "youtube": 3
+   },
+   "articles_candidates": 148,
+   "articles_low_authority": 31,
+   "articles_relevant": 11,
+   "elapsed_min": 17.4,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 3,
+      "gemini-3.5-flash": 2
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Conseil fédéral",
+   "Chancellerie fédérale",
+   "Centre national pour la cybersécurité (NCSC)",
+   "Secteur Transformation numérique et gouvernance de l'informatique (TNP)",
+   "Florian Schütz",
+   "Département fédéral des finances"
+  ],
+  "authoritative_sources": [
+   "rts.ch",
+   "admin.ch",
+   "srf.ch",
+   "swissinfo.ch",
+   "letemps.ch",
+   "nzz.ch",
+   "Reuters",
+   "ats-keystone.ch",
+   "24heures.ch",
+   "heise.de",
+   "RTS Info",
+   "SRF News"
+  ],
+  "site_query": "Suisse administration Microsoft sécurité cloud",
+  "countries": [
+   "CH",
+   "US"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 3,
+  "articles_scanned": 11
+ },
+ "videos": [],
+ "articles": [
+  {
+   "title": "Switzerland takes a Swiss Army knife to Microsoft 365",
+   "date": "2026-09-11",
+   "source": "ZDNet",
+   "domain": "zdnet.com",
+   "url": "https://www.zdnet.com/business/switzerland-replaces-microsoft-365-open-source-opendesk/",
+   "verified_on_full_text": true,
+   "authority": 0.75,
+   "authority_why": "média national",
+   "passages": [
+    {
+     "t": null,
+     "quote": "In short, they don’t trust American cloud companies. So, they’re migrating to openDesk, after concluding that Microsoft 365’s cloud-centered model is incompatible with military requirements for confidentiality, availability, and integrity. So the Swiss Cyber Command’s specialists are moving to openDesk “in record time.”",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "L'article rapporte que le commandement cyber de l'armée suisse abandonne Microsoft 365 au profit d'openDesk car il juge le modèle incompatible avec les exigences de sécurité et de confidentialité.",
+     "t_end": null,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Les Helvètes sortent leur couteau suisse face à Microsoft 365",
+   "date": "2026-09-15",
+   "source": "ZDNet",
+   "domain": "zdnet.fr",
+   "url": "https://www.zdnet.fr/actualites/les-helvetes-sortent-leur-couteau-suisse-face-a-microsoft-365-503507.htm",
+   "verified_on_full_text": true,
+   "authority": 0.75,
+   "authority_why": "média national",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Deux entités du gouvernement suisse abandonnent Microsoft 365 au profit d’openDesk. - La Chancellerie fédérale suisse et les Forces armées suisses avancent à des rythmes différents. - Il s’agit avant tout de protéger les données suisses contre l'espionnage américain.",
+     "verdict": "literal",
+     "who_says": "unknown",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "L'article affirme explicitement que deux entités du gouvernement suisse abandonnent Microsoft 365 pour protéger leurs données contre l'espionnage américain.",
+     "t_end": 0.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "La Confédération va-t-elle tourner le dos à Microsoft?",
+   "date": "2026-04-20",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNRWlaXzJqRXVVakNZUlRVS1JKeGwzd3FDSzhOWlNwMFVZQV91dllxZHN4NXo5SnVPOXJFOFpVX25JVE9Od3dWYlRfRnFtV2VQNDl6S2hrNDg4SDhMc0NZZk9oUUJ5NUM3d2xwVkxXVzlQZmh6LVVScFRkdUg2M2FRZFU3RWhvcVJJZmpzWDlSXzlRM1lZaktmTGZrTV9pUjk0cGxSck1Kam5tMkp2emlBN3NEWQ?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "C’était inimaginable il y a peu: 3000 employés de la Confédération testeront une alternative souveraine à Microsoft",
+   "date": "2026-09-04",
+   "source": "Le Temps",
+   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPTVZIbzVBLUNocUw5cUVjbmFmSk92dUYxT01ZZDVFRGp3T1B0OEF3eU5hZzdSYUJ6b0EwdTItRV9fUlRvaTY5b2dLOUpxWG42MDI4Y3ItZ1pmcnFhMkNUZGwzbDBhWTVNZWRyVWs3dkc0eGJTbFhKRHBsQ0pJcWstQkR1Tm80Y2dMZElVaXNxOVUweVlLVDVsZmRJb09hX3RMVkVmbFdfQVlYRFJncGpQWWM3VzVCUkxhbnUzUEZ6M0RXc0FWSGVXUm5PM1lWRXBTVVdENEJ3VFNpM1E?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "La Suisse peut-elle se passer de Microsoft?",
+   "date": "2026-07-30",
+   "source": "SWI swissinfo.ch",
+   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNMjhfYmFRUlpBSDVQMXlRRjZuclNfTFcwSE9VSGFKMWlLZHcwS2lucjN1QzJtQUVRYWJEdGdxM0k2WUFWR2VPUnQ2Vkt6dHhkZ0RuVTlYWno0QkJxOTZ0WUtFOTEwLXZTR0tiQ1JpYTA1UTZVc2U5R2FRR2lqTVU4XzdGMzhlTnJRNTdtRm9iM2NIV3Z6?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "La Confédération affirme vouloir réduire sa dépendance à Microsoft. Mais, pour l’heure, les faits disent le contraire",
+   "date": "2026-04-19",
+   "source": "Le Temps",
+   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNVlE0aWxWZzNnc21DSkg1a3Ewbl9nVGg0U08ycU4wbmFnUkVzRFBGbnpvVFd4dzRkeTZIWHV2Zk1SWVJrLWotb0hlRU1tZVZtbUxMd2x2U0hncDdoZnVhZDR5NHhpLTRwSWFOZk9TZFlsSFJHeGQ5QnY1blZzVktHUTZIbzh5ZjNaOVRpeDBwbVVWTFNVTzZKanQyUUpDSWpaNDh6dmxkcnhYN0x4WDVJdUZkVGo2Y1phSzlLME0wbW1rZ0ppYk5oWDVtRy1hazlsdHlyRlMtTEJuMWs?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "La Suisse peut-elle se passer des géants de la tech? Nous avons tenté l’expérience",
+   "date": "2026-06-01",
+   "source": "SWI swissinfo.ch",
+   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxONFZ4eVVrTUhYM3doU1YxN3B6T0hNSXBKS3cya1k2WlE5bmU4S21IcVprSWFPSnZ2dTNuLTNOSll2LWp2V1VndEFXNFZYLWp5Y2syZWY2M0xLelNBNnpYckpPeFU3TUctNHJyU0s5RmZvcjZpRVRXbXRoMXMybDZMSzNRQV90MUtSbDBMekx1OW1PUUlUY1B4YlFhUFVXVEtqaGMzQXJyLU9LUjVDN1VmdU9ETF9SaWZjTGl6c09zYS1abXpSSTN2dUZuSFVzaGpiM0RGVTlheTJUdVk?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "Doit-on craindre que Microsoft transmette trop facilement nos données sensibles aux autorités américaines?",
+   "date": "2025-08-20",
+   "source": "Le Temps",
+   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNcWU2bXFIbHNxRlpaTjh4bW00QU5VYW9MaUs1eWpKOUJsMGlNcHRtN1NOaVJaV2dhT3Jzbi1pWnF0SURYRG8wSWVYWHNVT2J5M3c0LS1JNzlfY25PQkpwdy16Sy1aakhtNGdDTlVMaEVDM2xHMUY5eVpJSVlWbV9COTlOZW1ybHdnWnFaVUtheGYtOHFMTG9OWHZYN0FvNUFvaE1PamxHcl9zbEwyaVNuckM3MlNYUGRPY3hRZmhwd2RRb2xhdW1oMTdwakowTlk?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "Swiss Army breaks with Microsoft: \"Cyber Command\" relies on Open Source",
+   "date": "2026-07-10",
+   "source": "heise online",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOcjdqcXF5VWYyMXpFd05RVk9oOVZfM2dtMXBaUmxtLXFHSVc3ZmtkcjhwTFNxNGgwUFdidUs2TldtckNCNTJOLVR0ODRZelZmV0VtY1U4QldUd0xFMXZuOEh1R0pOeVZXRFdxMVZWcTlOMDJXTjcwVUs1MVF0OFl3djBKWHZ3RnFhdm9Manhpc0FJNk1oX3RkYUJMLWhMQXdjMjRieEIwVHE5amVWMy1rag?oc=5",
+   "authority": 0.75
+  },
+  {
+   "title": "Microsoft pose un problème à l'armée suisse",
+   "date": "2025-11-18",
+   "source": "Watson",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPb09NYnBNVV9Ja2hVTzl3Ujc3amlFdTVrUGNqTDhKZzV2Vl95X1RIdGVGdXRJU0JPcjhfUUE0MWhLWlZDcGFPNW1nTkVMOGpHa3NZUDEwU1I0Q2FoZ0Jsd2dNU0FzbmlKZ2xMQnVpUE1aVEJWUTFUcHZUQXFYMEE1Mm1wRjJOSF9PRTFuVXRTYjNXY25HY3ZqRGd4QXhaNl9SLUhoa0tFR0k1X1l0ekdEWGpKaVkxdw?oc=5",
+   "authority": 0.75
+  },
+  {
+   "title": "Swiss government bans SaaS and cloud for sensitive info",
+   "date": "2025-12-01",
+   "source": "The Register",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxONHJlMWlxUGxaa3NBSEtSZ2JEWVZpLU1jdEFHZ0pBOWVkZTNqMmVtTE1zbW42WERrcXJGLTZBUUtOZkRMVmNkSk9wc3htY0JkcnNFc1BHN2o1NVpJbUpCUVFUYkdYX2c3NjRYd2xEZnBwMGh2dXpRc2lKN1FNcDlEcm1oODRKMzlFVjh1b0psVVBET0hrS2MtU0RxY3dGeXlfZnBzbUNYSTlLLVRVQTEtMg?oc=5",
+   "authority": 0.75
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!",
+   "url": "https://www.youtube.com/watch?v=A-cipLy-c7s",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  },
+  {
+   "title": "Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany Saves €15M/Year",
+   "url": "https://www.youtube.com/watch?v=BffWWGOgcWs",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  },
+  {
+   "title": "Schweiz gegen Microsoft 365 – und Deutschland schaut genau hin",
+   "url": "https://www.youtube.com/watch?v=BEBnOMV1q_c",
+   "reason": "erreur LLM: HTTP 503 (gemini-3.6-flash): {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high d"
+  }
+ ]
+}

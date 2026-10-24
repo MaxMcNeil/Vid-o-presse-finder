@@ -1,0 +1,209 @@
+{
+ "target": "Allemagne",
+ "target_type": "pays",
+ "claim": "quitte Microsoft pour des logiciels libres",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "L'Allemagne, son administration fédérale ou un de ses Länder (comme le Schleswig-Holstein) abandonne Microsoft ou Windows au profit de solutions open source et de logiciels libres.",
+  "term_groups": [
+   [
+    "microsoft",
+    "windows",
+    "office 365",
+    "ms office",
+    "proprietary software"
+   ],
+   [
+    "open source",
+    "logiciel libre",
+    "logiciels libres",
+    "foss",
+    "linux",
+    "libreoffice"
+   ],
+   [
+    "quitte",
+    "abandonne",
+    "transition",
+    "migration",
+    "switches",
+    "ditching",
+    "drops",
+    "migrates"
+   ]
+  ],
+  "target_aliases": [
+   "allemagne",
+   "germany",
+   "deutschland",
+   "allemand",
+   "allemande",
+   "german",
+   "schleswig holstein",
+   "bundesregierung"
+  ],
+  "youtube_queries": [
+   "Allemagne quitte Microsoft pour des logiciels libres",
+   "Tagesschau Schleswig Holstein Microsoft Linux",
+   "DW News Germany Microsoft open source switch",
+   "Germany ditches Microsoft LibreOffice government",
+   "Schleswig-Holstein Open Source Umstieg Pressekonferenz",
+   "Allemagne transition logiciels libres administration",
+   "German state ditches Windows for Linux"
+  ],
+  "news_queries": [
+   "Allemagne quitte Microsoft pour des logiciels libres",
+   "Germany open source Microsoft government switch",
+   "Schleswig-Holstein ditches Microsoft for Linux LibreOffice",
+   "Allemagne abandon Microsoft logiciels libres administration",
+   "German administration migrates from Windows to open source",
+   "Deutschland Umstieg Microsoft Open Source Landesverwaltung"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 7,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "bundesregierung.de",
+    "tagesschau.de",
+    "zdf.de",
+    "spiegel.de",
+    "zeit.de",
+    "faz.net",
+    "sueddeutsche.de",
+    "reuters.com"
+   ],
+   "videos_candidates": 135,
+   "videos_low_authority": 112,
+   "videos_relevant": 7,
+   "videos_by_platform": {
+    "youtube": 7
+   },
+   "articles_candidates": 108,
+   "articles_low_authority": 27,
+   "articles_relevant": 5,
+   "elapsed_min": 13.6,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 1,
+      "gemini-3.6-flash": 7
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "pays",
+  "official_speakers": [
+   "Bundesministerium des Innern",
+   "Dirk Schrödter",
+   "Jan Philipp Albrecht",
+   "Porte-parole du gouvernement fédéral allemand",
+   "Landesregierung Schleswig-Holstein"
+  ],
+  "authoritative_sources": [
+   "reuters.com",
+   "dw.com",
+   "tagesschau.de",
+   "zdf.de",
+   "heise.de",
+   "golem.de",
+   "lemonde.fr",
+   "zdnet.com",
+   "theverge.com",
+   "ard.de",
+   "bmi.bund.de",
+   "schleswig-holstein.de",
+   "Deutsche Welle",
+   "Tagesschau"
+  ],
+  "site_query": "Deutschland Microsoft Open Source Linux Umstieg",
+  "countries": [
+   "DE"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 7,
+  "articles_scanned": 5
+ },
+ "videos": [],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Un Land allemand abandonne Microsoft au nom de la souveraineté numérique",
+   "date": "2025-06-12",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOa0dtNFhQOUMwNndsS2lwbFVUdmI3clFaR0MtMU9vVEd0ZjU0aUZvUGRIRzVaZmp2WDZleGtELWtFRjFrYjZqVUM5RkNEdTlsTGZNM1dzWUZwMkZIeW9SV1hSSFJFNUpBMTV1VXhLaDhUWnc5c19MSzRPTHVPS05sRTJrYThFcXJld2VZekpxS3ZHMUNWODVJWDAxVklCVXNMbzRoUFpvN0NFZktBVVVjYmNGREcyaWViYWRFZzNwR1M?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "L’administration allemande veut apprendre à vivre sans Microsoft",
+   "date": "2026-04-04",
+   "source": "franceinfo",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPZklMT3pQbFRadVZ0WndWM1ItYmwwcXAyS2FIYTh4SmJEYUYyekFoWVhsblZIQi1QRkwySVVpZmhueWg0S19vYzRPZ3FteEdkUU1GWVkwdGl4RVI3Z0c1QzFzaDJBZmxrLUFxb192TWJ3ZjI2M0JvZXE5TVBkeElDVjV2c0RreldMbkJ2Q01TV0x5X29NaThSd09wMTlySmtydUVqTUpDUWlWaW5mT2o5QlR2d0R2NWFFWWtudEpsdFV0eXZ2dnEwZWFn?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "Un lander allemand abandonne Microsoft pour Linux - voici pourquoi",
+   "date": "2026-09-02",
+   "source": "ZDNET",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOdFB0SkdQbkZmb1c3OUhOY1o1aUZ4OWt0ai1VQV85cUhkc0lIVUQ5N1hEZUxWOXc2MFVtdzFDSVZNM3JfeDJweFNJdFYzQlZ4aDFsMjJ0UmhuOTdhekJ3cmVEY2tWeEp1ai1CNnZIX0FZV19QZDRBaXZucGYta2lkVElpbjl5MW5fZ1RPMExWSFRoSF95UDd6U1pvMHRxSnJ6QXNBVGI5a1dxLUU?oc=5",
+   "authority": 0.75
+  },
+  {
+   "title": "German state replaces Microsoft Exchange and Outlook with open-source email",
+   "date": "2025-10-13",
+   "source": "ZDNET",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQenJRakVOc3ZHQTFMcWhJZXJLclJrRkQ3NmpxMDNIZnhuRWRkWk1fbmV2RTZqX1FNSzZETXZaTjBteWFFeEFkM1g4bkpkWmtKUVFKaUZqWGxPWlRnWk93cXl5MEZjVjFtM1Boa25nbFdKenRUREFuVXg5ck5tdzg5NjkxVkliRWhYN2c5STBQbnNoR2NBZDdnWlJsYTdtMTZ1WUZUcEROM1BoUQ?oc=5",
+   "authority": 0.75
+  },
+  {
+   "title": "Numérique européen : l’Allemagne prend son indépendance vis-à-vis de la tech américaine",
+   "date": "2026-03-25",
+   "source": "Ouest-France",
+   "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNVmNUOWF4SUFCR21aSTE2akkwNGhuZnh4ckVzTTVTZVVxWjZOUXFFb2MzMjJ5eE9hSkotUjNPejNtX3ktZm9PSHU0REFIZ2pyRTN3dHphei1veVlNaE9EcXpZUFlTZHhVTGxuemFWWEhlN3dLano0YmZOc1lCTHZWQ1FNNU9OYTVtY2ktR25qMnFXaFo2a2RLWGlFYVV5YTlhSGYwWU9Va0xpSmpzRmw3X09TSTVWb290Z0JJdXNNTHFaMkhIT2dLb3JDTjFWT3RqQkZ0dTNHak54YkFkS0ZZLTZ4MlBLaTc2R2ZQaTRUZkRsdEw1LXlxSEpoNUhwdw?oc=5",
+   "authority": 0.75
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "German Province Ditches Microsoft for Open Source! Analysis with Alex Cojocaru",
+   "url": "https://www.youtube.com/watch?v=tL2Rnm40uts",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  },
+  {
+   "title": "Wow! German State Embraces Open-Source Software Over Microsoft!",
+   "url": "https://www.youtube.com/watch?v=mdyb788hwq0",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  },
+  {
+   "title": "An Entire German State Just Deleted Microsoft — 30,000 PCs Gone",
+   "url": "https://www.youtube.com/watch?v=uM8r7zL8evs",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  },
+  {
+   "title": "Germany's moving to Open Source, Age verification gets worse - Linux weekly News",
+   "url": "https://www.youtube.com/watch?v=IkAld223VYI",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  },
+  {
+   "title": "German State Is Ditching Windows For Linux",
+   "url": "https://www.youtube.com/watch?v=HXfMFrBn7G4",
+   "reason": "erreur interne (AttributeError: 'list' object has no attribute 'get')"
+  }
+ ]
+}
