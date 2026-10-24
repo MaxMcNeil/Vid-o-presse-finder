@@ -180,6 +180,10 @@ def select(items: list, plan: Plan, o: Options, llm, kind: str, cap: int, meta, 
         chosen += extra
         if extra:
             log.info("%s : %d source(s) d'autorité moyenne ajoutée(s) faute de source forte assez pertinente", kind, len(extra))
+    if diag == "videos":  # pour le rapport : ce qu'ont donné les vidéos prises chez les sources de référence
+        plan.diag["site_videos_scored"] = [f"{x.title[:60]} ({getattr(x, 'relevance', 0):.0f}/10)" for x in items
+                                           if "site" in (getattr(x, "found_by", None) or ()) or
+                                           any(str(f).startswith("chaîne:") for f in (getattr(x, "found_by", None) or ()))][:8]
     plan.diag[f"{diag}_low_authority"] = sum(1 for x in items if x.authority < o.min_authority)
     plan.diag[f"{diag}_relevant"] = len(pool)
     log.info("%s : %d candidates → %d pertinentes → %d retenues", kind, len(items), len(pool), len(chosen))

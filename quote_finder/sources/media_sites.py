@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 import logging
 import subprocess
@@ -70,13 +71,47 @@ def _ytdlp_json(url: str, timeout: int = 60) -> dict | None:
         return None
 
 
+EMBEDS = [
+    (re.compile(r"(?:youtube(?:-nocookie)?\.com/(?:embed/|watch\?v=|shorts/)|youtu\.be/)([\w-]{11})"), "https://www.youtube.com/watch?v={0}"),
+    (re.compile(r"dailymotion\.com/(?:embed/)?video/(x[0-9a-z]+)"), "https://www.dailymotion.com/video/{0}"),
+    (re.compile(r"urn:(rts|srf|rsi|rtr|swi):video:([0-9a-f-]{36}|\d+)"), "srgssr:{0}:video:{1}"),  # RTS, SRF, RSI, swissinfo
+    (re.compile(r'<meta[^>]+property="og:video(?::secure_url|:url)?"[^>]+content="([^"]+)"'), "{0}"),
+]
+
+
+def find_embeds(html: str) -> list[str]:
+    """Vidéos intégrées dans une page d'article (lecteur YouTube, Dailymotion, SRG, og:video...)."""
+    out = []
+    for rx, fmt in EMBEDS:
+        for m in rx.finditer(html or ""):
+            u = fmt.format(*m.groups())
+            if u not in out:
+                out.append(u)
+    return out[:3]
+
+
+def _page(url: str) -> str:
+    try:
+        import requests
+        r = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0 (compatible; quote-finder)"})
+        return r.text if r.status_code == 200 else ""
+    except Exception:  # noqa: BLE001
+        return ""
+
+
 def probe_video(a: ArticleCandidate, source_name: str = "") -> VideoCandidate | None:
-    """La page de cet article contient-elle une vidéo lisible ? (résultat gardé 7 jours en cache)"""
+    """La page de cet article contient-elle une vidéo lisible ? 1) yt-dlp sur la page ; 2) sinon, on cherche dans
+    le code de la page un lecteur intégré (YouTube, Dailymotion, RTS/SRF...) et on le lit. Résultat gardé en cache."""
     ck = a.url
     c = cache.get("probe", ck)
     if c is not None:
         return VideoCandidate(**c) if c else None
     d = _ytdlp_json(a.url)
+    if not d or not (d.get("duration") or d.get("formats") or d.get("url")):
+        for emb in find_embeds(_page(a.url)):
+            d = _ytdlp_json(emb)
+            if d and (d.get("duration") or d.get("formats")):
+                break
     if d and d.get("_type") == "playlist" and d.get("entries"):
         d = next((e for e in d["entries"] if e), None)
     if not d or not (d.get("duration") or d.get("formats") or d.get("url")):
@@ -133,7 +168,9 @@ def channel_id(pool, name: str, http=None) -> str:
     c = cache.get("ytchannel", name.lower())
     if c is not None:
         return c.get("id", "")
-    d = youtube._call(pool, "search", {"part": "snippet", "type": "channel", "q": name, "maxResults": 1}, http) if pool else None
+    import requests
+    d = youtube._call(pool, "search", {"part": "snippet", "type": "channel", "q": name, "maxResults": 1},
+                      http or requests) if pool else None
     cid = ""
     for it in (d or {}).get("items", []):
         cid = (it.get("id") or {}).get("channelId", "") or (it.get("snippet") or {}).get("channelId", "")

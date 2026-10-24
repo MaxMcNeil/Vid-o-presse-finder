@@ -106,14 +106,16 @@ def for_search(countries: list[str], langs: list[str], extra_domains: list[str] 
         if s.domain not in seen:
             seen.add(s.domain)
             out.append(s)
-    cs = expand(countries) or [c for l in langs for c in LANG_COUNTRIES.get(l, [])][:2]
-    # 1) pays concernés, à tour de rôle (ex. GCC : 1re source de chaque pays, puis 2e...) ;
-    #    dans chaque pays : institutions, puis médias vidéo, puis presse écrite
-    per = [sorted(SOURCES.get(c, []), key=lambda s: (not s.official, not s.video)) for c in cs]
-    for i in range(max((len(p) for p in per), default=0)):
-        for p in per:
-            if i < len(p):
-                add(p[i])
+    blocks = []  # un bloc par pays demandé ; un groupe (GCC) = ses pays à tour de rôle
+    for c in [str(x).upper().strip() for x in countries or [] if x] or \
+            [c for l in langs for c in LANG_COUNTRIES.get(l, [])][:2]:
+        members = GROUPS.get(c, [c])
+        per = [sorted(SOURCES.get(m, []), key=lambda s: (not s.official, not s.video)) for m in members if m != "INT"]
+        blocks.append([p[i] for i in range(max((len(p) for p in per), default=0)) for p in per if i < len(p)])
+    # 1) pays concernés : le premier cité d'abord (ex. la Suisse avant les États-Unis), institutions et médias vidéo en tête
+    for i, b in enumerate(blocks):
+        for s in (b if i == 0 else b[:3]):  # pays secondaires : leurs 3 sources principales seulement
+            add(s)
     # 2) sources proposées par l'IA pour ce sujet (domaines)
     for d in extra_domains or []:
         d = d.lower().strip().removeprefix("https://").removeprefix("http://").removeprefix("www.").split("/")[0]

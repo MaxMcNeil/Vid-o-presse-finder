@@ -75,6 +75,9 @@ def _load_registry():
 
 
 _load_registry()
+for _c in ("aljazeera arabic", "al jazeera arabic", "الجزيرة", "france 24 arabic", "bbc news عربي", "sky news arabia",
+           "سكاي نيوز عربية", "al arabiya", "الشرق للأخبار", "asharq news", "dw عربية", "dw arabic", "rt arabic"):
+    CHANNELS.setdefault(normalize(_c), 0.85 if _c in ("rt arabic",) else 0.9)
 
 LEVELS = {"forte": 0.6, "moyenne": 0.4, "toutes": 0.0}
 
@@ -153,9 +156,10 @@ def score_video(v, plan=None) -> tuple[float, str]:
     base, why = None, ""
     if name:
         base = CHANNELS.get(name)
-        if base is None:  # "franceinfo" dans "franceinfo tv", "BBC News Afrique"...
-            for k, s in CHANNELS.items():
-                if len(k) >= 4 and (name.startswith(k + " ") or name == k):
+        if base is None:  # "franceinfo" dans "franceinfo tv", "BBC News Afrique", "فرانس 24 / FRANCE 24 Arabic"...
+            for k, s in sorted(CHANNELS.items(), key=lambda x: -len(x[0])):
+                if (len(k) >= 4 and (name.startswith(k + " ") or name == k)) or \
+                        (len(k) >= 7 and f" {k} " in f" {name} "):
                     base = s
                     break
         if base is not None:

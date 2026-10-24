@@ -136,7 +136,9 @@ class GeminiClient:
         media = bool(video_url or inline_media)
         last = "aucune clé disponible"
         total = max_attempts or (max(10, 4 * len(self.pool._next_ok)) + 10)
-        for attempt in range(total):
+        attempt, spins = 0, 0
+        while attempt < total and spins < 400:  # seules les vraies requêtes comptent comme tentatives ; borné par le temps
+            spins += 1
             lim = min(x for x in (self.deadline, until, float("inf")) if x)
             if time.time() > lim:
                 raise QuotaExhausted("temps imparti écoulé")
@@ -170,6 +172,7 @@ class GeminiClient:
             if media and not self._no_res:
                 body["generationConfig"]["mediaResolution"] = "MEDIA_RESOLUTION_LOW"  # la parole suffit : ~3x moins de jetons
             try:
+                attempt += 1
                 r = self.http.post(GEMINI_URL.format(model=m), params={"key": key}, json=body,
                                    timeout=max(10.0, min(self.timeout, lim - time.time())))
             except requests.RequestException as e:
@@ -184,7 +187,13 @@ class GeminiClient:
                     self.used[m] = self.used.get(m, 0) + 1
                     return out
                 except (KeyError, IndexError, ValueError, TypeError) as e:
-                    last = f"réponse illisible: {e}"
+                    # réponse vide (filtre, limite de longueur...) : on retente avec un AUTRE modèle
+                    try:
+                        why = r.json()["candidates"][0].get("finishReason", "")
+                    except (KeyError, IndexError, ValueError, TypeError, AttributeError):
+                        why = ""
+                    last = f"réponse illisible ({m}{', ' + why if why else ''}): {e}"
+                    self._until[(key, m)] = time.time() + 90
                     continue
             msg = r.text[:400]
             last = f"HTTP {r.status_code} ({m}): {msg}"

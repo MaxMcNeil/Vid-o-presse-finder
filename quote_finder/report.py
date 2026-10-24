@@ -240,7 +240,8 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
           f"- Sources de référence interrogées : {', '.join(d.get('reference_sites', [])) or '—'}",
           f"- Articles trouvés directement chez elles : {d.get('site_articles', '?')} {d.get('site_articles_by_site', '')}",
           f"- Pages ouvertes pour y chercher une vidéo : {d.get('site_pages_probed', '?')} → vidéos trouvées : {d.get('site_videos', '?')}",
-          f"- Recherche dans les chaînes YouTube officielles : {d.get('official_channels', '?')}"]
+          f"- Recherche dans les chaînes YouTube officielles : {d.get('official_channels', '?')}",
+          f"- Vidéos des sources de référence (pertinence) : {'; '.join(d.get('site_videos_scored', [])) or 'aucune'}"]
     if reasons:
         L.append("- Vidéos non vérifiées : " + " ; ".join(f"{n}× {k}" for k, n in sorted(reasons.items(), key=lambda x: -x[1])[:4]))
     if not (d.get("videos_by_platform") or {}).get("youtube"):
