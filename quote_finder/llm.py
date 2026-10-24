@@ -34,9 +34,19 @@ class QuotaExhausted(LLMError):
 DEFAULT_MODELS = ["gemini-3.8-flash", "gemini-flash-latest", "gemini-3-flash", "gemini-2.5-flash"]
 
 
+def is_text_only(name: str) -> bool:
+    return name.startswith("gemma")
+
+
 def _model_rank(name: str):
-    """Plus grand = préférable : version la plus récente, famille 'flash' (pas lite/image/tts...)."""
+    """Plus grand = préférable : version la plus récente, famille 'flash', puis 'flash-lite', puis Gemma (texte seul).
+    Chaque modèle a son propre quota gratuit : plus il y en a dans la liste, plus on peut travailler."""
     n = name.replace("models/", "")
+    if n.startswith("gemma-"):  # quota gratuit très large (plusieurs milliers de requêtes/jour), texte uniquement
+        sizes = [float(x) for x in re.findall(r"(\d+)b", n)]
+        if not sizes or max(sizes) < 12:
+            return None
+        return -10 + max(sizes) / 100
     if "flash" not in n or any(x in n for x in ("image", "tts", "live", "audio", "thinking", "embedding", "preview-")):
         return None
     m = re.search(r"gemini-(\d+(?:\.\d+)?)", n)
@@ -59,7 +69,9 @@ class GeminiClient:
         self._overload: dict[str, int] = {}
         self._think: dict[str, int] = {}                 # 0 niveau bas, 1 budget 0, 2 défaut du modèle
         self._no_res = False
+        self._nojson: set[str] = set()                   # modèles sans mode JSON (Gemma)
         self.last_model = (self.preferred or self.models or ["?"])[0]
+        self.used: dict[str, int] = {}
         self.deadline: float | None = None
 
     @property
@@ -83,17 +95,20 @@ class GeminiClient:
         else:  # découverte impossible : on tente les noms connus
             lst = list(dict.fromkeys(self.preferred + self.models))
         self._key_models[key] = lst
-        log.info("Gemini clé …%s : %d modèle(s) accessible(s), meilleur : %s", key[-4:], len(lst), lst[:3])
+        log.info("%s : %d modèle(s) accessible(s) : %s", self.pool.label(key), len(lst), lst[:6])
         return lst
 
-    def _pick(self, key: str) -> tuple[str | None, float]:
+    def _pick(self, key: str, media: bool = False) -> tuple[str | None, float]:
         """Meilleur modèle disponible pour cette clé ; sinon (None, secondes avant le prochain retour possible)."""
+        from . import quota
         now = time.time()
         soon = float("inf")
+        st = quota.state() if self.pool.persist else None
         for m in self._models_for(key):
-            if (key, m) in self._bad:
+            if (key, m) in self._bad or (media and is_text_only(m)):
                 continue
-            free_at = max(self._until.get((key, m), 0), self._cool.get(m, 0))
+            free_at = max(self._until.get((key, m), 0), self._cool.get(m, 0),
+                          st.model_until("gemini", key, m) if st else 0)
             if free_at <= now:
                 return m, 0.0
             soon = min(soon, free_at - now)
@@ -128,18 +143,27 @@ class GeminiClient:
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted(f"toutes les clés Gemini sont épuisées ou refusées (dernière erreur : {last[:140]})")
-            m, soon = self._pick(key)
+            m, soon = self._pick(key, media)
             if m is None:
                 if soon <= 150:  # pause courte (surcharge, limite par minute) : on patiente
-                    time.sleep(min(soon + 0.5, 20))
-                else:            # quota du jour épuisé pour tous les modèles de cette clé
+                    if self.pool.available() > 1:
+                        self.pool.cooldown(key, soon)  # une autre clé est peut-être libre tout de suite
+                    else:
+                        time.sleep(min(soon + 0.5, 20))
+                elif soon > 3600 and not media:  # tous les modèles de cette clé sont épuisés pour la journée
+                    log.warning("Gemini : %s n'a plus aucun modèle disponible aujourd'hui → clé suivante", self.pool.label(key))
+                    self.pool.exhaust(key, "tous les modèles épuisés")
+                else:
                     self.pool.cooldown(key, soon)
                 continue
             self.last_model = m
-            body = {"contents": [{"role": "user", "parts": parts}],
-                    "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"}}
+            body = {"contents": [{"role": "user", "parts": parts}], "generationConfig": {"temperature": temperature}}
+            if m not in self._nojson:
+                body["generationConfig"]["responseMimeType"] = "application/json"
             think = self._think.get(m, 0)
-            if think == 0:
+            if is_text_only(m):
+                pass  # Gemma : pas de réglage de réflexion
+            elif think == 0:
                 body["generationConfig"]["thinkingConfig"] = {"thinkingLevel": "low"}
             elif think == 1:
                 body["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
@@ -156,6 +180,8 @@ class GeminiClient:
                 try:
                     out = parse_json_loose(r.json()["candidates"][0]["content"]["parts"][0]["text"])
                     self._overload[m] = 0
+                    self.pool.use(key, model=m)
+                    self.used[m] = self.used.get(m, 0) + 1
                     return out
                 except (KeyError, IndexError, ValueError, TypeError) as e:
                     last = f"réponse illisible: {e}"
@@ -163,6 +189,10 @@ class GeminiClient:
             msg = r.text[:400]
             last = f"HTTP {r.status_code} ({m}): {msg}"
             low = msg.lower()
+            self.pool.note_error(key, f"{m}: HTTP {r.status_code} {msg[:100]}")
+            if r.status_code == 400 and ("json mode" in low or "response_mime_type" in low or "responsemimetype" in low):
+                self._nojson.add(m)
+                continue
             if r.status_code == 400 and "thinking" in low and think < 2:
                 self._think[m] = think + 1
                 continue
@@ -176,15 +206,18 @@ class GeminiClient:
                 continue
             if r.status_code == 429:
                 if re.search(r"perday|per day|daily", low):
-                    log.warning("Gemini : quota du jour de %s atteint (clé …%s) → autre modèle ou autre clé", m, key[-4:])
-                    self._until[(key, m)] = time.time() + 86400
+                    from . import quota
+                    log.warning("Gemini : quota du jour de %s atteint (%s) → autre modèle ou autre clé", m, self.pool.label(key))
+                    self._until[(key, m)] = quota.next_reset()
+                    if self.pool.persist:
+                        quota.state().exhaust_model("gemini", key, m)
                 else:
                     d = re.search(r"retry in ([\d.]+)s", msg) or re.search(r'"retryDelay":\s*"(\d+)s"', msg)
                     self._until[(key, m)] = time.time() + (float(d.group(1)) + 1 if d else 30)
                 continue
             if r.status_code in (401, 403):
                 if "api key" in low or "api_key" in low:
-                    self.pool.exhaust(key)            # clé invalide ou révoquée
+                    self.pool.exhaust(key, "clé refusée (invalide ou révoquée ?)")
                 else:
                     self._bad.add((key, m))           # accès refusé à CE modèle seulement
                 continue
@@ -214,6 +247,8 @@ class OpenAICompatClient:
         self._bad: set[str] = set()
         self._discovered = False
         self._json_mode = True
+        self.name = "relais"
+        self.calls = 0
         self.http = session or requests.Session()
 
     @property
@@ -250,7 +285,7 @@ class OpenAICompatClient:
                 raise QuotaExhausted("temps imparti écoulé")
             key = self.pool.acquire()
             if key is None:
-                raise QuotaExhausted(f"clés de repli refusées ou épuisées (dernière erreur : {last or 'aucune'})")
+                raise QuotaExhausted(f"clés {self.name} refusées ou épuisées (dernière erreur : {last or 'aucune'})")
             body = {"model": self.model, "temperature": temperature,
                     "messages": [{"role": "system", "content": "Réponds uniquement par un objet JSON valide."},
                                  {"role": "user", "content": prompt}]}
@@ -265,7 +300,10 @@ class OpenAICompatClient:
                 continue
             if r.status_code == 200:
                 try:
-                    return parse_json_loose(r.json()["choices"][0]["message"]["content"])
+                    out = parse_json_loose(r.json()["choices"][0]["message"]["content"])
+                    self.calls += 1
+                    self.pool.use(key, model=self.model)
+                    return out
                 except (KeyError, IndexError, ValueError, TypeError) as e:
                     last = f"réponse illisible: {e}"
                     continue
@@ -280,11 +318,21 @@ class OpenAICompatClient:
             if r.status_code == 400 and self._json_mode and ("response_format" in low or "json" in low):
                 self._json_mode = False  # certains modèles n'ont pas le mode JSON : le prompt suffit
                 continue
+            self.pool.note_error(key, f"HTTP {r.status_code} {r.text[:100]}")
             if r.status_code == 429:
-                self.pool.cooldown(key, 60)
+                if re.search(r"per day|daily|tokens per day|requests per day|\brpd\b|\btpd\b|credits", low):
+                    log.warning("%s : quota du jour atteint (%s) → clé suivante", self.name, self.pool.label(key))
+                    self.pool.exhaust(key)
+                else:
+                    ra = r.headers.get("retry-after") if hasattr(r, "headers") and r.headers else None
+                    try:
+                        wait = float(ra) if ra else 60.0
+                    except ValueError:
+                        wait = 60.0
+                    self.pool.cooldown(key, min(max(wait, 2.0), 600.0))
                 continue
             if r.status_code in (401, 403):
-                self.pool.exhaust(key)
+                self.pool.exhaust(key, "clé refusée (invalide ?)")
                 continue
             if r.status_code >= 500:
                 time.sleep(3)
@@ -293,28 +341,62 @@ class OpenAICompatClient:
         raise LLMError(last)
 
 
+def guess_provider(key: str) -> str:
+    k = key.strip()
+    if k.startswith("gsk_"):
+        return "groq"
+    if k.startswith("csk-"):
+        return "cerebras"
+    if k.startswith("sk-or-"):
+        return "openrouter"
+    return ""
+
+
 class LLMRouter:
     """Essaie Gemini, puis le repli (texte seulement). Met les réponses en cache disque."""
 
-    def __init__(self, gemini: GeminiClient | None, fallback: OpenAICompatClient | None):
-        self.gemini, self.fallback = gemini, fallback
+    def __init__(self, gemini: GeminiClient | None, fallback=None, fallbacks: list | None = None):
+        self.gemini = gemini
+        self.fallbacks = list(fallbacks or ([fallback] if fallback else []))
+
+    @property
+    def fallback(self):
+        return self.fallbacks[0] if self.fallbacks else None
 
     @classmethod
     def from_env(cls) -> "LLMRouter":
+        """Ordre : Gemini (5 clés × tous les modèles flash, flash-lite puis Gemma) → Groq → Cerebras → OpenRouter.
+        Chaque relais a ses propres clés : GROQ_API_KEYS, CEREBRAS_API_KEYS, OPENROUTER_API_KEYS
+        (ou l'ancien couple FALLBACK_LLM_KEYS + FALLBACK_LLM_PROVIDER)."""
         g = keys_from_env("GEMINI")
         forced = os.environ.get("GEMINI_MODEL")
-        gem = GeminiClient(KeyPool("gemini", g, min_interval=float(os.environ.get("GEMINI_MIN_INTERVAL", "5"))),
+        gem = GeminiClient(KeyPool("gemini", g, min_interval=float(os.environ.get("GEMINI_MIN_INTERVAL", "4")), persist=True),
                            DEFAULT_MODELS, preferred=[forced] if forced else []) if g else None
-        fb = None
-        prov = os.environ.get("FALLBACK_LLM_PROVIDER", "").lower()
-        fkeys = keys_from_env("FALLBACK_LLM")
-        if fkeys and prov:
-            base, model = PROVIDERS.get(prov, ("", ""))
-            base = os.environ.get("FALLBACK_LLM_BASE_URL") or base
-            model = os.environ.get("FALLBACK_LLM_MODEL") or model
-            if base and model:
-                fb = OpenAICompatClient(KeyPool("fallback", fkeys, min_interval=2.5), base, model)
-        return cls(gem, fb)
+        fbs = []
+        legacy = os.environ.get("FALLBACK_LLM_PROVIDER", "").lower().strip()
+        # clés de FALLBACK_LLM_KEYS : le service est reconnu à leur début (gsk_ = Groq, csk- = Cerebras, sk-or- = OpenRouter)
+        by_prov: dict[str, list[str]] = {}
+        for k in keys_from_env("FALLBACK_LLM"):
+            prov = guess_provider(k) or (legacy if legacy in PROVIDERS else "")
+            if prov:
+                by_prov.setdefault(prov, []).append(k)
+        for prov in ("groq", "cerebras", "openrouter"):
+            keys = list(dict.fromkeys(keys_from_env(prov.upper()) + by_prov.get(prov, [])))
+            if not keys:
+                continue
+            base, model = PROVIDERS[prov]
+            if prov == legacy:
+                base = os.environ.get("FALLBACK_LLM_BASE_URL") or base
+                model = os.environ.get("FALLBACK_LLM_MODEL") or model
+            c = OpenAICompatClient(KeyPool(prov, keys, min_interval=2.5, persist=True), base, model)
+            c.name = prov
+            fbs.append(c)
+        if legacy and legacy not in PROVIDERS and keys_from_env("FALLBACK_LLM") and os.environ.get("FALLBACK_LLM_BASE_URL"):
+            c = OpenAICompatClient(KeyPool("fallback", keys_from_env("FALLBACK_LLM"), 2.5, persist=True),
+                                   os.environ["FALLBACK_LLM_BASE_URL"], os.environ.get("FALLBACK_LLM_MODEL", ""))
+            c.name = legacy
+            fbs.append(c)
+        return cls(gem, fallbacks=fbs)
 
     deadline: float | None = None
     MEDIA_CALL_MAX = 300.0  # secondes max pour analyser UNE vidéo/un audio (toutes tentatives comprises)
@@ -322,13 +404,13 @@ class LLMRouter:
 
     def set_deadline(self, t: float | None) -> None:
         self.deadline = t
-        for c in (self.gemini, self.fallback):
+        for c in [self.gemini] + self.fallbacks:
             if c:
                 c.deadline = t
 
     @property
     def has_text(self) -> bool:
-        return bool(self.gemini or self.fallback)
+        return bool(self.gemini or self.fallbacks)
 
     @property
     def has_video(self) -> bool:
@@ -348,18 +430,36 @@ class LLMRouter:
         if self.gemini and self.gemini.pool.available():
             try:
                 out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media, until=until,
-                                                max_attempts=(4 if self.fallback and not media else (6 if media else None)))
+                                                max_attempts=(None if not media else 6))
                 cache.put("llm", ck, out)
                 return out
             except QuotaExhausted as e:
                 err = e
+                if not media and self.fallbacks:
+                    log.warning("Gemini indisponible (%s) → relais %s", str(e)[:100], self.fallbacks[0].name)
             except LLMError as e:
-                if video_url or inline_media:
+                if media:
                     raise
                 err = e
-                log.warning("Gemini a échoué (%s), tentative de repli", e)
-        if self.fallback and not video_url and not inline_media:
-            out = self.fallback.generate_json(prompt, until=time.time() + self.TEXT_CALL_MAX)
-            cache.put("llm", ck, out)
-            return out
+                log.warning("Gemini a échoué (%s), tentative de relais", str(e)[:120])
+        if not media:
+            for fb in self.fallbacks:  # Groq, puis Cerebras, puis OpenRouter : chacun avec son propre quota
+                if not fb.pool.available():
+                    continue
+                try:
+                    out = fb.generate_json(prompt, until=time.time() + self.TEXT_CALL_MAX)
+                    cache.put("llm", ck, out)
+                    return out
+                except LLMError as e:
+                    err = e
+                    log.warning("Relais %s indisponible (%s)", getattr(fb, "name", "?"), str(e)[:100])
         raise err or QuotaExhausted("aucun LLM disponible")
+
+    def usage(self) -> dict:
+        """Résumé pour le rapport : état des clés et modèles réellement utilisés."""
+        d = {}
+        if self.gemini:
+            d["gemini"] = {"clés": self.gemini.pool.status(), "modèles utilisés": dict(self.gemini.used)}
+        for fb in self.fallbacks:
+            d[getattr(fb, "name", "relais")] = {"clés": fb.pool.status(), "appels": getattr(fb, "calls", 0)}
+        return d

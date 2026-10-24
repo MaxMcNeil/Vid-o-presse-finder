@@ -242,6 +242,13 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
     if not (d.get("videos_by_platform") or {}).get("youtube"):
         L.append(f"- ⚠️ Aucune vidéo YouTube retenue (clés YouTube chargées : {d.get('youtube_keys', 0)}). "
                  "Essaie l'autorité « moyenne » ou lance le workflow « Diagnostic ».")
+    if d.get("youtube_keys_status"):
+        L.append(f"- Clés YouTube en fin de recherche : {d['youtube_keys_status']}")
+    for api, u in (d.get("llm_usage") or {}).items():
+        used = u.get("modèles utilisés") or {}
+        L.append(f"- IA {api} : clés {u.get('clés', '?')}" + (" ; modèles : " + ", ".join(f"{m} ×{n}" for m, n in used.items()) if used else "")
+                 + (f" ; {u['appels']} appel(s)" if u.get("appels") else ""))
+    L.append("- État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt")
     L.append(f"- Durée : {d.get('elapsed_min', '?')} min" + (" — ⚠️ limite de temps atteinte, résultats partiels" if d.get("timed_out") else ""))
     L.append("")
     p = outdir / "report.md"

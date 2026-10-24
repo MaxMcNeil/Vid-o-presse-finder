@@ -67,18 +67,43 @@ Automatiquement : `python -m quote_finder.clips results/<lot>/montage.json` (ou 
 
 ## Secrets à créer
 
-*Settings → Secrets and variables → Actions → New repository secret* (plusieurs clés par secret : une par ligne ou séparées par des virgules).
+*Settings → Secrets and variables → Actions → New repository secret*. Plusieurs clés dans un même secret : une par ligne (ou séparées par des virgules).
 
 | Secret | Rôle | Obligatoire |
 |---|---|---|
 | `GEMINI_API_KEYS` | comprendre la recherche, juger le contenu, analyser les vidéos sans sous-titres | oui |
-| `YOUTUBE_API_KEYS` | recherche YouTube + nombre d'abonnés des chaînes (sert au score d'autorité) | fortement conseillé |
-| `FALLBACK_LLM_KEYS` + variable `FALLBACK_LLM_PROVIDER` (`groq`, `cerebras` ou `openrouter`) | relais gratuit quand Gemini est à court de quota (texte seulement) | conseillé |
-| `GUARDIAN_API_KEYS` | archives du Guardian, texte intégral | optionnel |
-| `NYT_API_KEYS` | archives du New York Times (résumés) | optionnel |
+| `YOUTUBE_API_KEYS` | recherche YouTube + abonnés des chaînes (score d'autorité) | fortement conseillé |
+| `GROQ_API_KEYS` | relais gratuit n° 1 quand toutes les clés Gemini sont vides (texte) | conseillé |
+| `CEREBRAS_API_KEYS` | relais gratuit n° 2 | optionnel |
+| `OPENROUTER_API_KEYS` | relais gratuit n° 3 (modèles `:free`) | optionnel |
+| `GUARDIAN_API_KEYS` / `NYT_API_KEYS` | archives de presse | optionnel |
 | `YT_PROXY_URL` | proxy si YouTube bloque les transcriptions depuis GitHub | optionnel |
 
-Les anciens secrets `NTFY_TOPIC` et `PHONE_SECRET` ne servent plus : tu peux les supprimer.
+Une clé déjà rangée dans l'ancien secret `FALLBACK_LLM_KEYS` est reconnue toute seule (`gsk_…` = Groq, `csk-…` = Cerebras, `sk-or-…` = OpenRouter) : pas besoin de la déplacer.
+
+⚠️ **Une clé = un projet Google différent.** Le quota gratuit de Gemini et celui de YouTube sont comptés **par projet Google Cloud**,
+pas par clé : 5 clés créées dans le même projet partagent un seul quota. Dans Google AI Studio, crée chaque clé avec
+« Create API key in new project » ; pour YouTube, une clé dans 5 projets différents (API « YouTube Data API v3 » activée dans chacun).
+
+## Gestion des quotas (automatique)
+
+L'ordre d'utilisation, pour avoir le maximum de chances :
+
+1. **Gemini** : les 5 clés en rotation (une requête sur chaque à tour de rôle, pour ne pas toucher la limite par minute).
+   Sur chaque clé, tous les modèles gratuits accessibles sont découverts et utilisés du meilleur au plus léger :
+   `flash` → `flash-lite` → **Gemma** (texte seulement, quota très large). Chaque modèle a son propre quota :
+   quand l'un est vide sur une clé, on passe au modèle suivant, puis à la clé suivante.
+2. **Relais** quand tout Gemini est vide : Groq → Cerebras → OpenRouter (texte seulement).
+3. **YouTube** : les 5 clés en rotation ; chaque appel est compté (recherche = 100 unités sur 10 000 par jour et par clé) ;
+   une clé presque vide est laissée de côté ; quand toutes sont vides → recherche par yt-dlp (gratuite, sans clé).
+   Une même recherche relancée dans les 36 h est servie depuis le cache (0 unité).
+4. **Mémoire entre les lancements** : `state/quota.json` (enregistré dans le dépôt) retient quelles clés ou quels modèles
+   sont vides jusqu'à la remise à zéro (minuit heure du Pacifique = 9 h en Italie/France). Le lancement suivant ne perd
+   pas de temps avec eux. Les clés n'y figurent jamais en clair (seulement « Gemini clé 2 »…).
+5. **Recherches en parallèle** : chaque job commence par une clé différente (job 1 → clé 1, job 2 → clé 2…).
+
+**Savoir quelles clés sont disponibles** : ouvre `state/QUOTAS.md` (mis à jour après chaque lancement et chaque Diagnostic),
+ou lance *Actions → Diagnostic* qui teste chaque clé de chaque api et donne les unités YouTube restantes.
 
 ## Comment ça marche
 

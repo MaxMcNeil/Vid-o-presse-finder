@@ -8,7 +8,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from . import batch, pipeline, report
+from . import batch, pipeline, quota, report
 from .llm import LLMRouter
 from .pipeline import Options, PlanError, run
 from .util import slugify
@@ -110,6 +110,7 @@ def main(argv=None) -> int:
     for s in searches:
         logging.info("===== Recherche %s : %s | %s (%s) =====", s["id"], s["target"], s["claim"], s["type"])
         codes.append(run_one(options_for(a, s["target"], s["claim"], s["type"]), llm, batch_dir / s["id"], s["id"]))
+        quota.state().save()  # l'état des clés est conservé même si une recherche échoue
     idx = batch.merge(batch_dir)
     batch.update_results_readme(Path(a.out))
     print(f"Index du lot : {idx}")

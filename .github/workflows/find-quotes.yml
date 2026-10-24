@@ -92,12 +92,17 @@ jobs:
       YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
       GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
       FALLBACK_LLM_KEYS: ${{ secrets.FALLBACK_LLM_KEYS }}
+      GROQ_API_KEYS: ${{ secrets.GROQ_API_KEYS }}
+      CEREBRAS_API_KEYS: ${{ secrets.CEREBRAS_API_KEYS }}
+      OPENROUTER_API_KEYS: ${{ secrets.OPENROUTER_API_KEYS }}
       GUARDIAN_API_KEYS: ${{ secrets.GUARDIAN_API_KEYS }}
       NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
       YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
       FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
       QF_CACHE_DIR: .cache
+      QF_QUOTA_FILE: state/quota.json          # clés épuisées lors des lancements précédents : sautées d'emblée
+      QF_KEY_OFFSET: ${{ strategy.job-index }} # chaque recherche en parallèle commence par une clé différente
       # entrées passées par variables d'environnement (jamais interpolées dans le shell)
       S_TARGET: ${{ matrix.s.target }}
       S_CLAIM: ${{ matrix.s.claim }}
@@ -145,6 +150,14 @@ jobs:
           if-no-files-found: ignore
           retention-days: 3
 
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quota-${{ matrix.s.id }}
+          path: state/quota.json
+          if-no-files-found: ignore
+          retention-days: 3
+
   publish:
     needs: [prepare, search]
     if: always() && needs.prepare.result == 'success'
@@ -159,6 +172,18 @@ jobs:
         with:
           pattern: res-*
           path: dl
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: quota-*
+          path: dlq
+
+      - name: Mettre à jour l'état des clés (state/QUOTAS.md)
+        run: |
+          files=$(find dlq -name quota.json 2>/dev/null)
+          python3 -m quote_finder.quota merge state/quota.json $files > /dev/null
+          rm -rf dlq
+          cat state/QUOTAS.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Rassembler (index + montage global du lot)
         env:
@@ -179,7 +204,7 @@ jobs:
         run: |
           git config user.name "quote-finder-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add results
+          git add results state
           git diff --cached --quiet && exit 0
           git commit -q -m "résultats : $LOT"
           for i in 1 2 3 4 5; do

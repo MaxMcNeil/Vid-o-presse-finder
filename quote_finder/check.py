@@ -27,39 +27,59 @@ def t(fn):
 
 
 def main() -> int:
+    from . import quota
+    from .keys import KeyPool
+    from .llm import PROVIDERS, GeminiClient, OpenAICompatClient, is_text_only
     print("Quote Finder — diagnostic\n")
+    st = quota.state()
     bad = 0
     print("Clés chargées :")
-    for n in ("GEMINI", "YOUTUBE", "FALLBACK_LLM", "GUARDIAN", "NYT"):
+    for n in ("GEMINI", "YOUTUBE", "GROQ", "CEREBRAS", "OPENROUTER", "FALLBACK_LLM", "GUARDIAN", "NYT"):
         k = keys_from_env(n)
-        line(OK if k else (WARN if n in ("GUARDIAN", "NYT") else KO), n, f"{len(k)} clé(s)")
+        if k or n in ("GEMINI", "YOUTUBE"):
+            line(OK if k else KO, n, f"{len(k)} clé(s)")
         if not k and n in ("GEMINI", "YOUTUBE"):
             bad += 1
-    print("\nIA :")
+    print("\nGemini (chaque clé, chaque modèle a son propre quota gratuit) :", flush=True)
     llm = LLMRouter.from_env()
-    if llm.gemini:
-        from .keys import KeyPool
-        from .llm import GeminiClient
-        print("  (60 s max par clé ; même méthode que la vraie recherche)", flush=True)
-        for i, key in enumerate(keys_from_env("GEMINI"), 1):
-            c = GeminiClient(KeyPool("t", [key], 0), list(llm.gemini.models), preferred=llm.gemini.preferred, timeout=60)
-            r, e, d = t(lambda c=c: c.generate_json('Réponds exactement {"ok": true}', max_attempts=3))
-            line(OK if r else KO, f"Gemini clé {i}", f"{c.model} (parmi {len(c._key_models.get(key, []))} modèles de cette clé), {d:.0f}s" if r else e)
-    if llm.fallback:
-        r, e, d = t(lambda: llm.fallback.generate_json('Réponds exactement {"ok": true}'))
-        line(OK if r else KO, "LLM de secours (Groq…)", f"{llm.fallback.model}, {d:.0f}s" if r else e)
+    ok_g = 0
+    for i, key in enumerate(keys_from_env("GEMINI"), 1):
+        pool = KeyPool("gemini", [key], 0, persist=True)
+        c = GeminiClient(pool, list(llm.gemini.models), preferred=llm.gemini.preferred, timeout=60)
+        r, e, d = t(lambda c=c: c.generate_json('Réponds exactement {"ok": true}', max_attempts=4))
+        models = c._key_models.get(key, [])
+        fl = [m for m in models if not is_text_only(m)]
+        gm = [m for m in models if is_text_only(m)]
+        ok_g += bool(r)
+        line(OK if r else KO, f"Gemini clé {i}", (f"répond avec {c.model} en {d:.0f}s" if r else e) +
+             f" — {len(fl)} modèle(s) vidéo/texte, {len(gm)} Gemma (texte)")
+    if keys_from_env("GEMINI") and not ok_g:
+        bad += 1
+    for fb in llm.fallbacks:
+        for i, key in enumerate(fb.pool._next_ok, 1):
+            c = OpenAICompatClient(KeyPool(fb.name, [key], 0, persist=True), fb.base, fb.models[0])
+            c.name = fb.name
+            r, e, d = t(lambda c=c: c.generate_json('Réponds exactement {"ok": true}'))
+            line(OK if r else KO, f"{fb.name} clé {i}", f"{c.model}, {d:.0f}s" if r else e)
+    if not llm.fallbacks:
+        line(WARN, "Relais (Groq / Cerebras / OpenRouter)", "aucun : ajoute GROQ_API_KEYS (gratuit) pour ne jamais rester bloqué")
     print("\nVidéos :")
-    yk = keys_from_env("YOUTUBE")
-    if yk:
-        def yt():
-            r = requests.get("https://www.googleapis.com/youtube/v3/search", timeout=20,
-                             params={"part": "id", "q": "test", "maxResults": 1, "type": "video", "key": yk[0]})
+    for i, key in enumerate(keys_from_env("YOUTUBE"), 1):
+        def yt(key=key):  # 1 unité seulement (au lieu de 100 pour une recherche)
+            r = requests.get("https://www.googleapis.com/youtube/v3/videos", timeout=20,
+                             params={"part": "id", "id": "dQw4w9WgXcQ", "key": key})
+            st.use("youtube", key, 1)
             if r.status_code != 200:
-                raise RuntimeError(f"HTTP {r.status_code} {r.json().get('error', {}).get('message', '')[:90]}")
-            return len(r.json().get("items", []))
+                msg = r.json().get("error", {}).get("message", "")[:90]
+                if "quota" in msg.lower():
+                    st.exhaust_key("youtube", key)
+                raise RuntimeError(f"HTTP {r.status_code} {msg}")
+            return True
+        st.label("youtube", key, f"YouTube clé {i}")
         r, e, d = t(yt)
-        line(OK if r is not None else KO, "YouTube API (1re clé)", "répond" if r is not None else e)
-        bad += 0 if r is not None else 1
+        left = st.units_left("youtube", key)
+        line(OK if r else KO, f"YouTube clé {i}", f"répond — ~{left} unités restantes aujourd'hui (≈ {left // 100} recherches)" if r else e)
+    st.save()
     from .sources import youtube
     r, e, d = t(lambda: youtube.search_ytdlp("actualité", 3))
     line(OK if r else KO, "YouTube via yt-dlp (sans clé)", f"{len(r)} résultat(s)" if r else (e or "0 résultat"))
@@ -86,6 +106,8 @@ def main() -> int:
                      ("GDELT", lambda: news.gdelt("Bardella", 5))):
         r, e, d = t(fn)
         line(OK if r else WARN, name, f"{len(r)} article(s)" if r else (e or "0 résultat (souvent un blocage temporaire)"))
+    print("\nÉtat des clés (aussi dans state/QUOTAS.md après chaque recherche) :\n")
+    print(st.markdown())
     print("\n" + ("Tout l'essentiel fonctionne." if not bad else f"{bad} problème(s) bloquant(s) ci-dessus : corrige-les avant de lancer une recherche."))
     return 1 if bad else 0
 

@@ -3,6 +3,9 @@ name: Diagnostic
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -11,6 +14,10 @@ jobs:
       YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
       GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
       FALLBACK_LLM_KEYS: ${{ secrets.FALLBACK_LLM_KEYS }}
+      GROQ_API_KEYS: ${{ secrets.GROQ_API_KEYS }}
+      CEREBRAS_API_KEYS: ${{ secrets.CEREBRAS_API_KEYS }}
+      OPENROUTER_API_KEYS: ${{ secrets.OPENROUTER_API_KEYS }}
+      QF_QUOTA_FILE: state/quota.json
       GUARDIAN_API_KEYS: ${{ secrets.GUARDIAN_API_KEYS }}
       NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
       YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
@@ -26,3 +33,13 @@ jobs:
           which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           pip install -r requirements.txt
       - run: python -m quote_finder.check | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Enregistrer l'état des clés (state/QUOTAS.md)
+        if: always()
+        run: |
+          python -m quote_finder.quota merge state/quota.json > /dev/null
+          git config user.name "quote-finder-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state
+          git diff --cached --quiet && exit 0
+          git commit -q -m "état des clés API"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done

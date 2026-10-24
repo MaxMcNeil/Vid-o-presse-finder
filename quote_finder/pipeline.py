@@ -111,7 +111,7 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None) -> list
     for i, q in enumerate(queries):
         lang = o.langs[i % len(o.langs)] if o.langs else None
         if "youtube" in o.platforms:
-            add(_safe(youtube.search, yt_pool, q, 15, lang, http), q)
+            add(_safe(youtube.search, yt_pool, q, 25, lang, http), q)  # 25 ou 15 résultats : même coût (100 unités)
         if "dailymotion" in o.platforms and i < 3:
             add(_safe(other_video.dailymotion, q, 10, http), q)
         if "archive" in o.platforms and i < 2:
@@ -331,9 +331,9 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                         "Rien n'a été cherché pour ne pas produire de résultats médiocres : relance dans quelques minutes.")
     log.info("Plan (%s) : cible %s (%s), locuteurs : %s | %s | groupes : %s", plan.source, o.target, o.target_type,
              o.speakers, plan.claim_summary, plan.term_groups)
-    yt_pool = KeyPool("youtube", keys_from_env("YOUTUBE"))
-    pools = {"guardian": KeyPool("guardian", keys_from_env("GUARDIAN"), 1.0),
-             "nyt": KeyPool("nyt", keys_from_env("NYT"), 13.0)}
+    yt_pool = KeyPool("youtube", keys_from_env("YOUTUBE"), persist=True)
+    pools = {"guardian": KeyPool("guardian", keys_from_env("GUARDIAN"), 1.0, persist=True),
+             "nyt": KeyPool("nyt", keys_from_env("NYT"), 13.0, persist=True)}
     plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries),
                  "queries_news": len(plan.news_queries), "authority": o.authority, "speakers": o.speakers}
 
@@ -420,5 +420,10 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     elif o.articles:
         log.warning("Plus assez de temps pour les articles")
     plan.diag["elapsed_min"] = round((time.time() - t0) / 60, 1)
+    plan.diag["youtube_keys_status"] = yt_pool.status()
+    if hasattr(llm, "usage"):
+        plan.diag["llm_usage"] = llm.usage()
+    from . import quota
+    quota.state().save()
     plan.diag["timed_out"] = TIMED_OUT.is_set()
     return plan, vres, ares
