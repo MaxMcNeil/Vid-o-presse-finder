@@ -8,7 +8,8 @@ from pathlib import Path
 
 from . import report
 from .llm import LLMRouter
-from .pipeline import Options, run
+from . import pipeline
+from .pipeline import Options, PlanError, run
 from .util import slugify
 
 
@@ -27,6 +28,8 @@ def parse_args(argv=None):
     p.add_argument("--strict", action="store_true", help="Exclure les propos rapportés/locuteur incertain")
     p.add_argument("--platforms", default="youtube,dailymotion,archive")
     p.add_argument("--no-articles", action="store_true")
+    p.add_argument("--max-minutes", type=int, default=40, help="durée maximale ; au-delà on rend les résultats partiels")
+    p.add_argument("--allow-heuristic", action="store_true", help="continuer même si l'IA ne répond pas (déconseillé)")
     p.add_argument("--out", default="results")
     return p.parse_args(argv)
 
@@ -38,12 +41,18 @@ def main(argv=None) -> int:
     o = Options(person=a.person.strip(), claim=a.claim.strip(), also=split(a.also), anyone=a.anyone,
                 langs=split(a.langs) or ["en"], max_videos=a.max_videos, max_articles=a.max_articles,
                 video_fallback_max=a.video_fallback_max, audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict,
-                platforms=split(a.platforms), articles=not a.no_articles)
+                platforms=split(a.platforms), articles=not a.no_articles,
+                max_minutes=a.max_minutes, allow_heuristic=a.allow_heuristic)
     llm = LLMRouter.from_env()
     if not llm.has_text:
         logging.warning("Aucune clé Gemini/LLM : impossible de juger le contenu. Définis GEMINI_API_KEYS.")
         return 2
-    plan, vres, ares = run(o, llm)
+    try:
+        plan, vres, ares = run(o, llm)
+    except PlanError as e:
+        logging.error("%s", e)
+        print(f"ÉCHEC : {e}")
+        return 3
     out = Path(a.out) / slugify(f"{o.person} {o.claim}")
     stats = {"videos_scanned": len(vres), "articles_scanned": len(ares)}
     p = report.build(o.person, o.claim, plan, vres, ares, out, stats)
@@ -52,6 +61,10 @@ def main(argv=None) -> int:
     if summ:
         with open(summ, "a", encoding="utf-8") as f:
             f.write(p.read_text(encoding="utf-8")[:900_000])
+    if pipeline.TIMED_OUT.is_set():  # des tâches bloquées pourraient retenir le processus : on sort proprement
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os._exit(0)
     return 0
 
 

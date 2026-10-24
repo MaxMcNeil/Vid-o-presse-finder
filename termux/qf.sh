@@ -56,6 +56,8 @@ case "$1" in
       cp -r "$HOME/qf_clips/$(basename "$(dirname "$RJ")")" "$D/" && echo "Copié dans $(basename "$D")/$(basename "$(dirname "$RJ")")"
     fi
     exit 0 ;;
+  check)
+    cd "$REPO" && exec python -m quote_finder.check ;;
   phone-setup)
     if [ -z "$NTFY_TOPIC" ] || [ -z "$PHONE_SECRET" ]; then
       NTFY_TOPIC="qf-$(python -c 'import secrets;print(secrets.token_hex(12))')"

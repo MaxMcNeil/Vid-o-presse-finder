@@ -141,11 +141,19 @@ def handle(d: dict, repo: Path, conf: Path) -> None:
     log = conf / "last.log"
     _notify("Quote Finder", f"Recherche lancée : {d['person']}")
     with open(log, "w", encoding="utf-8") as f:
-        rc = subprocess.run([sys.executable, "-m", "quote_finder", *args, f"--out={repo / 'results'}"],
-                            cwd=repo, env=env, stdout=f, stderr=subprocess.STDOUT).returncode
+        try:
+            rc = subprocess.run([sys.executable, "-m", "quote_finder", *args, "--max-minutes=40", f"--out={repo / 'results'}"],
+                                cwd=repo, env=env, stdout=f, stderr=subprocess.STDOUT, timeout=55 * 60).returncode
+        except subprocess.TimeoutExpired:
+            rc = 124
     outs = sorted((repo / "results").glob("*/"), key=lambda p: p.stat().st_mtime, reverse=True)
     if rc != 0 or not outs:
-        _notify("Quote Finder", "Échec : voir ~/.quote_finder/last.log")
+        tail = ""
+        try:
+            tail = [l for l in log.read_text(encoding="utf-8").splitlines() if "ÉCHEC" in l or "ERROR" in l][-1][:140]
+        except (OSError, IndexError):
+            pass
+        _notify("Quote Finder — échec", tail or "voir ~/.quote_finder/last.log")
         return
     for cmd in (["git", "add", "results"], ["git", "commit", "-qm", f"résultats (téléphone) {d['id']}"],
                 ["git", "pull", "--rebase", "-q"], ["git", "push", "-q"]):

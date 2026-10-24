@@ -82,3 +82,7 @@ qf clips                                   # derniers résultats
 qf clips --own-voice-only --min-confidence 0.9
 ```
 Ils sont copiés dans `Movies` (ou Téléchargements) avec un fichier `montage_list.txt` : `ffmpeg -f concat -safe 0 -i montage_list.txt -c copy montage.mp4`. En local : `python -m quote_finder.clips results/<recherche>/results.json`.
+
+## Diagnostic
+
+`qf check` (ou `python -m quote_finder.check`) teste, depuis le téléphone, chaque clé et chaque service (Gemini, Groq, YouTube, sous-titres, Dailymotion, audio, presse, ntfy) et dit ce qui ne marche pas. Chaque `report.md` se termine par une section **Diagnostic** (plan IA ou de secours, vidéos par plateforme, méthodes d'analyse, durée). Une recherche est limitée à 40 min (`--max-minutes`) et s'arrête franchement si l'IA ne répond pas pour établir le plan.

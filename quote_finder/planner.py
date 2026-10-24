@@ -3,11 +3,13 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 
 from .models import Plan
 from .util import normalize
 
 log = logging.getLogger("qf.planner")
+PLAN_ATTEMPTS, PLAN_WAIT = 4, 25  # le plan est la base de tout : on insiste avant de renoncer
 
 STOP = set("""dit dire disent disait says said say affirme affirment declare a an the of to in on at is are was were be been has have had that this these those and or for with
 from by as it its he she they them his her their not no do does did can could would should will
@@ -43,32 +45,38 @@ def _heuristic(person: str, claim: str, others: list[str], langs: list[str]) -> 
     yt = [f"{person} {claim}", f"{person} {claim} interview", f"{person} {claim} speech",
           f"{person} says {claim}", f'"{claim}" {person}']
     return Plan(claim, groups, [normalize(n) for n in names if n], yt,
-                [f'"{person}" {claim}', f"{person} {claim}"], langs)
+                [f'"{person}" {claim}', f"{person} {claim}"], langs, source="heuristic")
 
 
 def make_plan(llm, person: str, claim: str, others: list[str], langs: list[str], anyone: bool = False) -> Plan:
     if llm is None or not llm.has_text:
         log.warning("Pas de LLM : plan heuristique (moins précis)")
         return _heuristic(person, claim, others, langs)
-    try:
-        d = llm.generate_json(PROMPT.format(person=person, others=", ".join(others) or "aucun", claim=claim,
-                                            langs=", ".join(langs),
-                                            anyone_line=("TOUT LOCUTEUR EST ACCEPTÉ : la personne cible est le SUJET de l'affirmation, "
-                                                         "pas forcément celui qui parle (ex. des gens qui disent que cette personne ment).\n") if anyone else ""))
-        groups = [[normalize(t) for t in g if normalize(t)] for g in d.get("term_groups", []) if g]
-        groups = [g for g in groups if g][:5]
-        if not groups:
-            raise ValueError("term_groups vide")
-        aliases = [normalize(a) for a in d.get("person_aliases", []) if a] + [normalize(person)] + \
-                  [normalize(o) for o in others]
-        return Plan(
-            claim_summary=str(d.get("claim_summary") or claim),
-            term_groups=groups,
-            person_aliases=list(dict.fromkeys(a for a in aliases if a)),
-            youtube_queries=list(dict.fromkeys([f"{person} {claim}"] + [q for q in d.get("youtube_queries", []) if q]))[:16],
-            news_queries=list(dict.fromkeys([f'"{person}" {claim}'] + [q for q in d.get("news_queries", []) if q]))[:10],
-            languages=langs,
-        )
-    except Exception as e:  # noqa: BLE001
-        log.warning("Planification LLM échouée (%s) : plan heuristique", e)
-        return _heuristic(person, claim, others, langs)
+    last = None
+    for attempt in range(PLAN_ATTEMPTS):
+        try:
+            d = llm.generate_json(PROMPT.format(person=person, others=", ".join(others) or "aucun", claim=claim,
+                                                langs=", ".join(langs),
+                                                anyone_line=("TOUT LOCUTEUR EST ACCEPTÉ : la personne cible est le SUJET de l'affirmation, "
+                                                             "pas forcément celui qui parle (ex. des gens qui disent que cette personne ment).\n") if anyone else ""))
+            groups = [[normalize(t) for t in g if normalize(t)] for g in d.get("term_groups", []) if g]
+            groups = [g for g in groups if g][:5]
+            if not groups:
+                raise ValueError("term_groups vide")
+            aliases = [normalize(a) for a in d.get("person_aliases", []) if a] + [normalize(person)] + \
+                      [normalize(o) for o in others]
+            return Plan(
+                claim_summary=str(d.get("claim_summary") or claim),
+                term_groups=groups,
+                person_aliases=list(dict.fromkeys(a for a in aliases if a)),
+                youtube_queries=list(dict.fromkeys([f"{person} {claim}"] + [q for q in d.get("youtube_queries", []) if q]))[:16],
+                news_queries=list(dict.fromkeys([f'"{person}" {claim}'] + [q for q in d.get("news_queries", []) if q]))[:10],
+                languages=langs,
+            )
+        except Exception as e:  # noqa: BLE001
+            last = e
+            log.warning("Planification LLM échouée (essai %d/%d) : %s", attempt + 1, PLAN_ATTEMPTS, str(e)[:150])
+            if attempt + 1 < PLAN_ATTEMPTS:
+                time.sleep(PLAN_WAIT)
+    log.error("Planification impossible après %d essais (%s) : plan heuristique", PLAN_ATTEMPTS, str(last)[:100])
+    return _heuristic(person, claim, others, langs)

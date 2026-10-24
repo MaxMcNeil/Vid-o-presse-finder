@@ -112,6 +112,8 @@ class GeminiClient:
         last = "aucune clé disponible"
         total = max_attempts or (max(8, 3 * len(self.pool._next_ok)) + len(self.models) + 6)
         for attempt in range(total):
+            if getattr(self, "deadline", None) and time.time() > self.deadline:
+                raise QuotaExhausted("temps imparti écoulé")
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted("toutes les clés Gemini sont épuisées")
@@ -176,6 +178,8 @@ class OpenAICompatClient:
                              {"role": "user", "content": prompt}]}
         last = ""
         for attempt in range(max(4, 2 * len(self.pool._next_ok))):
+            if getattr(self, "deadline", None) and time.time() > self.deadline:
+                raise QuotaExhausted("temps imparti écoulé")
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted("clés de repli épuisées")
@@ -229,6 +233,14 @@ class LLMRouter:
                 fb = OpenAICompatClient(KeyPool("fallback", fkeys, min_interval=2.5), base, model)
         return cls(gem, fb)
 
+    deadline: float | None = None
+
+    def set_deadline(self, t: float | None) -> None:
+        self.deadline = t
+        for c in (self.gemini, self.fallback):
+            if c:
+                c.deadline = t
+
     @property
     def has_text(self) -> bool:
         return bool(self.gemini or self.fallback)
@@ -238,6 +250,8 @@ class LLMRouter:
         return bool(self.gemini and self.gemini.pool.available())
 
     def generate_json(self, prompt: str, video_url: str | None = None, inline_media=None, media_key: str = ""):
+        if self.deadline and time.time() > self.deadline:
+            raise QuotaExhausted("temps imparti écoulé")
         ck = f"{video_url or ''}|{media_key}\n{prompt}"
         hit = cache.get("llm", ck)
         if hit is not None:

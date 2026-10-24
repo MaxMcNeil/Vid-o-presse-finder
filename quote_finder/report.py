@@ -138,6 +138,25 @@ def build(person, claim, plan, vres, ares, outdir: Path, stats: dict | None = No
         L += ["## Vidéos non vérifiables (pas de transcription, quota IA épuisé ou erreur)", ""]
         L += [f"- {r.video.title or r.video.id} — {r.video.url} — {r.note}" for r in un[:40]]
         L.append("")
+    d = plan.diag or {}
+    meth: dict[str, int] = {}
+    for r in vres:
+        meth[r.method] = meth.get(r.method, 0) + 1
+    reasons: dict[str, int] = {}
+    for r in vres:
+        if r.method == "none":
+            reasons[r.note[:70]] = reasons.get(r.note[:70], 0) + 1
+    L += ["## Diagnostic", "",
+          f"- Plan de recherche : {'IA' if plan.source == 'llm' else '⚠️ plan de secours (IA indisponible), résultats peu fiables'}",
+          f"- Vidéos candidates par plateforme : {d.get('videos_by_platform', {})}",
+          f"- Analyses : {meth}"]
+    if reasons:
+        L.append("- Vidéos non vérifiées : " + " ; ".join(f"{n}× {k}" for k, n in sorted(reasons.items(), key=lambda x: -x[1])[:4]))
+    if "youtube" in (d.get("videos_by_platform") or {}) or d.get("youtube_keys") is not None:
+        if not (d.get("videos_by_platform") or {}).get("youtube"):
+            L.append(f"- ⚠️ Aucune vidéo YouTube trouvée (clés YouTube chargées : {d.get('youtube_keys', 0)}). Lance `qf check`.")
+    L.append(f"- Durée : {d.get('elapsed_min', '?')} min" + (" — ⚠️ limite de temps atteinte, résultats partiels" if d.get("timed_out") else ""))
+    L.append("")
     p = outdir / "report.md"
     p.write_text("\n".join(L), encoding="utf-8")
     return p

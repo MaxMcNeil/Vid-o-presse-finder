@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import logging
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import TimeoutError as FuturesTimeout
 from dataclasses import dataclass, field
 
 import re
@@ -22,6 +24,11 @@ from .sources import news, other_video, youtube
 from .util import normalize
 
 log = logging.getLogger("qf.pipeline")
+TIMED_OUT = threading.Event()
+
+
+class PlanError(Exception):
+    """Le plan IA n'a pas pu être établi : mieux vaut s'arrêter que chercher n'importe quoi."""
 
 
 @dataclass
@@ -40,6 +47,8 @@ class Options:
     platforms: list[str] = field(default_factory=lambda: ["youtube", "dailymotion", "archive"])
     articles: bool = True
     workers: int = 4
+    max_minutes: int = 40       # durée maximale : au-delà, on rend ce qui est déjà trouvé
+    allow_heuristic: bool = False
 
 
 @dataclass
@@ -257,13 +266,27 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
 
 
 def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[ArticleResult]]:
+    t0 = time.time()
+    deadline = t0 + o.max_minutes * 60
+    if hasattr(llm, "set_deadline"):
+        llm.set_deadline(deadline)
     plan = make_plan(llm, o.person, o.claim, o.also, o.langs, o.anyone)
-    log.info("Plan : %s | groupes : %s", plan.claim_summary, plan.term_groups)
+    if plan.source == "heuristic" and not o.allow_heuristic and getattr(llm, "has_text", False):
+        raise PlanError("L'IA (Gemini et le LLM de secours) n'a pas répondu pour préparer la recherche. "
+                        "Rien n'a été cherché pour ne pas produire de résultats médiocres : relance dans quelques minutes.")
+    log.info("Plan (%s) : %s | groupes : %s", plan.source, plan.claim_summary, plan.term_groups)
     yt_pool = KeyPool("youtube", keys_from_env("YOUTUBE"))
     pools = {"guardian": KeyPool("guardian", keys_from_env("GUARDIAN"), 1.0),
              "nyt": KeyPool("nyt", keys_from_env("NYT"), 13.0)}
+    plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries), "queries_news": len(plan.news_queries)}
 
     vids = discover_videos(plan, o, yt_pool, http)
+    by_plat: dict[str, int] = {}
+    for v in vids:
+        by_plat[v.platform] = by_plat.get(v.platform, 0) + 1
+    plan.diag["videos_by_platform"] = by_plat
+    if "youtube" in o.platforms and not by_plat.get("youtube"):
+        log.warning("AUCUNE vidéo YouTube trouvée (clés YouTube : %d). Lance `qf check` pour tester.", len(yt_pool._next_ok))
     budget = [o.video_fallback_max]
     abudget = [o.audio_fallback_max]
     vres: list[VideoResult] = []
@@ -274,13 +297,25 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
         except Exception as e:  # noqa: BLE001 - une vidéo en erreur ne doit pas perdre les autres
             return VideoResult(v, [], "none", f"erreur interne ({type(e).__name__}: {str(e)[:100]})")
 
-    with ThreadPoolExecutor(o.workers) as ex:
-        futs = {ex.submit(safe_video, v): v for v in vids}
-        for i, f in enumerate(as_completed(futs), 1):
+    video_deadline = t0 + o.max_minutes * 60 * 0.75  # on garde 25 % du temps pour la presse
+    ex = ThreadPoolExecutor(o.workers)
+    futs = {ex.submit(safe_video, v): v for v in vids}
+    handled = set()
+    try:
+        for i, f in enumerate(as_completed(futs, timeout=max(1.0, video_deadline - time.time())), 1):
+            handled.add(f)
             r = f.result()
             vres.append(r)
             log.info("[%d/%d] %s → %d passage(s) bruts (%s)%s", i, len(vids), r.video.title[:60] or r.video.id, len(r.hits),
                      r.method, f" — {r.note}" if r.note else "")
+    except FuturesTimeout:
+        TIMED_OUT.set()
+        log.warning("Temps imparti pour les vidéos écoulé : on rend ce qui est déjà analysé")
+    finally:
+        ex.shutdown(wait=False, cancel_futures=True)
+    for f, v in futs.items():
+        if f not in handled:  # en cours ou annulée à l'échéance : listée, jamais perdue
+            vres.append(VideoResult(v, [], "none", "temps imparti écoulé"))
     for r in vres:
         kept = []
         for h in r.hits:
@@ -296,7 +331,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                  blocked, len(vres))
 
     ares: list[ArticleResult] = []
-    if o.articles:
+    if o.articles and deadline - time.time() > 90:
         try:
             arts = discover_articles(plan, o, pools, http)
 
@@ -305,8 +340,16 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                     return analyze_article(a, plan, o, llm, http)
                 except Exception as e:  # noqa: BLE001
                     return ArticleResult(a, [], False, f"erreur interne ({type(e).__name__})")
-            with ThreadPoolExecutor(o.workers) as ex:
-                ares = list(ex.map(safe_article, arts))
+            ex = ThreadPoolExecutor(o.workers)
+            afuts = {ex.submit(safe_article, a): a for a in arts}
+            try:
+                for f in as_completed(afuts, timeout=max(1.0, deadline - time.time())):
+                    ares.append(f.result())
+            except FuturesTimeout:
+                TIMED_OUT.set()
+                log.warning("Temps imparti pour les articles écoulé")
+            finally:
+                ex.shutdown(wait=False, cancel_futures=True)
             for r in ares:
                 r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o.anyone, o.also, o.min_confidence, o.strict)]
                 tn = normalize(r.article.title)
@@ -314,4 +357,8 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                     any(a and a in tn for a in plan.person_aliases)
         except Exception as e:  # noqa: BLE001 - les résultats vidéo sont conservés quoi qu'il arrive
             log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
+    elif o.articles:
+        log.warning("Plus assez de temps pour les articles")
+    plan.diag["elapsed_min"] = round((time.time() - t0) / 60, 1)
+    plan.diag["timed_out"] = TIMED_OUT.is_set()
     return plan, vres, ares

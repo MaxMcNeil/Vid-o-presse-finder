@@ -111,3 +111,32 @@ def test_anyone_mode_is_announced_to_the_judge():
     assert "TOUT LOCUTEUR EST ACCEPTÉ" in seen["p"]
     scan.judge_excerpts(L(), plan, "Bardella", [], "il ment", {}, ex, anyone=False)
     assert "TOUT LOCUTEUR EST ACCEPTÉ" not in seen["p"]
+
+
+def test_aborts_instead_of_junk_when_plan_llm_fails(monkeypatch):
+    import pytest
+    from quote_finder import planner
+    monkeypatch.setattr(planner, "PLAN_WAIT", 0)
+
+    class Down:
+        has_text = True
+        def generate_json(self, *a, **k): raise RuntimeError("503 surchargé")
+    with pytest.raises(pipeline.PlanError):
+        pipeline.run(pipeline.Options("La Suisse", "abandonne Microsoft"), Down())
+
+
+def test_time_budget_returns_partial_results(monkeypatch):
+    import time
+    vids = [VideoCandidate("youtube", f"V{i}", f"https://www.youtube.com/watch?v=V{i}", "t", "", "c", "2026-01-01", 100) for i in range(3)]
+    monkeypatch.setattr(youtube, "search", lambda *a, **k: list(vids))
+    for n in ("dailymotion", "archive_org"):
+        monkeypatch.setattr(other_video, n, lambda *a, **k: [])
+    monkeypatch.setattr(pipeline, "analyze_video", lambda *a, **k: time.sleep(8))
+    pipeline.TIMED_OUT.clear()
+    t0 = time.time()
+    o = pipeline.Options("A", "B", articles=False, max_minutes=0.04, workers=2)
+    plan, vres, ares = pipeline.run(o, FakeLLM())
+    assert time.time() - t0 < 6 and pipeline.TIMED_OUT.is_set()
+    assert len(vres) == 3 and all("temps imparti" in r.note for r in vres)
+    assert plan.diag["timed_out"] is True
+    pipeline.TIMED_OUT.clear()

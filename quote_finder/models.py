@@ -72,6 +72,8 @@ class Plan:
     youtube_queries: list[str]
     news_queries: list[str]
     languages: list[str]
+    source: str = "llm"  # llm | heuristic
+    diag: dict = field(default_factory=dict)
 
     def to_dict(self):
         return asdict(self)
