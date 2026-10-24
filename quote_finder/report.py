@@ -15,7 +15,9 @@ WHO = {"target": "la cible (ou son représentant) parle", "other_named": "autre 
 ROLE = {"official": "officiel", "expert": "expert", "politician": "responsable politique", "journalist": "journaliste",
         "other": "autre"}
 TYPE = {"personne": "personne", "pays": "pays", "entite": "entité", "sujet": "sujet"}
-PAD = {"sous-titres": (1.0, 0.8), "ia": (2.5, 2.0)}  # marges avant/après pour le montage, selon la précision
+PAD = {"sous-titres": (1.0, 0.8), "ia-affiné": (1.2, 1.0), "ia": (2.5, 2.0)}
+TIMING = {"sous-titres": "calé sur les sous-titres (±1-2 s)", "ia-affiné": "affiné par réécoute ciblée (±1 s)",
+          "ia": "estimé par l'IA (±5 s)", "non retrouvé": "⚠️ non retrouvé à la réécoute : exclu du montage"}  # marges avant/après pour le montage, selon la précision
 
 
 def ts_url(url: str, platform: str, t: float | None) -> str:
@@ -71,7 +73,7 @@ def montage_clips(o, vm, search_id: str = "") -> list[dict]:
     for r in vm:
         v = r.video
         for h in r.hits:
-            if h.t is None or h.t_end is None:
+            if h.t is None or h.t_end is None or h.timing == "non retrouvé":
                 continue
             pb, pa = PAD.get(h.timing, PAD["ia"])
             tin, tout = max(0.0, h.t - pb), h.t_end + pa
@@ -187,6 +189,7 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
             d = dur(h)
             role = ROLE.get(h.speaker_role, "")
             L.append(f"  - [{span(h)}]({clip_link(v.url, v.platform, h)})" + (f" ({d:.0f} s)" if d else "")
+                     + f" · {TIMING.get(h.timing, h.timing)}"
                      + f" — {VERDICT.get(h.verdict, h.verdict)}, {WHO.get(h.who_says, h.who_says)}"
                      + (f" ({h.speaker_name}{', ' + role if role else ''})" if h.speaker_name else (f" ({role})" if role else ""))
                      + f", confiance {h.confidence:.0%}")
@@ -237,6 +240,7 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
           f"- Articles candidats : {d.get('articles_candidates', '?')}, écartés pour autorité insuffisante : "
           f"{d.get('articles_low_authority', '?')}",
           f"- Analyses : {meth}",
+          f"- Horodatage des passages : {d.get('timing', {})}",
           f"- Sources de référence interrogées : {', '.join(d.get('reference_sites', [])) or '—'}",
           f"- Articles trouvés directement chez elles : {d.get('site_articles', '?')} {d.get('site_articles_by_site', '')}",
           f"- Pages ouvertes pour y chercher une vidéo : {d.get('site_pages_probed', '?')} → vidéos trouvées : {d.get('site_videos', '?')}",

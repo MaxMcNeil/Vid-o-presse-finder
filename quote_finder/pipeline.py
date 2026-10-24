@@ -53,6 +53,7 @@ class Options:
     max_minutes: float = 30          # au-delà, on rend ce qui est déjà trouvé
     allow_heuristic: bool = False
     since: str = ""                  # AAAA-MM-JJ : ignorer ce qui est plus ancien (facultatif)
+    refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
 
     @property
     def person(self) -> str:  # compatibilité
@@ -363,6 +364,35 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
     return ArticleResult(a, hits, verified, "" if verified else "vérifié sur le chapô/résumé seulement")
 
 
+def refine_videos(vres: list[VideoResult], o: Options, llm, deadline: float) -> None:
+    """2e passage (precise.py) : réécoute ciblée des passages horodatés par l'IA (vidéos YouTube sans sous-titres)."""
+    from . import precise
+    todo = [(r, h) for r in vres if r.video.platform == "youtube" and r.method == "gemini-video"
+            for h in r.hits if h.t is not None and h.timing == "ia"]
+    todo.sort(key=lambda x: -scan.hit_score(x[1], x[0].video.authority))
+    todo = todo[: o.refine_max]
+    if not todo or not getattr(llm, "has_video", False) or deadline - time.time() < 180:
+        return
+    log.info("Affinage de %d passage(s) par réécoute ciblée", len(todo))
+    ex = ThreadPoolExecutor(min(3, o.workers))
+    futs = [ex.submit(precise.refine_hit, llm, r.video.url, h, r.video.duration) for r, h in todo]
+    try:
+        for f in as_completed(futs, timeout=max(1.0, deadline - time.time() - 120)):
+            f.result()
+    except FuturesTimeout:
+        log.warning("Affinage interrompu (temps imparti) : les passages restants gardent l'horodatage de la 1re analyse")
+    except Exception as e:  # noqa: BLE001
+        log.warning("Affinage : %s", e)
+    finally:
+        ex.shutdown(wait=False, cancel_futures=True)
+    for r, h in todo:
+        scan.finish_times([h], r.video.duration)
+    st = {}
+    for _, h in todo:
+        st[h.timing] = st.get(h.timing, 0) + 1
+    log.info("Affinage : %s", st)
+
+
 def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[ArticleResult]]:
     t0 = time.time()
     deadline = t0 + o.max_minutes * 60
@@ -441,6 +471,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                 log.info("  écarté (%s, %s, %s, conf %.2f) : %s", h.verdict, h.who_says, h.speaker_name or "?", h.confidence,
                          h.quote[:80])
         r.hits = sorted(kept, key=lambda h: h.t if h.t is not None else 0)
+    refine_videos(vres, o, llm, deadline)
     blocked = sum(1 for r in vres if r.method in ("gemini-video", "gemini-audio"))
     if blocked:
         log.info("%d/%d vidéos analysées sans transcription (YouTube bloque souvent les transcriptions depuis GitHub)",
@@ -478,6 +509,11 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
             log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
     elif o.articles:
         log.warning("Plus assez de temps pour les articles")
+    tim: dict[str, int] = {}
+    for r in vres:
+        for h in r.hits:
+            tim[h.timing] = tim.get(h.timing, 0) + 1
+    plan.diag["timing"] = tim
     plan.diag["elapsed_min"] = round((time.time() - t0) / 60, 1)
     plan.diag["youtube_keys_status"] = yt_pool.status()
     if hasattr(llm, "usage"):

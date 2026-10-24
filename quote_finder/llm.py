@@ -123,12 +123,16 @@ class GeminiClient:
             log.warning("Gemini %s surchargé : pause 2 min, on utilise d'autres modèles", m)
 
     def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1, inline_media=None,
-                      max_attempts: int | None = None, until: float | None = None):
-        """inline_media = (mime, octets) pour un enregistrement audio envoyé directement (< ~15 Mo)."""
+                      max_attempts: int | None = None, until: float | None = None, video_clip=None):
+        """inline_media = (mime, octets) pour un enregistrement audio envoyé directement (< ~15 Mo).
+        video_clip = (début_s, fin_s) : Gemini ne regarde que ce segment de la vidéo YouTube."""
         import base64
         parts = []
         if video_url:
-            parts.append({"file_data": {"file_uri": video_url}})
+            part = {"file_data": {"file_uri": video_url}}
+            if video_clip:
+                part["video_metadata"] = {"start_offset": f"{int(video_clip[0])}s", "end_offset": f"{int(video_clip[1])}s", "fps": 1}
+            parts.append(part)
         if inline_media:
             parts.append({"inline_data": {"mime_type": inline_media[0],
                                           "data": base64.b64encode(inline_media[1]).decode()}})
@@ -425,10 +429,11 @@ class LLMRouter:
     def has_video(self) -> bool:
         return bool(self.gemini and self.gemini.pool.available())
 
-    def generate_json(self, prompt: str, video_url: str | None = None, inline_media=None, media_key: str = ""):
+    def generate_json(self, prompt: str, video_url: str | None = None, inline_media=None, media_key: str = "",
+                      video_clip=None):
         if self.deadline and time.time() > self.deadline:
             raise QuotaExhausted("temps imparti écoulé")
-        ck = f"{video_url or ''}|{media_key}\n{prompt}"
+        ck = f"{video_url or ''}|{media_key}|{video_clip or ''}\n{prompt}"
         hit = cache.get("llm", ck)
         if hit is not None:
             return hit
@@ -438,7 +443,7 @@ class LLMRouter:
         until = time.time() + (self.MEDIA_CALL_MAX if media else self.TEXT_CALL_MAX)
         if self.gemini and self.gemini.pool.available():
             try:
-                out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media, until=until,
+                out = self.gemini.generate_json(prompt, video_url, inline_media=inline_media, until=until, video_clip=video_clip,
                                                 max_attempts=(None if not media else 10))
                 cache.put("llm", ck, out)
                 return out

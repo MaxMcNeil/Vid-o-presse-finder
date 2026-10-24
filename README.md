@@ -57,7 +57,7 @@ Chaque extrait de `montage.json` / `montage.csv` contient :
 |---|---|
 | `start`, `end` (+ `start_tc`, `end_tc`) | début et fin **exacts** de la déclaration, en secondes et en `HH:MM:SS.mmm` |
 | `in`, `out` (+ `in_tc`, `out_tc`) | mêmes points **avec marges** (prêts à couper) |
-| `timing` | `sous-titres` : calé sur la ligne de transcription où la phrase commence et finit (±1–2 s, marges 1 s / 0,8 s) ; `ia` : estimé par l'IA quand la vidéo n'a pas de sous-titres (±5 s, marges 2,5 s / 2 s) |
+| `timing` | `sous-titres` : calé sur la transcription (±1–2 s) ; `ia-affiné` : vidéo YouTube réécoutée par Gemini sur une fenêtre de quelques secondes autour du passage (±1 s) ; `ia` : estimé par l'IA (±5 s, marges plus larges). Les passages « non retrouvés » à la réécoute sont exclus du montage |
 | `video_id`, `source_url`, `platform` | pour télécharger la source |
 | `quote`, `speaker`, `speaker_role`, `verdict`, `confidence` | ce qui est dit, par qui (officiel, expert, journaliste…) |
 | `source_authority`, `score`, `order` | solidité de la source et ordre conseillé |
@@ -138,6 +138,8 @@ python -m pytest -q          # tests (pip install -r requirements-dev.txt)
 ## Limites
 
 - Les sous-titres automatiques n'indiquent pas qui parle : le locuteur est déduit du contexte ; « propos rapportés » et « locuteur incertain » sont signalés.
-- YouTube bloque parfois les transcriptions depuis GitHub : l'analyse vidéo par Gemini prend le relais (horodatage moins précis, `timing = ia`).
+- Depuis GitHub, YouTube bloque sous-titres et téléchargements (« Sign in to confirm you're not a bot », vérifié le 24/10/2026).
+  Contournement gratuit intégré : Gemini (qui lit la vidéo chez Google) analyse la vidéo, puis **réécoute uniquement
+  la fenêtre de chaque passage** pour l'horodater au dixième de seconde (`timing = ia-affiné`) et vérifier qu'il existe.
 - Avec `autorite = forte`, une recherche sur un sujet peu couvert peut ne rien rendre : relance en `moyenne`. Le rapport indique combien de sources ont été écartées pour autorité insuffisante.
 - Articles sous paywall : vérifiés sur le chapô seulement (signalé), ou listés « à vérifier à la main ».
