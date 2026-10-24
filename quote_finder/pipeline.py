@@ -20,7 +20,8 @@ from .keys import KeyPool, keys_from_env
 from .llm import LLMError, QuotaExhausted
 from .models import ArticleCandidate, Hit, Plan, Segment, VideoCandidate
 from .planner import make_plan
-from .sources import news, other_video, youtube
+from . import registry
+from .sources import media_sites, news, other_video, youtube
 from .util import call_with_timeout, normalize
 
 log = logging.getLogger("qf.pipeline")
@@ -43,7 +44,7 @@ class Options:
     max_articles: int = 6            # articles retenus au maximum
     authority: str = "forte"         # forte | moyenne | toutes
     video_fallback_max: int = 8      # vidéos YouTube sans transcription analysées directement par Gemini
-    audio_fallback_max: int = 4      # vidéos sans transcription (Dailymotion...) : audio écouté par Gemini
+    audio_fallback_max: int = 8      # vidéos sans sous-titres hors YouTube (sites des médias...) : audio écouté par Gemini
     min_confidence: float = 0.6
     strict: bool = False
     platforms: list[str] = field(default_factory=lambda: ["youtube", "dailymotion", "archive"])
@@ -92,7 +93,8 @@ def _recent_enough(published: str, since: str) -> bool:
     return not since or not published or published[:10] >= since
 
 
-def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None, llm=None) -> list[VideoCandidate]:
+def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None, llm=None,
+                    site_arts: list[ArticleCandidate] | None = None) -> list[VideoCandidate]:
     found: dict[str, VideoCandidate] = {}
 
     def add(vs, q):
@@ -116,6 +118,15 @@ def discover_videos(plan: Plan, o: Options, yt_pool: KeyPool, http=None, llm=Non
             add(_safe(other_video.dailymotion, q, 10, http), q)
         if "archive" in o.platforms and i < 2:
             add(_safe(other_video.archive_org, q, 8, http), q)
+    # sources de référence : vidéos de leurs sites (souvent sous-titrées) et recherche dans leurs chaînes YouTube
+    sq = plan.site_query or f"{o.target} {short}".strip()
+    if site_arts:
+        from . import screen
+        ranked = sorted(site_arts, key=lambda a: -screen.local_relevance(a.title, a.snippet, plan, o.target_type))
+        add(_safe(media_sites.videos_from_articles, ranked, 12), "site")
+    if "youtube" in o.platforms:
+        names = registry.youtube_channels(plan.countries, o.langs, 3)
+        add(_safe(media_sites.search_in_channels, yt_pool, names, sq, 8, http), "chaînes")
     vids = [v for v in found.values() if (v.duration is None or v.duration < 4 * 3600) and _recent_enough(v.published, o.since)]
     seen_titles, uniq = set(), []
     for v in vids:  # même vidéo publiée deux fois (ex. « Le Point » et « Le Point Abonnés »)
@@ -170,8 +181,9 @@ def select(items: list, plan: Plan, o: Options, llm, kind: str, cap: int, meta, 
     return chosen
 
 
-def discover_articles(plan: Plan, o: Options, pools: dict, http=None, llm=None) -> list[ArticleCandidate]:
-    found: dict[str, ArticleCandidate] = {}
+def discover_articles(plan: Plan, o: Options, pools: dict, http=None, llm=None,
+                      site_arts: list[ArticleCandidate] | None = None) -> list[ArticleCandidate]:
+    found: dict[str, ArticleCandidate] = {a.url: a for a in (site_arts or []) if a.url}
     queries = list(plan.news_queries)
     doms = [d for d in plan.authoritative_sources if "." in d and " " not in d][:3]
     base = f"{o.target} {' '.join((o.claim or '').split()[:6])}".strip()
@@ -364,7 +376,11 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries),
                  "queries_news": len(plan.news_queries), "authority": o.authority, "speakers": o.speakers}
 
-    vids = discover_videos(plan, o, yt_pool, http, llm)
+    srcs = registry.for_search(plan.countries, o.langs, [x for x in plan.authoritative_sources if "." in x], limit=8)
+    sq = plan.site_query or f"{o.target} {' '.join((o.claim or '').split()[:6])}".strip()
+    site_arts = _safe(media_sites.search_articles, srcs, sq, o.langs, http)
+    plan.diag["reference_sites"] = [x.domain for x in srcs]
+    vids = discover_videos(plan, o, yt_pool, http, llm, site_arts)
     by_plat: dict[str, int] = {}
     for v in vids:
         by_plat[v.platform] = by_plat.get(v.platform, 0) + 1
@@ -417,7 +433,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     ares: list[ArticleResult] = []
     if o.articles and deadline - time.time() > 90:
         try:
-            arts = discover_articles(plan, o, pools, http, llm)
+            arts = discover_articles(plan, o, pools, http, llm, site_arts)
 
             def safe_article(a):
                 try:

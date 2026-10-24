@@ -36,7 +36,7 @@ def parse_args(argv=None):
                    help="Exigence sur la source : forte = agences, grands médias, officiels")
     p.add_argument("--since", default="", help="Ignorer ce qui est antérieur à cette date (AAAA-MM-JJ)")
     p.add_argument("--video-fallback-max", type=int, default=None, help="Vidéos sans transcription analysées par Gemini")
-    p.add_argument("--audio-fallback-max", type=int, default=4)
+    p.add_argument("--audio-fallback-max", type=int, default=8)
     p.add_argument("--min-confidence", type=float, default=0.6)
     p.add_argument("--strict", action="store_true", help="Exclure les propos rapportés/locuteur incertain")
     p.add_argument("--platforms", default="youtube,dailymotion,archive")

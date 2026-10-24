@@ -63,6 +63,17 @@ for _score, _cs in _CH.items():
     for _c in _cs.split("|"):
         CHANNELS.setdefault(normalize(_c), _score)
 
+def _load_registry():
+    """L'annuaire par pays (registry.py) complète les tables : un média ajouté là-bas est reconnu partout."""
+    from . import registry
+    for d, src in registry.all_domains().items():
+        DOMAINS.setdefault(d, 1.0 if src.official else 0.85)
+        for ch in src.youtube:
+            CHANNELS.setdefault(normalize(ch), 1.0 if src.official else 0.9)
+
+
+_load_registry()
+
 LEVELS = {"forte": 0.6, "moyenne": 0.4, "toutes": 0.0}
 
 
@@ -133,6 +144,9 @@ def _caps_words(title: str) -> int:
 
 
 def score_video(v, plan=None) -> tuple[float, str]:
+    if v.platform == "web":  # vidéo prise sur le site du média : son domaine fait foi
+        s, why = score_domain(domain_of(v.url), plan)
+        return s, why + " (vidéo du site)"
     name = normalize(v.channel)
     base, why = None, ""
     if name:

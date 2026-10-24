@@ -90,6 +90,8 @@ class Plan:
     target_type: str = "personne"
     official_speakers: list[str] = field(default_factory=list)   # qui parle AU NOM de la cible (gouvernement, PDG...)
     authoritative_sources: list[str] = field(default_factory=list)  # médias / institutions de référence (noms ou domaines)
+    site_query: str = ""                                # mots-clés courts pour chercher sur le site d'un média
+    countries: list[str] = field(default_factory=list)  # pays concernés (codes ISO : CH, FR...) -> médias à interroger
 
     def to_dict(self):
         return asdict(self)
