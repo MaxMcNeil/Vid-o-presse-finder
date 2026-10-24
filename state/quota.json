@@ -2,113 +2,118 @@
  "keys": {
   "gemini:0ad101a9a2": {
    "day": "2026-10-24",
-   "calls": 6,
-   "units": 6,
-   "errors": 1,
+   "calls": 7,
+   "units": 7,
+   "errors": 5,
    "models": {},
    "label": "Gemini clé 1",
    "used_models": {
-    "gemini-3.8-flash": 6
+    "gemini-3.8-flash": 6,
+    "gemini-3-flash-preview": 1
    },
    "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:6f10d27b24": {
    "day": "2026-10-24",
-   "calls": 5,
-   "units": 5,
-   "errors": 1,
+   "calls": 7,
+   "units": 7,
+   "errors": 3,
    "models": {},
    "label": "Gemini clé 2",
    "used_models": {
-    "gemini-3.8-flash": 5
+    "gemini-3.8-flash": 6,
+    "gemini-3-flash-preview": 1
    },
-   "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
+   "last": "gemini-3.5-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:8c54858ebc": {
    "day": "2026-10-24",
-   "calls": 3,
-   "units": 3,
-   "errors": 1,
+   "calls": 4,
+   "units": 4,
+   "errors": 3,
    "models": {},
    "label": "Gemini clé 3",
    "used_models": {
-    "gemini-3.8-flash": 3
+    "gemini-3.8-flash": 3,
+    "gemini-3-flash-preview": 1
    },
-   "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
+   "last": "gemini-3.5-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:181ad99cca": {
    "day": "2026-10-24",
-   "calls": 5,
-   "units": 5,
-   "errors": 1,
+   "calls": 7,
+   "units": 7,
+   "errors": 3,
    "models": {},
    "label": "Gemini clé 4",
    "used_models": {
     "gemini-3.8-flash": 4,
-    "gemini-3.7-flash": 1
+    "gemini-3.7-flash": 1,
+    "gemini-3-flash-preview": 2
    },
    "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:c7a23ab254": {
    "day": "2026-10-24",
-   "calls": 2,
-   "units": 2,
-   "errors": 4,
+   "calls": 4,
+   "units": 4,
+   "errors": 6,
    "models": {},
    "label": "Gemini clé 5",
    "used_models": {
     "gemini-3.8-flash": 1,
-    "gemini-3.7-flash": 1
+    "gemini-3.7-flash": 1,
+    "gemini-3-flash-preview": 2
    },
    "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "groq:1691e6b64a": {
    "day": "2026-10-24",
-   "calls": 2,
-   "units": 2,
+   "calls": 5,
+   "units": 5,
    "errors": 0,
    "models": {},
    "label": "Groq clé 1",
    "used_models": {
-    "openai/gpt-oss-120b": 2
+    "openai/gpt-oss-120b": 5
    }
   },
   "youtube:ca0e47bd85": {
    "day": "2026-10-24",
-   "calls": 15,
-   "units": 510,
+   "calls": 21,
+   "units": 813,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 1"
   },
   "youtube:bcc568c3e7": {
    "day": "2026-10-24",
-   "calls": 14,
-   "units": 410,
+   "calls": 20,
+   "units": 713,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 2"
   },
   "youtube:0f238cfda0": {
    "day": "2026-10-24",
-   "calls": 14,
-   "units": 509,
+   "calls": 20,
+   "units": 812,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 3"
   },
   "youtube:92aa479928": {
    "day": "2026-10-24",
-   "calls": 14,
-   "units": 509,
+   "calls": 20,
+   "units": 713,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 4"
   },
   "youtube:a5a9d82454": {
    "day": "2026-10-24",
-   "calls": 14,
-   "units": 509,
+   "calls": 19,
+   "units": 613,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 5"
@@ -130,5 +135,5 @@
    "label": "NYT clé 1"
   }
  },
- "saved": "2026-10-24T13:39:19+00:00"
+ "saved": "2026-10-24T15:38:15+00:00"
 }
