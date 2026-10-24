@@ -1,0 +1,164 @@
+{
+ "target": "La famine menace l'Europe à cause de la guerre en Iran et l'Ukraine",
+ "target_type": "sujet",
+ "claim": "",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Analyse de la menace présumée de famine ou de crise alimentaire majeure en Europe liée aux conflits en Ukraine et au Moyen-Orient impliquant l'Iran.",
+  "term_groups": [
+   [
+    "famine",
+    "crise alimentaire",
+    "penurie alimentaire",
+    "securite alimentaire",
+    "food shortage",
+    "food crisis",
+    "famine risk",
+    "food security",
+    "starvation"
+   ],
+   [
+    "guerre en ukraine",
+    "crise ukrainienne",
+    "conflit iran",
+    "tensions iran",
+    "ukraine war",
+    "iran conflict",
+    "middle east escalation",
+    "escalade moyen orient"
+   ],
+   [
+    "europe",
+    "union europeenne",
+    "ue",
+    "european union",
+    "eu",
+    "continent europeen"
+   ]
+  ],
+  "target_aliases": [
+   "famine en europe",
+   "crise alimentaire europeenne",
+   "european food crisis",
+   "food insecurity europe",
+   "penurie alimentaire europe",
+   "la famine menace l europe a cause de la guerre en iran et l ukraine"
+  ],
+  "youtube_queries": [
+   "La famine menace l'Europe à cause de la guerre en Iran et l'Ukraine",
+   "Europe crise alimentaire guerre conférence de presse",
+   "FAO food security Europe Ukraine war briefing",
+   "Guerre Ukraine impact alimentation Europe débat",
+   "Commission européenne sécurité alimentaire déclarations",
+   "Reuters food crisis Ukraine Middle East Europe",
+   "France 24 famine risque Europe guerre analyse",
+   "DW News European food supply war impact",
+   "Euronews food security Europe inflation supply chain"
+  ],
+  "news_queries": [
+   "La famine menace l'Europe à cause de la guerre en Iran et l'Ukraine",
+   "risque famine Europe guerre Ukraine Iran",
+   "Europe food crisis security Ukraine war",
+   "sécurité alimentaire Union européenne conflit approvisionnement",
+   "FAO report food security Europe conflict impact",
+   "EU agricultural supply chain war Ukraine Middle East"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "senat.fr",
+    "vie-publique.fr",
+    "francetvinfo.fr",
+    "radiofrance.fr",
+    "lemonde.fr"
+   ],
+   "site_articles": 61,
+   "site_articles_by_site": {
+    "elysee.fr": 10,
+    "assemblee-nationale.fr": 10,
+    "senat.fr": 10,
+    "vie-publique.fr": 10,
+    "radiofrance.fr": 10,
+    "lemonde.fr": 11
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "franceinfo": 0
+   },
+   "videos_candidates": 8,
+   "site_videos_scored": [],
+   "videos_low_authority": 4,
+   "videos_relevant": 2,
+   "videos_by_platform": {
+    "youtube": 1
+   },
+   "articles_candidates": 124,
+   "articles_low_authority": 6,
+   "articles_relevant": 0,
+   "timing": {},
+   "elapsed_min": 3.7,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 4
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "sujet",
+  "official_speakers": [],
+  "authoritative_sources": [
+   "reuters.com",
+   "afp.com",
+   "fao.org",
+   "wfp.org",
+   "ec.europa.eu",
+   "lemonde.fr",
+   "lefigaro.fr",
+   "bbc.com",
+   "theguardian.com",
+   "ft.com",
+   "franceinfo",
+   "dw.com",
+   "euronews.com",
+   "politico.eu"
+  ],
+  "site_query": "Europe sécurité alimentaire guerre Ukraine Iran",
+  "countries": [
+   "FR",
+   "UA",
+   "IR"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 1,
+  "articles_scanned": 0
+ },
+ "videos": [],
+ "articles": [],
+ "unreadable_articles": [],
+ "unverifiable_videos": []
+}
