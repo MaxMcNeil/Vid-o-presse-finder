@@ -2,57 +2,58 @@
  "keys": {
   "gemini:0ad101a9a2": {
    "day": "2026-10-24",
-   "calls": 28,
-   "units": 28,
-   "errors": 93,
+   "calls": 31,
+   "units": 31,
+   "errors": 99,
    "models": {},
    "label": "Gemini clé 1",
    "used_models": {
-    "gemini-3.8-flash": 12,
+    "gemini-3.8-flash": 13,
+    "gemini-3-flash-preview": 3,
+    "gemini-3.6-flash": 12,
+    "gemini-3.5-flash": 2,
+    "gemini-3.7-flash": 1
+   },
+   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+  },
+  "gemini:6f10d27b24": {
+   "day": "2026-10-24",
+   "calls": 23,
+   "units": 23,
+   "errors": 103,
+   "models": {},
+   "label": "Gemini clé 2",
+   "used_models": {
+    "gemini-3.8-flash": 11,
+    "gemini-3-flash-preview": 2,
+    "gemini-3.6-flash": 10
+   },
+   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+  },
+  "gemini:8c54858ebc": {
+   "day": "2026-10-24",
+   "calls": 25,
+   "units": 25,
+   "errors": 98,
+   "models": {},
+   "label": "Gemini clé 3",
+   "used_models": {
+    "gemini-3.8-flash": 9,
     "gemini-3-flash-preview": 3,
     "gemini-3.6-flash": 11,
     "gemini-3.5-flash": 2
    },
    "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
-  "gemini:6f10d27b24": {
-   "day": "2026-10-24",
-   "calls": 20,
-   "units": 20,
-   "errors": 97,
-   "models": {},
-   "label": "Gemini clé 2",
-   "used_models": {
-    "gemini-3.8-flash": 10,
-    "gemini-3-flash-preview": 2,
-    "gemini-3.6-flash": 8
-   },
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  "gemini:8c54858ebc": {
-   "day": "2026-10-24",
-   "calls": 22,
-   "units": 22,
-   "errors": 93,
-   "models": {},
-   "label": "Gemini clé 3",
-   "used_models": {
-    "gemini-3.8-flash": 7,
-    "gemini-3-flash-preview": 3,
-    "gemini-3.6-flash": 10,
-    "gemini-3.5-flash": 2
-   },
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
   "gemini:181ad99cca": {
    "day": "2026-10-24",
-   "calls": 27,
-   "units": 27,
-   "errors": 87,
+   "calls": 29,
+   "units": 29,
+   "errors": 93,
    "models": {},
    "label": "Gemini clé 4",
    "used_models": {
-    "gemini-3.8-flash": 9,
+    "gemini-3.8-flash": 11,
     "gemini-3.7-flash": 2,
     "gemini-3-flash-preview": 6,
     "gemini-3.6-flash": 9,
@@ -62,19 +63,19 @@
   },
   "gemini:c7a23ab254": {
    "day": "2026-10-24",
-   "calls": 23,
-   "units": 23,
-   "errors": 97,
+   "calls": 26,
+   "units": 26,
+   "errors": 102,
    "models": {},
    "label": "Gemini clé 5",
    "used_models": {
-    "gemini-3.8-flash": 4,
+    "gemini-3.8-flash": 5,
     "gemini-3.7-flash": 3,
     "gemini-3-flash-preview": 4,
-    "gemini-3.6-flash": 11,
+    "gemini-3.6-flash": 13,
     "gemini-3.5-flash": 1
    },
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.7-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "groq:1691e6b64a": {
    "day": "2026-10-24",
@@ -89,40 +90,40 @@
   },
   "youtube:ca0e47bd85": {
    "day": "2026-10-24",
-   "calls": 70,
-   "units": 2941,
+   "calls": 77,
+   "units": 3245,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 1"
   },
   "youtube:bcc568c3e7": {
    "day": "2026-10-24",
-   "calls": 72,
-   "units": 3042,
+   "calls": 79,
+   "units": 3247,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 2"
   },
   "youtube:0f238cfda0": {
    "day": "2026-10-24",
-   "calls": 73,
-   "units": 2746,
+   "calls": 80,
+   "units": 2951,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 3"
   },
   "youtube:92aa479928": {
    "day": "2026-10-24",
-   "calls": 72,
-   "units": 2448,
+   "calls": 78,
+   "units": 2652,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 4"
   },
   "youtube:a5a9d82454": {
    "day": "2026-10-24",
-   "calls": 66,
-   "units": 2541,
+   "calls": 72,
+   "units": 2745,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 5"
@@ -144,5 +145,5 @@
    "label": "NYT clé 1"
   }
  },
- "saved": "2026-10-24T19:03:59+00:00"
+ "saved": "2026-10-24T21:57:09+00:00"
 }

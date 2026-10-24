@@ -1,0 +1,259 @@
+{
+ "target": "La famine menace l'Europe",
+ "target_type": "sujet",
+ "claim": "",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations et analyses d'autorités ou d'experts évaluant le risque réel ou perçu d'une crise alimentaire grave, de pénuries ou de famine en Europe.",
+  "term_groups": [
+   [
+    "famine",
+    "crise alimentaire",
+    "penurie alimentaire",
+    "securite alimentaire",
+    "food crisis",
+    "food shortage",
+    "famine risk",
+    "food security",
+    "hunger crisis",
+    "disette"
+   ],
+   [
+    "menace",
+    "risque",
+    "alerte",
+    "imminente",
+    "threat",
+    "risk",
+    "warning",
+    "looming",
+    "shortage"
+   ]
+  ],
+  "target_aliases": [
+   "europe",
+   "union europeenne",
+   "ue",
+   "european union",
+   "eu",
+   "continent europeen",
+   "la famine menace l europe"
+  ],
+  "youtube_queries": [
+   "La famine menace l'Europe",
+   "Euronews crise alimentaire Europe",
+   "Reuters food crisis Europe warning",
+   "BBC News Europe food supply shortage",
+   "France 24 sécurité alimentaire Europe",
+   "European Commission food security press conference",
+   "DW News food shortage risk Europe",
+   "FAO déclaration crise alimentaire Europe"
+  ],
+  "news_queries": [
+   "La famine menace l'Europe",
+   "Reuters Europe food security crisis shortage",
+   "AFP risque famine crise alimentaire Europe",
+   "Financial Times Europe food supply vulnerability",
+   "Politico EU food crisis threat agriculture",
+   "Le Monde sécurité alimentaire pénuries Europe"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "de"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "senat.fr",
+    "vie-publique.fr",
+    "francetvinfo.fr",
+    "radiofrance.fr",
+    "lemonde.fr"
+   ],
+   "site_articles": 50,
+   "site_articles_by_site": {
+    "elysee.fr": 6,
+    "assemblee-nationale.fr": 10,
+    "senat.fr": 10,
+    "vie-publique.fr": 10,
+    "radiofrance.fr": 4,
+    "lemonde.fr": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "franceinfo": 0
+   },
+   "videos_candidates": 30,
+   "site_videos_scored": [],
+   "videos_low_authority": 10,
+   "videos_relevant": 5,
+   "videos_by_platform": {
+    "youtube": 5
+   },
+   "articles_candidates": 180,
+   "articles_low_authority": 38,
+   "articles_relevant": 8,
+   "timing": {
+    "ia-affiné": 1
+   },
+   "elapsed_min": 11.5,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 7,
+      "gemini-3.6-flash": 6,
+      "gemini-3.7-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "sujet",
+  "official_speakers": [],
+  "authoritative_sources": [
+   "fao.org",
+   "ec.europa.eu",
+   "Reuters",
+   "reuters.com",
+   "AFP",
+   "afp.com",
+   "WFP",
+   "wfp.org",
+   "franceinfo",
+   "lemonde.fr",
+   "bbc.com",
+   "BBC News",
+   "ft.com",
+   "politico.eu",
+   "Euronews",
+   "euronews.com",
+   "dw.com",
+   "DW News"
+  ],
+  "site_query": "Europe crise alimentaire risque pénurie FAO",
+  "countries": [
+   "FR",
+   "DE",
+   "BE"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 5,
+  "articles_scanned": 8
+ },
+ "videos": [
+  {
+   "title": "Food prices could skyrocket, if no measures taken to tackle fertilizer crisis, farmer unions warn",
+   "uploaded": "2026-05-12",
+   "platform": "youtube",
+   "channel": "euronews",
+   "url": "https://www.youtube.com/watch?v=RAt5h630_E8",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "03:14",
+     "end": "03:35",
+     "start_seconds": 194.2,
+     "end_seconds": 215.1,
+     "start_tc": "00:03:14.200",
+     "end_tc": "00:03:35.100",
+     "duration_seconds": 20.9,
+     "timestamp": "03:14",
+     "link": "https://www.youtube.com/watch?v=RAt5h630_E8&t=194s",
+     "clip_link": "https://www.youtube.com/embed/RAt5h630_E8?start=194&end=216&autoplay=1",
+     "t": 194.2,
+     "quote": "there is a lot of farmers that are using less fertilizers, that means we have less production on next summer on wheat, at example. The wheat is at the basis for bread or pasta, so and the risk is that the farmers on the next September are going to have different choices on the next sowing time.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Massimiliano Giansanti",
+     "confidence": 0.85,
+     "why": "Massimiliano Giansanti met en garde contre une baisse de production de blé pour le pain et les pâtes en Europe due au manque d'engrais.",
+     "t_end": 215.1,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "British government ‘complacent about food as a national security matter’",
+   "date": "2026-10-05",
+   "source": "The Guardian",
+   "domain": "theguardian.com",
+   "url": "https://www.theguardian.com/business/2026/oct/05/british-government-food-national-security-crisis-shortages",
+   "verified_on_full_text": true,
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Britain does not have a plan for how to feed people in a crisis and is unprepared for potential future food shortages, according to a warning from more than 150 experts delivered to Andy Burnham. The climate crisis, geopolitical shocks, cyber-attacks and energy outages are among the threats to food chain security, according to the open letter",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "The Guardian",
+     "confidence": 0.85,
+     "why": "L'article rapporte l'alerte de plus de 150 experts avertissant que le Royaume-Uni manque de préparation face aux risques de pénuries alimentaires et de crises d'approvisionnement.",
+     "t_end": 0.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "The Guardian view on food security: we have just-in-time, we need just-in-case",
+   "date": "2026-10-15",
+   "source": "The Guardian",
+   "domain": "theguardian.com",
+   "url": "https://www.theguardian.com/commentisfree/2026/oct/15/the-guardian-view-on-food-security-we-have-just-in-time-we-need-just-in-case",
+   "verified_on_full_text": true,
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Only weeks before, 150 experts together warned the British government that it does not have a plan to feed people in a crisis – and that the west is entering an era in which not only disruption but the weaponisation of food is a real possibility. “The public has been led to assume that food will simply be there,” they wrote. “It may not be.”",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "The Guardian",
+     "confidence": 0.9,
+     "why": "L'article rapporte une mise en garde d'experts affirmant que le Royaume-Uni n'a pas de plan pour nourrir sa population en cas de crise et que la nourriture pourrait venir à manquer.",
+     "t_end": 120.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "How badly is Europe affected by fertiliser shortages due to the Iran war?",
+   "date": "2026-05-27",
+   "source": "Al Jazeera",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQbFhEWnpDaWtoNnJqNWhoc0pXUWFaOWtXa0xscFlta1Z0R05mb013S3E5SXlIS0FlM0J5QXVybkVCdVhCcDZCNlZBejF4ZE9yMGFoWnVncXdON3NXTE55MmVnZEltTEROWi1hNGluWS1VcjQzQVhaME1NcVUyM21GSHFJYnJvX2ZCOFN3dHlBeTFzaExVaWVvdm1VSTdXMVBYeUZMU1pWMk9jV29vTXFPdjRCSdIBuAFBVV95cUxNbFlmYTlhOXZWcFpWend2QW5TbFhGTmdlWEQtb3Q4Qmh0VDBDZ1d2SkFDbWwzTkl6SlVZOHQwam1qSTNKa3ZxMWlNOHRiSTBRZHVkX3dTR01ndnBNY2JQRWZVMXlmZkN4NU5MSUxvRnNVNVZCU3NRclBmVFFQTXdfamJWbllicmFacEZWVlFwM0dIeFUxVDVVdDZhT1kzRE9yNXVvZ1lsemdiVXJQVm4tdXZJdDM1Rzli?oc=5",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": []
+}

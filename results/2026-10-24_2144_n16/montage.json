@@ -1,0 +1,39 @@
+{
+ "batch": "2026-10-24_2144_n16",
+ "searches": 1,
+ "clips": [
+  {
+   "search": "01-la-famine-menace-l-europe",
+   "target": "La famine menace l'Europe",
+   "target_type": "sujet",
+   "claim": "",
+   "platform": "youtube",
+   "video_id": "RAt5h630_E8",
+   "source_url": "https://www.youtube.com/watch?v=RAt5h630_E8",
+   "title": "Food prices could skyrocket, if no measures taken to tackle fertilizer crisis, farmer unions warn",
+   "channel": "euronews",
+   "uploaded": "2026-05-12",
+   "source_authority": 0.9,
+   "source_authority_why": "média de référence",
+   "start": 194.2,
+   "end": 215.1,
+   "duration": 20.9,
+   "start_tc": "00:03:14.200",
+   "end_tc": "00:03:35.100",
+   "in": 193.0,
+   "out": 216.1,
+   "in_tc": "00:03:13.000",
+   "out_tc": "00:03:36.100",
+   "timing": "ia-affiné",
+   "quote": "there is a lot of farmers that are using less fertilizers, that means we have less production on next summer on wheat, at example. The wheat is at the basis for bread or pasta, so and the risk is that the farmers on the next September are going to have different choices on the next sowing time.",
+   "speaker": "Massimiliano Giansanti",
+   "speaker_role": "official",
+   "who_says": "other_named",
+   "verdict": "paraphrase",
+   "confidence": 0.85,
+   "score": 0.893,
+   "link": "https://www.youtube.com/embed/RAt5h630_E8?start=194&end=216&autoplay=1",
+   "order": 1
+  }
+ ]
+}
