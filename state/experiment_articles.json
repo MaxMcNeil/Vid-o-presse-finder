@@ -1,307 +1,496 @@
 [
  {
-  "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNVmxVRUZNakZoaEhnNllhdzY1Y2dMM0ViTEsxaHhzRDhtUnh",
+  "title": "Chef José Andrés warns of multi-year world famine from Iran war",
   "source": "The Guardian",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.8
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://en.m.wikipedia.org/wiki/Chef",
+     10938
+    ],
+    [
+     "https://en.m.wikipedia.org/wiki/Chef_(2014_film)",
+     19787
+    ],
+    [
+     "https://m.imdb.com/title/tt2883512",
+     -202
+    ],
+    [
+     "https://shef.com/",
+     46
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.6,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://en.m.wikipedia.org/wiki/Chef",
+     10938
+    ],
+    [
+     "https://en.m.wikipedia.org/wiki/Chef_(2014_film)",
+     19787
+    ],
+    [
+     "https://m.imdb.com/title/tt2883512",
+     -202
+    ],
+    [
+     "https://shef.com/",
+     46
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 0.2
-  },
-  "wayback": {
-   "ok": false,
-   "err": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
-   "s": 0.2
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "ReadTimeout: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=120)",
-   "s": 120.2
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://en.wikipedia.org/wiki/Chef\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le premier paragraphe de la page [1] :\n\n> \"A chef is a professional cook and tradesperson who is proficient in many aspects of food preparation, often focusing on a particular cuisine. The word "
   }
  },
  {
-  "url": "https://news.google.com/rss/articles/CBMingJBVV95cUxOS2ZadGo3RWVzUXk3aFUyX2t3VWlmU2w5M2JZZkw2ODB0WHh",
+  "title": "Engrais et sécurité alimentaire : comment l’UE veut réduire sa dépendance et protéger ses ",
   "source": "belgium.representation.ec.europa.eu",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.2
+  "bing_site": {
+   "code": 200,
+   "links": []
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.2,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": []
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 1.2
-  },
-  "wayback": {
-   "ok": false,
-   "err": "RuntimeError: pas d'archive",
-   "s": 1.5
-  },
-  "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try a",
-   "s": 8.6
+  "ddg_any": {
+   "code": 202,
+   "links": []
   }
  },
  {
-  "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE50ZDhOQzE1RkVHMHI4M25Ldy04UDBIU1FGQzBWakFLaUVnSER",
+  "title": "Question écrite n° 13547 : Conséquences de la guerre en Iran sur le marché mondial des eng",
   "source": "Assemblée nationale",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.2
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://en.wikipedia.org/wiki/Question",
+     19735
+    ],
+    [
+     "https://www.merriam-webster.com/dictionary/question",
+     5330
+    ],
+    [
+     "https://dictionary.cambridge.org/us/dictionary/english/question",
+     1872
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/question",
+     1796
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.2,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://en.wikipedia.org/wiki/Question",
+     19735
+    ],
+    [
+     "https://www.merriam-webster.com/dictionary/question",
+     5330
+    ],
+    [
+     "https://dictionary.cambridge.org/us/dictionary/english/question",
+     1872
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/question",
+     1796
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 0.1
-  },
-  "wayback": {
-   "ok": false,
-   "err": "RuntimeError: pas d'archive",
-   "s": 0.4
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
-   "s": 0.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://en.wikipedia.org/wiki/Question\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le premier paragraphe de la page Wikipédia « Question » [1] :\n\n> \"A question is an utterance which serves as a request for information. Questions are sometimes distinguished from interrogatives,"
   }
  },
  {
-  "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxQckFXOFM3cnJQSUFJTnhoU1p1YWNfa0oyNjZra0N0NkdzSHN",
+  "title": "Guerre au Moyen-Orient : \"Une grosse spéculation sur les matières premières\" pour ce produ",
   "source": "Radio France",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.3
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://fr.m.wikipedia.org/wiki/Guerre",
+     134307
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/french-english/guerre",
+     783
+    ],
+    [
+     "https://www.merriam-webster.com/dictionary/guerre",
+     458
+    ],
+    [
+     "https://en.m.wiktionary.org/wiki/guerre",
+     1949
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.3,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://fr.m.wikipedia.org/wiki/Guerre",
+     134307
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/french-english/guerre",
+     783
+    ],
+    [
+     "https://www.merriam-webster.com/dictionary/guerre",
+     458
+    ],
+    [
+     "https://en.m.wiktionary.org/wiki/guerre",
+     1949
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 0.1
-  },
-  "wayback": {
-   "ok": false,
-   "err": "RuntimeError: pas d'archive",
-   "s": 0.5
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
-   "s": 0.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://fr.wikipedia.org/wiki/Guerre\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le premier paragraphe du résumé d'introduction de la page Wikipedia « Guerre », recopié mot à mot :\n\n« La guerre se définit comme un état de conflit armé entre plusieurs groupes politiques const"
   }
  },
  {
-  "url": "https://www.nytimes.com/2026/03/27/business/economy/fertilizer-food-supply-iran-war.html",
+  "title": "Global Food Supply Faces a Dangerous Bottleneck as Iran War Persists",
   "source": "The New York Times",
-  "google_decode": {
-   "ok": true,
-   "len": 88,
-   "s": 0.0,
-   "head": "https://www.nytimes.com/2026/03/27/business/economy/fertilizer-food-supply-iran-war.html"
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://globle-game.com/",
+     46
+    ],
+    [
+     "https://www.globalindustrial.com/",
+     865
+    ],
+    [
+     "https://www.globalcu.org/accounts/online-mobile-banking/",
+     2517
+    ],
+    [
+     "https://www.cbp.gov/travel/trusted-traveler-programs/global-entry",
+     1839
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403",
-   "s": 0.1
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://globle-game.com/",
+     46
+    ],
+    [
+     "https://www.globalindustrial.com/",
+     865
+    ],
+    [
+     "https://www.globalcu.org/accounts/online-mobile-banking/",
+     2517
+    ],
+    [
+     "https://www.cbp.gov/travel/trusted-traveler-programs/global-entry",
+     1839
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "len": 0,
-   "s": 15.4,
-   "head": ""
-  },
-  "wayback": {
-   "ok": true,
-   "len": 2246,
-   "s": 2.3,
-   "head": "Supported by\nGlobal Food Supply Faces a Dangerous Bottleneck as Iran War Persists\nFertilizer prices are climbing as a result of disruptions in the Middle East, "
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
-   "s": 0.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://globle-game.com/\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le premier paragraphe de la page :\n\n> « Every day, there is a new Mystery Country. Your goal is to guess which country it is using as few guesses as possible. Each incorrect guess will appear on"
   }
  },
  {
-  "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYjBGSWdwRFQ1Vm1reDN4a1ZPcWhhNVM1QjhnNjNZbkZhQlF",
+  "title": "Kérosène, CO2, engrais, alimentation... Les effets en chaîne du blocage du détroit d'Ormuz",
   "source": "France 24",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.2
+  "bing_site": {
+   "code": 200,
+   "links": []
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.2,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://agendaza.fr/sports-pres-de-moi",
+     -403
+    ],
+    [
+     "https://ville-data.com/agenda-evenements-sportifs/",
+     -403
+    ],
+    [
+     "https://agendaza.fr/evenements-pres-de-moi",
+     -403
+    ],
+    [
+     "https://portail.sportsregions.fr/",
+     2915
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 0.1
-  },
-  "wayback": {
-   "ok": false,
-   "err": "RuntimeError: pas d'archive",
-   "s": 2.4
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try a",
-   "s": 9.4
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://agendaza.fr/sports-pres-de-moi\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_ERROR\"}]}",
+   "text": "Je ne peux malheureusement pas accéder à cette page web (`https://agendaza.fr/sports-pres-de-moi`). Par conséquent, il ne m'est pas possible de lire son contenu ni d'en recopier le premier paragraphe."
   }
  },
  {
-  "url": "https://www.msn.com/en-us/news/other/failure-to-activate-hormuz-fertilizer-plan-could-trigger-food-c",
+  "title": "Failure to activate Hormuz fertilizer plan could trigger food crisis, UN official says",
   "source": "Reuters",
-  "google_decode": {
-   "ok": true,
-   "len": 134,
-   "s": 0.0,
-   "head": "https://www.msn.com/en-us/news/other/failure-to-activate-hormuz-fertilizer-plan-could-trigger-food-crisis-un-official-says/ar-AA2eeirq"
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://www.merriam-webster.com/dictionary/failure",
+     3704
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/failure",
+     2643
+    ],
+    [
+     "https://en.wikipedia.org/wiki/Failure",
+     13301
+    ],
+    [
+     "https://www.dictionary.com/browse/failure",
+     5774
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": true,
-   "len": 3940,
-   "s": 0.4,
-   "head": "By Panu Wongcha-um and Devjyot Ghoshal\nBANGKOK, Oct 14 (Reuters) - A failure by the United States and Iran to agree within weeks on a UN-backed plan for moving "
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://www.merriam-webster.com/dictionary/failure",
+     3704
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/failure",
+     2643
+    ],
+    [
+     "https://en.wikipedia.org/wiki/Failure",
+     13301
+    ],
+    [
+     "https://www.dictionary.com/browse/failure",
+     5774
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": true,
-   "len": 523,
-   "s": 6.6,
-   "head": "Title: Failure to activate Hormuz fertilizer plan could trigger food crisis, UN official says\n\nURL Source: https://www.msn.com/en-us/news/other/failure-to-activ"
-  },
-  "wayback": {
-   "ok": false,
-   "err": "RuntimeError: pas d'archive",
-   "s": 0.7
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
-   "s": 0.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://www.merriam-webster.com/dictionary/failure\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le texte exact du premier point de définition (1a) sur la page du dictionnaire Merriam-Webster pour le mot **failure** :\n\n> **1**\n> **a** **:** omission of occurrence or performance\n> *specifica"
   }
  },
  {
-  "url": "https://www.reuters.com/world/middle-east/hormuz-shipping-disruption-is-starting-hit-harvests-un-age",
+  "title": "Hormuz shipping disruption is starting to hit harvests, UN agency says",
   "source": "Reuters",
-  "google_decode": {
-   "ok": true,
-   "len": 120,
-   "s": 0.0,
-   "head": "https://www.reuters.com/world/middle-east/hormuz-shipping-disruption-is-starting-hit-harvests-un-agency-says-2026-10-15/"
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://en.wikipedia.org/wiki/Strait_of_Hormuz",
+     68646
+    ],
+    [
+     "https://hormuz.data-tracking.net/",
+     2800
+    ],
+    [
+     "https://en.wikipedia.org/wiki/Hormuz_Island",
+     10805
+    ],
+    [
+     "https://hormuzstraitmonitor.com/",
+     1928
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 401",
-   "s": 0.2
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://en.wikipedia.org/wiki/Strait_of_Hormuz",
+     68646
+    ],
+    [
+     "https://hormuz.data-tracking.net/",
+     2800
+    ],
+    [
+     "https://en.wikipedia.org/wiki/Hormuz_Island",
+     10805
+    ],
+    [
+     "https://hormuzstraitmonitor.com/",
+     1928
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "len": 0,
-   "s": 15.4,
-   "head": ""
-  },
-  "wayback": {
-   "ok": false,
-   "err": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
-   "s": 0.2
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
-   "s": 0.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://en.wikipedia.org/wiki/Strait_of_Hormuz\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le premier paragraphe de la page Wikipedia consacrée au détroit d'Hormuz, copié mot à mot [1] :\n\n> The Strait of Hormuz (/hɔːrˈmuːz/) [a] is a waterway between the Persian Gulf and the Gulf of O"
   }
  },
  {
-  "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPaVBXX3M5UUg5cDlmSEJubUtBbFNUTHVnbTdjZnVVSWVoZE1",
+  "title": "Diplomatic push underway on Hormuz fertiliser proposal, UN says, as shortages bite",
   "source": "Reuters",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.2
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://www.merriam-webster.com/dictionary/diplomatic",
+     2229
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/diplomatic",
+     544
+    ],
+    [
+     "https://www.vocabulary.com/dictionary/diplomatic",
+     2187
+    ],
+    [
+     "https://dictionary.cambridge.org/us/dictionary/english/diplomatic",
+     544
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.3,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://www.merriam-webster.com/dictionary/diplomatic",
+     2229
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/diplomatic",
+     544
+    ],
+    [
+     "https://www.vocabulary.com/dictionary/diplomatic",
+     2187
+    ],
+    [
+     "https://dictionary.cambridge.org/us/dictionary/english/diplomatic",
+     544
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 0.1
-  },
-  "wayback": {
-   "ok": false,
-   "err": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
-   "s": 0.2
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "ReadTimeout: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=120)",
-   "s": 120.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://www.merriam-webster.com/dictionary/diplomatic\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici le texte exact du premier point de définition figurant sur la page de Merriam-Webster pour le mot **diplomatic** :\n\n> **1**  \n> **a :** paleographic  \n> **b :** exactly reproducing the original "
   }
  },
  {
-  "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPc1hzcU1MUmhicDJHeGs0X2FubWp3LVpIeGNyX2VjUU5OM1V",
+  "title": "Protracted Hormuz crisis could trigger agrifood catastrophe, UN food agency says",
   "source": "Reuters",
-  "google_decode": {
-   "ok": false,
-   "err": "RuntimeError: None",
-   "s": 1.2
+  "bing_site": {
+   "code": 200,
+   "links": [
+    [
+     "https://www.merriam-webster.com/dictionary/protract",
+     1566
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/protracted",
+     7648
+    ],
+    [
+     "https://www.thefreedictionary.com/protracted",
+     2978
+    ],
+    [
+     "https://www.wordplays.com/crossword-solver/protracted",
+     -401
+    ]
+   ]
   },
-  "direct_trafilatura": {
-   "ok": false,
-   "len": 0,
-   "s": 0.3,
-   "head": ""
+  "bing_any": {
+   "code": 200,
+   "links": [
+    [
+     "https://www.merriam-webster.com/dictionary/protract",
+     1566
+    ],
+    [
+     "https://dictionary.cambridge.org/dictionary/english/protracted",
+     7648
+    ],
+    [
+     "https://www.thefreedictionary.com/protracted",
+     2978
+    ],
+    [
+     "https://www.wordplays.com/crossword-solver/protracted",
+     -401
+    ]
+   ]
   },
-  "jina_reader": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
-   "s": 0.3
-  },
-  "wayback": {
-   "ok": false,
-   "err": "RuntimeError: pas d'archive",
-   "s": 0.5
+  "ddg_any": {
+   "code": 202,
+   "links": []
   },
   "gemini_url_context": {
-   "ok": false,
-   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
-   "s": 0.1
+   "model": "gemini-3.6-flash",
+   "meta": "{\"urlMetadata\": [{\"retrievedUrl\": \"https://www.merriam-webster.com/dictionary/protract\", \"urlRetrievalStatus\": \"URL_RETRIEVAL_STATUS_SUCCESS\"}]}",
+   "text": "Voici la définition de **protract** ainsi que le premier paragraphe de texte figurant sur la page :\n\n**Première définition (transitive verb) :**\n> **1 :** to prolong in time or space : continue\n\n**Pre"
   }
  }
 ]
