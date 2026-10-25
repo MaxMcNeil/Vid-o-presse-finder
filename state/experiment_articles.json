@@ -1,0 +1,307 @@
+[
+ {
+  "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNVmxVRUZNakZoaEhnNllhdzY1Y2dMM0ViTEsxaHhzRDhtUnh",
+  "source": "The Guardian",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.8
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.6,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 0.2
+  },
+  "wayback": {
+   "ok": false,
+   "err": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+   "s": 0.2
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "ReadTimeout: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=120)",
+   "s": 120.2
+  }
+ },
+ {
+  "url": "https://news.google.com/rss/articles/CBMingJBVV95cUxOS2ZadGo3RWVzUXk3aFUyX2t3VWlmU2w5M2JZZkw2ODB0WHh",
+  "source": "belgium.representation.ec.europa.eu",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.2
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.2,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 1.2
+  },
+  "wayback": {
+   "ok": false,
+   "err": "RuntimeError: pas d'archive",
+   "s": 1.5
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try a",
+   "s": 8.6
+  }
+ },
+ {
+  "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE50ZDhOQzE1RkVHMHI4M25Ldy04UDBIU1FGQzBWakFLaUVnSER",
+  "source": "Assemblée nationale",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.2
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.2,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 0.1
+  },
+  "wayback": {
+   "ok": false,
+   "err": "RuntimeError: pas d'archive",
+   "s": 0.4
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
+   "s": 0.1
+  }
+ },
+ {
+  "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxQckFXOFM3cnJQSUFJTnhoU1p1YWNfa0oyNjZra0N0NkdzSHN",
+  "source": "Radio France",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.3
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.3,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 0.1
+  },
+  "wayback": {
+   "ok": false,
+   "err": "RuntimeError: pas d'archive",
+   "s": 0.5
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
+   "s": 0.1
+  }
+ },
+ {
+  "url": "https://www.nytimes.com/2026/03/27/business/economy/fertilizer-food-supply-iran-war.html",
+  "source": "The New York Times",
+  "google_decode": {
+   "ok": true,
+   "len": 88,
+   "s": 0.0,
+   "head": "https://www.nytimes.com/2026/03/27/business/economy/fertilizer-food-supply-iran-war.html"
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403",
+   "s": 0.1
+  },
+  "jina_reader": {
+   "ok": false,
+   "len": 0,
+   "s": 15.4,
+   "head": ""
+  },
+  "wayback": {
+   "ok": true,
+   "len": 2246,
+   "s": 2.3,
+   "head": "Supported by\nGlobal Food Supply Faces a Dangerous Bottleneck as Iran War Persists\nFertilizer prices are climbing as a result of disruptions in the Middle East, "
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
+   "s": 0.1
+  }
+ },
+ {
+  "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYjBGSWdwRFQ1Vm1reDN4a1ZPcWhhNVM1QjhnNjNZbkZhQlF",
+  "source": "France 24",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.2
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.2,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 0.1
+  },
+  "wayback": {
+   "ok": false,
+   "err": "RuntimeError: pas d'archive",
+   "s": 2.4
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try a",
+   "s": 9.4
+  }
+ },
+ {
+  "url": "https://www.msn.com/en-us/news/other/failure-to-activate-hormuz-fertilizer-plan-could-trigger-food-c",
+  "source": "Reuters",
+  "google_decode": {
+   "ok": true,
+   "len": 134,
+   "s": 0.0,
+   "head": "https://www.msn.com/en-us/news/other/failure-to-activate-hormuz-fertilizer-plan-could-trigger-food-crisis-un-official-says/ar-AA2eeirq"
+  },
+  "direct_trafilatura": {
+   "ok": true,
+   "len": 3940,
+   "s": 0.4,
+   "head": "By Panu Wongcha-um and Devjyot Ghoshal\nBANGKOK, Oct 14 (Reuters) - A failure by the United States and Iran to agree within weeks on a UN-backed plan for moving "
+  },
+  "jina_reader": {
+   "ok": true,
+   "len": 523,
+   "s": 6.6,
+   "head": "Title: Failure to activate Hormuz fertilizer plan could trigger food crisis, UN official says\n\nURL Source: https://www.msn.com/en-us/news/other/failure-to-activ"
+  },
+  "wayback": {
+   "ok": false,
+   "err": "RuntimeError: pas d'archive",
+   "s": 0.7
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
+   "s": 0.1
+  }
+ },
+ {
+  "url": "https://www.reuters.com/world/middle-east/hormuz-shipping-disruption-is-starting-hit-harvests-un-age",
+  "source": "Reuters",
+  "google_decode": {
+   "ok": true,
+   "len": 120,
+   "s": 0.0,
+   "head": "https://www.reuters.com/world/middle-east/hormuz-shipping-disruption-is-starting-hit-harvests-un-agency-says-2026-10-15/"
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 401",
+   "s": 0.2
+  },
+  "jina_reader": {
+   "ok": false,
+   "len": 0,
+   "s": 15.4,
+   "head": ""
+  },
+  "wayback": {
+   "ok": false,
+   "err": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+   "s": 0.2
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
+   "s": 0.1
+  }
+ },
+ {
+  "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPaVBXX3M5UUg5cDlmSEJubUtBbFNUTHVnbTdjZnVVSWVoZE1",
+  "source": "Reuters",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.2
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.3,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 0.1
+  },
+  "wayback": {
+   "ok": false,
+   "err": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+   "s": 0.2
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "ReadTimeout: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=120)",
+   "s": 120.1
+  }
+ },
+ {
+  "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPc1hzcU1MUmhicDJHeGs0X2FubWp3LVpIeGNyX2VjUU5OM1V",
+  "source": "Reuters",
+  "google_decode": {
+   "ok": false,
+   "err": "RuntimeError: None",
+   "s": 1.2
+  },
+  "direct_trafilatura": {
+   "ok": false,
+   "len": 0,
+   "s": 0.3,
+   "head": ""
+  },
+  "jina_reader": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 403 AbuseAlleviationError: Anonymous access to domain news.google.com blocked until Sun Oct 25 2026 09:0",
+   "s": 0.3
+  },
+  "wayback": {
+   "ok": false,
+   "err": "RuntimeError: pas d'archive",
+   "s": 0.5
+  },
+  "gemini_url_context": {
+   "ok": false,
+   "err": "RuntimeError: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on t",
+   "s": 0.1
+  }
+ }
+]
