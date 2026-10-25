@@ -44,6 +44,11 @@ def pending(m: dict) -> bool:
     return not (m.get("tel_status") in FINAL and m.get("tel_algo", 1) >= ALGO)
 
 
+# Facultatif : cookies d'un compte YouTube SECONDAIRE (fichier ~/.qf/cookies.txt), utilisés par yt-dlp
+# quand YouTube refuse le réseau. Jamais envoyés sur GitHub.
+COOKIES = Path.home() / ".qf" / "cookies.txt"
+
+
 class Blocked(Exception):
     """YouTube refuse temporairement (trop de requêtes) : on s'arrête et on retentera plus tard."""
 
@@ -88,6 +93,7 @@ def _ytdlp_tracks(video_id: str, langs: list[str]) -> list[list[Segment]]:
         try:
             p = subprocess.run([sys.executable, "-m", "yt_dlp", "--skip-download", "--write-subs", "--write-auto-subs",
                                 "--sub-langs", want, "--sub-format", "vtt", "--no-warnings", "--sleep-subtitles", "1",
+                                *(["--cookies", str(COOKIES)] if COOKIES.is_file() else []),
                                 "-o", os.path.join(d, "s.%(ext)s"), f"https://www.youtube.com/watch?v={video_id}"],
                                capture_output=True, text=True, timeout=180)
         except (subprocess.SubprocessError, OSError):
