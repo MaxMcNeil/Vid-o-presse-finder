@@ -1,0 +1,214 @@
+{
+ "target": "Europe",
+ "target_type": "sujet",
+ "claim": "risque de famine ou de pénurie alimentaire à cause des guerres en Ukraine et en Iran",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Il existe un risque de famine ou de pénurie alimentaire en Europe en raison des conflits en Ukraine et en Iran.",
+  "term_groups": [
+   [
+    "famine",
+    "penurie alimentaire",
+    "manque de nourriture",
+    "crise alimentaire",
+    "insecurite alimentaire",
+    "deficit alimentaire",
+    "faminee",
+    "food shortag"
+   ],
+   [
+    "guerre en ukraine",
+    "conflit ukrainien",
+    "invasion russe ukraine",
+    "guerre russo ukrainienne",
+    "war in ukraine",
+    "ukraine conflict",
+    "russian invasion ukraine",
+    "ukraine war",
+    "war ukraine",
+    "ukraine war"
+   ],
+   [
+    "guerre en iran",
+    "conflit iranien",
+    "tensions iran",
+    "conflit au iran",
+    "war in iran",
+    "iran conflict",
+    "iran war",
+    "tensions iran",
+    "war iran",
+    "iran war"
+   ]
+  ],
+  "target_aliases": [
+   "europe"
+  ],
+  "youtube_queries": [
+   "Europe risque de famine ou de pénurie alimentaire à cause des guerres en Ukraine et en Iran",
+   "Franceinfo famine Ukraine",
+   "BBC food shortage Iran war",
+   "Euronews crise alimentaire Ukraine",
+   "DW pénurie alimentaire Iran",
+   "Reuters interview food crisis Ukraine",
+   "Al Jazeera famine risk Iran",
+   "Le Monde pénurie alimentaire guerre Ukraine Iran",
+   "Europarl débat famine Ukraine Iran"
+  ],
+  "news_queries": [
+   "Europe risque de famine ou de pénurie alimentaire à cause des guerres en Ukraine et en Iran",
+   "famine Ukraine Iran",
+   "food shortage Ukraine war",
+   "pénurie alimentaire guerre Ukraine",
+   "food crisis Iran conflict",
+   "insécurité alimentaire Europe Ukraine Iran"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "fao.org",
+    "unocha.org",
+    "ec.europa.eu",
+    "reuters.com",
+    "afp.com"
+   ],
+   "site_articles": 35,
+   "site_articles_by_site": {
+    "elysee.fr": 10,
+    "assemblee-nationale.fr": 10,
+    "fao.org": 10,
+    "ec.europa.eu": 3,
+    "afp.com": 2
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "Reuters": 1
+   },
+   "videos_candidates": 57,
+   "site_videos_scored": [
+    "Why the world could be heading for a wheat crisis (6/10)"
+   ],
+   "videos_low_authority": 22,
+   "videos_relevant": 4,
+   "videos_by_platform": {
+    "youtube": 4
+   },
+   "articles_candidates": 163,
+   "articles_low_authority": 44,
+   "articles_relevant": 3,
+   "timing": {
+    "ia-affiné": 1
+   },
+   "elapsed_min": 12.5,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.6-flash": 4,
+      "gemini-3.8-flash": 2
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "sujet",
+  "official_speakers": [],
+  "authoritative_sources": [
+   "fao.org",
+   "unocha.org",
+   "ec.europa.eu",
+   "ec.europa.eu/eurostat",
+   "reuters.com",
+   "afp.com",
+   "lemonde.fr",
+   "lefigaro.fr",
+   "bbc.co.uk",
+   "theguardian.com",
+   "dw.com",
+   "euronews.com",
+   "rfi.fr",
+   "franceinfo.fr",
+   "aljazeera.com"
+  ],
+  "site_query": "pénurie alimentaire guerre Ukraine Iran",
+  "countries": [
+   "UA",
+   "IR",
+   "FR"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 4,
+  "articles_scanned": 3
+ },
+ "videos": [
+  {
+   "title": "Ukraine, Ormuz : vers la pénurie alimentaire mondiale ? - JT du mardi 25 août 2026",
+   "uploaded": "2026-08-25",
+   "platform": "youtube",
+   "video_id": "3ndo9Y2Upv8",
+   "duration": 1274,
+   "channel": "Chaîne officielle TVL",
+   "url": "https://www.youtube.com/watch?v=3ndo9Y2Upv8",
+   "method": "gemini-video",
+   "authority": 0.67,
+   "authority_why": "chaîne non répertoriée (1 080 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:56",
+     "end": "02:25",
+     "start_seconds": 56.4,
+     "end_seconds": 145.7,
+     "start_tc": "00:00:56.400",
+     "end_tc": "00:02:25.700",
+     "duration_seconds": 89.3,
+     "timestamp": "00:56",
+     "link": "https://www.youtube.com/watch?v=3ndo9Y2Upv8&t=56s",
+     "clip_link": "https://www.youtube.com/embed/3ndo9Y2Upv8?start=56&end=146&autoplay=1",
+     "t": 56.4,
+     "quote": "C'est la convergence des catastrophes qui atteint peut-être la capacité des humains à se nourrir convenablement, et ce dès 2027. [...] Concrètement, les importantes sécheresses de 2026 combinées avec les conflits en Ukraine et au Proche-Orient qui conduisent au blocage de la Mer Noire et du détroit d'Ormuz sont en train de créer les conditions d'une généralisation de l'insécurité alimentaire dans le monde.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Nicolas de Lamberterie",
+     "confidence": 0.85,
+     "why": "Le journaliste explique que les conflits en Ukraine et au Proche-Orient (détroit d'Ormuz/Iran) ainsi que les sécheresses font courir un risque d'insécurité alimentaire et de pénurie globale, touchant également l'Occident/Europe.",
+     "t_end": 145.7,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Chef José Andrés warns of multi-year world famine from Iran war",
+   "date": "2026-04-16",
+   "source": "The Guardian",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNVmxVRUZNakZoaEhnNllhdzY1Y2dMM0ViTEsxaHhzRDhtUnhkLXJjNmh6dlBteWRmTWpoeUhyWFl2VmZvLVlhREI1RGpSOW9FbHVKc2VoUVdSbm9SV3lCcjdvdkQ3emMwSkh6cmdpMjFaZ2lFX2xRVlBWd3JYa3o1dXA1U28?oc=5",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": []
+}

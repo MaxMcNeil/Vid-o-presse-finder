@@ -1,0 +1,39 @@
+{
+ "batch": "2026-10-25_0759_n18",
+ "searches": 1,
+ "clips": [
+  {
+   "search": "01-europe-risque-de-famine-ou-de-penurie-alimentaire",
+   "target": "Europe",
+   "target_type": "sujet",
+   "claim": "risque de famine ou de pénurie alimentaire à cause des guerres en Ukraine et en Iran",
+   "platform": "youtube",
+   "video_id": "3ndo9Y2Upv8",
+   "source_url": "https://www.youtube.com/watch?v=3ndo9Y2Upv8",
+   "title": "Ukraine, Ormuz : vers la pénurie alimentaire mondiale ? - JT du mardi 25 août 2026",
+   "channel": "Chaîne officielle TVL",
+   "uploaded": "2026-08-25",
+   "source_authority": 0.67,
+   "source_authority_why": "chaîne non répertoriée (1 080 000 abonnés)",
+   "start": 56.4,
+   "end": 145.7,
+   "duration": 89.3,
+   "start_tc": "00:00:56.400",
+   "end_tc": "00:02:25.700",
+   "in": 55.2,
+   "out": 146.7,
+   "in_tc": "00:00:55.200",
+   "out_tc": "00:02:26.700",
+   "timing": "ia-affiné",
+   "quote": "C'est la convergence des catastrophes qui atteint peut-être la capacité des humains à se nourrir convenablement, et ce dès 2027. [...] Concrètement, les importantes sécheresses de 2026 combinées avec les conflits en Ukraine et au Proche-Orient qui conduisent au blocage de la Mer Noire et du détroit d'Ormuz sont en train de créer les conditions d'une généralisation de l'insécurité alimentaire dans le monde.",
+   "speaker": "Nicolas de Lamberterie",
+   "speaker_role": "journalist",
+   "who_says": "other_named",
+   "verdict": "paraphrase",
+   "confidence": 0.85,
+   "score": 0.651,
+   "link": "https://www.youtube.com/embed/3ndo9Y2Upv8?start=56&end=146&autoplay=1",
+   "order": 1
+  }
+ ]
+}
