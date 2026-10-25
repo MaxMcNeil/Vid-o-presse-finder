@@ -34,12 +34,12 @@ _Mis à jour le 25/10/2026 à 22:02 (heure italienne), automatiquement après ch
 <!-- workflows:start -->
 ## Workflows
 
-_Vérifié le 25/10/2026 à 21:24 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
+_Vérifié le 25/10/2026 à 22:03 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
 
 ✅ **Tout fonctionne** : aucun workflow en échec.
 
 - ✅ **Diagnostic** : dernier lancement réussi (25/10 à 10:42) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40180776568)
-- ℹ️ **Find quotes** : dernier lancement annulé (25/10 à 21:24) — à la main ou remplacé par un plus récent ; dernier succès le 25/10 à 19:17 · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40225451810)
+- ✅ **Find quotes** : dernier lancement réussi (25/10 à 22:02) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40231917580)
 - ✅ **Republier un lancement** : dernier lancement réussi (25/10 à 10:27) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40180725266)
 
 <!-- workflows:end -->
