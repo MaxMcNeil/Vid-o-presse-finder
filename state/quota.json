@@ -2,75 +2,78 @@
  "keys": {
   "gemini:0ad101a9a2": {
    "day": "2026-10-25",
-   "calls": 2,
-   "units": 2,
-   "errors": 1,
+   "calls": 11,
+   "units": 11,
+   "errors": 4,
    "models": {},
    "label": "Gemini clé 1",
    "used_models": {
-    "gemini-3.8-flash": 15,
+    "gemini-3.8-flash": 21,
     "gemini-3-flash-preview": 3,
-    "gemini-3.6-flash": 13,
+    "gemini-3.6-flash": 14,
     "gemini-3.5-flash": 2,
-    "gemini-3.7-flash": 1
+    "gemini-3.7-flash": 3
    },
-   "last": "gemini-3.7-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
+   "last": "gemini-3.6-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:6f10d27b24": {
    "day": "2026-10-25",
-   "calls": 1,
-   "units": 1,
-   "errors": 3,
+   "calls": 6,
+   "units": 6,
+   "errors": 6,
    "models": {},
    "label": "Gemini clé 2",
    "used_models": {
-    "gemini-3.8-flash": 11,
+    "gemini-3.8-flash": 13,
     "gemini-3-flash-preview": 2,
-    "gemini-3.6-flash": 11
+    "gemini-3.6-flash": 12,
+    "gemini-3.7-flash": 1,
+    "gemini-3.5-flash": 1
    },
-   "last": "gemini-3.7-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
+   "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:8c54858ebc": {
    "day": "2026-10-25",
-   "calls": 2,
-   "units": 2,
-   "errors": 1,
+   "calls": 11,
+   "units": 11,
+   "errors": 5,
    "models": {},
    "label": "Gemini clé 3",
    "used_models": {
-    "gemini-3.8-flash": 11,
+    "gemini-3.8-flash": 16,
     "gemini-3-flash-preview": 3,
-    "gemini-3.6-flash": 12,
-    "gemini-3.5-flash": 2
+    "gemini-3.6-flash": 13,
+    "gemini-3.5-flash": 2,
+    "gemini-3.7-flash": 3
    },
-   "last": "gemini-3.7-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
+   "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:181ad99cca": {
    "day": "2026-10-25",
-   "calls": 1,
-   "units": 1,
-   "errors": 2,
+   "calls": 6,
+   "units": 6,
+   "errors": 10,
    "models": {},
    "label": "Gemini clé 4",
    "used_models": {
-    "gemini-3.8-flash": 12,
-    "gemini-3.7-flash": 2,
+    "gemini-3.8-flash": 13,
+    "gemini-3.7-flash": 5,
     "gemini-3-flash-preview": 6,
-    "gemini-3.6-flash": 10,
+    "gemini-3.6-flash": 11,
     "gemini-3.5-flash": 1
    },
    "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:c7a23ab254": {
    "day": "2026-10-25",
-   "calls": 0,
-   "units": 0,
-   "errors": 3,
+   "calls": 8,
+   "units": 8,
+   "errors": 8,
    "models": {},
    "label": "Gemini clé 5",
    "used_models": {
-    "gemini-3.8-flash": 6,
-    "gemini-3.7-flash": 3,
+    "gemini-3.8-flash": 11,
+    "gemini-3.7-flash": 6,
     "gemini-3-flash-preview": 4,
     "gemini-3.6-flash": 13,
     "gemini-3.5-flash": 1
@@ -79,51 +82,51 @@
   },
   "groq:1691e6b64a": {
    "day": "2026-10-25",
-   "calls": 2,
-   "units": 2,
+   "calls": 5,
+   "units": 5,
    "errors": 0,
    "models": {},
    "label": "Groq clé 1",
    "used_models": {
-    "openai/gpt-oss-120b": 22
+    "openai/gpt-oss-120b": 25
    }
   },
   "youtube:ca0e47bd85": {
    "day": "2026-10-25",
-   "calls": 6,
-   "units": 204,
+   "calls": 23,
+   "units": 914,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 1"
   },
   "youtube:bcc568c3e7": {
    "day": "2026-10-25",
-   "calls": 6,
-   "units": 303,
+   "calls": 24,
+   "units": 915,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 2"
   },
   "youtube:0f238cfda0": {
    "day": "2026-10-25",
-   "calls": 5,
-   "units": 104,
+   "calls": 24,
+   "units": 915,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 3"
   },
   "youtube:92aa479928": {
    "day": "2026-10-25",
-   "calls": 5,
-   "units": 203,
+   "calls": 23,
+   "units": 815,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 4"
   },
   "youtube:a5a9d82454": {
    "day": "2026-10-25",
-   "calls": 5,
-   "units": 203,
+   "calls": 23,
+   "units": 914,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 5"
@@ -145,5 +148,5 @@
    "label": "NYT clé 1"
   }
  },
- "saved": "2026-10-25T08:13:12+00:00"
+ "saved": "2026-10-25T08:39:34+00:00"
 }

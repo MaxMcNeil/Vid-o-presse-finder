@@ -1,0 +1,371 @@
+{
+ "target": "FAO",
+ "target_type": "entite",
+ "claim": "alerte sur la crise alimentaire mondiale liée aux guerres en Ukraine et en Iran",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Avertissements ou rapports de la FAO concernant l'impact des conflits en Ukraine et des tensions au Moyen-Orient (notamment impliquant l'Iran) sur la crise alimentaire mondiale et la hausse des prix des denrées.",
+  "term_groups": [
+   [
+    "crise alimentaire",
+    "securite alimentaire",
+    "penurie alimentaire",
+    "famine",
+    "food crisis",
+    "food insecurity",
+    "food security",
+    "hunger crisis",
+    "prix des denrees",
+    "food price index"
+   ],
+   [
+    "ukraine",
+    "guerre en ukraine",
+    "war in ukraine",
+    "mer noire",
+    "black sea",
+    "cereales ukrainiennes",
+    "ukrainian grain"
+   ],
+   [
+    "iran",
+    "moyen orient",
+    "middle east",
+    "detroit d ormuz",
+    "strait of hormuz",
+    "tensions regionales",
+    "conflit iran"
+   ]
+  ],
+  "target_aliases": [
+   "fao",
+   "f a o",
+   "organisation des nations unies pour l alimentation et l agriculture",
+   "food and agriculture organization",
+   "food and agriculture organization of the united nations",
+   "onuaa"
+  ],
+  "youtube_queries": [
+   "FAO alerte sur la crise alimentaire mondiale liée aux guerres en Ukraine et en Iran",
+   "FAO food crisis Ukraine Iran briefing",
+   "FAO conférence de presse crise alimentaire Ukraine",
+   "FAO Qu Dongyu Ukraine food security statement",
+   "Reuters FAO global food crisis conflict",
+   "France 24 FAO alerte sécurité alimentaire guerre",
+   "United Nations FAO Ukraine Middle East grain supply",
+   "BBC News FAO chief food price index war"
+  ],
+  "news_queries": [
+   "FAO alerte sur la crise alimentaire mondiale liée aux guerres en Ukraine et en Iran",
+   "FAO alerte crise alimentaire mondiale guerre Ukraine",
+   "FAO food crisis global supply war Ukraine Iran tensions",
+   "FAO warning food security conflict Ukraine Middle East",
+   "Rapport FAO insécurité alimentaire impact conflits"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 8,
+   "queries_news": 5,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "fao.org",
+    "un.org",
+    "reuters.com",
+    "afp.com",
+    "apnews.com"
+   ],
+   "site_articles": 31,
+   "site_articles_by_site": {
+    "elysee.fr": 1,
+    "assemblee-nationale.fr": 10,
+    "fao.org": 10,
+    "un.org": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "Reuters": 0
+   },
+   "videos_candidates": 23,
+   "site_videos_scored": [],
+   "videos_low_authority": 17,
+   "videos_relevant": 3,
+   "videos_by_platform": {
+    "youtube": 2
+   },
+   "articles_candidates": 118,
+   "articles_low_authority": 19,
+   "articles_relevant": 12,
+   "timing": {
+    "ia-affiné": 3
+   },
+   "elapsed_min": 9.8,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 3,
+      "gemini-3.6-flash": 4,
+      "gemini-3.5-flash": 1,
+      "gemini-3.7-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "entite",
+  "official_speakers": [
+   "QU Dongyu",
+   "Máximo Torero",
+   "Beth Bechdol",
+   "Porte-parole FAO",
+   "FAO spokesperson"
+  ],
+  "authoritative_sources": [
+   "fao.org",
+   "un.org",
+   "reuters.com",
+   "afp.com",
+   "apnews.com",
+   "lemonde.fr",
+   "lefigaro.fr",
+   "france24.com",
+   "bbc.com",
+   "ft.com",
+   "United Nations YouTube",
+   "FAO YouTube",
+   "Reuters YouTube",
+   "AFP YouTube",
+   "France 24 YouTube"
+  ],
+  "site_query": "FAO crise alimentaire Ukraine Iran conflits",
+  "countries": [
+   "UA",
+   "IR",
+   "FR"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 2,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "How El Nino and two wars are driving the next food price crisis | DW News",
+   "uploaded": "2026-09-05",
+   "platform": "youtube",
+   "video_id": "6gTtOkpt8Fc",
+   "duration": 986,
+   "channel": "DW News",
+   "url": "https://www.youtube.com/watch?v=6gTtOkpt8Fc",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:44",
+     "end": "00:53",
+     "start_seconds": 44.4,
+     "end_seconds": 53.9,
+     "start_tc": "00:00:44.400",
+     "end_tc": "00:00:53.900",
+     "duration_seconds": 9.5,
+     "timestamp": "00:44",
+     "link": "https://www.youtube.com/watch?v=6gTtOkpt8Fc&t=44s",
+     "clip_link": "https://www.youtube.com/embed/6gTtOkpt8Fc?start=44&end=54&autoplay=1",
+     "t": 44.4,
+     "quote": "Now that war in Ukraine is still ongoing, and this year the Iran war has piled on top of it.",
+     "verdict": "paraphrase",
+     "who_says": "journalist",
+     "speaker_name": "Hannah Hummel",
+     "confidence": 0.95,
+     "why": "La journaliste Hannah Hummel mentionne la poursuite de la guerre en Ukraine et le conflit impliquant l'Iran comme facteurs pesant sur la situation alimentaire mondiale au début du reportage basé sur les données et avertissements de la FAO.",
+     "t_end": 53.9,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "FAO issues warning: Is the world on the brink of an unprecedented food shock?",
+   "uploaded": "2026-05-23",
+   "platform": "youtube",
+   "video_id": "HPXpAKUe_NI",
+   "duration": 80,
+   "channel": "Al Mayadeen English",
+   "url": "https://www.youtube.com/watch?v=HPXpAKUe_NI",
+   "method": "gemini-video",
+   "authority": 0.59,
+   "authority_why": "chaîne non répertoriée (235 000 abonnés) — ajoutée faute de source forte sur ce sujet",
+   "moments": [
+    {
+     "start": "00:06",
+     "end": "00:26",
+     "start_seconds": 6.0,
+     "end_seconds": 26.0,
+     "start_tc": "00:00:06.000",
+     "end_tc": "00:00:26.000",
+     "duration_seconds": 20.0,
+     "timestamp": "00:06",
+     "link": "https://www.youtube.com/watch?v=HPXpAKUe_NI&t=6s",
+     "clip_link": "https://www.youtube.com/embed/HPXpAKUe_NI?start=6&end=27&autoplay=1",
+     "t": 6.0,
+     "quote": "A serious warning issued by the FAO... The UN Food and Agriculture Organization, FAO, warns of a global food crisis that could erupt within just six months to one year.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "The video explicitly reports on the FAO warning about a upcoming global food crisis caused by conflicts and regional tensions (such as Iran and Strait of Hormuz).",
+     "t_end": 26.0,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "00:39",
+     "end": "00:58",
+     "start_seconds": 39.5,
+     "end_seconds": 58.7,
+     "start_tc": "00:00:39.500",
+     "end_tc": "00:00:58.700",
+     "duration_seconds": 19.2,
+     "timestamp": "00:39",
+     "link": "https://www.youtube.com/watch?v=HPXpAKUe_NI&t=39s",
+     "clip_link": "https://www.youtube.com/embed/HPXpAKUe_NI?start=39&end=59&autoplay=1",
+     "t": 39.5,
+     "quote": "The FAO stressed that what is happening marks 'the beginning of a systemic agrifood shock'... The international organization warned that the decisions being made today will determine the scale of the coming catastrophe.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "The video highlights the FAO's report warning of systemic agrifood shock and impending global catastrophe due to conflict-related trade disruptions.",
+     "t_end": 58.7,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Global food prices at three-year high as heatwaves and wars push up crop costs",
+   "date": "2026-08-07",
+   "source": "The Guardian",
+   "domain": "theguardian.com",
+   "url": "https://www.theguardian.com/business/2026/aug/07/global-food-prices-three-year-high-heatwaves-wars-crop-costs",
+   "verified_on_full_text": true,
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Global food prices have hit their highest level in three and a half years, as summer heatwaves and conflict in Ukraine and the Middle East push up crop costs. The UN Food and Agriculture Organization (FAO) index of food commodity prices rose last month to its highest level since January 2023, after a jump in prices for cereals, sugar and vegetable oil.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "The Guardian",
+     "confidence": 0.85,
+     "why": "L'article rapporte l'indice des prix de la FAO et attribue la flambée des cours alimentaires aux canicules et aux conflits en Ukraine et au Moyen-Orient (avec mention ultérieure de la guerre en Iran).",
+     "t_end": null,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "Le conflit dans le détroit d’Ormuz menace les prix alimentaires mondiaux, prévient la FAO",
+   "date": "2026-05-20",
+   "source": "UN News",
+   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5welBzSWtEVG92QkdFMjRFS1JyOHdkaUZ6OGZhcG1BSlU2VEtmaVAyTWl2ZlZLU0ZrYnFIam1NZ3VTZHVFRFA5Y1p3eVlycXpMRG54VjJnOA?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "War in Iran threatens fresh food-price shock across developing world",
+   "date": "2026-03-20",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNUmsyNFJRN1J6NDMtV2ZPdDFJb3ZjclFjZUpaQWRDang2QUxZSHFaQUNuMG9ZNXFOZ2ZSVjVCNDdGRF9WTzB5REFVX3l3Y0hmc0ZYNHl5cDRINDZTZmdQOC16MXVoZEZNbUFhSGFka2FHdlFCbl9NaHhMQU1EcUxQNlB1c1dqcHV3b1QtWXlfbFVsbXY0THgwNjQ1UE5IX0kwNWt4YUNsbzJJZURIbnZnRTFkUnNaYmJtVzFV?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Guerre au Moyen-Orient : le spectre de la faim plane sur des millions de personnes dans le monde | ONU Info",
+   "date": "2026-03-17",
+   "source": "UN News",
+   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFB5VW13NTN3OXczRXFXaS1XU19rU21hUVNRUHZSbW1OZnIzNzhDR1NKTzg1LTkyVkswQ1lsNXRSOFBZU19GOGVlRzMwdm1JVXFkWGp2TXdMaw?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "« Le temps presse » : les perturbations à Ormuz font craindre une crise alimentaire mondiale",
+   "date": "2026-04-13",
+   "source": "UN News",
+   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9fcndKRWx0Ul9iUDhMNVhxRFVCYjhKcGRfTVJEdVBMR1BHNHJwRGV1V2RzMThsdm9FNTJZblhYUVFSRWwwM3NJV3dZYzZfV2FZOUNOQ1Zodw?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "World braces for new wave of food price surges due to Middle East, Ukraine wars, FAO warns",
+   "date": "2026-08-05",
+   "source": "The Peninsula Qatar",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPLUlsUkZyM0JMRnpRMTdRVnowXzVIOUZuVUhNcGFrcnFoTTlEVFhIdXpqd3R3a1VqWk9WY0x2UWRJQmk2ckQwUlBhVTRTZUhSMW5BNlBhRFVrY0pJQ3g2cFlpOERMckZKTEZGcUdIZnpKV0lNcE1hS1RQMEtVTEpEdkM4ZVVlVzdvUUcxRVFnMHl3aDlGRGhIY1NOZ3ZqeFNJT2Z3d3lIWVA4YlNSV3dWQ0xWeUxtTE1DaUhIUjE3NFNVZEhsOVNCd25lZjVmZVhka2FN?oc=5",
+   "authority": 0.85
+  },
+  {
+   "title": "‘No country will be left untouched’: FAO warns Gulf crisis could hit global food systems",
+   "date": "2026-03-26",
+   "source": "Arab News",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQ1MwenNMZXV4ZHUycDZLcm5nY0tNOHpuNVVpM2RqUUN2eEp0NmdlbTU0bkVSdUhIVy1wVHk4YVp6S21kWWp5WjFSS2ZCampMUXV0cEhaQXBMY3k5QVJDU2dmc1BsT203N1YzVFZNUm9FY0ZzOEN4YnFKRDFtTFkxaVVocU1oc0tCMGh5U0E1dkYwQUxDTW9CTlZjRzZRdUZRUlJ1RFZWQ1pzaVREdlN0WlpsNWpuSkgxQ3RROGZCRldNUDFNZ05LbVZR?oc=5",
+   "authority": 0.85
+  },
+  {
+   "title": "FAO Chief Economist warns of severe global food security risks from disruption to Strait of Hormuz trade corridor",
+   "date": "2026-03-26",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQQktNS2FNV2lINHoxMDA5MmZLbFJEWER1ZkxlV2xlNlV3cE9kX0RwWW5aalJBY3lfNUJYb1RUNmZlY18xTkhkaGllRE5TSkFHSE9NWmVSY1VSalN1Q1Z3MUVudUtzYWRaVk9wMWdPNTRDVDE4cUhzT3JmdHhYSTF6TFIxVF9tM1JiY1duYWVCZnZuSHNZS2ptdEV1SmdnUmRZZWI3LVFWYzQ5TE9IZEtFZzVvVl9jS1NwVkZkRXJMMXB0Z3pGVUU5aTJRcks5OUxKdVVhcDIwMzc5SS1VVmpMMTRSMlFXQ0E?oc=5",
+   "authority": 0.8
+  },
+  {
+   "title": "Assessing the 2026 Middle East conflict: implications on resilience of agrifood systems",
+   "date": "2026-04-10",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNQ0Nza2VCRzR3d2VNMUtrZFBOWmw2QldIQjdiX1lHTTFYUzNOY2FpMmF5SlI0VXJSdnpuSkdlQUFKT2tZbk00TXNjbF84a0Z5cE9pc3ZiOXlVWXgtZTF2blRuM2RYNkpZeFlJR1I5Tlh5VWJOeWJjeTVmOFpXT1FoTzNsY3JPVEdRaXdyZTBYZ0xrTnlhWXpCbXMtWHd0MlE0OGZr?oc=5",
+   "authority": 0.8
+  },
+  {
+   "title": "Supply concerns drive FAO Food Price Index higher in August",
+   "date": "2026-09-04",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQNlR2SG5LaV9BRElDVHI3ZkNVdm5YQW9sYU5YV1pFbWQ3ajdwX1JQR2JKa2oweXhqUWRPQ1pibTRlbkZoWXRuWnVoN3JoLUx6UmZxMkw2NHpGTHRzRWE3cjlQcEZ4dzVVY01JM0JrSTdnNUZSTUtYMHZYbEE4MVJfSXljVTFnNDg1X0F0amxncm5PUQ?oc=5",
+   "authority": 0.8
+  },
+  {
+   "title": "« Nous faisons face à une insécurité alimentaire croissante » : entretien avec David Laborde de la FAO",
+   "date": "2026-05-17",
+   "source": "L'Humanité",
+   "url": "https://www.msn.com/fr-fr/finance/autres/nous-faisons-face-%C3%A0-une-ins%C3%A9curit%C3%A9-alimentaire-croissante-entretien-avec-david-laborde-de-la-fao/ar-AA23pukL",
+   "authority": 0.75
+  },
+  {
+   "title": "ENTRETIEN. « La sécurité alimentaire mondiale s’est détériorée sous l’effet cumulatif de chocs »",
+   "date": "2026-08-29",
+   "source": "Ouest-France",
+   "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxPaW5PUVdpOWxIdVVRa211NGNXdUh5SVotenJoRWRRLS0yVHVjSERvUTJWNkViUTU4ZUVkRTFlNTBnV1RvanlKR01XLWN0TE1iREhwelowQ1RxYlU1UUNqYlpFUnZyNm1lVjJlUXJ2QWRLYzFCQWdGWGtFajJ5b2dKRlhMeXRodlI0LUZKVnNSOVhzclhaR1NTbDhpVXF6d0kzS1lMcXZHR1dHWThubHdMTV8tZUJhQmdqWU1DTF9ZcHdfMnktQlFxSHdESHlBVUdFWkRyZ0pSczFBdTFkcXBkcmdFVmFZOVBmenFRX3dsUGhqODd1dEE0QXJ3ejVFMzZLVG14Zk93?oc=5",
+   "authority": 0.75
+  }
+ ],
+ "unverifiable_videos": []
+}

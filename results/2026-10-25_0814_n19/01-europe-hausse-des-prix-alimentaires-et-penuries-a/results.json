@@ -1,0 +1,211 @@
+{
+ "target": "Europe",
+ "target_type": "sujet",
+ "claim": "hausse des prix alimentaires et pénuries à cause de la guerre en Ukraine et du conflit avec l'Iran",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Impact de la guerre en Ukraine et des tensions géopolitiques avec l'Iran sur l'inflation alimentaire, la flambée des prix et les risques de pénuries en Europe.",
+  "term_groups": [
+   [
+    "hausse des prix",
+    "flambee des prix",
+    "inflation alimentaire",
+    "penurie alimentaire",
+    "crise alimentaire",
+    "food prices",
+    "rising food costs",
+    "food inflation",
+    "food shortages",
+    "food crisis"
+   ],
+   [
+    "guerre en ukraine",
+    "conflit ukrainien",
+    "invasion de l ukraine",
+    "war in ukraine",
+    "ukraine conflict",
+    "russia ukraine war"
+   ],
+   [
+    "iran",
+    "conflit iran",
+    "tensions iran",
+    "moyen orient",
+    "iran conflict",
+    "iran tensions",
+    "middle east crisis",
+    "detroit d ormuz",
+    "strait of hormuz"
+   ]
+  ],
+  "target_aliases": [
+   "europe",
+   "union europeenne",
+   "ue",
+   "european union",
+   "eu",
+   "europeen",
+   "european"
+  ],
+  "youtube_queries": [
+   "Europe hausse des prix alimentaires et pénuries à cause de la guerre en Ukraine et du conflit avec l'Iran",
+   "Euronews hausse prix alimentaires guerre Ukraine",
+   "France 24 pénuries alimentaires conflit Ukraine",
+   "BBC News food price inflation Ukraine war",
+   "DW News food security Ukraine Middle East tensions",
+   "Journal télévisé inflation alimentaire impact guerre",
+   "Bloomberg food crisis Ukraine war impact Europe",
+   "Reuters global food prices inflation conflict"
+  ],
+  "news_queries": [
+   "Europe hausse des prix alimentaires et pénuries à cause de la guerre en Ukraine et du conflit avec l'Iran",
+   "\"prix alimentaires\" inflation Ukraine Iran Europe",
+   "\"food prices\" inflation Ukraine war shortages",
+   "impact guerre Ukraine tensions Iran crise alimentaire Europe",
+   "\"food inflation\" Middle East Ukraine supply chain Europe",
+   "Commission européenne hausse prix denrées alimentaires guerre"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "de"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "senat.fr",
+    "vie-publique.fr",
+    "francetvinfo.fr",
+    "radiofrance.fr",
+    "lemonde.fr"
+   ],
+   "site_articles": 59,
+   "site_articles_by_site": {
+    "elysee.fr": 9,
+    "assemblee-nationale.fr": 10,
+    "senat.fr": 10,
+    "vie-publique.fr": 10,
+    "radiofrance.fr": 10,
+    "lemonde.fr": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "franceinfo": 0
+   },
+   "videos_candidates": 24,
+   "site_videos_scored": [],
+   "videos_low_authority": 14,
+   "videos_relevant": 2,
+   "videos_by_platform": {
+    "youtube": 2
+   },
+   "articles_candidates": 186,
+   "articles_low_authority": 19,
+   "articles_relevant": 12,
+   "timing": {},
+   "elapsed_min": 14.0,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 6,
+      "gemini-3.7-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "sujet",
+  "official_speakers": [],
+  "authoritative_sources": [
+   "Reuters",
+   "AFP",
+   "Bloomberg",
+   "ec.europa.eu",
+   "fao.org",
+   "lemonde.fr",
+   "lefigaro.fr",
+   "ft.com",
+   "franceinfo",
+   "France 24",
+   "Euronews",
+   "BBC News",
+   "dw.com",
+   "lesechos.fr",
+   "ecb.europa.eu"
+  ],
+  "site_query": "inflation prix alimentaires guerre Ukraine Iran",
+  "countries": [
+   "FR",
+   "DE",
+   "BE"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 2,
+  "articles_scanned": 12
+ },
+ "videos": [],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Engrais et sécurité alimentaire : comment l’UE veut réduire sa dépendance et protéger ses agriculteurs",
+   "date": "2026-05-19",
+   "source": "belgium.representation.ec.europa.eu",
+   "url": "https://news.google.com/rss/articles/CBMingJBVV95cUxOS2ZadGo3RWVzUXk3aFUyX2t3VWlmU2w5M2JZZkw2ODB0WHh1TFdseGhGT3BIMmdpS04zMVUtY3VTZnhQWUZtdWZtV1RkQlYtcElXaTYwWEpZbE0wQ0tzVUFGX0ZKd1daQmpXeFVMMEhaZWR4b0ZyVkw2MkM2UndXS1UtQ1M0bzlMa0hIUDlLdDFfU0RQVTYtRkRoSGxTUWNEZHc0RDROb0tZWkFMRmluaHQ2dEFUNUIyVE5ocWJRWDFZemFBOXlHb043aFlXdkpySmRsTVhYakV4T050TnRsVENsalYyeTlwendhcVpDeTMwaFlsNjhBLTA5bXhZNlAxRHBjdEo4LWdMS2VPS2R5U0g0Q0FIbWlkMVBzTXRn?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Question écrite n° 13547 : Conséquences de la guerre en Iran sur le marché mondial des engrais azotés",
+   "date": "2026-08-18",
+   "source": "Assemblée nationale",
+   "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE50ZDhOQzE1RkVHMHI4M25Ldy04UDBIU1FGQzBWakFLaUVnSERWQkkybDF4cjE4cW9jcDdYcFVnN25XN3RYanpoVFc2cEVRRTJtQnlFTnZyU3dZeWNmZk9MUFg3cDlpUjgwNG40c3pNQUtCNWdudVBDVEdnSmo4QQ?oc=5",
+   "authority": 1.0
+  },
+  {
+   "title": "Guerre au Moyen-Orient : \"Une grosse spéculation sur les matières premières\" pour ce producteur d'engrais en Bretagne",
+   "date": "2026-03-30",
+   "source": "Radio France",
+   "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxQckFXOFM3cnJQSUFJTnhoU1p1YWNfa0oyNjZra0N0NkdzSHN1ZmxIT1Bod1FXM21kSmRaQThEOFZUVmRlbDZEUmZsQ2U0SnhxZnBNQlNCT2s2OXBMYXhITDd4OE4xVVFUR285U0I3UkVWb2RPYXVzZTBrUU5fcmplakExVzRFUW02RHVWZ19kMFp1d0pibXhXUlFkcUlKTG9jUllsSnppaUZmeW9ZZk9ZVi16d2p3QU1jeXNmWUczeHFOY2JCV3NCLTlJbS1Ud2pQM284MnYwbUlWMmcyYXNxUWEtUzlNYkdKUHpiVWoyMzRDUGlQbnZfeWpQRjhwVWstZUFLWkpTUWx3V1pQNkN2QnNNQXkxa2JJNmtVRw?oc=5",
+   "authority": 0.9
+  },
+  {
+   "title": "Global Food Supply Faces a Dangerous Bottleneck as Iran War Persists",
+   "date": "2026-03-27",
+   "source": "The New York Times",
+   "url": "https://www.nytimes.com/2026/03/27/business/economy/fertilizer-food-supply-iran-war.html",
+   "authority": 0.9
+  },
+  {
+   "title": "Kérosène, CO2, engrais, alimentation... Les effets en chaîne du blocage du détroit d'Ormuz",
+   "date": "2026-04-16",
+   "source": "France 24",
+   "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYjBGSWdwRFQ1Vm1reDN4a1ZPcWhhNVM1QjhnNjNZbkZhQlFQUUlnazNfODFZanpBN1lqcXlERktTQ3hVM3pOdW1ubkhLbEtKZWhWaGNQbEs1Z2ZlaUlpcUZOczdycml6dWlvdWUyY2RERVZqeVZ3QklremVpdndJWjFELVVMeWtzalAtWGJrbXMzLVk5Mm1aeXc1LWwxa2FxWXlyYjdWQktxSV9qMUFWUnFFS3VzWHVadnNqRURlQV81REczTElEMGNrMkc2SlFxaHFwcHBiZ29rUQ?oc=5",
+   "authority": 0.9
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "OECD Interim Outlook LIVE: Cormann On Global Growth & Inflation Risks",
+   "url": "https://www.youtube.com/watch?v=jmuAuOzhOJY",
+   "reason": "vidéo de 105 min : trop longue pour l'analyse IA (limite 60 min, quotas Gemini)"
+  }
+ ]
+}
