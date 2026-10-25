@@ -37,8 +37,8 @@ jobs:
         if: always()
         run: |
           python -m quote_finder.quota merge state/quota.json > /dev/null
-          git config user.name "quote-finder-bot"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add state
           git diff --cached --quiet && exit 0
           git commit -q -m "état des clés API"

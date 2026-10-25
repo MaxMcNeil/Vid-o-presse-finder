@@ -230,6 +230,20 @@ def process(results_dir: Path, days: int = 14, max_videos: int = 40, dry_run: bo
     return stats
 
 
+def _identity(repo: Path) -> list[str]:
+    """Commits signés avec TON identité Git (celle du téléphone). Jamais une adresse inventée : GitHub relie
+    toute adresse @users.noreply.github.com au compte du même nom (une 1re version signait « tel », un inconnu)."""
+    name = _git(repo, "config", "user.name", check=False).stdout.strip()
+    mail = _git(repo, "config", "user.email", check=False).stdout.strip()
+    if name and mail:
+        return []
+    owner = "MaxMcNeil"
+    url = _git(repo, "remote", "get-url", "origin", check=False).stdout.strip()
+    if "github.com" in url:
+        owner = url.rstrip("/").split("github.com")[-1].lstrip(":/").split("/")[0] or owner
+    return ["-c", f"user.name={name or owner}", "-c", f"user.email={mail or owner + '@users.noreply.github.com'}"]
+
+
 def _git(repo: Path, *args, check=True) -> subprocess.CompletedProcess:
     return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=check)
 
@@ -257,7 +271,7 @@ def main(argv=None) -> int:
     if st["lots"]:
         _git(repo, "add", "results")
         if _git(repo, "diff", "--cached", "--quiet", check=False).returncode != 0:
-            _git(repo, "-c", "user.name=quote-finder-tel", "-c", "user.email=tel@users.noreply.github.com", "commit", "-q", "-m",
+            _git(repo, *_identity(repo), "commit", "-q", "-m",
                  f"précision téléphone : {st['recalés']} extrait(s) recalé(s) sur les sous-titres ({', '.join(st['lots'])})")
     ahead = _git(repo, "rev-list", "--count", "origin/main..HEAD", check=False).stdout.strip()
     if not ahead or ahead == "0":  # rien à envoyer (y compris un envoi raté lors d'un passage précédent)

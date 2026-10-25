@@ -202,8 +202,8 @@ jobs:
 
       - name: Enregistrer les résultats dans le dépôt
         run: |
-          git config user.name "quote-finder-bot"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add results state
           git diff --cached --quiet && exit 0
           git commit -q -m "résultats : $LOT"
