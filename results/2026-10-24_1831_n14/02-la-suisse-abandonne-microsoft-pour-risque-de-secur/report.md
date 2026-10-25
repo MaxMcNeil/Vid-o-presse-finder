@@ -52,3 +52,11 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 6.7 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:00 → 00:24](https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=25&autoplay=1) — Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany S
+  > Switzerland's federal administration aims to reduce its dependency on Microsoft step by step and in the long term, a federal chancellery spokesman told NZZ am Sonntag. This comes after Microsoft 365 w
+

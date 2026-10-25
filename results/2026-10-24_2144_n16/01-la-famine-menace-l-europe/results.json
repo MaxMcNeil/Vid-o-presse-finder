@@ -172,26 +172,28 @@
    "authority_why": "média de référence",
    "moments": [
     {
-     "start": "03:14",
-     "end": "03:35",
-     "start_seconds": 194.2,
-     "end_seconds": 215.1,
-     "start_tc": "00:03:14.200",
-     "end_tc": "00:03:35.100",
-     "duration_seconds": 20.9,
-     "timestamp": "03:14",
-     "link": "https://www.youtube.com/watch?v=RAt5h630_E8&t=194s",
-     "clip_link": "https://www.youtube.com/embed/RAt5h630_E8?start=194&end=216&autoplay=1",
-     "t": 194.2,
+     "start": "03:32",
+     "end": "03:56",
+     "start_seconds": 212.0,
+     "end_seconds": 236.24,
+     "start_tc": "00:03:32.000",
+     "end_tc": "00:03:56.240",
+     "duration_seconds": 24.2,
+     "timestamp": "03:32",
+     "link": "https://www.youtube.com/watch?v=RAt5h630_E8&t=212s",
+     "clip_link": "https://www.youtube.com/embed/RAt5h630_E8?start=212&end=237&autoplay=1",
+     "t": 212.0,
      "quote": "there is a lot of farmers that are using less fertilizers, that means we have less production on next summer on wheat, at example. The wheat is at the basis for bread or pasta, so and the risk is that the farmers on the next September are going to have different choices on the next sowing time.",
      "verdict": "paraphrase",
      "who_says": "other_named",
      "speaker_name": "Massimiliano Giansanti",
      "confidence": 0.85,
      "why": "Massimiliano Giansanti met en garde contre une baisse de production de blé pour le pain et les pâtes en Europe due au manque d'engrais.",
-     "t_end": 215.1,
+     "t_end": 236.24,
      "speaker_role": "official",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     }
    ]
   }

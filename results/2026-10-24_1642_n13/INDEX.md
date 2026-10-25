@@ -1,6 +1,8 @@
 # Lot de recherches — 2026-10-24_1642_n13
 
 3 recherche(s), 44 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
+Précision : 17 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) par Gemini (±1 s), 27 estimé(s) (±5 s). ⏳ 27 seront recalés par le téléphone au prochain passage (`qf precis`).
+
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |
 |---|---|---|---|---|---|---|
@@ -10,19 +12,19 @@
 
 ## Meilleurs extraits
 
-- [00:00:35 → 00:01:04](https://www.youtube.com/embed/FVf9kK9VCLo?start=35&end=65&autoplay=1) · Bloomberg Television · H.E. Omar Bin Sultan Al Olama · score 1.00
+- [00:00:34 → 00:01:04](https://www.youtube.com/embed/FVf9kK9VCLo?start=34&end=65&autoplay=1) · Bloomberg Television · H.E. Omar Bin Sultan Al Olama · score 1.00
   > So some of our most successful exits so far are artificial intelligence stories of success. Careem is an artificial intelligence company that got acquired for 11 billion dirhams, 3.1 or 3.2 billion dollars. Souq.com got 
 - [00:00:11 → 00:00:34](https://www.youtube.com/embed/4zf7ItVRbH0?start=11&end=35&autoplay=1) · FRANCE 24 · Emmanuel Macron · score 1.00
   > Le tandem franco-allemand en quête de souveraineté numérique. Merz et Macron dans la course à l'IA. Emmanuel Macron est venu pour impulser un tandem, cette quête d'indépendance technologique.
-- [00:00:53 → 00:01:50](https://www.youtube.com/embed/4zf7ItVRbH0?start=53&end=111&autoplay=1) · FRANCE 24 · Emmanuel Macron · score 1.00
+- [00:00:47 → 00:01:11](https://www.youtube.com/embed/4zf7ItVRbH0?start=47&end=72&autoplay=1) · FRANCE 24 · Emmanuel Macron · score 1.00
   > L'Europe est prête à bâtir son propre avenir numérique. Ce sommet réunit les 27 ministres en charge, présidé par la France et l'Allemagne, pour favoriser l'émergence de partenariats européens, notamment de start-up et de
 - [00:02:11 → 00:02:32](https://www.youtube.com/embed/4zf7ItVRbH0?start=131&end=153&autoplay=1) · FRANCE 24 · Emmanuel Macron · score 1.00
   > Face aux géants du numérique qui veulent la dérégulation maximale, nous avons inauguré un chantier de centre de données pour 11 milliards d'euros. C'est important pour notre souveraineté.
-- [00:01:02 → 00:02:15](https://www.youtube.com/embed/kRUU6awEoHk?start=62&end=136&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
+- [00:00:59 → 00:01:36](https://www.youtube.com/embed/kRUU6awEoHk?start=59&end=97&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
   > Indeed, we are together completely convinced that we have entered a technological race in the digital field, which clearly affects the pillars of our society. And of course, our economy has entered the race for AI, cloud
-- [00:02:16 → 00:03:39](https://www.youtube.com/embed/kRUU6awEoHk?start=136&end=220&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
+- [00:01:36 → 00:02:21](https://www.youtube.com/embed/kRUU6awEoHk?start=96&end=142&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
   > Talking about digital sovereignty is relevant to our competitiveness and our ability to innovate, but also to the health of our democracies, the efficiency of our public services, and to the protection of our citizens, p
-- [00:03:46 → 00:04:19](https://www.youtube.com/embed/kRUU6awEoHk?start=226&end=260&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
+- [00:02:27 → 00:04:19](https://www.youtube.com/embed/kRUU6awEoHk?start=147&end=260&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
   > Being more sovereign and more independent doesn't mean you want to be autarky. No. But it means on the key pillars, on the key building blocks, you want to preserve your sovereignty. And this is just the refusal of being
 - [00:05:00 → 00:05:46](https://www.youtube.com/embed/kRUU6awEoHk?start=300&end=347&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
   > This transformation presents us with a twofold challenge: innovate to remain competitive, while protecting our data, our infrastructure, and more broadly, our sovereignty. [...] We have to innovate before regulating, and

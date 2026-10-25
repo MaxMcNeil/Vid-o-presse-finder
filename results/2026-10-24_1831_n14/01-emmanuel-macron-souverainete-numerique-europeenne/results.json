@@ -197,7 +197,9 @@
      "why": "Emmanuel Macron exprime directement la nécessité pour l'Europe de préserver sa souveraineté numérique et de concevoir ses propres solutions face aux États-Unis et à la Chine.",
      "t_end": 120.7,
      "speaker_role": "official",
-     "timing": "ia-affiné"
+     "timing": "ia-affiné",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   },
@@ -212,26 +214,28 @@
    "authority_why": "chaîne officielle / agence",
    "moments": [
     {
-     "start": "00:00",
-     "end": "00:21",
-     "start_seconds": 0.3,
-     "end_seconds": 21.6,
-     "start_tc": "00:00:00.300",
-     "end_tc": "00:00:21.600",
-     "duration_seconds": 21.3,
-     "timestamp": "00:00",
-     "link": "https://www.youtube.com/watch?v=F_YBDMAJcGA&t=0s",
-     "clip_link": "https://www.youtube.com/embed/F_YBDMAJcGA?start=0&end=22&autoplay=1",
-     "t": 0.3,
+     "start": "00:01",
+     "end": "00:23",
+     "start_seconds": 1.28,
+     "end_seconds": 23.76,
+     "start_tc": "00:00:01.280",
+     "end_tc": "00:00:23.760",
+     "duration_seconds": 22.5,
+     "timestamp": "00:01",
+     "link": "https://www.youtube.com/watch?v=F_YBDMAJcGA&t=1s",
+     "clip_link": "https://www.youtube.com/embed/F_YBDMAJcGA?start=1&end=24&autoplay=1",
+     "t": 1.28,
      "quote": "Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aurait accepté autant que nous de dépendre des autres sur des produits vitaux, des composantes essentielles.",
      "verdict": "paraphrase",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 0.95,
      "why": "Emmanuel Macron évoque la souveraineté technologique et industrielle de l'Europe et la réduction de la dépendance envers les autres puissances.",
-     "t_end": 21.6,
+     "t_end": 23.76,
      "speaker_role": "official",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     }
    ]
   }

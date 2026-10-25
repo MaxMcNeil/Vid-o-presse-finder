@@ -51,3 +51,13 @@ _Des autorités suisses déclarent envisager d'abandonner les produits Microsoft
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 12.3 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:15 → 00:35](https://www.youtube.com/embed/SCJH0f6cdq8?start=15&end=36&autoplay=1) — Switzerland wants to ditch Microsoft 365, kicks off migration pilot
+  > Now, it looks like Switzerland's government is planning to take the same route. According to reports, Switzerland is migrating away from Microsoft 365 on 3,000 government PCs in a pilot program that a
+- [00:00 → 00:24](https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=25&autoplay=1) — Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany S
+  > Switzerland's Federal Administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step in the long term, a Federal Chancellery spokesman told NZZ am Sonntag. This comes after 
+

@@ -192,29 +192,33 @@
      "why": "Emmanuel Macron s'exprime lors d'un sommet franco-allemand sur la souveraineté numérique et l'IA, soulignant l'importance de l'indépendance technologique européenne.",
      "t_end": 34.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
-     "start": "00:53",
-     "end": "01:50",
-     "start_seconds": 53.0,
-     "end_seconds": 110.0,
-     "start_tc": "00:00:53.000",
-     "end_tc": "00:01:50.000",
-     "duration_seconds": 57.0,
-     "timestamp": "00:53",
-     "link": "https://www.youtube.com/watch?v=4zf7ItVRbH0&t=53s",
-     "clip_link": "https://www.youtube.com/embed/4zf7ItVRbH0?start=53&end=111&autoplay=1",
-     "t": 53.0,
+     "start": "00:47",
+     "end": "01:11",
+     "start_seconds": 47.36,
+     "end_seconds": 71.68,
+     "start_tc": "00:00:47.360",
+     "end_tc": "00:01:11.680",
+     "duration_seconds": 24.3,
+     "timestamp": "00:47",
+     "link": "https://www.youtube.com/watch?v=4zf7ItVRbH0&t=47s",
+     "clip_link": "https://www.youtube.com/embed/4zf7ItVRbH0?start=47&end=72&autoplay=1",
+     "t": 47.36,
      "quote": "L'Europe est prête à bâtir son propre avenir numérique. Ce sommet réunit les 27 ministres en charge, présidé par la France et l'Allemagne, pour favoriser l'émergence de partenariats européens, notamment de start-up et de grands groupes.",
      "verdict": "literal",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 1.0,
      "why": "Macron réaffirme la volonté de l'Europe de construire son autonomie numérique à travers des partenariats stratégiques et le soutien aux entreprises technologiques européennes.",
-     "t_end": 110.0,
+     "t_end": 71.68,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     },
     {
      "start": "02:11",
@@ -236,7 +240,9 @@
      "why": "Il souligne l'investissement massif dans les infrastructures de données comme pilier de la souveraineté numérique face à la domination des acteurs extra-européens.",
      "t_end": 152.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   },
@@ -251,61 +257,65 @@
    "authority_why": "chaîne officielle / agence",
    "moments": [
     {
-     "start": "01:02",
-     "end": "02:15",
-     "start_seconds": 62.0,
-     "end_seconds": 135.0,
-     "start_tc": "00:01:02.000",
-     "end_tc": "00:02:15.000",
-     "duration_seconds": 73.0,
-     "timestamp": "01:02",
-     "link": "https://www.youtube.com/watch?v=kRUU6awEoHk&t=62s",
-     "clip_link": "https://www.youtube.com/embed/kRUU6awEoHk?start=62&end=136&autoplay=1",
-     "t": 62.0,
+     "start": "00:59",
+     "end": "01:36",
+     "start_seconds": 59.28,
+     "end_seconds": 96.799,
+     "start_tc": "00:00:59.280",
+     "end_tc": "00:01:36.799",
+     "duration_seconds": 37.5,
+     "timestamp": "00:59",
+     "link": "https://www.youtube.com/watch?v=kRUU6awEoHk&t=59s",
+     "clip_link": "https://www.youtube.com/embed/kRUU6awEoHk?start=59&end=97&autoplay=1",
+     "t": 59.28,
      "quote": "Indeed, we are together completely convinced that we have entered a technological race in the digital field, which clearly affects the pillars of our society. And of course, our economy has entered the race for AI, cloud computing, chips, quantum technology, and from downstream to upstream in all these different transformations, the competition is definitely a very fierce and global one.",
      "verdict": "paraphrase",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 1.0,
      "why": "Macron évoque la course technologique mondiale et la nécessité pour l'Europe d'y participer activement.",
-     "t_end": 135.0,
+     "t_end": 96.799,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     },
     {
-     "start": "02:16",
-     "end": "03:39",
-     "start_seconds": 136.0,
-     "end_seconds": 219.0,
-     "start_tc": "00:02:16.000",
-     "end_tc": "00:03:39.000",
-     "duration_seconds": 83.0,
-     "timestamp": "02:16",
-     "link": "https://www.youtube.com/watch?v=kRUU6awEoHk&t=136s",
-     "clip_link": "https://www.youtube.com/embed/kRUU6awEoHk?start=136&end=220&autoplay=1",
-     "t": 136.0,
+     "start": "01:36",
+     "end": "02:21",
+     "start_seconds": 96.799,
+     "end_seconds": 141.481,
+     "start_tc": "00:01:36.799",
+     "end_tc": "00:02:21.481",
+     "duration_seconds": 44.7,
+     "timestamp": "01:36",
+     "link": "https://www.youtube.com/watch?v=kRUU6awEoHk&t=96s",
+     "clip_link": "https://www.youtube.com/embed/kRUU6awEoHk?start=96&end=142&autoplay=1",
+     "t": 96.799,
      "quote": "Talking about digital sovereignty is relevant to our competitiveness and our ability to innovate, but also to the health of our democracies, the efficiency of our public services, and to the protection of our citizens, particularly our children. [...] Europe doesn't want to be the client of the big entrepreneurs or the big solutions being provided either from US or from China. We clearly want to design our own solutions.",
      "verdict": "literal",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 1.0,
      "why": "Il définit explicitement la souveraineté numérique comme la capacité de l'Europe à créer ses propres solutions technologiques.",
-     "t_end": 219.0,
+     "t_end": 141.481,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     },
     {
-     "start": "03:46",
+     "start": "02:27",
      "end": "04:19",
-     "start_seconds": 226.0,
+     "start_seconds": 147.68,
      "end_seconds": 259.0,
-     "start_tc": "00:03:46.000",
+     "start_tc": "00:02:27.680",
      "end_tc": "00:04:19.000",
-     "duration_seconds": 33.0,
-     "timestamp": "03:46",
-     "link": "https://www.youtube.com/watch?v=kRUU6awEoHk&t=226s",
-     "clip_link": "https://www.youtube.com/embed/kRUU6awEoHk?start=226&end=260&autoplay=1",
-     "t": 226.0,
+     "duration_seconds": 111.3,
+     "timestamp": "02:27",
+     "link": "https://www.youtube.com/watch?v=kRUU6awEoHk&t=147s",
+     "clip_link": "https://www.youtube.com/embed/kRUU6awEoHk?start=147&end=260&autoplay=1",
+     "t": 147.68,
      "quote": "Being more sovereign and more independent doesn't mean you want to be autarky. No. But it means on the key pillars, on the key building blocks, you want to preserve your sovereignty. And this is just the refusal of being a vassal.",
      "verdict": "literal",
      "who_says": "target",
@@ -314,7 +324,9 @@
      "why": "Macron lie l'indépendance technologique au refus d'une position de vassalité vis-à-vis des puissances étrangères.",
      "t_end": 259.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     },
     {
      "start": "05:00",
@@ -336,7 +348,9 @@
      "why": "Il explique que la souveraineté passe par un équilibre entre innovation et protection face aux concurrents non-européens.",
      "t_end": 346.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "06:48",
@@ -358,7 +372,9 @@
      "why": "Il souligne le risque de perte de souveraineté si l'Europe ne possède pas ses propres champions technologiques.",
      "t_end": 443.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "18:42",
@@ -380,7 +396,9 @@
      "why": "Macron réaffirme l'objectif de réduire les dépendances technologiques pour atteindre une véritable souveraineté.",
      "t_end": 1154.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "20:33",
@@ -402,7 +420,9 @@
      "why": "Il insiste sur le fait que sans actions concrètes, le discours sur la souveraineté restera vain face à la dépendance aux solutions étrangères.",
      "t_end": 1311.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   },
@@ -436,7 +456,9 @@
      "why": "Emmanuel Macron affirme explicitement que l'Europe ne veut pas être dépendante des solutions technologiques américaines ou chinoises et souhaite développer ses propres solutions.",
      "t_end": 131.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "02:11",
@@ -458,7 +480,9 @@
      "why": "Emmanuel Macron précise sa vision de la souveraineté numérique : une indépendance sur les piliers technologiques clés sans pour autant refuser la coopération internationale.",
      "t_end": 133.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   },

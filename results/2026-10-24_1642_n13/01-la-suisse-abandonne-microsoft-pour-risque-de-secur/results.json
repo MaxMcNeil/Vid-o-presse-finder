@@ -171,26 +171,28 @@
    "authority_why": "chaîne non répertoriée (8 440 abonnés) — ajoutée faute de source forte sur ce sujet",
    "moments": [
     {
-     "start": "00:17",
+     "start": "00:15",
      "end": "00:35",
-     "start_seconds": 17.0,
-     "end_seconds": 35.0,
-     "start_tc": "00:00:17.000",
-     "end_tc": "00:00:35.000",
-     "duration_seconds": 18.0,
-     "timestamp": "00:17",
-     "link": "https://www.youtube.com/watch?v=SCJH0f6cdq8&t=17s",
-     "clip_link": "https://www.youtube.com/embed/SCJH0f6cdq8?start=17&end=36&autoplay=1",
-     "t": 17.0,
+     "start_seconds": 15.0,
+     "end_seconds": 35.76,
+     "start_tc": "00:00:15.000",
+     "end_tc": "00:00:35.760",
+     "duration_seconds": 20.8,
+     "timestamp": "00:15",
+     "link": "https://www.youtube.com/watch?v=SCJH0f6cdq8&t=15s",
+     "clip_link": "https://www.youtube.com/embed/SCJH0f6cdq8?start=15&end=36&autoplay=1",
+     "t": 15.0,
      "quote": "Now, it looks like Switzerland's government is planning to take the same route. According to reports, Switzerland is migrating away from Microsoft 365 on 3,000 government PCs in a pilot program that aims to adopt and trial open source alternatives.",
      "verdict": "paraphrase",
      "who_says": "reported",
      "speaker_name": "",
      "confidence": 0.95,
      "why": "La narratrice rapporte que le gouvernement suisse lance un projet pilote pour migrer 3 000 postes de travail hors de Microsoft 365 vers des alternatives open source pour des motifs de souveraineté numérique et de protection des données.",
-     "t_end": 35.0,
+     "t_end": 35.76,
      "speaker_role": "journalist",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     },
     {
      "start": "00:35",
@@ -212,7 +214,9 @@
      "why": "Citation des arguments de sécurité et de fuite de données vers des gouvernements étrangers pour justifier la transition hors de Microsoft en Suisse.",
      "t_end": 51.0,
      "speaker_role": "expert",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   },
@@ -228,15 +232,15 @@
    "moments": [
     {
      "start": "00:00",
-     "end": "00:22",
+     "end": "00:24",
      "start_seconds": 0.0,
-     "end_seconds": 22.0,
+     "end_seconds": 24.36,
      "start_tc": "00:00:00.000",
-     "end_tc": "00:00:22.000",
-     "duration_seconds": 22.0,
+     "end_tc": "00:00:24.360",
+     "duration_seconds": 24.4,
      "timestamp": "00:00",
      "link": "https://www.youtube.com/watch?v=BffWWGOgcWs&t=0s",
-     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=23&autoplay=1",
+     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=25&autoplay=1",
      "t": 0.0,
      "quote": "Switzerland's Federal Administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step in the long term, a Federal Chancellery spokesman told NZZ am Sonntag. This comes after Microsoft 365 was recently installed on some 54,000 Administration workstations despite concerns about data security.",
      "verdict": "paraphrase",
@@ -244,9 +248,11 @@
      "speaker_name": "El",
      "confidence": 0.95,
      "why": "La présentatrice rapporte les déclarations d'un porte-parole de la Chancellerie fédérale suisse indiquant que l'administration suisse vise à réduire sa dépendance envers Microsoft à long terme, suite à des inquiétudes sur la sécurité des données.",
-     "t_end": 22.0,
+     "t_end": 24.36,
      "speaker_role": "expert",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     }
    ]
   }

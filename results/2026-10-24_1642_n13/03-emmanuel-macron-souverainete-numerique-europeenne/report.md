@@ -132,3 +132,17 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 6.7 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:47 → 01:11](https://www.youtube.com/embed/4zf7ItVRbH0?start=47&end=72&autoplay=1) — Macron à Berlin : le tandem franco-allemand en quête de souveraineté n
+  > L'Europe est prête à bâtir son propre avenir numérique. Ce sommet réunit les 27 ministres en charge, présidé par la France et l'Allemagne, pour favoriser l'émergence de partenariats européens, notamme
+- [00:59 → 01:36](https://www.youtube.com/embed/kRUU6awEoHk?start=59&end=97&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > Indeed, we are together completely convinced that we have entered a technological race in the digital field, which clearly affects the pillars of our society. And of course, our economy has entered th
+- [01:36 → 02:21](https://www.youtube.com/embed/kRUU6awEoHk?start=96&end=142&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > Talking about digital sovereignty is relevant to our competitiveness and our ability to innovate, but also to the health of our democracies, the efficiency of our public services, and to the protectio
+- [02:27 → 04:19](https://www.youtube.com/embed/kRUU6awEoHk?start=147&end=260&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > Being more sovereign and more independent doesn't mean you want to be autarky. No. But it means on the key pillars, on the key building blocks, you want to preserve your sovereignty. And this is just 
+

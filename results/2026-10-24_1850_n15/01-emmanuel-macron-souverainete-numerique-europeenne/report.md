@@ -111,3 +111,21 @@ _Déclarations et prises de position d'Emmanuel Macron concernant la souverainet
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 12.8 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [03:19 → 03:31](https://www.youtube.com/embed/zVadD951mIY?start=199&end=212&autoplay=1) — Il est temps pour l’Europe d’avoir sa propre souveraineté technologiqu
+  > And for me now what we have to do is in in each sector in each innovation how to build the European solution and European sovereignty.
+- [17:22 → 17:47](https://www.youtube.com/embed/zVadD951mIY?start=1042&end=1068&autoplay=1) — Il est temps pour l’Europe d’avoir sa propre souveraineté technologiqu
+  > Otherwise it's impossible. If I depend on the US cloud, I depend on US law and US regulation. I cannot guarantee you about the use of your data. If you want me to guarantee you about the use of your d
+- [11:20 → 11:51](https://www.youtube.com/embed/kRUU6awEoHk?start=680&end=712&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > And for this reason, we put digital sovereignty, fostering domestic champions and freeing ourselves from dependence on foreign technologies, as the forefront of the economic agenda that we set during 
+- [00:01 → 00:23](https://www.youtube.com/embed/F_YBDMAJcGA?start=1&end=24&autoplay=1) — Macron : "Depuis 7 ans, l’Europe a commencé à sortir de cette naïveté 
+  > Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aura
+- [01:14 → 01:47](https://www.youtube.com/embed/refYWVpbwKA?start=74&end=108&autoplay=1) — Macron Calls for AI Adoption, Data Protection, and Building European D
+  > we are together completely convinced that we haven't entered a technological race in the digital field which clearly affects the pillars of our society. And of course our economy has entered the race 
+- [02:43 → 04:15](https://www.youtube.com/embed/refYWVpbwKA?start=163&end=256&autoplay=1) — Macron Calls for AI Adoption, Data Protection, and Building European D
+  > on the key pillars, on the key building blocks, you want to preserve your sovereignty, and this is just the refusal of being a vassal.
+

@@ -55,3 +55,11 @@ _Déclarations et analyses d'autorités ou d'experts évaluant le risque réel o
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 11.5 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [03:32 → 03:56](https://www.youtube.com/embed/RAt5h630_E8?start=212&end=237&autoplay=1) — Food prices could skyrocket, if no measures taken to tackle fertilizer
+  > there is a lot of farmers that are using less fertilizers, that means we have less production on next summer on wheat, at example. The wheat is at the basis for bread or pasta, so and the risk is that
+

@@ -85,3 +85,11 @@ _Déclarations et prises de position d'Emmanuel Macron concernant la souverainet
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 16.4 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:01 → 00:23](https://www.youtube.com/embed/F_YBDMAJcGA?start=1&end=24&autoplay=1) — Macron : "Depuis 7 ans, l’Europe a commencé à sortir de cette naïveté 
+  > Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aura
+
