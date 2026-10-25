@@ -12,10 +12,12 @@ def parse_keys(raw: str | None) -> list[str]:
 
 
 def keys_from_env(prefix: str) -> list[str]:
-    """Lit PREFIX_KEYS, PREFIX_KEY, PREFIX_KEY_1..20 et les mêmes avec PREFIX_API_ (ex. GEMINI_API_KEYS)."""
+    """Lit PREFIX_KEYS, PREFIX_KEYS_PLUS, PREFIX_KEY, PREFIX_KEY_1..20 et les mêmes avec PREFIX_API_ (ex. GEMINI_API_KEYS,
+    GEMINI_API_KEYS_PLUS). *_PLUS = clés ajoutées en plus, sans écraser le secret existant (illisible sur GitHub)."""
     out: list[str] = []
     for base in (prefix, f"{prefix}_API"):
         out += parse_keys(os.environ.get(f"{base}_KEYS"))
+        out += parse_keys(os.environ.get(f"{base}_KEYS_PLUS"))  # clés ajoutées EN PLUS (sans toucher aux anciennes)
         out += parse_keys(os.environ.get(f"{base}_KEY"))
         for i in range(1, 21):
             out += parse_keys(os.environ.get(f"{base}_KEY_{i}"))
