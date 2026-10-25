@@ -76,3 +76,9 @@ def test_cancelled_search_is_listed_not_lost(tmp_path):
     assert batch.mark_missing(lot, m) == ["02-bernard-valluis"]
     idx = batch.merge(lot).read_text()
     assert "Bernard Valluis" in idx and "interrompue" in idx
+
+
+def test_unsupported_script_dropped_arabic_kept():
+    g = H(7, 20, "यूरोपमा हिट वेभ, अलग्नोनी असर खादय संकट ना ऐन्धान युद्ध ना कारने")
+    a = H(30, 40, "الأمن الغذائي في أوروبا مهدد بسبب الحرب", role="official")
+    assert [h.t for h in scan.tidy_hits([g, a], 100)] == [30]

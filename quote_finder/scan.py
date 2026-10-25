@@ -428,6 +428,11 @@ def not_a_statement(h: Hit) -> str:
     letters = [c for c in q if c.isalpha()]
     if _words(q) < 3:
         return "trop court"
+    if len(letters) >= 8:  # écriture inutilisable pour le montage (ex. gujarati) : seuls latin et arabe sont gardés
+        ok = sum(1 for c in letters if ord(c) < 0x250 or 0x600 <= ord(c) <= 0x6FF or 0x750 <= ord(c) <= 0x77F
+                 or 0xFB50 <= ord(c) <= 0xFEFF)
+        if ok / len(letters) < 0.6:
+            return "langue non prise en charge"
     if len(letters) >= 8 and sum(c.isupper() for c in letters) / len(letters) > 0.8:
         return "titre affiché à l'écran"
     if q.rstrip(" »\"'").endswith("?") and h.speaker_role not in ("official", "expert", "politician"):
