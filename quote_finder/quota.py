@@ -187,7 +187,9 @@ def merge(target: Path, others: list[Path]) -> QuotaState:
         except (OSError, ValueError):
             continue
         for k, e in (d.get("keys") or {}).items():
-            b = base.data["keys"].setdefault(k, {"models": {}, "day": e.get("day", ""), "calls": 0, "units": 0, "errors": 0})
+            b = base.data["keys"].setdefault(k, {"models": {}, "day": e.get("day", ""), "calls": 0, "units": 0, "errors": 0,
+                                                 "used_models": {}})
+            b.setdefault("models", {})
             o = orig.get(k) or {}
             for f in ("label", "last"):
                 if e.get(f):
@@ -202,8 +204,9 @@ def merge(target: Path, others: list[Path]) -> QuotaState:
                 for f in counters:
                     b[f] = b.get(f, 0) + max(0, e.get(f, 0) - (o.get(f, 0) if same else 0))
                 om = (o.get("used_models") or {}) if same else {}
+                um = b.setdefault("used_models", {})  # clé nouvelle (ajoutée au secret) : pas encore de compteur
                 for m, n in (e.get("used_models") or {}).items():
-                    b.setdefault("used_models", {})[m] = b["used_models"].get(m, 0) + max(0, n - om.get(m, 0))
+                    um[m] = um.get(m, 0) + max(0, n - om.get(m, 0))
     base._purge()
     return base
 

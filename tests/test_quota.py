@@ -166,3 +166,20 @@ def test_daily_quota_detected_even_at_end_of_long_google_error(st):
     c = GeminiClient(KeyPool("gemini", ["g1"], 0, persist=True), ["x"], h)
     assert c.generate_json("x") == {"ok": 1} and h.calls == ["gemini-9-flash", "gemini-9-flash-lite"]
     assert quota.state().model_until("gemini", "g1", "gemini-9-flash") > time.time() + 3600  # jusqu'à la remise à zéro
+
+
+def test_merge_accepts_keys_added_to_the_secret(tmp_path):
+    """25/10/2026 : 5 clés ajoutées (secret *_PLUS) faisaient planter la fusion -> mémoire des quotas jamais enregistrée."""
+    import json as _j
+    from quote_finder import quota as q
+    base = tmp_path / "quota.json"
+    base.write_text(_j.dumps({"keys": {"gemini:old": {"label": "Gemini clé 1", "day": q.pacific_day(), "calls": 1,
+                                                      "units": 1, "errors": 0, "models": {}}}}))
+    job = tmp_path / "job.json"
+    job.write_text(_j.dumps({"keys": {"gemini:new": {"label": "Gemini clé 9", "day": q.pacific_day(), "calls": 3, "units": 3,
+                                                     "errors": 0, "models": {}, "used_models": {"gemini-x": 3}},
+                                      "gemini:old": {"label": "Gemini clé 1", "day": q.pacific_day(), "calls": 2, "units": 2,
+                                                     "errors": 0, "used_models": {"gemini-x": 1}}}}))
+    st = q.merge(base, [job])
+    assert st.data["keys"]["gemini:new"]["used_models"] == {"gemini-x": 3}
+    assert st.data["keys"]["gemini:old"]["calls"] == 2 and st.data["keys"]["gemini:old"]["used_models"] == {"gemini-x": 1}

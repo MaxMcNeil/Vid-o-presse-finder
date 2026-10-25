@@ -23,7 +23,7 @@ for i in 1 2 3 4 5 6; do
   # lot lancé par OSINT-teleprompter- : on garde le lien (le montage s'en sert pour se synchroniser)
   if [ -n "${ORIGINE:-}" ] && [ "${ORIGINE}" != "null" ]; then printf '%s\n' "$ORIGINE" > "results/$LOT/ORIGINE.json"; fi
   files=$(find dlq -name quota.json 2>/dev/null)
-  python3 -m quote_finder.quota merge state/quota.json $files > /dev/null
+  python3 -m quote_finder.quota merge state/quota.json $files > /dev/null || echo "::warning::mémoire des quotas non fusionnée (voir l'erreur ci-dessus)"
   python3 -m quote_finder.batch merge "results/$LOT" > /dev/null
   python3 -m quote_finder.status > /dev/null   # ETAT.md (garde la section « Workflows »)
   git add "results/$LOT" results/README.md state ETAT.md
