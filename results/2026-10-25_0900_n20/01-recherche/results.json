@@ -1,0 +1,605 @@
+{
+ "target": "détroit d'Ormuz",
+ "target_type": "sujet",
+ "claim": "blocage des engrais et menace sur la production agricole et la sécurité alimentaire",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Blocage ou restriction d'exportation d'engrais dans le détroit d'Ormuz, entraînant une menace pour la production agricole et la sécurité alimentaire dans la région",
+  "term_groups": [
+   [
+    "blocage des engrais",
+    "engrais bloques",
+    "interdiction d engrais",
+    "restriction d engrais",
+    "embargo sur engrais",
+    "engrais bloque",
+    "engrais interdits",
+    "engrais sanctionnes",
+    "engrais stoppes",
+    "fertilizer blockade",
+    "fertilizer ban",
+    "fertilizer restriction",
+    "حظر الاسمده",
+    "ايقاف الاسمده"
+   ],
+   [
+    "menace sur la production agricole",
+    "risque pour la production agricole",
+    "danger pour l agriculture",
+    "menace a la production agricole",
+    "impact sur la production agricole",
+    "menace agriculture",
+    "agricultural production threat",
+    "agricultural output risk",
+    "threat to crop yields",
+    "risk to farm output",
+    "تهديد الانتاج الزراعي"
+   ],
+   [
+    "securite alimentaire",
+    "food security",
+    "securite de l alimentation",
+    "securite nutritionnelle",
+    "food safety",
+    "securite alimentaire mondiale",
+    "global food security",
+    "الامن الغذايي",
+    "امن الغذاء"
+   ],
+   [
+    "detroit d ormuz",
+    "strait of hormuz",
+    "detroit d or muz",
+    "ormuz",
+    "hormuz",
+    "مضيق هرمز",
+    "مضيق هرمز"
+   ]
+  ],
+  "target_aliases": [
+   "detroit d ormuz"
+  ],
+  "youtube_queries": [
+   "détroit d'Ormuz blocage des engrais et menace sur la production agricole et la sécurité alimentaire",
+   "Reuters interview fertilizer blockade Strait of Hormuz",
+   "Al Jazeera English Hormuz fertilizer ban impact agriculture",
+   "BBC News Persian Hormuz fertilizer restriction",
+   "France24 French blocage des engrais détroit d'Ormuz",
+   "FAO webinar food security Middle East fertilizer embargo",
+   "Gulf News report Hormuz fertilizer crisis",
+   "Saudi Press Agency statement fertilizer block",
+   "UN Food Security Council Hormuz fertilizer issue"
+  ],
+  "news_queries": [
+   "détroit d'Ormuz blocage des engrais et menace sur la production agricole et la sécurité alimentaire",
+   "fertilizer blockade Strait of Hormuz",
+   "engrais détroit d'Ormuz sécurité alimentaire",
+   "Hormuz fertilizer ban agriculture impact",
+   "blocage des engrais Moyen-Orient",
+   "food security Gulf fertilizer restriction"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "ar"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 5,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "wam.ae",
+    "skynewsarabia.com",
+    "thenationalnews.com",
+    "omannews.gov.om",
+    "timesofoman.com",
+    "omanobserver.om",
+    "reuters.com",
+    "afp.com"
+   ],
+   "site_articles": 1,
+   "site_articles_by_site": {
+    "afp.com": 1
+   },
+   "site_pages_probed": 0,
+   "site_videos": 0,
+   "official_channels": {
+    "سكاي نيوز عربية Sky News Arabia": 0,
+    "The National": 0,
+    "Reuters": 0
+   },
+   "videos_candidates": 97,
+   "site_videos_scored": [],
+   "videos_low_authority": 58,
+   "videos_relevant": 22,
+   "videos_by_platform": {
+    "youtube": 7,
+    "dailymotion": 1
+   },
+   "articles_candidates": 137,
+   "articles_low_authority": 40,
+   "articles_relevant": 19,
+   "articles_read_via": {
+    "illisible : lien Google Actualités non converti": 8,
+    "illisible : site fermé aux robots, pas d'archive": 3,
+    "archive.org": 1
+   },
+   "timing": {
+    "ia-affiné": 10,
+    "non retrouvé": 1
+   },
+   "elapsed_min": 20.4,
+   "youtube_keys_status": "5/5 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "5/5 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.6-flash": 28,
+      "gemini-3.7-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "sujet",
+  "official_speakers": [],
+  "authoritative_sources": [
+   "reuters.com",
+   "afp.com",
+   "bbc.com",
+   "aljazeera.com",
+   "franceinfo.fr",
+   "lemonde.fr",
+   "theguardian.com",
+   "bloomberg.com",
+   "fao.org",
+   "iea.org",
+   "gulfnews.com",
+   "spagov.sa"
+  ],
+  "site_query": "blocage engrais détroit d'ormuz",
+  "countries": [
+   "IR",
+   "AE",
+   "OM"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "Strait of Hormuz: Hunger looming | Fertilizer shipments cannot wait",
+   "uploaded": "2026-04-22",
+   "platform": "youtube",
+   "video_id": "LbzeRVYUiLY",
+   "duration": 96,
+   "channel": "United Nations",
+   "url": "https://www.youtube.com/watch?v=LbzeRVYUiLY",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:28",
+     "start_seconds": 0.0,
+     "end_seconds": 28.0,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:28.000",
+     "duration_seconds": 28.0,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=LbzeRVYUiLY&t=0s",
+     "clip_link": "https://www.youtube.com/embed/LbzeRVYUiLY?start=0&end=29&autoplay=1",
+     "t": 0.0,
+     "quote": "The disruption of the Strait of Hormuz can push 45 million more people into hunger and starvation. We have one third of all fertilizers in the world going through the Strait of Hormuz. So we can see how important is the Persian Gulf for the production of fertilizers and how impacted is the entire supply chain of fertilizers with the disruption of the Strait of Hormuz.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Jorge Moreira da Silva",
+     "confidence": 0.95,
+     "why": "L'intervenant explique directement l'impact de la perturbation du détroit d'Ormuz sur le transit des engrais et la menace résultante sur la sécurité alimentaire.",
+     "t_end": 28.0,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "00:44",
+     "end": "01:36",
+     "start_seconds": 44.0,
+     "end_seconds": 96.0,
+     "start_tc": "00:00:44.000",
+     "end_tc": "00:01:36.000",
+     "duration_seconds": 52.0,
+     "timestamp": "00:44",
+     "link": "https://www.youtube.com/watch?v=LbzeRVYUiLY&t=44s",
+     "clip_link": "https://www.youtube.com/embed/LbzeRVYUiLY?start=44&end=97&autoplay=1",
+     "t": 44.0,
+     "quote": "was to develop a mechanism, focused on fertilizers and related raw materials such as urea, sulfur and ammonia, to prevent a massive humanitarian crisis... So the productivity of agriculture is very much dependent on the fertilizers. And we know also that if we don't get productivity on agriculture, you will have food insecurity, hunger and starvation.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Jorge Moreira da Silva",
+     "confidence": 0.95,
+     "why": "Le locuteur réitère le lien direct entre les engrais transitant par la zone, la baisse de productivité agricole et la crise alimentaire.",
+     "t_end": 96.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    }
+   ]
+  },
+  {
+   "title": "UN Sets Up Task Force For Strait Of Hormuz As Iran War Threatens Global Food Supply | VERTEX",
+   "uploaded": "2026-03-27",
+   "platform": "youtube",
+   "video_id": "u3vV1maECYg",
+   "duration": 363,
+   "channel": "VERTEX",
+   "url": "https://www.youtube.com/watch?v=u3vV1maECYg",
+   "method": "gemini-video",
+   "authority": 0.66,
+   "authority_why": "chaîne non répertoriée (906 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:10",
+     "start_seconds": 0.0,
+     "end_seconds": 10.5,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:10.500",
+     "duration_seconds": 10.5,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=u3vV1maECYg&t=0s",
+     "clip_link": "https://www.youtube.com/embed/u3vV1maECYg?start=0&end=11&autoplay=1",
+     "t": 0.0,
+     "quote": "intensify disruptions in the maritime trade through the strait of Hormuz risks creating a ripple effect impacting humanitarian needs and agricultural production in the coming months.",
+     "verdict": "literal",
+     "who_says": "official",
+     "speaker_name": "Stéphane Dujarric",
+     "confidence": 0.95,
+     "why": "L'intervenant indique explicitement que les perturbations du commerce maritime dans le détroit d'Ormuz risquent de créer un effet domino impactant la production agricole et les besoins humanitaires.",
+     "t_end": 10.5,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Fertilizer crisis means food inflation 'locked in' for at least a year, says researcher",
+   "uploaded": "2026-03-24",
+   "platform": "youtube",
+   "video_id": "HYaGMLP29-c",
+   "duration": 285,
+   "channel": "CBC News",
+   "url": "https://www.youtube.com/watch?v=HYaGMLP29-c",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:12",
+     "start_seconds": 0.0,
+     "end_seconds": 12.8,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:12.800",
+     "duration_seconds": 12.8,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=HYaGMLP29-c&t=0s",
+     "clip_link": "https://www.youtube.com/embed/HYaGMLP29-c?start=0&end=13&autoplay=1",
+     "t": 0.0,
+     "quote": "As the Strait of Hormuz blockage continues, it's not just oil and gas being impacted. Noah Gordon points out the supply and price of food and fertilizer is also impacted.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "Le présentateur explique dès les premières secondes de l'émission que le blocage du détroit d'Ormuz impacte l'approvisionnement et le prix des engrais et de la nourriture.",
+     "t_end": 12.8,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "00:33",
+     "end": "00:51",
+     "start_seconds": 33.1,
+     "end_seconds": 51.5,
+     "start_tc": "00:00:33.100",
+     "end_tc": "00:00:51.500",
+     "duration_seconds": 18.4,
+     "timestamp": "00:33",
+     "link": "https://www.youtube.com/watch?v=HYaGMLP29-c&t=33s",
+     "clip_link": "https://www.youtube.com/embed/HYaGMLP29-c?start=33&end=52&autoplay=1",
+     "t": 33.1,
+     "quote": "You've really got a double crisis with fertilizer. The Middle East region is a big producer of fertilizer itself, nitrogen-based fertilizer comes from places like Saudi Arabia and Qatar, and that obviously can't get out of the Strait just as oil and gas can't get out. And that's helped push fertilizer prices up about 40% in North America and more in some other regions.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Noah Gordon",
+     "confidence": 0.98,
+     "why": "L'expert Noah Gordon explique la crise des engrais causée par l'impossibilité d'exporter depuis le détroit d'Ormuz, provoquant une hausse globale des prix.",
+     "t_end": 51.5,
+     "speaker_role": "expert",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "UN Warns Millions Risk Hunger as Hormuz Fertiliser Trade Remains Blocked | APT",
+   "uploaded": "2026-05-11",
+   "platform": "youtube",
+   "video_id": "dFfe5qPPtP0",
+   "duration": 250,
+   "channel": "APT",
+   "url": "https://www.youtube.com/watch?v=dFfe5qPPtP0",
+   "method": "gemini-video",
+   "authority": 0.68,
+   "authority_why": "chaîne non répertoriée (1 230 000 abonnés)",
+   "moments": [
+    {
+     "start": "01:48",
+     "end": "02:13",
+     "start_seconds": 108.8,
+     "end_seconds": 133.4,
+     "start_tc": "00:01:48.800",
+     "end_tc": "00:02:13.400",
+     "duration_seconds": 24.6,
+     "timestamp": "01:48",
+     "link": "https://www.youtube.com/watch?v=dFfe5qPPtP0&t=108s",
+     "clip_link": "https://www.youtube.com/embed/dFfe5qPPtP0?start=108&end=134&autoplay=1",
+     "t": 108.8,
+     "quote": "The reason is clear: 1/3 of all seaborne fertilizers go through the Strait of Hormuz, and some of the poorest countries in Africa are highly dependent on fertilizers from the Strait of Hormuz. For instance, Sudan, Somalia, South Sudan, Kenya, Mozambique, but also in Southeast Asia, Sri Lanka is another example.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "L'intervenant explique directement que le passage des engrais par le détroit d'Ormuz est crucial pour l'approvisionnement agricole et la sécurité alimentaire de nombreux pays en développement.",
+     "t_end": 133.4,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "02:26",
+     "end": "02:40",
+     "start_seconds": 146.8,
+     "end_seconds": 160.0,
+     "start_tc": "00:02:26.800",
+     "end_tc": "00:02:40.000",
+     "duration_seconds": 13.2,
+     "timestamp": "02:26",
+     "link": "https://www.youtube.com/watch?v=dFfe5qPPtP0&t=146s",
+     "clip_link": "https://www.youtube.com/embed/dFfe5qPPtP0?start=146&end=161&autoplay=1",
+     "t": 146.8,
+     "quote": "When the crisis started, we knew that a few countries, some countries in Africa and Southeast Asia, would be impacted. Now it's much worse because the entire fertilizer market is disrupted.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "L'intervenant souligne la perturbation du marché des engrais liée au détroit et la menace directe que cela fait peser sur la production agricole et la sécurité alimentaire mondiale.",
+     "t_end": 160.0,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Hormuz Blockade: How the Iran Conflict Threatens Global Food Supply and Fertilizer Markets",
+   "uploaded": "2026-03-26",
+   "platform": "youtube",
+   "video_id": "df5mwb9nKec",
+   "duration": 129,
+   "channel": "CGTN America",
+   "url": "https://www.youtube.com/watch?v=df5mwb9nKec",
+   "method": "gemini-video",
+   "authority": 0.66,
+   "authority_why": "chaîne non répertoriée (907 000 abonnés)",
+   "moments": [
+    {
+     "start": "01:07",
+     "end": "01:14",
+     "start_seconds": 67.8,
+     "end_seconds": 74.8,
+     "start_tc": "00:01:07.800",
+     "end_tc": "00:01:14.800",
+     "duration_seconds": 7.0,
+     "timestamp": "01:07",
+     "link": "https://www.youtube.com/watch?v=df5mwb9nKec&t=67s",
+     "clip_link": "https://www.youtube.com/embed/df5mwb9nKec?start=67&end=75&autoplay=1",
+     "t": 67.8,
+     "quote": "And fully a third of all fertilizers traded by sea usually pass through the Strait of Hormuz.",
+     "verdict": "paraphrase",
+     "who_says": "journalist",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "La journaliste explique que le détroit d'Ormuz est un point de passage clé pour un tiers des engrais maritimes, menaçant la production alimentaire mondiale si le passage est bloqué.",
+     "t_end": 74.8,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "01:14",
+     "end": "01:30",
+     "start_seconds": 74.8,
+     "end_seconds": 90.9,
+     "start_tc": "00:01:14.800",
+     "end_tc": "00:01:30.900",
+     "duration_seconds": 16.1,
+     "timestamp": "01:14",
+     "link": "https://www.youtube.com/watch?v=df5mwb9nKec&t=74s",
+     "clip_link": "https://www.youtube.com/embed/df5mwb9nKec?start=74&end=91&autoplay=1",
+     "t": 74.8,
+     "quote": "The closure of the Strait of Hormuz will impact the world's access to fertilizer, right? Which will increase the cost of fertilizer, which will increase the cost of food production. I mean, it will be across the board.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Stephane Dujarric",
+     "confidence": 0.95,
+     "why": "Stephane Dujarric (porte-parole de l'ONU) explique la menace directe d'une fermeture du détroit sur l'accès aux engrais et l'augmentation consécutive des coûts de la production alimentaire mondiale.",
+     "t_end": 90.9,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "01:43",
+     "end": "01:59",
+     "start_seconds": 103.0,
+     "end_seconds": 119.2,
+     "start_tc": "00:01:43.000",
+     "end_tc": "00:01:59.200",
+     "duration_seconds": 16.2,
+     "timestamp": "01:43",
+     "link": "https://www.youtube.com/watch?v=df5mwb9nKec&t=103s",
+     "clip_link": "https://www.youtube.com/embed/df5mwb9nKec?start=103&end=120&autoplay=1",
+     "t": 103.0,
+     "quote": "I would say we also really need to look at food prices because you need energy to produce food and natural gas, for example, is often used to produce fertilizer. So there's potential here for a jump in food prices.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Stefan Angrick",
+     "confidence": 0.95,
+     "why": "Stefan Angrick détaille le lien entre les tensions sur l'énergie/engrais et la hausse probable des prix alimentaires mondiaux.",
+     "t_end": 119.2,
+     "speaker_role": "expert",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Iran War's On Impact On Global Food Supply | U.N. Activates Fertilizer Emergency Plan",
+   "uploaded": "2026-04-23",
+   "platform": "youtube",
+   "video_id": "3QE4rvAXhmo",
+   "duration": 215,
+   "channel": "ET Now World",
+   "url": "https://www.youtube.com/watch?v=3QE4rvAXhmo",
+   "method": "gemini-video",
+   "authority": 0.62,
+   "authority_why": "chaîne non répertoriée (385 000 abonnés)",
+   "moments": [
+    {
+     "start": "01:26",
+     "end": "02:18",
+     "start_seconds": 86.8,
+     "end_seconds": 138.8,
+     "start_tc": "00:01:26.800",
+     "end_tc": "00:02:18.800",
+     "duration_seconds": 52.0,
+     "timestamp": "01:26",
+     "link": "https://www.youtube.com/watch?v=3QE4rvAXhmo&t=86s",
+     "clip_link": "https://www.youtube.com/embed/3QE4rvAXhmo?start=86&end=139&autoplay=1",
+     "t": 86.8,
+     "quote": "a time-bound exceptional limited mechanism just for fertilizers and related raw materials because this will be still in time for the planting season. This mechanism for the Strait of Hormuz will be based on the same principle of building trust through more accountability and transparency.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Jorge Moreira da Silva",
+     "confidence": 0.95,
+     "why": "The speaker mentions the risk to fertilizers via the Strait of Hormuz affecting the planting season.",
+     "t_end": 138.8,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Détroit d’Ormuz : un choc sur les engrais menace l’alimentation mondiale",
+   "date": "2026-06-08",
+   "source": "UN News",
+   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1qTlJoeEttZW55VlhZOTNHeFN0N0hKUUl1emdGdHVnSXVSWHNpcHVzTmpGM3F3ck11ZVZGWnR6RlAzLTRMak1YYlFNOTVvV0ZTSXZIaXdnZw?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "\"Un risque particulièrement grave\" : comment le blocage des engrais dans le détroit d'Ormuz menace l'agriculture mondiale",
+   "date": "2026-05-18",
+   "source": "franceinfo",
+   "url": "https://news.google.com/rss/articles/CBMitwJBVV95cUxPSmZzV0dyd3lIX3FaVENSZUowNGZxOXZEbFJNc095LWpGRVZha19oN1F1NmpnZzd0UkIwSFdQOXkzRWJ1U0tlelFnck9XRE1QNkJHVXR4em5iNHNKSEtOakd5ajhXNjZ2X0VwdkpFcHBwSXdxWmVsNEdZd3BKOHZtTDFTdEpNelpHMzl6ZERFMzhoTVBfT2I3SUdjNnR4QjV6ZFdpZFZnaW5RS0hkVjlJS1BuTFFneUhsdVhiTGRBa1FUVktObWxfZ2hTUGF5WUo3SV9nQ2Jkdkp1Vk90b09hZkFhQUVuRGFZQ1ZZbnVvMzVRZnEydUJheDJucVZQbjhzU2J5eklLM0daM0c2OG43Ui1nb0FUVmVEQ1hkV3NSdVM1THFmZEExQlhzMzM4c0s0ZmF5UUppbw?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Le blocage du détroit d’Ormuz, une menace pour la sécurité alimentaire et un révélateur des fragilités des systèmes agricoles",
+   "date": "2026-04-13",
+   "source": "Le Monde.fr",
+   "url": "https://www.lemonde.fr/international/article/2026/09/09/l-iran-condamne-les-frappes-americaines-et-instaure-une-nouvelle-zone-interdite-pres-du-detroit-d-ormuz_6768921_3210.html",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  },
+  {
+   "title": "Le blocus du détroit d'Ormuz menace la sécurité alimentaire mondiale - Élément Terre, la quotidienne",
+   "date": "2026-04-13",
+   "source": "France 24",
+   "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxONnI5endPM0lZWHVYU0k4YXNRX2hEOUZFNWFCMUZqbW1nb2tKQ3dSZW1jUHE4cmp4ZlpRTzRoQjhkN0YyZUprYjR6MVhpMDI3SmRnOVV5WEpIeXduNmN4OURMTmVEN1NOcmx1cENNNE9tT19uN1NXSVRNVmp2aThmRzRhVjdMTUM4U2ZIRElyckV3YndhSG5jckhKYTEwTHczcFVuMDdsSmF6ejczRmMyRzAxbnFYT0V4REhVeVVZWDBubmcxbjRHTTM3ZjNrQWVwdWZpaHJ6X1NSbEFUOXpTMGQ4ZFF4Wk93YlA3UEE5LXd3UHVsX01OaHA2ZWVGdzdyYUVWQg?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Détroit d’Ormuz : pour prévenir la famine, l’ONU veut sécuriser le passage des cargaisons d’engrais à destination des pays vulnérables",
+   "date": "2026-05-12",
+   "source": "Le Monde.fr",
+   "url": "https://news.google.com/rss/articles/CBMipgJBVV95cUxNWkh3Z0swUUJwZEtua0RMWndvU3hXdkRETm5na0J1Sy1lUHRQVW5rTTIyQWEweWw4ZzdXYzNoUGo2S3M2eEN0LXlqOHBTb0RuX3FHbms3TEwwS0wwMG01a3dRUTl4RzRza0VMb21RSHRXMW9pZU96dG0yT0VFQ1R6LXZuczZDTVVLQlkxaXpFNmdQVDZTdy1TTVBBVG5GVnBxbl9wTmc3Ul9qeW44N2lUMFlCcnVwcHN1Uk8yUUVXa09sc1ZQQzBsVWJQaW5xSEFSVmQ0cXZZZkdDeWg0Q2FWTFlHN2hYZVNvMGFjLUswakNvUm9SZlJwNElPVnVWWDlEV291N21OR0diOV9oUHF5ck5SM2RqeXB0dl82NUw0YUp2TkZJMXc?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Why blocking Hormuz could threaten the world's food supply",
+   "date": "2026-09-03",
+   "source": "Euronews.com",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQU3ROWjFrYXNQcnFxandKdnJUaU02VU9kQlNPV29tYzRuS0RCOExibm00VHdiUVQzdkZ6MV9ENk04Um05V203cF95TUk0a1Utd1d0YTZrcTRiNjN4Mmp0M2hPYXI5eHVjbWxaa1d0YjcyZFhFT1hMZjhnQnh2N0FXNnRyQklkQVdIZEtqVmlQaExxNWVibk1ldQ?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Strait of Hormuz: UN seeks to secure fertilizer shipments to fragile countries to prevent famines",
+   "date": "2026-05-12",
+   "source": "Le Monde.fr",
+   "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxONmR0b2tUZDdjZEE4UEkwa19jWGNncU10d29OWTg4MnRBaFZod0pCYU5zUVE5a2ZiTG90NnBVV2V0ak9RNl9SYmZOUHZTVnVOU3V1NlhLWGZ2OWkzZGI1OUhfVlJOU1pTUGdRbmtpbFhiSUs3dENEQ0loMmIyeXpPdnJhWnVodHI4cDZNRDZCX3VtQnkwYWxGYy1yZmNEdWNJZk9DUmxrVk5xWUdQc25zSVhwdFRUNXhSbGtRaGV0ZERqekdabzhoaHdSMHB1endWT2NTUE13NGNORnZtcUxSVThqWnpaNVdianAyNE41MTNiZHNac3VOY1p1Q0pKaVU?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Guerre en Iran: crise des engrais menace l'alimentation",
+   "date": "2026-05-01",
+   "source": "Euronews.com",
+   "url": "https://fr.euronews.com/2026/09/22/lagriculture-espagnole-reclame-des-aides-urgentes-face-a-la-hausse-des-couts-de-la-guerre",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  },
+  {
+   "title": "Fertilizer crisis: Africa's options amid the Hormuz blockade",
+   "date": "2026-05-08",
+   "source": "DW.com",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSEUzXzZ6UUdUWnlNWVVSLUF3bjFDVFRReXZxZGtsbEVZWWlIaGVncnhEWHRDU1E4VlphRWhwRHZhak9fZVd4Tlp4ZHJsc1NDWEJHUWxOcFo4VDI5TXppdjNScXQ1NUxucUNRZnBRQ1FGRTNMV1R5eXZtQjBMZGtkQWZ2Q3lNX19qY1NpZVdleWRXM1JKOHAxOFFvSXkyRlFzYVBuZ0F30gGmAUFVX3lxTE1wMV9HX2pvRWFNWGh6TWpoV2plLW9MUkR0QUo0V0F1bFVOU0NSZjU0RHlrZHZOcFVzdUJMQ2ZEYW4wdWQ0QzdHSF9US2NVU3BZdTVUMDZNN0hwZnU4QW9HcnF0VXNaVV85SU1hdDFGei1KOGpreXVjU3Zzc2h4cmFCN2c0UkllSG1VeXEwZTBTbFRRbndhOWlzVktOWnVWci1fZG5FeUE?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Le blocage du détroit d’Ormuz menace de fortes perturbations le marché des engrais et les importations agricoles au Moyen-Orient",
+   "date": "2026-03-08",
+   "source": "Le Monde.fr",
+   "url": "https://www.lemonde.fr/international/article/2026/09/27/donald-trump-rejette-le-plan-de-reouverture-iranien-du-detroit-d-ormuz-teheran-ne-reviendra-pas-sur-ses-conditions_6783275_3211.html",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  },
+  {
+   "title": "Crise touchant le détroit d’Ormuz: la pénurie d’engrais compromettra les prochaines récoltes et l’approvisionnement en denrées alimentaires, avertit la FAO",
+   "date": "2026-05-07",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQLVJNY2x6LS0wNUk1MzFBNGtLSVdjMWwzb0F6cWM1WENrYzVzd09mTlduU3Rldm5zNG1QWm1NYVhVUW9vSVNoYXpRLUtGVFV5R1FTb1RySXRBWGFCQVZwWlU4cUdRSzNXVlVtVG9pZFBseGN0SHcyUkdCZ244Y2ZqSXFCUU9oaEU3VllsWS1TMG9wbVBudWhDekFHQWM5bmt5ZnNmMmpLUjdyUW1GWlY2aTdEemtpSjFLN2wzMG1GNlpIcmZkUC13Rjc0TTBwZmR4NHRvMQ?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Update on the Global Agrifood Implications of the 2026 Conflict in the Middle East - The Work We Do",
+   "url": "https://www.youtube.com/watch?v=sKUlKxcBdlk",
+   "reason": "quota LLM épuisé (temps imparti écoulé)"
+  }
+ ]
+}
