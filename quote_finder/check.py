@@ -26,6 +26,13 @@ def t(fn):
         return None, f"{type(e).__name__}: {str(e)[:110]}", time.time() - t0
 
 
+def _safe_list(fn):
+    try:
+        return fn() or []
+    except Exception:  # noqa: BLE001
+        return []
+
+
 def main() -> int:
     from . import quota
     from .keys import KeyPool
@@ -65,6 +72,23 @@ def main() -> int:
             line(OK if r else KO, f"{fb.name} clé {i}", f"{c.model}, {d:.0f}s" if r else e)
     if not llm.fallbacks:
         line(WARN, "Relais (Groq / Cerebras / OpenRouter)", "aucun : ajoute GROQ_API_KEYS (gratuit) pour ne jamais rester bloqué")
+    print("\nLecture d'articles par Gemini (pour les sites fermés aux robots et les liens Google Actualités) :", flush=True)
+    if llm.gemini:
+        from types import SimpleNamespace
+        from . import article_text
+        from .sources import news
+        tests = [SimpleNamespace(url="https://www.reuters.com/world/", source="Reuters", title="World news", domain="reuters.com", text="")]
+        g = _safe_list(lambda: news.google_news("FAO food crisis", 2, "en"))
+        if g:
+            tests.append(g[0])
+        for a in tests:
+            def rd(a=a):
+                t, real = article_text.gemini(a, llm, "actualité")
+                if not t:
+                    raise RuntimeError("page non lue (réponse vide ou « INACCESSIBLE »)")
+                return f"{len(t)} caractères lus" + (f", vrai lien : {real[:70]}" if real else "")
+            r, e, d = t(rd)
+            line(OK if r else KO, ("lien Google Actualités" if "news.google.com" in a.url else a.url[:40]), r or e)
     print("\nVidéos :")
     for i, key in enumerate(keys_from_env("YOUTUBE"), 1):
         def yt(key=key):  # 1 unité seulement (au lieu de 100 pour une recherche)

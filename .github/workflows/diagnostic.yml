@@ -32,7 +32,10 @@ jobs:
       - run: |
           which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           pip install -r requirements.txt && pip install -U -q yt-dlp   # yt-dlp toujours à jour (YouTube change souvent)
-      - run: python -m quote_finder.check | tee -a "$GITHUB_STEP_SUMMARY"
+      - run: |
+          mkdir -p state
+          { echo "# Dernier diagnostic"; echo; echo '```'; python -m quote_finder.check 2>&1 | grep -v "^ *$"; echo '```'; } > /tmp/diag.md
+          cat /tmp/diag.md | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Enregistrer l'état des clés (state/QUOTAS.md)
         if: always()
         run: |
@@ -45,6 +48,7 @@ jobs:
             git fetch -q origin main && git reset -q --hard origin/main
             python -m quote_finder.quota merge state/quota.json /tmp/quota_diag.json > /dev/null
             python -m quote_finder.status > /dev/null
+            cp /tmp/diag.md state/DIAGNOSTIC.md   # compte rendu lisible dans le dépôt
             git add state ETAT.md
             git diff --cached --quiet && exit 0
             git commit -q -m "état des clés API"
