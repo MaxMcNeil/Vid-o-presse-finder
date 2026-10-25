@@ -75,9 +75,20 @@ def merge(batch_dir: Path, title: str = "") -> Path:
     for i, c in enumerate(clips, 1):
         c["order"] = i
     write_montage(clips, batch_dir, {"batch": batch_dir.name, "searches": len(rows)})
+    origine = {}
+    try:   # lot lancé par OSINT-teleprompter- : lien vers le script du live (et synchro du montage)
+        origine = json.loads((batch_dir / "ORIGINE.json").read_text(encoding="utf-8")) or {}
+    except (OSError, ValueError):
+        pass
+    if origine and not title:
+        title = "🔗 OSINT : " + (origine.get("court") or origine.get("sujet") or "")[:80]
     L = [f"# {title or 'Lot de recherches'} — {batch_dir.name}", "",
          f"{len(rows)} recherche(s), {len(clips)} extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).", "",
          "| # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |", "|---|---|---|---|---|---|---|"]
+    if origine:
+        dep = origine.get("depot") or "OSINT-teleprompter-"
+        L[2:2] = [f"Lancé par [{dep}]({origine.get('run_url') or 'https://github.com/' + dep}) pour le live : "
+                  f"« {(origine.get('sujet') or '')[:300]} » — script dans `prompter/{origine.get('dossier', '')}`.", ""]
     prec = {}
     for c in clips:
         prec[c.get("timing", "ia")] = prec.get(c.get("timing", "ia"), 0) + 1

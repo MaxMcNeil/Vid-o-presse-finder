@@ -1,6 +1,10 @@
 name: Find quotes
+run-name: ${{ github.event_name == 'repository_dispatch' && format('🔗 OSINT → {0}', github.event.client_payload.origine.court || github.event.client_payload.origine.sujet) || 'Find quotes' }}
 
 on:
+  # 🔗 lancé automatiquement par OSINT-teleprompter- après chaque script (recherches ciblées sur son sujet) — jamais par un cron
+  repository_dispatch:
+    types: [osint-finder]
   workflow_dispatch:
     inputs:
       recherches:
@@ -66,8 +70,8 @@ jobs:
       - id: p
         name: Lire les recherches
         env:
-          IN_SEARCHES: ${{ inputs.recherches }}
-          IN_TYPE: ${{ inputs.type_par_defaut }}
+          IN_SEARCHES: ${{ inputs.recherches || github.event.client_payload.recherches }}
+          IN_TYPE: ${{ inputs.type_par_defaut || github.event.client_payload.reglages.type_par_defaut }}
         run: |
           m=$(python3 -m quote_finder.batch matrix "$IN_SEARCHES" recherches.txt "$IN_TYPE")
           echo "Recherches : $m"
@@ -84,7 +88,7 @@ jobs:
     timeout-minutes: 45
     strategy:
       fail-fast: false
-      max-parallel: ${{ fromJSON(inputs.en_parallele || '2') }}
+      max-parallel: ${{ fromJSON(inputs.en_parallele || github.event.client_payload.reglages.en_parallele || '2') }}
       matrix:
         s: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     name: "${{ matrix.s.target }} — ${{ matrix.s.claim }}"
@@ -111,12 +115,12 @@ jobs:
       S_TYPE: ${{ matrix.s.type }}
       S_ID: ${{ matrix.s.id }}
       LOT: ${{ needs.prepare.outputs.lot }}
-      IN_SPEAKERS: ${{ inputs.locuteurs }}
-      IN_AUTH: ${{ inputs.autorite }}
-      IN_MAXV: ${{ inputs.videos_par_recherche }}
-      IN_MAXA: ${{ inputs.articles_par_recherche }}
-      IN_LANGS: ${{ inputs.langs }}
-      IN_SINCE: ${{ inputs.depuis }}
+      IN_SPEAKERS: ${{ inputs.locuteurs || github.event.client_payload.reglages.locuteurs }}
+      IN_AUTH: ${{ inputs.autorite || github.event.client_payload.reglages.autorite }}
+      IN_MAXV: ${{ inputs.videos_par_recherche || github.event.client_payload.reglages.videos_par_recherche }}
+      IN_MAXA: ${{ inputs.articles_par_recherche || github.event.client_payload.reglages.articles_par_recherche }}
+      IN_LANGS: ${{ inputs.langs || github.event.client_payload.reglages.langs }}
+      IN_SINCE: ${{ inputs.depuis || github.event.client_payload.reglages.depuis }}
     steps:
       - uses: actions/checkout@v5
 
@@ -182,6 +186,8 @@ jobs:
 
       - name: Rassembler et enregistrer (résistant aux écritures simultanées)
         env:
+          # lien avec le run OSINT-teleprompter- qui a lancé ce lot (vide si lancé à la main) -> results/<lot>/ORIGINE.json
+          ORIGINE: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload.origine) || '' }}
           FIRST_ID: ${{ fromJSON(needs.prepare.outputs.matrix)[0].id }}
         run: |
           cp scripts/publish_lot.sh /tmp/publish_lot.sh   # copie : le dépôt est réinitialisé pendant l'enregistrement
@@ -189,7 +195,7 @@ jobs:
 
   clips:
     needs: [prepare, publish]
-    if: inputs.telecharger_extraits && needs.publish.result == 'success'
+    if: (inputs.telecharger_extraits || github.event.client_payload.reglages.telecharger_extraits) && needs.publish.result == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:

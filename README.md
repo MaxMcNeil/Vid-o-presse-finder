@@ -36,6 +36,14 @@ Les autres réglages du formulaire :
 
 Chaque recherche tourne dans son propre job (visible séparément dans *Actions*). Un dernier job rassemble tout et fait **un seul commit**.
 
+## 🔗 Lancement automatique par OSINT-teleprompter-
+
+Chaque script de live généré par **OSINT-teleprompter-** lance ce workflow tout seul (événement `osint-finder`,
+jamais de cron) avec des recherches **ciblées** : les personnes qui ont réellement parlé dans les faits cités au script,
+les cibles mises en cause, et les points du script. Le run s'appelle « 🔗 OSINT → <sujet> ».
+Le lot contient `ORIGINE.json` (sujet, thèse, dossier du script) : son INDEX.md renvoie au script, et
+Montage LV final s'en sert pour se synchroniser (`finder: osint`).
+
 ## Où sont les résultats
 
 ```

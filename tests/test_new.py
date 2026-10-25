@@ -148,3 +148,16 @@ def test_selection_without_ai_keeps_only_titles_with_most_concepts():
     out = pipeline.select(vids, plan, pipeline.Options("La Suisse", "x"), Down(), "vidéos", 5,
                           lambda v: (v.title, v.channel, v.published, v.description), "videos")
     assert [v.title for v in out] == ["La Suisse quitte Microsoft pour des raisons de sécurité"]
+
+
+def test_batch_merge_origine_osint(tmp_path):
+    import json
+    lot = tmp_path / "2026-10-25_1900_n30"
+    (lot / "01-x").mkdir(parents=True)
+    (lot / "01-x" / "results.json").write_text(json.dumps({"target": "X", "claim": "y", "videos": [], "articles": []}))
+    (lot / "ORIGINE.json").write_text(json.dumps({"court": "Suisse Microsoft", "sujet": "La Suisse abandonne Microsoft",
+                                                  "dossier": "2026-10-25_19h00_suisse", "run_url": "https://e/x"}))
+    idx = batch.merge(lot).read_text()
+    assert "🔗 OSINT : Suisse Microsoft" in idx.splitlines()[0] and "prompter/2026-10-25_19h00_suisse" in idx
+    batch.update_results_readme(tmp_path)
+    assert "OSINT" in (tmp_path / "README.md").read_text()
