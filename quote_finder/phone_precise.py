@@ -107,6 +107,17 @@ def _ytdlp_tracks(video_id: str, langs: list[str]) -> list[list[Segment]]:
 
 
 def fetch_original(video_id: str, langs: list[str]) -> list[list[Segment]]:
+    """Avec cache disque (7 jours) : un nouvel essai d'envoi ne refait aucune requête vers YouTube."""
+    from . import cache
+    c = cache.get("teltracks", f"{video_id}|{','.join(langs)}")
+    if c is not None and time.time() - c.get("t", 0) < 7 * 86400:
+        return [[Segment(a, b) for a, b in tr] for tr in c.get("tracks", [])]
+    tracks = _fetch_original(video_id, langs)
+    cache.put("teltracks", f"{video_id}|{','.join(langs)}", {"t": time.time(), "tracks": [[[s.start, s.text] for s in tr] for tr in tracks]})
+    return tracks
+
+
+def _fetch_original(video_id: str, langs: list[str]) -> list[list[Segment]]:
     """Sous-titres dans la langue ORIGINALE de la vidéo (les citations sont dans cette langue), puis les langues voulues.
     Jamais de traduction. Deux moyens : youtube-transcript-api, puis yt-dlp si le premier est refusé ou vide."""
     blocked = None
@@ -279,6 +290,33 @@ def _git(repo: Path, *args, check=True) -> subprocess.CompletedProcess:
     return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=check)
 
 
+OWN = ("results/", "state/telephone.json", "ETAT.md")  # seuls fichiers que le téléphone écrit
+
+
+def _local_edits(repo: Path) -> list[str]:
+    """Modifications locales HORS de ce que le téléphone écrit (ex. code modifié à la main dans ~/vpf)."""
+    out = _git(repo, "status", "--porcelain", check=False).stdout.splitlines()
+    return [l[3:] for l in out if l[3:] and not l.startswith("??") and not l[3:].startswith(OWN)]  # non suivis : intacts
+
+
+def _sync(repo: Path) -> bool:
+    """Repart du dépôt GitHub à jour. Jamais de fusion à moitié faite : si une ancienne fusion traîne, elle est annulée.
+    Refuse (False) si des fichiers ont été modifiés à la main, pour ne rien effacer."""
+    for d in ("rebase-merge", "rebase-apply"):
+        if (repo / ".git" / d).exists():
+            _git(repo, "rebase", "--abort", check=False)
+    edits = _local_edits(repo)
+    if edits:
+        print("⚠ fichiers modifiés à la main dans le dossier (non touchés) :", ", ".join(edits[:5]),
+              "→ envoie-les ou annule-les (git status), le téléphone reprendra ensuite")
+        return False
+    if _git(repo, "fetch", "-q", "origin", "main", check=False).returncode != 0:
+        print("⚠ GitHub injoignable (réseau ?) : passage reporté")
+        return False
+    _git(repo, "reset", "-q", "--hard", "origin/main", check=False)
+    return True
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="qf precis", description="Recale les extraits sur les sous-titres YouTube (téléphone)")
     ap.add_argument("--repo", default=".", help="dossier du dépôt (défaut : dossier courant)")
@@ -289,21 +327,26 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
     repo = Path(a.repo).resolve()
-    if not a.no_push:
-        r = _git(repo, "pull", "--rebase", "-q", "origin", "main", check=False)
-        if r.returncode != 0:
-            print("⚠ git pull impossible (réseau ?) :", (r.stderr or r.stdout).strip()[-200:])
-            return 1
-    st = process(repo / "results", a.days, a.max_videos, a.dry_run)
-    print(f"Vidéos consultées : {st['videos']} · extraits recalés : {st['recalés']} · sans sous-titres : "
-          f"{st['pas_de_sous_titres']} · non retrouvés : {st['non_retrouvés']}" + (" · ⚠ YouTube a limité, suite au prochain passage" if st["bloqué"] else ""))
-    if a.dry_run or a.no_push:
+    if a.no_push or a.dry_run:
+        st = process(repo / "results", a.days, a.max_videos, a.dry_run)
+        print(f"Vidéos consultées : {st['videos']} · extraits recalés : {st['recalés']}")
         return 0
-    status_changed = update_phone_status(repo, st)
-    if st["lots"] or status_changed:
+    # Chaque essai repart du dépôt GitHub à jour et refait le travail (les sous-titres sont en cache : c'est rapide).
+    # Ainsi, si GitHub ou le workflow État a écrit entre-temps, rien n'est écrasé et il n'y a jamais de conflit.
+    for attempt in range(4):
+        if not _sync(repo):
+            return 1
+        st = process(repo / "results", a.days, a.max_videos, False)
+        if attempt == 0:
+            print(f"Vidéos consultées : {st['videos']} · extraits recalés : {st['recalés']} · sans sous-titres : "
+                  f"{st['pas_de_sous_titres']} · non retrouvés : {st['non_retrouvés']}"
+                  + (" · ⚠ YouTube a limité, suite au prochain passage" if st["bloqué"] else ""))
+        status_changed = update_phone_status(repo, st)
+        if not (st["lots"] or status_changed):
+            return 0
         import os
         cwd = os.getcwd()
-        try:  # ETAT.md régénéré avec l'état du téléphone
+        try:  # ETAT.md régénéré avec l'état du téléphone (la section « Workflows » est conservée)
             os.chdir(repo)
             from . import status
             status.build()
@@ -311,20 +354,17 @@ def main(argv=None) -> int:
             print("⚠ ETAT.md non régénéré :", e)
         finally:
             os.chdir(cwd)
-        _git(repo, "add", "results", "state/telephone.json", "ETAT.md", check=False)
-        if _git(repo, "diff", "--cached", "--quiet", check=False).returncode != 0:
-            msg = (f"précision téléphone : {st['recalés']} extrait(s) recalé(s) sur les sous-titres ({', '.join(st['lots'])})"
-                   if st["lots"] else "état du téléphone")
-            _git(repo, *_identity(repo), "commit", "-q", "-m", msg)
-    ahead = _git(repo, "rev-list", "--count", "origin/main..HEAD", check=False).stdout.strip()
-    if not ahead or ahead == "0":  # rien à envoyer (y compris un envoi raté lors d'un passage précédent)
-        return 0
-    for i in range(4):
-        if _git(repo, "pull", "--rebase", "-q", "origin", "main", check=False).returncode == 0 and _git(repo, "push", "-q", "origin", "HEAD:main", check=False).returncode == 0:
+        _git(repo, "add", *OWN, check=False)
+        if _git(repo, "diff", "--cached", "--quiet", check=False).returncode == 0:
+            return 0
+        msg = (f"précision téléphone : {st['recalés']} extrait(s) recalé(s) sur les sous-titres ({', '.join(st['lots'])})"
+               if st["lots"] else "état du téléphone")
+        _git(repo, *_identity(repo), "commit", "-q", "-m", msg)
+        if _git(repo, "push", "-q", "origin", "HEAD:main", check=False).returncode == 0:
             print("✔ envoyé sur GitHub")
             return 0
-        time.sleep(5 * (i + 1))
-    print("⚠ envoi sur GitHub impossible pour l'instant : réessayé au prochain passage (le commit est gardé)")
+        time.sleep(5 * (attempt + 1))
+    print("⚠ envoi sur GitHub impossible pour l'instant : refait au prochain passage")
     return 1
 
 

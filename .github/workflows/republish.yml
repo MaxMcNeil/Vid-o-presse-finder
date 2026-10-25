@@ -1,0 +1,48 @@
+name: Republier un lancement
+
+# Secours : si l'enregistrement d'un lancement « Find quotes » a échoué, ses résultats sont encore dans ses
+# artefacts (3 jours). Ce workflow les récupère et les enregistre dans results/ sans rien relancer.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Numéro du lancement (dans l'adresse : .../actions/runs/NUMÉRO)"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: find-quotes-publish
+  cancel-in-progress: false
+
+jobs:
+  republish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v6
+        with:
+          pattern: res-*
+          path: dl
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v6
+        with:
+          pattern: quota-*
+          path: dlq
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enregistrer
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          # même nom de lot que le lancement d'origine : date de début + numéro
+          INFO=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}" -q '.created_at + " " + (.run_number|tostring)')
+          LOT="$(date -u -d "${INFO% *}" +%Y-%m-%d_%H%M)_n${INFO##* }"
+          echo "Lot : $LOT"
+          cp scripts/publish_lot.sh /tmp/publish_lot.sh
+          bash /tmp/publish_lot.sh "$LOT"

@@ -52,3 +52,21 @@ def test_blocked_stops_cleanly_and_retries_later(tmp_path, monkeypatch):
     assert st["bloqué"] and st["recalés"] == 0 and st["lots"] == []
     st2 = phone_precise.process(tmp_path / "results", pause=(0, 0), fetch=lambda v, l: [SEGS])
     assert st2["recalés"] == 2  # retenté au passage suivant
+
+
+def test_phone_never_leaves_a_half_merge_and_never_erases_manual_edits(tmp_path):
+    import subprocess
+    def g(d, *a):
+        return subprocess.run(["git", "-C", str(d), *a], capture_output=True, text=True)
+    remote = tmp_path / "remote.git"; subprocess.run(["git", "init", "-q", "--bare", "-b", "main", str(remote)])
+    a = tmp_path / "a"; subprocess.run(["git", "clone", "-q", str(remote), str(a)])
+    (a / "ETAT.md").write_text("v1\n"); (a / "code.py").write_text("x=1\n")
+    g(a, "add", "."); g(a, "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "1"); g(a, "push", "-q", "origin", "HEAD:main")
+    # le téléphone (b) est en retard et a une fusion à moitié faite qui traîne
+    b = tmp_path / "b"; subprocess.run(["git", "clone", "-q", str(remote), str(b)])
+    (a / "ETAT.md").write_text("v2 (workflow État)\n"); g(a, "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qam", "2"); g(a, "push", "-q", "origin", "HEAD:main")
+    (b / ".git" / "rebase-merge").mkdir()
+    assert phone_precise._sync(b) and (b / "ETAT.md").read_text() == "v2 (workflow État)\n"
+    # code modifié à la main : le téléphone refuse de toucher au dossier
+    (b / "code.py").write_text("x=2  # modif perso\n")
+    assert not phone_precise._sync(b) and (b / "code.py").read_text().startswith("x=2")

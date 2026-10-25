@@ -40,7 +40,14 @@ jobs:
           python -m quote_finder.status > /dev/null && cat ETAT.md >> "$GITHUB_STEP_SUMMARY"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state ETAT.md
-          git diff --cached --quiet && exit 0
-          git commit -q -m "état des clés API"
-          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          cp state/quota.json /tmp/quota_diag.json
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python -m quote_finder.quota merge state/quota.json /tmp/quota_diag.json > /dev/null
+            python -m quote_finder.status > /dev/null
+            git add state ETAT.md
+            git diff --cached --quiet && exit 0
+            git commit -q -m "état des clés API"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done

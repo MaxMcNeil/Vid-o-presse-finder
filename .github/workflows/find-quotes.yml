@@ -178,41 +178,12 @@ jobs:
           pattern: quota-*
           path: dlq
 
-      - name: Mettre à jour l'état des clés (state/QUOTAS.md)
-        run: |
-          files=$(find dlq -name quota.json 2>/dev/null)
-          python3 -m quote_finder.quota merge state/quota.json $files > /dev/null
-          rm -rf dlq
-
-      - name: Rassembler (index + montage global du lot)
+      - name: Rassembler et enregistrer (résistant aux écritures simultanées)
         env:
           FIRST_ID: ${{ fromJSON(needs.prepare.outputs.matrix)[0].id }}
         run: |
-          [ -d dl ] || { echo "::error::Aucun résultat produit (voir les étapes « Recherche »)"; exit 1; }
-          mkdir -p "results/$LOT"
-          if ls dl/res-* >/dev/null 2>&1; then
-            for d in dl/res-*; do n=$(basename "$d"); rm -rf "results/$LOT/${n#res-}"; mv "$d" "results/$LOT/${n#res-}"; done
-          else
-            mv dl "results/$LOT/$FIRST_ID"   # un seul artefact décompressé directement
-          fi
-          rm -rf dl
-          python3 -m quote_finder.batch merge "results/$LOT"
-          python3 -m quote_finder.status > /dev/null   # ETAT.md : ce qui bloque, quand ça se débloque, quoi faire
-          { cat ETAT.md; echo; } >> "$GITHUB_STEP_SUMMARY"
-          cat "results/$LOT/INDEX.md" >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Enregistrer les résultats dans le dépôt
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results state ETAT.md
-          git diff --cached --quiet && exit 0
-          git commit -q -m "résultats : $LOT"
-          for i in 1 2 3 4 5; do
-            git pull --rebase -q && git push -q && exit 0
-            sleep $((i * 5))
-          done
-          echo "::error::Impossible d'enregistrer les résultats dans le dépôt"; exit 1
+          cp scripts/publish_lot.sh /tmp/publish_lot.sh   # copie : le dépôt est réinitialisé pendant l'enregistrement
+          bash /tmp/publish_lot.sh "$LOT" "$FIRST_ID"
 
   clips:
     needs: [prepare, publish]
