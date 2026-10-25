@@ -33,3 +33,15 @@ _Mis à jour le 25/10/2026 à 10:03 (heure italienne), automatiquement après ch
 
 ---
 Détail des clés : [state/QUOTAS.md](state/QUOTAS.md) · Résultats : [results/README.md](results/README.md)
+
+<!-- workflows:start -->
+## Workflows
+
+_Vérifié le 25/10/2026 à 10:12 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
+
+✅ **Tout fonctionne** : aucun workflow en échec.
+
+- ✅ **Diagnostic** : dernier lancement réussi (24/10 à 15:07) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40096257106)
+- ✅ **Find quotes** : dernier lancement réussi (25/10 à 09:39) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40175802074)
+
+<!-- workflows:end -->
