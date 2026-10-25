@@ -43,12 +43,11 @@ _Mis à jour le 25/10/2026 à 22:21 (heure italienne), automatiquement après ch
 <!-- workflows:start -->
 ## Workflows
 
-_Vérifié le 25/10/2026 à 22:09 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
+_Vérifié le 25/10/2026 à 22:21 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
 
-- ❌ **Diagnostic** : dernier lancement en échec (25/10 à 22:09, failure) — dernier succès le 25/10 à 10:42 · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40233676517)
-  - **Cause** : quota ou limite atteint chez Gemini (Google IA) (étape « check → Enregistrer l'état des clés (state/QUOTAS.md) »)
-  - **Quoi faire** : se débloque demain à 8 h 01 (remise à zéro des quotas Google)
-  - Message : `| Gemini clé 9 | ⚠ 2 modèle(s) épuisé(s), les autres restent utilisables | 0 appels aujourd'hui | 4 | gemini-3.6-flash: HTTP 429 { "error": { "code": 429, "message": "You exceeded your current |`
+✅ **Tout fonctionne** : aucun workflow en échec.
+
+- ✅ **Diagnostic** : dernier lancement réussi (25/10 à 22:21) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40234374449)
 - ✅ **Find quotes** : dernier lancement réussi (25/10 à 22:02) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40231917580)
 - ✅ **Republier un lancement** : dernier lancement réussi (25/10 à 10:27) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40180725266)
 
