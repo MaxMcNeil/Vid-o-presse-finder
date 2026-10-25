@@ -1,0 +1,274 @@
+{
+ "target": "Union européenne",
+ "target_type": "entite",
+ "claim": "sécurité alimentaire menacée par la guerre en Ukraine et le conflit avec l'Iran",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "L'Union européenne affirme que la sécurité alimentaire est menacée par la guerre en Ukraine et les tensions avec l'Iran",
+  "term_groups": [
+   [
+    "securite alimentaire",
+    "food security",
+    "securite alimentaire",
+    "foodsecurity",
+    "securite alimentaire",
+    "food secure",
+    "securite alimentaire",
+    "food securite"
+   ],
+   [
+    "guerre en ukraine",
+    "ukraine war",
+    "conflit ukrainien",
+    "ukraine conflict",
+    "war ukraine",
+    "guerre ukrainienne",
+    "ukraine war conflict",
+    "guerre en ukraine"
+   ],
+   [
+    "conflit avec l iran",
+    "iran conflict",
+    "tensions iraniennes",
+    "iran tensions",
+    "conflict iran",
+    "tensions avec iran",
+    "iran war",
+    "conflit iran"
+   ]
+  ],
+  "target_aliases": [
+   "union europeenne",
+   "ue",
+   "european union",
+   "eu",
+   "europe",
+   "commission europeenne"
+  ],
+  "youtube_queries": [
+   "Union européenne sécurité alimentaire menacée par la guerre en Ukraine et le conflit avec l'Iran",
+   "Union européenne sécurité alimentaire Ukraine",
+   "European Commission food security Ukraine war",
+   "EU food security Iran tensions",
+   "Commission européenne déclaration sécurité alimentaire",
+   "EU press conference food security Ukraine",
+   "European Parliament débat sécurité alimentaire",
+   "BBC Europe food security Ukraine",
+   "Reuters interview EU food security"
+  ],
+  "news_queries": [
+   "Union européenne sécurité alimentaire menacée par la guerre en Ukraine et le conflit avec l'Iran",
+   "EU food security Ukraine",
+   "Union européenne sécurité alimentaire Iran",
+   "European Commission Ukraine war food impact",
+   "Eurostat food supply Ukraine",
+   "Reuters EU food security conflict Iran"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "de"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "senat.fr",
+    "vie-publique.fr",
+    "francetvinfo.fr",
+    "radiofrance.fr",
+    "lemonde.fr"
+   ],
+   "site_articles": 61,
+   "site_articles_by_site": {
+    "elysee.fr": 10,
+    "assemblee-nationale.fr": 10,
+    "senat.fr": 10,
+    "vie-publique.fr": 10,
+    "radiofrance.fr": 10,
+    "lemonde.fr": 11
+   },
+   "site_pages_probed": 12,
+   "site_videos": 1,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "franceinfo": 0
+   },
+   "videos_candidates": 36,
+   "site_videos_scored": [
+    "Libération de stocks stratégiques de carburants : \"C'est du  (0/10)"
+   ],
+   "videos_low_authority": 21,
+   "videos_relevant": 4,
+   "videos_by_platform": {
+    "youtube": 4
+   },
+   "articles_candidates": 203,
+   "articles_low_authority": 27,
+   "articles_relevant": 7,
+   "articles_read_via": {
+    "direct": 3,
+    "illisible : site fermé aux robots, pas d'archive": 2,
+    "illisible : lien Google Actualités non converti": 1,
+    "gemini": 1
+   },
+   "timing": {
+    "ia-affiné": 1,
+    "non retrouvé": 1
+   },
+   "elapsed_min": 18.6,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.6-flash": 2,
+      "gemini-3.5-flash": 2,
+      "gemini-3-flash-preview": 5,
+      "gemini-3.8-flash": 1,
+      "gemini-3.5-flash-lite": 3
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "entite",
+  "official_speakers": [
+   "Ursula von der Leyen",
+   "Josep Borrell",
+   "Porte-parole de la Commission européenne",
+   "Secrétaire général de l'UE",
+   "Porte-parole du Conseil européen"
+  ],
+  "authoritative_sources": [
+   "ec.europa.eu",
+   "europa.eu",
+   "europarl.europa.eu",
+   "euronews.com",
+   "reuters.com",
+   "afp.com",
+   "lemonde.fr",
+   "franceinfo.fr",
+   "bbc.co.uk",
+   "dw.com",
+   "ft.com",
+   "theguardian.com",
+   "politico.eu",
+   "euobserver.com",
+   "europa.eu/newsroom",
+   "council.europa.eu",
+   "ecb.europa.eu"
+  ],
+  "site_query": "sécurité alimentaire guerre Ukraine Iran",
+  "countries": [
+   "FR",
+   "DE",
+   "PL"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 4,
+  "articles_scanned": 7
+ },
+ "videos": [
+  {
+   "title": "FULL REMARKS: EU Kallas Urges Action as Strait of Hormuz Closure Threatens Oil & Food Security |AC1B",
+   "uploaded": "2026-03-16",
+   "platform": "youtube",
+   "video_id": "7uGzlJIPhgk",
+   "duration": 755,
+   "channel": "DRM News",
+   "url": "https://www.youtube.com/watch?v=7uGzlJIPhgk",
+   "method": "gemini-video",
+   "authority": 0.67,
+   "authority_why": "chaîne non répertoriée (976 000 abonnés)",
+   "moments": [
+    {
+     "start": "02:14",
+     "end": "05:23",
+     "start_seconds": 134.4,
+     "end_seconds": 323.0,
+     "start_tc": "00:02:14.400",
+     "end_tc": "00:05:23.000",
+     "duration_seconds": 188.6,
+     "timestamp": "02:14",
+     "link": "https://www.youtube.com/watch?v=7uGzlJIPhgk&t=134s",
+     "clip_link": "https://www.youtube.com/embed/7uGzlJIPhgk?start=134&end=324&autoplay=1",
+     "t": 134.4,
+     "quote": "During the weekend I also had talks with UN Secretary General Antonio Guterres about whether it was possible to also have the same kind of initiative like we had the Black Sea initiative how to get the grain from Ukraine out because the closure of Strait of Hormuz is really dangerous for the oil supplies, energy supplies to Asia, 85% of the oil and gas through Strait of Hormuz goes to Asian countries, but it's also problematic for the fertilizers and if there is lack of fertilizers this year there's going to be also food deprivation next year. So we discussed with Antonio Guterres how to make this happen.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Kaja Kallas",
+     "confidence": 1.0,
+     "why": "Kaja Kallas, representing the EU, explicitly links the war in Ukraine and tensions in the Strait of Hormuz (Iran) to food security risks.",
+     "t_end": 323.0,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "12:16",
+     "end": "12:35",
+     "start_seconds": 736.0,
+     "end_seconds": 755.0,
+     "start_tc": "00:12:16.000",
+     "end_tc": "00:12:35.000",
+     "duration_seconds": 19.0,
+     "timestamp": "12:16",
+     "link": "https://www.youtube.com/watch?v=7uGzlJIPhgk&t=736s",
+     "clip_link": "https://www.youtube.com/embed/7uGzlJIPhgk?start=736&end=756&autoplay=1",
+     "t": 736.0,
+     "quote": "And the food as well because via the Strait of Hormuz I mean the food supply is equally concerning and like I said the fertilizers. So if it is blocked and the fertilizers don't get through then there will also be food deprivation in Africa for example. So that's why I also discussed this with UN Secretary General.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Kaja Kallas",
+     "confidence": 1.0,
+     "why": "Kaja Kallas reiterates the threat to food security caused by the potential blockage of the Strait of Hormuz.",
+     "t_end": 755.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    }
+   ]
+  }
+ ],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "Session on Global Food Security and the Black Sea – UNGA in New York",
+   "date": "2026-09-22",
+   "source": "EEAS",
+   "url": "https://www.eeas.europa.eu/delegations/un-rome/session-global-food-security-and-black-sea-unga-new-york_en?s=65",
+   "authority": 1.0,
+   "reason": "site fermé aux robots, pas d'archive"
+  },
+  {
+   "title": "Statement by the HR/VP on the escalation of Russian strikes in the EU, particularly on Black Sea shipping, threatening human life, regional stability and food security",
+   "date": "2026-10-20",
+   "source": "EEAS",
+   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxONWF2Y3V2eEFBYmFwMHlvc054RUpZb09FQV9ySjV3by1FZGYyWmR4Ukd2Y29MS0VBVkdCZXktS3MtTFdleUVmR2prUzdMNFZFdmREX2ZzVUZ1bWh6bS1sbFVmd1NpNDJCemc1aUFoTk10bHdONU5rNTE3VG9VQlFYbmJCc3RUMmJPeXNjU2NqZy1QTTUtQVlnMk1pazdCMU40NFZQSUk4N0hpZlpLQ1JMTHVjRUkyZC1ZNkxZQmd5T09HSzkxeGxHVWhwZm4zV2M?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Attacks on Ukraine’s trade routes threaten global food security: Access to food should not be another weapon of war",
+   "date": "2026-10-16",
+   "source": "EEAS",
+   "url": "https://www.eeas.europa.eu/delegations/tanzania/russias-war-ukrainian-trade-war-global-food-security_en?s=124",
+   "authority": 1.0,
+   "reason": "site fermé aux robots, pas d'archive"
+  }
+ ],
+ "unverifiable_videos": []
+}

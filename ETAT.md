@@ -1,10 +1,10 @@
 # État du système
 
-_Mis à jour le 25/10/2026 à 10:42 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 25/10/2026 à 19:17 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
-- 👉 Articles illisibles et aucun lu par Gemini : quota Gemini probablement saturé pendant le lancement → relance plus tard ou le lendemain
+- ✅ Rien ne bloque. Tu peux lancer tes recherches.
 
 ## Clés et quotas
 
@@ -21,16 +21,15 @@ _Mis à jour le 25/10/2026 à 10:42 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 39 min (données mobiles) : 0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
-  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 16 h 03 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
+- ✅ Dernier passage il y a 9 h (données mobiles) : 0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
   - Passage automatique : à l'ouverture de Termux
-- ⏳ Extraits en attente de recalage par le téléphone : 68
+- ⏳ Extraits en attente de recalage par le téléphone : 88
 
 ## Dernier lancement
 
-- ⚠️ Lot **2026-10-25_0900_n20** : 1 recherche(s) réussie(s), 11 extrait(s) vidéo
-  - 1 vidéo(s) non analysée(s) : temps imparti écoulé
-- ⚠️ **Articles** : 1 lu(s) (archive.org ×1), 11 illisible(s) : lien Google Actualités non converti ×8, site fermé aux robots, pas d'archive ×3
+- ⚠️ Lot **2026-10-25_1757_n21** : 2 recherche(s) réussie(s), 25 extrait(s) vidéo
+  - 1 vidéo(s) non analysée(s) : autre erreur
+- ⚠️ **Articles** : 7 lu(s) (gemini ×2, api ×2, direct ×3), 6 illisible(s) : lien Google Actualités non converti ×3, site fermé aux robots, pas d'archive ×3
 
 <!-- workflows:start -->
 ## Workflows

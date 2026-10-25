@@ -1,0 +1,42 @@
+{
+ "target": "Union européenne",
+ "target_type": "entite",
+ "claim": "sécurité alimentaire menacée par la guerre en Ukraine et le conflit avec l'Iran",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "clips": [
+  {
+   "search": "02-union-europeenne-securite-alimentaire-menacee-par",
+   "target": "Union européenne",
+   "target_type": "entite",
+   "claim": "sécurité alimentaire menacée par la guerre en Ukraine et le conflit avec l'Iran",
+   "platform": "youtube",
+   "video_id": "7uGzlJIPhgk",
+   "source_url": "https://www.youtube.com/watch?v=7uGzlJIPhgk",
+   "title": "FULL REMARKS: EU Kallas Urges Action as Strait of Hormuz Closure Threatens Oil & Food Security |AC1B",
+   "channel": "DRM News",
+   "uploaded": "2026-03-16",
+   "source_authority": 0.67,
+   "source_authority_why": "chaîne non répertoriée (976 000 abonnés)",
+   "start": 134.4,
+   "end": 323.0,
+   "duration": 188.6,
+   "start_tc": "00:02:14.400",
+   "end_tc": "00:05:23.000",
+   "in": 133.2,
+   "out": 324.0,
+   "in_tc": "00:02:13.200",
+   "out_tc": "00:05:24.000",
+   "timing": "ia-affiné",
+   "quote": "During the weekend I also had talks with UN Secretary General Antonio Guterres about whether it was possible to also have the same kind of initiative like we had the Black Sea initiative how to get the grain from Ukraine out because the closure of Strait of Hormuz is really dangerous for the oil supplies, energy supplies to Asia, 85% of the oil and gas through Strait of Hormuz goes to Asian countries, but it's also problematic for the fertilizers and if there is lack of fertilizers this year there's going to be also food deprivation next year. So we discussed with Antonio Guterres how to make this happen.",
+   "speaker": "Kaja Kallas",
+   "speaker_role": "official",
+   "who_says": "target",
+   "verdict": "literal",
+   "confidence": 1.0,
+   "score": 0.968,
+   "link": "https://www.youtube.com/embed/7uGzlJIPhgk?start=134&end=324&autoplay=1",
+   "order": 1
+  }
+ ]
+}
