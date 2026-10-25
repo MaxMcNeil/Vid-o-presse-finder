@@ -245,7 +245,7 @@ def main(argv=None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
     repo = Path(a.repo).resolve()
     if not a.no_push:
-        r = _git(repo, "pull", "--rebase", "-q", check=False)
+        r = _git(repo, "pull", "--rebase", "-q", "origin", "main", check=False)
         if r.returncode != 0:
             print("⚠ git pull impossible (réseau ?) :", (r.stderr or r.stdout).strip()[-200:])
             return 1
@@ -259,11 +259,11 @@ def main(argv=None) -> int:
         if _git(repo, "diff", "--cached", "--quiet", check=False).returncode != 0:
             _git(repo, "-c", "user.name=quote-finder-tel", "-c", "user.email=tel@users.noreply.github.com", "commit", "-q", "-m",
                  f"précision téléphone : {st['recalés']} extrait(s) recalé(s) sur les sous-titres ({', '.join(st['lots'])})")
-    ahead = _git(repo, "rev-list", "--count", "@{u}..HEAD", check=False).stdout.strip()
+    ahead = _git(repo, "rev-list", "--count", "origin/main..HEAD", check=False).stdout.strip()
     if not ahead or ahead == "0":  # rien à envoyer (y compris un envoi raté lors d'un passage précédent)
         return 0
     for i in range(4):
-        if _git(repo, "pull", "--rebase", "-q", check=False).returncode == 0 and _git(repo, "push", "-q", check=False).returncode == 0:
+        if _git(repo, "pull", "--rebase", "-q", "origin", "main", check=False).returncode == 0 and _git(repo, "push", "-q", "origin", "HEAD:main", check=False).returncode == 0:
             print("✔ envoyé sur GitHub")
             return 0
         time.sleep(5 * (i + 1))

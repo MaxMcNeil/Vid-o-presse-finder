@@ -13,6 +13,10 @@ pip install -q --upgrade "youtube-transcript-api>=1.0,<2" "requests>=2.31,<3" yt
 # un ancien verrou de veille laissé par la 1re version : relâché (économie d'énergie)
 command -v termux-wake-unlock >/dev/null && termux-wake-unlock 2>/dev/null
 [ -d "$REPO/.git" ] || { echo "✘ dépôt introuvable dans $REPO (QF_REPO=chemin pour un autre dossier)"; exit 1; }
+# configuration Git réparée : une seule branche suivie (origin/main) — évite « Cannot rebase onto multiple branches »
+git -C "$REPO" config --unset-all branch.main.merge 2>/dev/null
+git -C "$REPO" config branch.main.remote origin
+git -C "$REPO" config branch.main.merge refs/heads/main
 
 echo "3/5 Commande qf…"
 # anciennes versions (écoute GitHub par ntfy) : arrêtées et retirées, elles ne servent plus

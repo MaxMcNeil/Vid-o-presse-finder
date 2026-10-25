@@ -8,7 +8,7 @@ case "${1:-aide}" in
     [ -f "$QF/last_ok" ] && echo "Dernier passage : $(date -r "$QF/last_ok" '+%d/%m %H:%M')" || echo "Aucun passage encore"
     command -v termux-job-scheduler >/dev/null && (timeout 15 termux-job-scheduler --pending 2>/dev/null | grep -q 4242 && echo "Passage automatique : actif" || echo "Passage automatique : inactif (relance : qf installer)")
     echo "--- derniers messages ---"; tail -n 15 "$QF/precis.log" 2>/dev/null ;;
-  maj|update) cd "$REPO" && git pull --rebase && pip install -q -U yt-dlp && bash "$REPO/termux/install-precis.sh" ;;
+  maj|update) cd "$REPO" && git pull --rebase origin main && pip install -q -U yt-dlp && bash "$REPO/termux/install-precis.sh" ;;
   test)  # diagnostic : quel moyen d'accès aux sous-titres marche depuis ce téléphone, sur ce réseau ?
     cd "$REPO" && python - <<'PY'
 from quote_finder import phone_precise as p

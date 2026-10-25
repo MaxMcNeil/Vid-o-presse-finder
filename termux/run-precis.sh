@@ -18,7 +18,7 @@ trap 'rm -rf "$QF/lock"' EXIT
 curl -s -m 15 -o /dev/null https://github.com || { echo "$(date '+%F %T') pas de réseau, passage reporté" >> "$LOG"; exit 0; }
 {
   echo "===== $(date '+%F %T')"
-  cd "$REPO" && git pull --rebase -q 2>&1 | tail -2
+  cd "$REPO" && git pull --rebase -q origin main 2>&1 | tail -2
   timeout 1800 python -m quote_finder.phone_precise --repo "$REPO" 2>&1 | grep -v "^ *$" | tail -15
 } >> "$LOG" 2>&1
 RC=$?
