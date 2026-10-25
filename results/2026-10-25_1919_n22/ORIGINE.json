@@ -1,0 +1,42 @@
+{
+  "cibles": [
+    "Dirigeants de l'Union européenne",
+    "Gouvernements des États membres de l'UE",
+    "Gouvernement iranien",
+    "Gouvernement russe"
+  ],
+  "court": "famine Europe engrais blé Ormuz",
+  "demontrer": "Les guerres en Ukraine et au Moyen-Orient provoquent une crise alimentaire majeure et une menace de famine en Europe en raison de l'impréparation totale des dirigeants européens",
+  "depot": "MaxMcNeil/OSINT-teleprompter-",
+  "dossier": "2026-10-25_18h06_dirigeants-europeens-famine-engrais-gaz",
+  "langue": "fr",
+  "points": [
+    {
+      "id": "P1",
+      "intitule": "Le blocus du détroit d'Ormuz perturbe l'approvisionnement en engrais et carburants"
+    },
+    {
+      "id": "P2",
+      "intitule": "La guerre en Ukraine bloque les exportations de blé et de maïs vers le marché européen"
+    },
+    {
+      "id": "P3",
+      "intitule": "La flambée des prix du gaz paralyse la fabrication d'engrais en Europe"
+    },
+    {
+      "id": "P4",
+      "intitule": "L'explosion des prix alimentaires frappe le budget des ménages européens"
+    },
+    {
+      "id": "P5",
+      "intitule": "Le risque de pénuries alimentaires réelles et la menace de famine s'installent en Europe"
+    },
+    {
+      "id": "P6",
+      "intitule": "L'absence d'anticipation et de stocks stratégiques par les dirigeants européens"
+    }
+  ],
+  "run_id": "40225111927",
+  "run_url": "https://github.com/MaxMcNeil/OSINT-teleprompter-/actions/runs/40225111927",
+  "sujet": "La famine menace l'Europe à cause des guerres en Ukraine et en Iran : blocus du détroit d'Ormuz et engrais bloqués, blé et maïs ukrainiens, flambée du gaz et des prix alimentaires, pénuries qui arrivent, et des dirigeants européens qui n'ont rien anticipé"
+}

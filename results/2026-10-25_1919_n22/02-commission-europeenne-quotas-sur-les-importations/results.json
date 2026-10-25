@@ -1,0 +1,621 @@
+{
+ "target": "Commission européenne",
+ "target_type": "entite",
+ "claim": "quotas sur les importations de blé et maïs ukrainiens",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Décisions, propositions ou débats de la Commission européenne concernant l'imposition de quotas, restrictions ou droits de douane sur les importations de céréales ukrainiennes (notamment blé et maïs).",
+  "term_groups": [
+   [
+    "quotas",
+    "quota",
+    "restrictions",
+    "tariffs",
+    "droits de douane",
+    "safeguard measures",
+    "clauses de sauvegarde",
+    "frein d urgence",
+    "emergency brake",
+    "import limits",
+    "plafond d importation"
+   ],
+   [
+    "ble",
+    "mais",
+    "cereales",
+    "wheat",
+    "corn",
+    "maize",
+    "grain",
+    "cereals",
+    "grain imports",
+    "produits agricoles",
+    "agricultural products"
+   ],
+   [
+    "ukraine",
+    "ukrainien",
+    "ukrainienne",
+    "ukrainiens",
+    "ukrainiennes",
+    "ukrainian",
+    "kyiv",
+    "kiev"
+   ]
+  ],
+  "target_aliases": [
+   "commission europeenne",
+   "european commission",
+   "ce",
+   "ec",
+   "bruxelles",
+   "brussels",
+   "executif europeen",
+   "eu executive"
+  ],
+  "youtube_queries": [
+   "Commission européenne quotas sur les importations de blé et maïs ukrainiens",
+   "Commission européenne conférence de presse céréales Ukraine",
+   "European Commission press briefing Ukraine grain tariffs",
+   "Euronews Ukraine grain imports EU restrictions",
+   "France 24 débat quotas importations agricoles Ukraine",
+   "Janusz Wojciechowski Ukraine grain quota statement",
+   "European Parliament debate Ukrainian agricultural imports",
+   "Ursula von der Leyen déclaration céréales ukrainiennes"
+  ],
+  "news_queries": [
+   "Commission européenne quotas sur les importations de blé et maïs ukrainiens",
+   "Commission européenne quotas blé maïs Ukraine",
+   "European Commission Ukraine grain import emergency brake",
+   "EU restrictions Ukrainian agriculture cereals tariffs",
+   "Bruxelles importations agricoles ukrainiennes clauses sauvegarde",
+   "EU Kyiv grain imports quota agreement"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "ec.europa.eu",
+    "reuters.com",
+    "afp.com",
+    "euronews.com",
+    "politico.eu"
+   ],
+   "site_articles": 18,
+   "site_articles_by_site": {
+    "elysee.fr": 1,
+    "assemblee-nationale.fr": 10,
+    "ec.europa.eu": 4,
+    "euronews.com": 3
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "Reuters": 0
+   },
+   "videos_candidates": 147,
+   "site_videos_scored": [],
+   "videos_low_authority": 49,
+   "videos_relevant": 34,
+   "videos_by_platform": {
+    "dailymotion": 1,
+    "youtube": 7
+   },
+   "articles_candidates": 131,
+   "articles_low_authority": 21,
+   "articles_relevant": 15,
+   "articles_read_via": {
+    "archive.org": 1,
+    "illisible : lien Google Actualités non converti": 9,
+    "chapô": 1,
+    "illisible : site fermé aux robots, pas d'archive": 1
+   },
+   "timing": {
+    "ia-affiné": 8,
+    "non retrouvé": 1
+   },
+   "elapsed_min": 22.4,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 6,
+      "gemini-3.5-flash-lite": 13,
+      "gemini-3.6-flash": 7,
+      "gemini-3.7-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "entite",
+  "official_speakers": [
+   "Ursula von der Leyen",
+   "Janusz Wojciechowski",
+   "Valdis Dombrovskis",
+   "Olof Gill",
+   "Eric Mamer",
+   "Porte-parole de la Commission européenne"
+  ],
+  "authoritative_sources": [
+   "ec.europa.eu",
+   "Reuters",
+   "AFP",
+   "reuters.com",
+   "afp.com",
+   "Euronews",
+   "euronews.com",
+   "Politico Europe",
+   "politico.eu",
+   "France 24",
+   "france24.com",
+   "Financial Times",
+   "ft.com",
+   "Le Monde",
+   "lemonde.fr",
+   "Europarl",
+   "Agra Presse"
+  ],
+  "site_query": "Commission européenne quotas céréales blé Ukraine",
+  "countries": [
+   "EU",
+   "UA",
+   "FR"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "Brussels considers allowing restrictions on Ukrainian grain in case of market 'disturbances'",
+   "uploaded": "2024-01-23",
+   "platform": "youtube",
+   "video_id": "j5uVicxkHSc",
+   "duration": 131,
+   "channel": "euronews",
+   "url": "https://www.youtube.com/watch?v=j5uVicxkHSc",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:29",
+     "end": "01:49",
+     "start_seconds": 29.8,
+     "end_seconds": 109.9,
+     "start_tc": "00:00:29.800",
+     "end_tc": "00:01:49.900",
+     "duration_seconds": 80.1,
+     "timestamp": "00:29",
+     "link": "https://www.youtube.com/watch?v=j5uVicxkHSc&t=29s",
+     "clip_link": "https://www.youtube.com/embed/j5uVicxkHSc?start=29&end=110&autoplay=1",
+     "t": 29.8,
+     "quote": "We need to take into account the sensitivities of agricultural sectors, especially in the neighbouring countries... including on a possibility of having safeguards not only in the case of disturbances of the EU market as a whole, but also in case of disturbances of in a single member state or a few member states...",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Valdis Dombrovskis",
+     "confidence": 0.95,
+     "why": "L'intervenant de la Commission européenne discute de mesures de sauvegarde pour limiter les importations de céréales ukrainiennes afin de protéger les pays voisins.",
+     "t_end": 109.9,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "L'UE dénonce l'interdiction décidée par Varsovie et Budapest d'importer les céréales urkainiennes",
+   "uploaded": "2023-04-17",
+   "platform": "youtube",
+   "video_id": "tcJCRYzcHWQ",
+   "duration": 141,
+   "channel": "euronews (en français)",
+   "url": "https://www.youtube.com/watch?v=tcJCRYzcHWQ",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:19",
+     "end": "00:39",
+     "start_seconds": 19.9,
+     "end_seconds": 39.4,
+     "start_tc": "00:00:19.900",
+     "end_tc": "00:00:39.400",
+     "duration_seconds": 19.5,
+     "timestamp": "00:19",
+     "link": "https://www.youtube.com/watch?v=tcJCRYzcHWQ&t=19s",
+     "clip_link": "https://www.youtube.com/embed/tcJCRYzcHWQ?start=19&end=40&autoplay=1",
+     "t": 19.9,
+     "quote": "La Commission européenne a répondu que ces interdictions unilatérales étaient inacceptables. Elle lance dans l'urgence une consultation... ce qui signifie que c'est au niveau de l'UE que de telles décisions peuvent être prises... Nous avons sur la table une nouvelle proposition pour maintenir cette suspension.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Miriam García Ferrer",
+     "confidence": 0.95,
+     "why": "La Commission européenne, via sa porte-parole Miriam García Ferrer, expose sa position sur les restrictions unilatérales et ses propositions de suspension des droits de douane.",
+     "t_end": 39.4,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "EU moves to limit row over Ukrainian grain as Bulgaria announces import ban",
+   "uploaded": "2023-04-20",
+   "platform": "youtube",
+   "video_id": "VvNzGdxu0_0",
+   "duration": 113,
+   "channel": "euronews",
+   "url": "https://www.youtube.com/watch?v=VvNzGdxu0_0",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "01:48",
+     "end": "01:53",
+     "start_seconds": 108.0,
+     "end_seconds": 113.0,
+     "start_tc": "00:01:48.000",
+     "end_tc": "00:01:53.000",
+     "duration_seconds": 5.0,
+     "timestamp": "01:48",
+     "link": "https://www.youtube.com/watch?v=VvNzGdxu0_0&t=108s",
+     "clip_link": "https://www.youtube.com/embed/VvNzGdxu0_0?start=108&end=114&autoplay=1",
+     "t": 108.0,
+     "quote": "The EU has rushed to quell the revolt arguing for a common European approach as customs policy should be united across the block. You will recall that we have already provided a support package of 56.3 million euros for the most affected farmers - and we are now preparing a second financial support package of 100 million euros.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Dana Spinant",
+     "confidence": 0.9,
+     "why": "The European Commission spokesperson discusses the EU's response to the unilateral bans by member states and mentions financial support packages for affected farmers.",
+     "t_end": 113.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    }
+   ]
+  },
+  {
+   "title": "EU blocks Ukraine grain imports to five countries including Poland",
+   "uploaded": "2023-06-14",
+   "platform": "youtube",
+   "video_id": "GQ-BeqvqJE8",
+   "duration": 150,
+   "channel": "euronews",
+   "url": "https://www.youtube.com/watch?v=GQ-BeqvqJE8",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:02",
+     "end": "00:08",
+     "start_seconds": 2.1,
+     "end_seconds": 8.9,
+     "start_tc": "00:00:02.100",
+     "end_tc": "00:00:08.900",
+     "duration_seconds": 6.8,
+     "timestamp": "00:02",
+     "link": "https://www.youtube.com/watch?v=GQ-BeqvqJE8&t=2s",
+     "clip_link": "https://www.youtube.com/embed/GQ-BeqvqJE8?start=2&end=9&autoplay=1",
+     "t": 2.1,
+     "quote": "The European Union is again extended a ban on Ukrainian grain imports to five countries including Poland.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "Le journaliste évoque la prolongation par l'Union européenne de l'interdiction d'importation de céréales ukrainiennes vers cinq pays.",
+     "t_end": 8.9,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "00:50",
+     "end": "00:58",
+     "start_seconds": 50.0,
+     "end_seconds": 58.0,
+     "start_tc": "00:00:50.000",
+     "end_tc": "00:00:58.000",
+     "duration_seconds": 8.0,
+     "timestamp": "00:50",
+     "link": "https://www.youtube.com/watch?v=GQ-BeqvqJE8&t=50s",
+     "clip_link": "https://www.youtube.com/embed/GQ-BeqvqJE8?start=50&end=59&autoplay=1",
+     "t": 50.0,
+     "quote": "Although the decision of the EU supported by the government brings a temporary relief, it was not met with much approval from Polish farmers...",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "Le journaliste mentionne la décision de l'UE d'apporter un soulagement temporaire aux agriculteurs polonais concernant les importations.",
+     "t_end": 58.0,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Trade Commissioner wants full trade liberalization with Ukraine! AGRI Commissioner has no idea!",
+   "uploaded": "2024-01-30",
+   "platform": "youtube",
+   "video_id": "cPguMcNKDK4",
+   "duration": 152,
+   "channel": "EU Debates | eudebates.tv",
+   "url": "https://www.youtube.com/watch?v=cPguMcNKDK4",
+   "method": "gemini-video",
+   "authority": 0.61,
+   "authority_why": "chaîne non répertoriée (336 000 abonnés)",
+   "moments": [
+    {
+     "start": "01:44",
+     "end": "02:00",
+     "start_seconds": 104.9,
+     "end_seconds": 120.6,
+     "start_tc": "00:01:44.900",
+     "end_tc": "00:02:00.600",
+     "duration_seconds": 15.7,
+     "timestamp": "01:44",
+     "link": "https://www.youtube.com/watch?v=cPguMcNKDK4&t=104s",
+     "clip_link": "https://www.youtube.com/embed/cPguMcNKDK4?start=104&end=121&autoplay=1",
+     "t": 104.9,
+     "quote": "Now, how have different members of the college contributed to this? Well, they have contributed all of them by looking at the proposals from the college, discussing their point of view. Commission of Wojciechowski was certainly one of them, but he was certainly not the only one.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Eric Mamer",
+     "confidence": 0.9,
+     "why": "Le porte-parole de la Commission européenne évoque les discussions au sein du collège concernant les propositions relatives à l'Ukraine (incluant les aspects agricoles).",
+     "t_end": 120.6,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "01:42",
+     "end": "02:30",
+     "start_seconds": 102.1,
+     "end_seconds": 150.3,
+     "start_tc": "00:01:42.100",
+     "end_tc": "00:02:30.300",
+     "duration_seconds": 48.2,
+     "timestamp": "01:42",
+     "link": "https://www.youtube.com/watch?v=cPguMcNKDK4&t=102s",
+     "clip_link": "https://www.youtube.com/embed/cPguMcNKDK4?start=102&end=151&autoplay=1",
+     "t": 102.1,
+     "quote": "In relation to Commissioner Wojciechowski, he advocates consistently and strongly for European farmers... there's a balance to be struck here between continuing our unwavering support for Ukraine on an economic level, while at the same time listening carefully to the concerns of all relevant stakeholders... any decisions we make including in relation to the extension of the autonomous trade measures will take that evidence into account",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Eric Mamer",
+     "confidence": 0.95,
+     "why": "Il explicite le débat et l'équilibre recherché par la Commission européenne sur les mesures commerciales et l'aide à l'Ukraine en tenant compte de la situation agricole.",
+     "t_end": 150.3,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Brussels proposes to extend EU-Ukraine free trade. But restrictions on grain will be easier to slap",
+   "uploaded": "2024-01-31",
+   "platform": "youtube",
+   "video_id": "54GSNumTqGw",
+   "duration": 135,
+   "channel": "euronews",
+   "url": "https://www.youtube.com/watch?v=54GSNumTqGw",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:01",
+     "end": "00:28",
+     "start_seconds": 1.0,
+     "end_seconds": 28.5,
+     "start_tc": "00:00:01.000",
+     "end_tc": "00:00:28.500",
+     "duration_seconds": 27.5,
+     "timestamp": "00:01",
+     "link": "https://www.youtube.com/watch?v=54GSNumTqGw&t=1s",
+     "clip_link": "https://www.youtube.com/embed/54GSNumTqGw?start=1&end=29&autoplay=1",
+     "t": 1.0,
+     "quote": "the European Commission has issued proposals to restrict farm imports from Ukraine",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Journaliste",
+     "confidence": 1.0,
+     "why": "Le journaliste rapporte que la Commission européenne a émis des propositions pour restreindre les importations agricoles d'Ukraine.",
+     "t_end": 28.5,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "01:51",
+     "end": "02:05",
+     "start_seconds": 111.4,
+     "end_seconds": 125.0,
+     "start_tc": "00:01:51.400",
+     "end_tc": "00:02:05.000",
+     "duration_seconds": 13.6,
+     "timestamp": "01:51",
+     "link": "https://www.youtube.com/watch?v=54GSNumTqGw&t=111s",
+     "clip_link": "https://www.youtube.com/embed/54GSNumTqGw?start=111&end=126&autoplay=1",
+     "t": 111.4,
+     "quote": "Now the Commission is willing to add an emergency break for other sensitive goods like egg, sugar and poultry. Pre-war tariffs will be introduced if import volumes exceed the level of the last two years.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Journaliste",
+     "confidence": 1.0,
+     "why": "Le journaliste détaille la proposition de la Commission européenne d'introduire des mesures de freinage et des tarifs douaniers sur certains produits.",
+     "t_end": 125.0,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Poland, Hungary, Slovakia defy end of EU Ukraine grain import ban",
+   "date": "2023-09-14",
+   "source": "France 24",
+   "domain": "france24.com",
+   "url": "https://www.france24.com/en/live-news/20230915-poland-hungary-slovakia-defy-end-of-eu-ukraine-grain-import-ban",
+   "verified_on_full_text": true,
+   "read_via": "archive.org",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "\"We do not agree with the European Commission’s decision and in the interest of Polish farmers and consumers, we are introducing national measures,\" Polish government spokesman Piotr Muller told state news agency PAP.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Piotr Muller",
+     "confidence": 1.0,
+     "why": "Le porte-parole du gouvernement polonais conteste la décision de la Commission européenne concernant les restrictions sur les importations.",
+     "t_end": 10.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "The European Commission announced \"existing measures will expire today\" when they run out at midnight.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "",
+     "confidence": 1.0,
+     "why": "La Commission européenne annonce l'expiration des mesures d'interdiction sur les importations.",
+     "t_end": 20.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "\"The market distortions in the five Member States bordering Ukraine have disappeared,\" the EU's executive arm said.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "",
+     "confidence": 1.0,
+     "why": "L'exécutif européen justifie la fin des restrictions sur les importations de céréales.",
+     "t_end": 25.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "L'UE réinstitue des droits de douane sur les importations ukrainiennes de produits agricoles",
+   "date": "2025-07-28",
+   "source": "trade.ec.europa.eu",
+   "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQd01veXUxVHcwckxhWFl6VFJKZVJGU3JROUtlQWFXX1FMNUhINVIzVmU4NEVCNTFSOVdMQjNXdjVjeDFHM3N2RDFHZWNUWTZqNVo2RTZkcm9kV256OUFoY2N1MmJmamFjYWhZQnItNTdZajZzMWpCMmpZUlZVTGtIVUNwVUtyOHdkQVk1YUJfMEU2OEN2akV1MUljaTV4bWM1bGhlRTg5WldGV2N4RUktTlhhT1k0Q04wcTVOTzN1VXF2Qjlld3NMWFRZU2VwRjQ4b2N4eXdNTGNEREJR?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "EU to cut Ukrainian wheat, sugar imports by 70-80% under new quotas",
+   "date": "2025-07-04",
+   "source": "Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQX3dQRkVMSmtaZ1FDMjVVSTlGeHl5eERHV2tNMHVCa3JhNHhBNm9WaVVFOGlBbUx0WEZyaWRma0Rod3ZRTTBrbTNqSGo0NnVmeXlzTjQ2RHl3a1g2ZHZxNTd1UktDMEg0OVBVR2s0Q1R5S0dNTXpsMWRieFFKOWx5c2VlRWpOMEkxTWZFNFZRZl9BNDVoRHI0VWttaDhLX2lhdUE3cWJtOGZaaWNaZmp0ejV2TlBpR1d2TVE?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "EU lifts bans on Ukrainian grain but Poland and Hungary move to impose unilateral restrictions",
+   "date": "2023-09-15",
+   "source": "Euronews.com",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPNUIxLXhQVjM4cllsdElDX0hveXowcEltNmljdzJpRWx4VlpuXzVreU8xS1EtMG16X2FsYjFxdHBNbV9mbHFPZzllOG5YcW4zUHJDNERGSHRhSGZJcFlNMzU4Q09NeVhPck5jU3BpOVFrdXRRNWZyT09zR3U4cUlNUVhsUzhOVlFVOE5wV1g5NzUyQVBmQVcweURUckZaeEJXZkZJOFlxT0xhQ0tYT1c5VzFNTDhwdzhaZ0oydXBOVkhCeDMy?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "L'Ukraine n'est pas entièrement satisfaite du nouvel accord européen sur les céréales, selon le ministre de l'agriculture",
+   "date": "2024-03-29",
+   "source": "Euronews.com",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPTGJBVDBBdzRfbUtNMVdudG54UXBxSlpTUlQ1ckxqcDRyblBucUxGeUxFZWk5dGZiY3hsbHAxTkk1YVFCN1A2U1RFOGZJZjVHdVZTZVBMSUR1LUptbkhuZ0gzdWMtS2dQTWtnNE81SkNvMGtFRUVDU2xkeXJpbFhDbnBiT2gtek51enpmNHVoZWNSUVlCblpBam5YdTAzM3Ria2trRExjcEJ4VHpoWWQ0VnhVTWtKRl9NUmlOd3lndDhoVTQ?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "EU agrees to cap tariff-free Ukraine farm imports",
+   "date": "2024-03-20",
+   "source": "Al Jazeera",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPYm9FUjJEcEo3U08wQmt1eWpHeEZCVzVic0NMN2Y3SUhhQnhUTzlQVmsyaDlqdU00cnRJODRvVlpfU2VxMEVPVmJ4a1p2allDZ2JQTkFkdk43R1ZqOTR5UkxPVVhneXJfUnEybWdpRy1VUng1Z2RlUkx5a0lFWFoyX0xieUNZU3Nzb1JGZklWQ3Bmbk9xZnM0SUFlRkTSAaIBQVVfeXFMTVBSYi1PaFNieGdmajhqR0ZRbjg5VjNhX3poRTBVOElxLTVudjYtZUdtZXZybnNudVRxUFZaOW94MEN5bTNUcW00WVRoeWF6ejE3cHdUTmVpa3V4RUhBdzQzSEZZSjVNMVlRYVExOWx1WnBtSS14aHN1RVlyM2t0NDBqanhxYTJLVlFKclc4SGNuWXNwV0hRV3lWZ3Z1bjVsdThR?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Farmers' protests: EU to cap some Ukrainian tariff-free imports",
+   "date": "2024-03-20",
+   "source": "BBC",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1fSDdyRTFoRHZMZ0xCSmRpcmJCMk9OVzhEMTZhU3VpRjFkOWltcTk1b1pMQ19YMm1zMjFVLW93VE1waUNXZ3o5d3FkMXVuU0dtQXkwVEFlaGRDUQ?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Droits de douane : l'Union européenne et l'Ukraine parviennent à un accord",
+   "date": "2025-06-30",
+   "source": "Les Echos",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNeTNEa2IwUklEMDU0cnpwQ1AtMnNpaFlOWHlpaUhrZV9PUWpSRGNBWFBvNEhad24xVlM3aUZoWXd2YkhNMmhqbGdHQkxoOF9RbDNjb0ticHA3Z1RMNW1sbnFMYlN1SXN4LXV1aVV2dDQybEl4QUVPOURxQ2o1Nk1qUDNzbEZIS1pyZ3JWZHFmd2JueEIwT2w2eWpVTGx1MWZXZXN1NW00YWtQMGFSaVB6b2dNUUxfZw?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "UE - Ukraine : un nouvel accord commercial, moins ambitieux mais \"réaliste\"",
+   "date": "2025-07-01",
+   "source": "Euronews.com",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOc3RTU2E0eDdoWFREbEtxckVDNktjWkxwZmNHaXVabnNjVHBEYVd3bV8xVzc1QkdraThLV1RtVGwwWE9HQTJ6NGMwWDJNSnZ6aTZXZ0Y3RWllQTJCWXZBQVBEdEVvQzdXTlEtVGZWdUtzUG5kUDF4Mk1VRGR6YUdRbDdPcnpkelpiRUUyTU5VdnY1empnazZIN0JXbGFTTWs3eUh1Qkh3?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Here's all we know about the EU deal on tariff-free Ukrainian grain",
+   "date": "2023-05-02",
+   "source": "Euronews.com",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQdk0zQWttTlY2cGJrWUR5Q1ZkVGZnSVJnRUJ3U0pZN3BrVkJCdWpvcVlBQkFheGFYeEZJQ3RQTmpiSnpGTUxDajZWaEw1YVFuemxvUk9oOGRMbmxGaEFpVDJpUVNyZGdRN0tHMTVUZXBTV0p6MkRldTdXVTc5cmJtRjZtbHRMX2duV3VyZ2JjLUhXWk9lXzA1RWk5bEpwWmRPSHpSYw?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "E.U. Extends Tariff Waiver for Ukrainian Grain, Despite Some Protests",
+   "date": "2023-04-28",
+   "source": "The New York Times",
+   "url": "https://www.nytimes.com/2023/04/28/world/europe/eu-ukraine-grain-tariff.html",
+   "authority": 0.9,
+   "reason": "vérifié sur le chapô/résumé seulement (site fermé aux robots, pas d'archive)"
+  },
+  {
+   "title": "Nouvel accord entre l’Ukraine et l’Union européenne sur l’importation de produits agricoles",
+   "date": "2025-06-30",
+   "source": "Ouest-France",
+   "url": "https://www.ouest-france.fr/europe/ue/un-partenariat-sur-les-drones-conclut-entre-lue-et-lukraine-annonce-ursula-von-der-leyen-a-kiev-5fe2d6a2-8044-11f1-9d8e-98fb5a42b8f3",
+   "authority": 0.75,
+   "reason": "site fermé aux robots, pas d'archive"
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "L'UE propose d'étendre les facilités commerciales avec l'Ukraine, mais il sera plus facile d'imposer des restrictions sur les céréales",
+   "url": "https://www.dailymotion.com/video/x8ryck5",
+   "reason": "pas de sous-titres ; audio : ERROR: [dailymotion] x8ryck5: The extractor is attempting impersonation, but none of these impersonate targets"
+  }
+ ]
+}

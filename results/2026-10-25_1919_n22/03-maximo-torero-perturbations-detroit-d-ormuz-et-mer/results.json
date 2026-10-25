@@ -1,0 +1,173 @@
+{
+ "target": "Maximo Torero",
+ "target_type": "personne",
+ "claim": "perturbations détroit d'Ormuz et mer Noire transmission prix alimentaires",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations de Maximo Torero sur l'impact des perturbations dans le détroit d'Ormuz et en mer Noire sur la transmission des prix des denrées alimentaires.",
+  "term_groups": [
+   [
+    "detroit d ormuz",
+    "strait of hormuz",
+    "mer noire",
+    "black sea",
+    "ormuz",
+    "hormuz"
+   ],
+   [
+    "prix alimentaires",
+    "food prices",
+    "couts alimentaires",
+    "food costs",
+    "choc d offre",
+    "inflation alimentaire"
+   ],
+   [
+    "transmission",
+    "pass through",
+    "impact",
+    "perturbations",
+    "disruptions",
+    "chaine d approvisionnement",
+    "supply chain"
+   ]
+  ],
+  "target_aliases": [
+   "maximo torero",
+   "maximo torero cullen",
+   "torero"
+  ],
+  "youtube_queries": [
+   "Maximo Torero perturbations détroit d'Ormuz et mer Noire transmission prix alimentaires",
+   "Maximo Torero Strait of Hormuz food prices",
+   "Maximo Torero FAO Black Sea food prices",
+   "Maximo Torero interview FAO food inflation",
+   "Maximo Torero détroit d'Ormuz prix alimentaires",
+   "FAO chief economist Maximo Torero supply disruption"
+  ],
+  "news_queries": [
+   "Maximo Torero perturbations détroit d'Ormuz et mer Noire transmission prix alimentaires",
+   "Maximo Torero Strait of Hormuz Black Sea food prices",
+   "Maximo Torero FAO food price transmission disruptions",
+   "Maximo Torero détroit d'Ormuz mer Noire prix alimentaires",
+   "FAO Maximo Torero food prices supply chain disruption"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "ar"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 6,
+   "queries_news": 5,
+   "authority": "forte",
+   "speakers": "cible",
+   "reference_sites": [
+    "omannews.gov.om",
+    "timesofoman.com",
+    "omanobserver.om",
+    "fao.org",
+    "lemonde.fr",
+    "bbc.com",
+    "reuters.com",
+    "apnews.com"
+   ],
+   "site_articles": 3,
+   "site_articles_by_site": {
+    "fao.org": 3
+   },
+   "site_pages_probed": 0,
+   "site_videos": 0,
+   "official_channels": {
+    "Reuters": 0,
+    "Associated Press": 0,
+    "AFP News Agency": 0
+   },
+   "videos_candidates": 92,
+   "site_videos_scored": [],
+   "videos_low_authority": 54,
+   "videos_relevant": 5,
+   "videos_by_platform": {
+    "youtube": 4
+   },
+   "articles_candidates": 129,
+   "articles_low_authority": 38,
+   "articles_relevant": 4,
+   "articles_read_via": {
+    "chapô": 1,
+    "api": 1,
+    "illisible : site fermé aux robots, pas d'archive": 1,
+    "direct": 1
+   },
+   "timing": {},
+   "elapsed_min": 6.6,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.6-flash": 4,
+      "gemini-3.5-flash": 2,
+      "gemini-3.8-flash": 2,
+      "gemini-3.5-flash-lite": 1,
+      "gemini-3-flash-preview": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "personne",
+  "official_speakers": [
+   "Maximo Torero"
+  ],
+  "authoritative_sources": [
+   "fao.org",
+   "Reuters",
+   "Bloomberg",
+   "AFP",
+   "Financial Times",
+   "World Bank",
+   "UN News",
+   "lemonde.fr",
+   "bbc.com"
+  ],
+  "site_query": "Maximo Torero Ormuz mer Noire prix alimentaires",
+  "countries": [
+   "IR",
+   "OM",
+   "UA"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 4,
+  "articles_scanned": 4
+ },
+ "videos": [],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "World food prices at highest since 2022 as supply risks mount, FAO says",
+   "date": "2026-09-04",
+   "source": "Reuters",
+   "url": "https://www.reuters.com/world/europe/world-food-prices-highest-since-2022-supply-risks-mount-fao-says-2026-09-04/",
+   "authority": 1.0,
+   "reason": "vérifié sur le chapô/résumé seulement (site fermé aux robots, pas d'archive)"
+  },
+  {
+   "title": "La sécheresse et les guerres font bondir les prix alimentaires en août, selon la FAO",
+   "date": "2026-09-04",
+   "source": "France 24",
+   "url": "https://www.france24.com/fr/info-en-continu/20260904-la-s%C3%A9cheresse-et-les-guerres-font-bondir-les-prix-alimentaires-en-ao%C3%BBt-selon-la-fao",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  }
+ ],
+ "unverifiable_videos": []
+}

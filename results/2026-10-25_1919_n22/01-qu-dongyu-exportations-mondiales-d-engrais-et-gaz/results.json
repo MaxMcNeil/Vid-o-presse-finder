@@ -1,0 +1,240 @@
+{
+ "target": "Qu Dongyu",
+ "target_type": "personne",
+ "claim": "exportations mondiales d'engrais et gaz transitent par détroit d'Ormuz",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations de Qu Dongyu (Directeur général de la FAO) concernant le transit des exportations mondiales d'engrais et de gaz via le détroit d'Ormuz et leur impact sur la sécurité alimentaire.",
+  "term_groups": [
+   [
+    "detroit d ormuz",
+    "detroit d ormuz",
+    "strait of hormuz",
+    "hormuz strait",
+    "hormuz",
+    "ormuz",
+    "مضيق هرمز",
+    "هرمز"
+   ],
+   [
+    "engrais",
+    "fertilisants",
+    "fertilizer",
+    "fertilizers",
+    "fertiliser",
+    "fertiliser exports",
+    "الاسمده",
+    "اسمده"
+   ],
+   [
+    "gaz",
+    "gaz naturel",
+    "lng",
+    "gas",
+    "natural gas",
+    "الغاز",
+    "غاز"
+   ]
+  ],
+  "target_aliases": [
+   "qu dongyu",
+   "dongyu qu",
+   "director general qu dongyu",
+   "directeur general qu dongyu",
+   "fao director general",
+   "directeur general de la fao",
+   "屈冬玉"
+  ],
+  "youtube_queries": [
+   "Qu Dongyu exportations mondiales d'engrais et gaz transitent par détroit d'Ormuz",
+   "Qu Dongyu Strait of Hormuz fertilizer",
+   "Qu Dongyu FAO press conference Hormuz",
+   "Qu Dongyu speech fertilizer gas supply",
+   "UN FAO Qu Dongyu statement trade",
+   "Qu Dongyu détroit d'Ormuz engrais",
+   "Qu Dongyu interview food security supply chain",
+   "FAO Director General Qu Dongyu UN briefing"
+  ],
+  "news_queries": [
+   "Qu Dongyu exportations mondiales d'engrais et gaz transitent par détroit d'Ormuz",
+   "\"Qu Dongyu\" \"Strait of Hormuz\" fertilizer",
+   "\"Qu Dongyu\" \"Hormuz\" gas food security",
+   "\"Qu Dongyu\" \"détroit d'Ormuz\" engrais",
+   "FAO \"Qu Dongyu\" \"fertilizer\" exports Hormuz",
+   "\"Qu Dongyu\" trade chokepoints fertilizers"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "it",
+   "ar"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "cible",
+   "reference_sites": [
+    "quirinale.it",
+    "governo.it",
+    "rainews.it",
+    "tg24.sky.it",
+    "ansa.it",
+    "corriere.it",
+    "repubblica.it",
+    "ilsole24ore.com"
+   ],
+   "site_articles": 0,
+   "site_articles_by_site": {},
+   "official_channels": {
+    "Rai News": 0,
+    "Sky TG24": 0,
+    "ANSA": 0
+   },
+   "videos_candidates": 96,
+   "site_videos_scored": [],
+   "videos_low_authority": 44,
+   "videos_relevant": 1,
+   "videos_by_platform": {},
+   "articles_candidates": 76,
+   "articles_low_authority": 13,
+   "articles_relevant": 7,
+   "articles_read_via": {
+    "direct": 1,
+    "illisible : lien Google Actualités non converti": 6
+   },
+   "timing": {},
+   "elapsed_min": 12.1,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 2,
+      "gemini-3.7-flash": 1,
+      "gemini-3.6-flash": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "personne",
+  "official_speakers": [
+   "FAO Spokesperson",
+   "Porte-parole FAO",
+   "FAO Media Relations",
+   "Qu Dongyu"
+  ],
+  "authoritative_sources": [
+   "fao.org",
+   "un.org",
+   "UN Web TV",
+   "Reuters",
+   "AFP",
+   "Associated Press",
+   "Bloomberg",
+   "France 24",
+   "BBC News",
+   "Al Jazeera",
+   "Al Arabiya",
+   "Financial Times",
+   "Agri-Pulse"
+  ],
+  "site_query": "Qu Dongyu engrais gaz détroit Ormuz",
+  "countries": [
+   "IT",
+   "IR",
+   "OM"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 0,
+  "articles_scanned": 7
+ },
+ "videos": [],
+ "articles": [
+  {
+   "title": "Détroit d’Ormuz : un choc sur les engrais menace l’alimentation mondiale",
+   "date": "2026-06-08",
+   "source": "UN News Centre",
+   "domain": "news.un.org",
+   "url": "https://news.un.org/fr/story/2026/06/1158951",
+   "verified_on_full_text": true,
+   "read_via": "direct",
+   "authority": 1.0,
+   "authority_why": "source officielle",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Selon le chef de la FAO, environ 35 % des exportations mondiales de pétrole brut, 20 % des exportations de gaz naturel liquéfié (GNL), 20 à 30 % des exportations mondiales d’engrais et près de la moitié des exportations mondiales de soufre transitent par ce « goulet d’étranglement crucial ».",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Qu Dongyu",
+     "confidence": 0.95,
+     "why": "L'article rapporte directement les propos de Qu Dongyu chiffrant le transit des exportations mondiales de GNL et d'engrais par le détroit d'Ormuz.",
+     "t_end": null,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "Crise touchant le détroit d’Ormuz: la pénurie d’engrais compromettra les prochaines récoltes et l’approvisionnement en denrées alimentaires, avertit la FAO",
+   "date": "2026-05-07",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQLVJNY2x6LS0wNUk1MzFBNGtLSVdjMWwzb0F6cWM1WENrYzVzd09mTlduU3Rldm5zNG1QWm1NYVhVUW9vSVNoYXpRLUtGVFV5R1FTb1RySXRBWGFCQVZwWlU4cUdRSzNXVlVtVG9pZFBseGN0SHcyUkdCZ244Y2ZqSXFCUU9oaEU3VllsWS1TMG9wbVBudWhDekFHQWM5bmt5ZnNmMmpLUjdyUW1GWlY2aTdEemtpSjFLN2wzMG1GNlpIcmZkUC13Rjc0TTBwZmR4NHRvMQ?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Strait of Hormuz crisis: FAO Director-General outlines risks, actions and policy responses",
+   "date": "2026-04-28",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNcGJiMHVZYm5mc2w1MGNUdXpJVDdPMjZDV0hqVmsyT1gxT0hYSjhxaEZwSDhKcUxjTHdoaVJSMHQxTks4cHpDY1VmbTQ3S3BOTGlGNzRtZVFEc041NG5qV3lxcmVFWWRGd0twNE5vVk5kSGFpVlJmOENIb0hmblBveFlBLXZKVEZqNm93STRGRkpQTUFJYUdRMUZJR1NrYm9BZ3c3NEh3dDN2UXJUdXZqZUlqeGFRN182ejZibUlwLVU2UDJfTUp0OA?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "La FAO appelle à maintenir ouverts les échanges pour tous les intrants agricoles et à promouvoir l’utilisation efficace des engrais face aux risques pesant sur la production alimentaire mondiale",
+   "date": "2026-06-08",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNeFZNV3hROUVtMjZNZHV3bTlzMzNHV1BKSVhwbHRfS1E3OG43amxjOXhvbV9IQk1rbTZydXFrOHlPVzNxckJyQTNIWjA5VlhpQVZrMHRwRDVubi03TUJXOFJ1SFI4d2E0bVhxUU1fdTkzUFdKY1BFRVN4akRhM253c1M4eG5RNjVsSkRkWVo4dlRiMGVPU0NoNzEwOThBSmhjN3drcUtpRjhsMWh6R1BHYkd1N3NYZnhkZl9PTHpzNzg4ZThzNHlZU1lCX0NkM1BFaE40dl9nTlNUTzhuYk5FMHRlSQ?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Strait of Hormuz crisis: Fertilizer scarcity will affect next harvests and food supplies, FAO warns",
+   "date": "2026-07-05",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOTkR1aS1IejVSczFqSU1PRldFZW9iQS10MFVlcjRpamhqaENOMDJiOFEwZ0pxanVUM21IMmxnckxxNnJSLVN5RV91aUQ2T3VXR2cwandGeFBZWDktRDFLRmlFWEZ3a1doV3B6Q2ZlT1dFQlJWZUg2MjBUOUhhd2JxYmt3bGIyQkU0b2FqN1VlaVpPTXFCVGVhOVJ6N1p6MXhKOC1ZLUI0czEzLU03TmJOYkFxYVk5SlVoUjNxbnZ0UVBTMC1zUmYxdjlyeTdBdzhWbkp3ag?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Strait of Hormuz: Time running out to avert global food security crisis, FAO warns",
+   "date": "2026-05-26",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPU3haMVZtTkdSaWowQ1FERUF0SU5xX0FNR0hDd3h0MTY3UEZoZlduUEQtbnRpRU91QXlKU2pFNG9wZi1RUS1QV2pJLUpWUHI5Z3drUHhZTFJXNVprZTJ0RDQxd2pIb29ZWEhMVW1qOGpBaDVpOEpDQlE0QjNtcUxYSnN4VUdveTYwTVpJQUVDSjFiZ3A3MVBsZk5aRE1IcC0xTTV4cWZFenVrTC1jaXQ1Tk53bUFQV2pXT1ZMb1R3?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "FAO urges open trade on all agricultural inputs and efficient fertilizer use amid global food production risks",
+   "date": "2026-06-08",
+   "source": "Food and Agriculture Organization",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNcEdwN0pOeXdPZnRCV0N0bFdnajJNSEVRQmw0UE9MQ3pyeWw0MTgtSEhnY3VaeWJOWWhCWVByT2duR3NocW5yQ1dyN3E4cUlrelE4ZDUxMDFrNEhzZmZkUEhaSHhPMERsam1HUkJyX0MtdDRHMjZwVHI2aXpnSmI0N0FVcmFMekdWZnJTdDk4eHpNN3BtMG9raHc2bEZNcjhzTUdveFdzVE9VSlhxejhRaXhXcS1ScFFPSmVFZWpSNjh3bzRuT21vT3pJQ1VRY2YxMlJGS1hOaVZkc19zMDBIVUozSQ?oc=5",
+   "authority": 0.8,
+   "reason": "lien Google Actualités non converti"
+  }
+ ],
+ "unverifiable_videos": []
+}
