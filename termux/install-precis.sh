@@ -36,6 +36,7 @@ if command -v termux-job-scheduler >/dev/null 2>&1 && timeout 20 termux-job-sche
   timeout 20 termux-job-scheduler --job-id 4242 --script "$QF/run-precis.sh" --period-ms 3600000 \
     --network any --battery-not-low false --persisted true >/dev/null 2>&1 && MODE="Android (toutes les heures environ)"
 fi
+case "$MODE" in aucun) echo "à l'ouverture de Termux" ;; *) echo "Android toutes les heures environ + à l'ouverture de Termux" ;; esac > "$QF/auto_mode"
 # au démarrage du téléphone (si l'appli Termux:Boot est installée) : replanifie et fait un passage
 cat > "$HOME/.termux/boot/qf-precis.sh" <<BOOT
 #!/data/data/com.termux/files/usr/bin/bash

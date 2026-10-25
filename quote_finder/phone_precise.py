@@ -244,6 +244,37 @@ def _identity(repo: Path) -> list[str]:
     return ["-c", f"user.name={name or owner}", "-c", f"user.email={mail or owner + '@users.noreply.github.com'}"]
 
 
+def update_phone_status(repo: Path, st: dict) -> bool:
+    """state/telephone.json (lu par ETAT.md) ; renvoie True si l'état a changé au point de mériter un envoi.
+    Jamais d'adresse IP publiée : seulement le type de réseau (wifi / données mobiles)."""
+    import os
+    p = repo / "state" / "telephone.json"
+    try:
+        old = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        old = {}
+    net = os.environ.get("QF_NETTYPE") or "réseau"
+    blocked = {k: v for k, v in (old.get("blocked") or {}).items() if v > time.time()}
+    if st["bloqué"]:
+        blocked[net] = time.time() + 6 * 3600
+    else:
+        blocked.pop(net, None)
+    result = (f"{st['recalés']} extrait(s) recalé(s), {st['non_retrouvés']} non retrouvé(s), {st['pas_de_sous_titres']} sans sous-titres"
+              + (" — YouTube a limité ce réseau" if st["bloqué"] else "") if st["videos"] else
+              ("YouTube a refusé ce réseau" if st["bloqué"] else "rien à recaler"))
+    new = {"last_run": time.time(), "network": net, "last_result": result, "blocked": blocked,
+           "auto": os.environ.get("QF_AUTO_MODE") or old.get("auto") or "à l'ouverture de Termux",
+           "committed_at": old.get("committed_at", 0)}
+    sig = lambda d: (sorted((d.get("blocked") or {}).keys()), d.get("network"), d.get("auto"),  # noqa: E731
+                     "bloqué" if "limité" in d.get("last_result", "") or "refusé" in d.get("last_result", "") else "ok")
+    changed = sig(old) != sig(new) or bool(st["lots"]) or time.time() - new["committed_at"] > 12 * 3600
+    if changed:
+        new["committed_at"] = time.time()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(new, ensure_ascii=False, indent=1), encoding="utf-8")
+    return changed
+
+
 def _git(repo: Path, *args, check=True) -> subprocess.CompletedProcess:
     return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=check)
 
@@ -268,11 +299,23 @@ def main(argv=None) -> int:
           f"{st['pas_de_sous_titres']} · non retrouvés : {st['non_retrouvés']}" + (" · ⚠ YouTube a limité, suite au prochain passage" if st["bloqué"] else ""))
     if a.dry_run or a.no_push:
         return 0
-    if st["lots"]:
-        _git(repo, "add", "results")
+    status_changed = update_phone_status(repo, st)
+    if st["lots"] or status_changed:
+        import os
+        cwd = os.getcwd()
+        try:  # ETAT.md régénéré avec l'état du téléphone
+            os.chdir(repo)
+            from . import status
+            status.build()
+        except Exception as e:  # noqa: BLE001
+            print("⚠ ETAT.md non régénéré :", e)
+        finally:
+            os.chdir(cwd)
+        _git(repo, "add", "results", "state/telephone.json", "ETAT.md", check=False)
         if _git(repo, "diff", "--cached", "--quiet", check=False).returncode != 0:
-            _git(repo, *_identity(repo), "commit", "-q", "-m",
-                 f"précision téléphone : {st['recalés']} extrait(s) recalé(s) sur les sous-titres ({', '.join(st['lots'])})")
+            msg = (f"précision téléphone : {st['recalés']} extrait(s) recalé(s) sur les sous-titres ({', '.join(st['lots'])})"
+                   if st["lots"] else "état du téléphone")
+            _git(repo, *_identity(repo), "commit", "-q", "-m", msg)
     ahead = _git(repo, "rev-list", "--count", "origin/main..HEAD", check=False).stdout.strip()
     if not ahead or ahead == "0":  # rien à envoyer (y compris un envoi raté lors d'un passage précédent)
         return 0

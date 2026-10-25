@@ -5,6 +5,13 @@ mkdir -p "$QF"
 # YouTube bloque parfois une connexion (ex. un wifi) et pas une autre (ex. la SIM) : la pause de 6 h après un refus
 # est donc propre à chaque réseau, repéré par son adresse publique
 NET="$(curl -s -m 10 https://api.ipify.org 2>/dev/null | tr -cd '0-9a-f.:')"; NET="${NET:-inconnu}"
+# type de réseau pour ETAT.md (jamais l'adresse) : wifi si Termux:API le confirme, sinon « données mobiles ou wifi »
+QF_NETTYPE="réseau"
+if command -v termux-wifi-connectioninfo >/dev/null 2>&1; then
+  if timeout 10 termux-wifi-connectioninfo 2>/dev/null | grep -q '"supplicant_state": "COMPLETED"'; then QF_NETTYPE="wifi"; else QF_NETTYPE="données mobiles"; fi
+fi
+export QF_NETTYPE
+QF_AUTO_MODE="$(cat "$QF/auto_mode" 2>/dev/null || echo "à l'ouverture de Termux")"; export QF_AUTO_MODE
 BLK="$QF/blocked_${NET//[:.]/_}"
 if [ "${1:-}" = "--auto" ] && [ -f "$BLK" ] && [ "$(date +%s)" -lt "$(cat "$BLK")" ]; then exit 0; fi
 if [ "${1:-}" = "--auto" ] && [ -f "$QF/last_ok" ] && [ $(( $(date +%s) - $(stat -c %Y "$QF/last_ok") )) -lt 7200 ] \

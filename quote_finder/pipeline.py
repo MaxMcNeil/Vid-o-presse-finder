@@ -54,7 +54,8 @@ class Options:
     allow_heuristic: bool = False
     since: str = ""                  # AAAA-MM-JJ : ignorer ce qui est plus ancien (facultatif)
     max_video_minutes: int = 60      # au-delà, une vidéo sans sous-titres n'est pas envoyée à Gemini (quota par minute)
-    refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
+    refine_max: int = 12
+    article_gemini_max: int = 6      # articles pertinents illisibles autrement : lus par Gemini (url_context)             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
 
     @property
     def person(self) -> str:  # compatibilité
@@ -80,6 +81,7 @@ class ArticleResult:
     verified: bool
     note: str = ""
     relevant_title: bool = True  # le titre évoque le sujet (sert à trier les articles illisibles)
+    via: str = ""                # méthode qui a permis de lire le texte (direct, archive.org, gemini, api)
 
 
 # ------------------------------------------------------------------ découverte
@@ -215,6 +217,9 @@ def discover_articles(plan: Plan, o: Options, pools: dict, http=None, llm=None,
             if a.url and _recent_enough(a.published, o.since):
                 found.setdefault(a.url, a).found_by.add(q)
     arts = list(found.values())
+    # un même article trouvé avec son vrai lien (Bing, GDELT, site:) et via Google Actualités : on garde le vrai lien
+    real_titles = {normalize(a.title)[:60] for a in arts if "news.google.com" not in a.url}
+    arts = [a for a in arts if "news.google.com" not in a.url or normalize(a.title)[:60] not in real_titles]
     for a in arts:
         a.authority, a.authority_why = authority.score_article(a, plan)
     plan.diag["articles_candidates"] = len(arts)
@@ -338,26 +343,27 @@ def resolve_google_news(a: ArticleCandidate, http=None) -> str:
     return ""
 
 
-def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None) -> ArticleResult:
-    text = a.text
-    if not text:
-        try:
-            url = a.url
-            if "news.google.com" in url:
-                url = resolve_google_news(a, http) or url
-            text = fetch_article_text(url) if "news.google.com" not in url else ""
-        except Exception:  # noqa: BLE001
-            text = ""
-    verified = bool(text)
+def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None,
+                    gemini_budget: list[int] | None = None) -> ArticleResult:
+    from . import article_text
+    subject = f"{o.target} — {o.claim or plan.claim_summary}"
+    try:
+        text, via = article_text.read(a, llm, subject, gemini_budget if getattr(a, "relevance", 0) >= 6 else None)
+    except Exception as e:  # noqa: BLE001
+        text, via = "", f"erreur ({type(e).__name__})"
+    verified = bool(text)  # sinon : on juge au moins le chapô (snippet) s'il existe
+    unread_reason = "" if verified else via
     text = text or a.snippet
     if not text:
-        return ArticleResult(a, [], False, "texte inaccessible (paywall/redirection)")
+        return ArticleResult(a, [], False, unread_reason or "texte inaccessible")
     paras = [p.strip() for p in text.split("\n") if p.strip()]
     segs = [Segment(float(i), p) for i, p in enumerate(paras)]
     # 1 paragraphe = 1 « seconde » fictive : fenêtre de 3 paragraphes
     ex = scan.find_excerpts(segs, plan, max_excerpts=5, max_chars=3000, win=3.0, step=1.0, context=1.0, merge_gap=1.0)
     if not ex:
-        return ArticleResult(a, [], verified, "")
+        r = ArticleResult(a, [], verified, "" if verified else unread_reason)
+        r.via = via if verified else ""
+        return r
     for e in ex:
         e.text = "\n".join(l.split("] ", 1)[-1] for l in e.text.splitlines())
     meta = {"title": a.title, "channel": f"{a.source} ({a.domain})" if a.domain else a.source,
@@ -368,7 +374,9 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None)
         return ArticleResult(a, [], verified, f"erreur LLM: {str(e)[:100]}")
     for h in hits:
         h.t = None
-    return ArticleResult(a, hits, verified, "" if verified else "vérifié sur le chapô/résumé seulement")
+    r = ArticleResult(a, hits, verified, "" if verified else f"vérifié sur le chapô/résumé seulement ({unread_reason})")
+    r.via = via if verified else "chapô"
+    return r
 
 
 def refine_videos(vres: list[VideoResult], o: Options, llm, deadline: float) -> None:
@@ -489,9 +497,11 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
         try:
             arts = discover_articles(plan, o, pools, http, llm, site_arts)
 
+            gbudget = [o.article_gemini_max]
+
             def safe_article(a):
                 try:
-                    return analyze_article(a, plan, o, llm, http)
+                    return analyze_article(a, plan, o, llm, http, gbudget)
                 except Exception as e:  # noqa: BLE001
                     return ArticleResult(a, [], False, f"erreur interne ({type(e).__name__})")
             ex = ThreadPoolExecutor(o.workers)
@@ -516,6 +526,11 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
             log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
     elif o.articles:
         log.warning("Plus assez de temps pour les articles")
+    via: dict[str, int] = {}
+    for r in ares:
+        k = r.via or ("illisible : " + (r.note or "?")[:45])
+        via[k] = via.get(k, 0) + 1
+    plan.diag["articles_read_via"] = via
     tim: dict[str, int] = {}
     for r in vres:
         for h in r.hits:

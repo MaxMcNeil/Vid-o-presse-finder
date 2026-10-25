@@ -5,6 +5,9 @@ L'automate trouve **où et quand** c'est dit, dans des vidéos (YouTube, Dailymo
 Il garde **peu de résultats, mais solides** : agences, grands médias, chaînes officielles, institutions.
 Tout tourne sur **GitHub** et les résultats sont enregistrés **uniquement dans le dépôt** (`results/`).
 
+> **Ce qui bloque, et quand ça se débloque : [ETAT.md](ETAT.md)** — quotas, YouTube, téléphone, articles,
+> mis à jour automatiquement après chaque recherche, Diagnostic ou passage du téléphone (heures italiennes).
+
 ## Lancer une ou plusieurs recherches (depuis le téléphone)
 
 *Actions → Find quotes → Run workflow*, puis remplis le champ **recherches** :

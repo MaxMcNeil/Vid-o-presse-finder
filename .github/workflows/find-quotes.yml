@@ -183,7 +183,6 @@ jobs:
           files=$(find dlq -name quota.json 2>/dev/null)
           python3 -m quote_finder.quota merge state/quota.json $files > /dev/null
           rm -rf dlq
-          cat state/QUOTAS.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Rassembler (index + montage global du lot)
         env:
@@ -198,13 +197,15 @@ jobs:
           fi
           rm -rf dl
           python3 -m quote_finder.batch merge "results/$LOT"
+          python3 -m quote_finder.status > /dev/null   # ETAT.md : ce qui bloque, quand ça se débloque, quoi faire
+          { cat ETAT.md; echo; } >> "$GITHUB_STEP_SUMMARY"
           cat "results/$LOT/INDEX.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Enregistrer les résultats dans le dépôt
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results state
+          git add results state ETAT.md
           git diff --cached --quiet && exit 0
           git commit -q -m "résultats : $LOT"
           for i in 1 2 3 4 5; do

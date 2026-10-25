@@ -130,10 +130,11 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
                                  "clip_link": clip_link(r.video.url, r.video.platform, h), **h.to_dict()} for h in r.hits]} for r in vm],
         "articles": [{"title": r.article.title, "date": r.article.published, "source": r.article.source,
                       "domain": r.article.domain, "url": r.article.url, "verified_on_full_text": r.verified,
+                      "read_via": getattr(r, "via", ""),
                       "authority": r.article.authority, "authority_why": r.article.authority_why,
                       "passages": [h.to_dict() for h in r.hits]} for r in am],
         "unreadable_articles": [{"title": r.article.title, "date": r.article.published, "source": r.article.source,
-                                 "url": r.article.url, "authority": r.article.authority}
+                                 "url": r.article.url, "authority": r.article.authority, "reason": r.note}
                                 for r in ares if not r.hits and not r.verified],
         "unverifiable_videos": [{"title": r.video.title, "url": r.video.url, "reason": r.note}
                                 for r in vres if r.method == "none"],
@@ -201,7 +202,10 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
         L.append("Aucun article confirmé.\n")
     for r in am:
         a = r.article
-        L.append(f"- **{a.title}** — {a.source} {stars(a.authority)}, {a.published or 'date inconnue'} — {a.url}")
+        VIA = {"direct": "", "api": "", "archive.org": " · lu via les archives d'Internet", "gemini": " · lu par Gemini (site fermé aux robots)",
+               "chapô": ""}
+        L.append(f"- **{a.title}** — {a.source} {stars(a.authority)}, {a.published or 'date inconnue'} — {a.url}"
+                 + VIA.get(getattr(r, "via", ""), ""))
         if not r.verified:
             L.append("  - ⚠️ vérifié sur le chapô/résumé seulement")
         for h in r.hits[:2]:
@@ -242,6 +246,7 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
           f"{d.get('articles_low_authority', '?')}",
           f"- Analyses : {meth}",
           f"- Horodatage des passages : {d.get('timing', {})}",
+          f"- Lecture des articles (méthode → nombre) : {d.get('articles_read_via', {})}",
           f"- Sources de référence interrogées : {', '.join(d.get('reference_sites', [])) or '—'}",
           f"- Articles trouvés directement chez elles : {d.get('site_articles', '?')} {d.get('site_articles_by_site', '')}",
           f"- Pages ouvertes pour y chercher une vidéo : {d.get('site_pages_probed', '?')} → vidéos trouvées : {d.get('site_videos', '?')}",

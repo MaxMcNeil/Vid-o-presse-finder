@@ -123,7 +123,7 @@ class GeminiClient:
             log.warning("Gemini %s surchargé : pause 2 min, on utilise d'autres modèles", m)
 
     def generate_json(self, prompt: str, video_url: str | None = None, temperature: float = 0.1, inline_media=None,
-                      max_attempts: int | None = None, until: float | None = None, video_clip=None):
+                      max_attempts: int | None = None, until: float | None = None, video_clip=None, tools=None):
         """inline_media = (mime, octets) pour un enregistrement audio envoyé directement (< ~15 Mo).
         video_clip = (début_s, fin_s) : Gemini ne regarde que ce segment de la vidéo YouTube."""
         import base64
@@ -167,8 +167,13 @@ class GeminiClient:
                     self.pool.cooldown(key, soon)
                 continue
             self.last_model = m
+            if tools and is_text_only(m):
+                self._until[(key, m)] = time.time() + 3600  # Gemma n'a pas les outils (lecture de page)
+                continue
             body = {"contents": [{"role": "user", "parts": parts}], "generationConfig": {"temperature": temperature}}
-            if m not in self._nojson:
+            if tools:
+                body["tools"] = tools  # ex. [{"url_context": {}}] : Gemini lit lui-même la page (chez Google)
+            if m not in self._nojson and not tools:
                 body["generationConfig"]["responseMimeType"] = "application/json"
             think = self._think.get(m, 0)
             if is_text_only(m):
@@ -189,7 +194,12 @@ class GeminiClient:
                 continue
             if r.status_code == 200:
                 try:
-                    out = parse_json_loose(r.json()["candidates"][0]["content"]["parts"][0]["text"])
+                    cand = r.json()["candidates"][0]
+                    if tools:  # réponse texte brute + métadonnées de lecture de page
+                        out = {"text": "".join(pt.get("text", "") for pt in cand["content"]["parts"]),
+                               "meta": cand.get("urlContextMetadata") or cand.get("url_context_metadata") or {}}
+                    else:
+                        out = parse_json_loose(cand["content"]["parts"][0]["text"])
                     self._overload[m] = 0
                     self.pool.use(key, model=m)
                     self.used[m] = self.used.get(m, 0) + 1
@@ -475,6 +485,19 @@ class LLMRouter:
                     err = e
                     log.warning("Relais %s indisponible (%s)", getattr(fb, "name", "?"), str(e)[:100])
         raise err or QuotaExhausted("aucun LLM disponible")
+
+    def read_page(self, prompt: str) -> dict:
+        """Gemini ouvre lui-même une page web (outil url_context) : {"text", "meta"}. Gemini seulement (pas de relais)."""
+        if not self.gemini or not self.gemini.pool.available():
+            raise QuotaExhausted("Gemini indisponible")
+        ck = f"url_context\n{prompt}"
+        hit = cache.get("llm", ck)
+        if hit is not None:
+            return hit
+        out = self.gemini.generate_json(prompt, tools=[{"url_context": {}}], until=time.time() + self.TEXT_CALL_MAX,
+                                        max_attempts=8)
+        cache.put("llm", ck, out)
+        return out
 
     def usage(self) -> dict:
         """Résumé pour le rapport : état des clés et modèles réellement utilisés."""
