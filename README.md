@@ -49,7 +49,7 @@ Montage LV final s'en sert pour se synchroniser (`finder: osint`).
 ```
 results/
   README.md                        ← liste des lots, le plus récent en haut
-  2026-10-24_1415_n12/             ← un lot = un lancement
+  2026-10-24_1415_n12/             ← un lot = un lancement (date et heure italiennes + numéro)
     INDEX.md                       ← tableau des recherches + meilleurs extraits
     montage.json / montage.csv     ← TOUS les extraits du lot, du plus solide au moins solide
     01-la-suisse-abandonne-microsoft/
@@ -131,7 +131,13 @@ ou lance *Actions → Diagnostic* qui teste chaque clé de chaque api et donne l
 3. **Le contenu prime sur le titre** : la transcription est lue, un filtre local repère les passages utiles, l'IA juge (à la lettre / dans le sens / simple mention / démenti), dit **qui** parle et son rôle.
 4. **Horodatage calé** sur les lignes de sous-titres, puis classement : sûreté du passage + autorité de la source + rôle du locuteur.
 5. Sans sous-titres : Gemini regarde la vidéo (YouTube) ou écoute l'audio (Dailymotion, Archive).
-6. Garde-fous : 5 min max par vidéo analysée par IA, 35 min max par recherche, une recherche en échec n'empêche pas les autres d'être enregistrées.
+6. Garde-fous : 7 min max par vidéo analysée par IA, 35 min max par recherche (moins si l'installation a été lente),
+   une recherche en échec ou interrompue n'empêche pas les autres d'être enregistrées et reste listée dans `INDEX.md` (« relance-la »).
+7. Extraits prêts pour le montage : jamais de questions du présentateur, de bandeaux à l'écran ni de signatures de reportage,
+   jamais deux extraits qui se chevauchent dans une même vidéo, durée ramenée à la durée parlée si l'horodatage est aberrant,
+   au plus un tiers des vidéos d'une même chaîne.
+8. Articles : lecture directe → archive.org → Gemini ; un lien Google Actualités est d'abord converti en vrai lien
+   (recherche web de Gemini, même média exigé) et tout texte lu est vérifié contre le titre de l'article.
 
 ## Précision par le téléphone (facultatif, recommandé)
 
