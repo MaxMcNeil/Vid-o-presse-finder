@@ -95,3 +95,17 @@ _Déclarations officielles et d'experts concernant la législation sur l'intelli
 - IA groq : clés 1/1 disponible(s) ; 4 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 15.7 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [10:32 → 11:01](https://www.youtube.com/embed/AzWkrSivblA?start=632&end=662&autoplay=1) — Roma - Per una normativa a prova di AI - Conferenza stampa di Giulio C
+  > In questo momento le normative per la maggior parte vengono pubblicate con dei formati obsoleti che non sono conformi a questi standard. Ci sono state delle iniziative istituzionali che hanno iniziato
+- [22:28 → 22:55](https://www.youtube.com/embed/AzWkrSivblA?start=1348&end=1376&autoplay=1) — Roma - Per una normativa a prova di AI - Conferenza stampa di Giulio C
+  > Dall'altro lato invece si potrebbe anche realizzare con la norma nazionale, ovviamente passando per il Ministero di Zangrillo, no? Quindi questo è un altro passaggio. Però cominciare ad agire sui rego
+- [41:26 → 41:45](https://www.youtube.com/embed/AzWkrSivblA?start=2486&end=2506&autoplay=1) — Roma - Per una normativa a prova di AI - Conferenza stampa di Giulio C
+  > stiamo lavorando anche nell'attuale DDL AI del governo per vedere se possiamo inserire qualcosa in questo senso, quindi credo che sia fondamentale spingere il prima possibile per un approccio limitato
+- [00:00 → 00:13](https://www.youtube.com/embed/suerd6hWbww?start=0&end=14&autoplay=1) — Germany, France & Italy reach agreement on future AI regulation | Worl
+  > France, Germany, and Italy have reached an agreement on how to regulate artificial intelligence. Need of the hour. According to media reports, the agreement is expected to hasten negotiations for AI l
+

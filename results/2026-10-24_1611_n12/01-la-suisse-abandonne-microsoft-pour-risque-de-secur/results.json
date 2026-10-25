@@ -182,15 +182,15 @@
    "moments": [
     {
      "start": "00:00",
-     "end": "00:26",
+     "end": "00:24",
      "start_seconds": 0.0,
-     "end_seconds": 26.0,
+     "end_seconds": 24.36,
      "start_tc": "00:00:00.000",
-     "end_tc": "00:00:26.000",
-     "duration_seconds": 26.0,
+     "end_tc": "00:00:24.360",
+     "duration_seconds": 24.4,
      "timestamp": "00:00",
      "link": "https://www.youtube.com/watch?v=BffWWGOgcWs&t=0s",
-     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=27&autoplay=1",
+     "clip_link": "https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=25&autoplay=1",
      "t": 0.0,
      "quote": "Switzerland's Federal Administration, I'm quoting here, aims to reduce its dependency on Microsoft step by step and in the long term, a Federal Chancellery spokesman told NZZ am Sonntag. This comes as a surprise, as Microsoft 365 was recently installed on some 54,000 administration workstations despite concerns about data security.",
      "verdict": "literal",
@@ -198,9 +198,11 @@
      "speaker_name": "El",
      "confidence": 0.95,
      "why": "The speaker explicitly mentions that Switzerland's Federal Administration aims to reduce its dependency on Microsoft in the long term following data security concerns.",
-     "t_end": 26.0,
+     "t_end": 24.36,
      "speaker_role": "expert",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     }
    ]
   }

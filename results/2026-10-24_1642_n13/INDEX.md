@@ -1,7 +1,7 @@
 # Lot de recherches — 2026-10-24_1642_n13
 
 3 recherche(s), 44 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
-Précision : 17 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) par Gemini (±1 s), 27 estimé(s) (±5 s). ⏳ 27 seront recalés par le téléphone au prochain passage (`qf precis`).
+Précision : 19 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) par Gemini (±1 s), 25 estimé(s) (±5 s). ⏳ 25 seront recalés par le téléphone au prochain passage (`qf precis`).
 
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |
@@ -38,7 +38,7 @@ Précision : 17 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) 
   > Europe doesn't want to be the client of the big entrepreneurs or the big solutions being provided either from US or from China. We clearly want to design our own solutions.
 - [00:02:11 → 00:02:13](https://www.youtube.com/embed/o5TgAgNAD28?start=131&end=134&autoplay=1) · euronews (en français) · Emmanuel Macron · score 1.00
   > Not to say that we don't want to cooperate. Being more sovereign and more independent doesn't mean you want to be in autarky. No, but it means on the key pillars, on the key building blocks, you want to preserve your sov
-- [00:00:00 → 00:01:48](https://www.youtube.com/embed/F_YBDMAJcGA?start=0&end=109&autoplay=1) · Public Sénat · Emmanuel Macron · score 1.00
+- [00:00:01 → 00:01:43](https://www.youtube.com/embed/F_YBDMAJcGA?start=1&end=104&autoplay=1) · Public Sénat · Emmanuel Macron · score 1.00
   > Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aurait accepté autant qu
 - [00:05:11 → 00:05:31](https://www.youtube.com/embed/zVadD951mIY?start=311&end=332&autoplay=1) · Élysée · Emmanuel Macron · score 1.00
   > We used a lot of US innovations and US solutions, but more and more European solutions as well. And for me now, what we have to do is in each sector, in each innovation, how to build the European solution and European so

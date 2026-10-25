@@ -497,26 +497,28 @@
    "authority_why": "chaîne officielle / agence",
    "moments": [
     {
-     "start": "00:00",
-     "end": "01:48",
-     "start_seconds": 0.0,
-     "end_seconds": 108.0,
-     "start_tc": "00:00:00.000",
-     "end_tc": "00:01:48.000",
-     "duration_seconds": 108.0,
-     "timestamp": "00:00",
-     "link": "https://www.youtube.com/watch?v=F_YBDMAJcGA&t=0s",
-     "clip_link": "https://www.youtube.com/embed/F_YBDMAJcGA?start=0&end=109&autoplay=1",
-     "t": 0.0,
+     "start": "00:01",
+     "end": "01:43",
+     "start_seconds": 1.28,
+     "end_seconds": 103.22,
+     "start_tc": "00:00:01.280",
+     "end_tc": "00:01:43.220",
+     "duration_seconds": 101.9,
+     "timestamp": "00:01",
+     "link": "https://www.youtube.com/watch?v=F_YBDMAJcGA&t=1s",
+     "clip_link": "https://www.youtube.com/embed/F_YBDMAJcGA?start=1&end=104&autoplay=1",
+     "t": 1.28,
      "quote": "Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aurait accepté autant que nous de dépendre des autres sur des produits vitaux, des composants essentiels. Dès 2018, nous avons lancé une initiative avec l'Allemagne pour soutenir notre filière de batteries, étendue ensuite à l'hydrogène, à l'électronique ou encore la santé. Nous avons aussi lancé avec l'Allemagne des grands projets, le char du futur, le système de combat aérien du futur, et avec nos amis néerlandais sur les sous-marins, là aussi des initiatives structurantes. Mais dès le moment de la pandémie, et surtout dès les premières semaines après l'agression russe contre l'Ukraine, nous avons bâti lors du sommet de Versailles une vraie stratégie d'autonomie. Oui, cette autonomie stratégique dont on a à ce moment-là parlé, assumant ce concept en européen, c'est ce choix de mettre fin à nos dépendances stratégiques dans des secteurs clés, des semi-conducteurs aux matières premières critiques. Des textes européens ont été pris, une politique a été assumée d'investissement, de sécurisation, de relocalisation, ce qui était inédit dans notre histoire contemporaine. Et depuis sept ans, l'Europe a commencé à sortir de cette naïveté, si je puis dire, technologique et industrielle, comme elle a commencé aussi à corriger sa politique commerciale, même si sur ce sujet, j'y reviendrai, nous ne sommes à mes yeux qu'à mi-chemin.",
      "verdict": "literal",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 1.0,
      "why": "Emmanuel Macron évoque explicitement la souveraineté technologique et l'autonomie stratégique européenne dans des secteurs clés comme les semi-conducteurs et l'électronique.",
-     "t_end": 108.0,
+     "t_end": 103.22,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     }
    ]
   },
@@ -531,26 +533,28 @@
    "authority_why": "chaîne officielle / agence",
    "moments": [
     {
-     "start": "02:11",
-     "end": "02:17",
-     "start_seconds": 131.0,
-     "end_seconds": 137.0,
-     "start_tc": "00:02:11.000",
-     "end_tc": "00:02:17.000",
-     "duration_seconds": 6.0,
-     "timestamp": "02:11",
-     "link": "https://www.youtube.com/watch?v=zVadD951mIY&t=131s",
-     "clip_link": "https://www.youtube.com/embed/zVadD951mIY?start=131&end=138&autoplay=1",
-     "t": 131.0,
+     "start": "01:32",
+     "end": "01:38",
+     "start_seconds": 92.48,
+     "end_seconds": 98.12,
+     "start_tc": "00:01:32.480",
+     "end_tc": "00:01:38.120",
+     "duration_seconds": 5.6,
+     "timestamp": "01:32",
+     "link": "https://www.youtube.com/watch?v=zVadD951mIY&t=92s",
+     "clip_link": "https://www.youtube.com/embed/zVadD951mIY?start=92&end=99&autoplay=1",
+     "t": 92.48,
      "quote": "Otherwise you are just consumer of the tech of somebody else.",
      "verdict": "paraphrase",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 0.9,
      "why": "Emmanuel Macron souligne l'importance d'être leader en technologie pour ne pas être de simples consommateurs de technologies étrangères.",
-     "t_end": 137.0,
+     "t_end": 98.12,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-25",
+     "tel_status": "ok"
     },
     {
      "start": "05:11",
@@ -572,7 +576,9 @@
      "why": "Emmanuel Macron mentionne explicitement la nécessité de construire des solutions européennes et la souveraineté européenne face aux innovations américaines.",
      "t_end": 331.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "23:53",
@@ -594,7 +600,9 @@
      "why": "Emmanuel Macron liste les besoins pour une stratégie de souveraineté : financement, solutions, talents et régulation européens, en opposition aux GAFAM et BATX.",
      "t_end": 1453.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "25:24",
@@ -616,7 +624,9 @@
      "why": "Il insiste sur le besoin d'un marché financier européen pour soutenir les entreprises technologiques et assurer leur autonomie.",
      "t_end": 1541.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   },
@@ -650,7 +660,9 @@
      "why": "Emmanuel Macron définit explicitement la souveraineté européenne et l'autonomie stratégique comme des objectifs clés.",
      "t_end": 649.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "10:49",
@@ -672,7 +684,9 @@
      "why": "Il explique les risques de dépendance vis-à-vis des géants technologiques américains et chinois si l'Europe ne développe pas sa propre souveraineté numérique.",
      "t_end": 717.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "11:57",
@@ -694,7 +708,9 @@
      "why": "Il affirme que la souveraineté dépend de la présence de champions technologiques européens.",
      "t_end": 748.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "12:28",
@@ -716,7 +732,9 @@
      "why": "Il lie directement la souveraineté à la capacité industrielle, au marché européen et à la régulation.",
      "t_end": 805.0,
      "speaker_role": "official",
-     "timing": "ia"
+     "timing": "ia",
+     "tel_date": "2026-10-25",
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   }

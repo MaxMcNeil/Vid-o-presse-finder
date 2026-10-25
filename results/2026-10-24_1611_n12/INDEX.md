@@ -1,6 +1,8 @@
 # Lot de recherches — 2026-10-24_1611_n12
 
 3 recherche(s), 23 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
+Précision : 12 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) par Gemini (±1 s), 11 estimé(s) (±5 s). ⏳ 11 seront recalés par le téléphone au prochain passage (`qf precis`).
+
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |
 |---|---|---|---|---|---|---|
@@ -10,11 +12,11 @@
 
 ## Meilleurs extraits
 
-- [00:02:16 → 00:03:59](https://www.youtube.com/embed/_bfN6GYB4Zk?start=136&end=240&autoplay=1) · Bloomberg Television · سعد بن شريده الكعبي · score 1.00
+- [00:01:33 → 00:02:01](https://www.youtube.com/embed/_bfN6GYB4Zk?start=93&end=122&autoplay=1) · Bloomberg Television · سعد بن شريده الكعبي · score 1.00
   > As far as the North Field expansion projects, we have two projects, North Field East, which we just announced sanctioning, and the North Field South. So the North Field East will take us from 77 million tons to 110 milli
 - [00:07:29 → 00:08:25](https://www.youtube.com/embed/_bfN6GYB4Zk?start=449&end=506&autoplay=1) · Bloomberg Television · سعد بن شريده الكعبي · score 1.00
   > Long term is the best approach. It's the best approach for both sides. It's the best approach for the buyer, it's the best approach for the seller. It has certainty of the demand that is required.
-- [00:04:16 → 00:05:47](https://www.youtube.com/embed/_bfN6GYB4Zk?start=256&end=348&autoplay=1) · Bloomberg Television · سعد بن شريده الكعبي · score 0.94
+- [00:02:55 → 00:03:18](https://www.youtube.com/embed/_bfN6GYB4Zk?start=175&end=199&autoplay=1) · Bloomberg Television · سعد بن شريده الكعبي · score 0.94
   > What we did is very unique this time in Qatar. We had never gone 100% QP in the past. Now we have sanctioned this project as 100% QP, but we like the joint venture model where we have international companies join us in d
 - [00:01:03 → 00:02:15](https://www.youtube.com/embed/vvc9rHjXH1E?start=63&end=136&autoplay=1) · Pupia News · Vittorio Colao · score 0.92
   > Ininnanzi tutto vorrei delineare il contesto in cui si si riferisce a cui si riferisce questa proposta di regolamento su intelligenza artificiale, poi descrivere le finalità del regolamento e anche alcuni nodi che pensia
@@ -26,7 +28,7 @@
   > Secondo, il regime delle eccezioni ed esenzioni previsto per i sistemi inaccettabili, abbiamo chiesto come Italia un maggior grado di dettaglio dei presupposti per chiedere questa eccezione per evitare poi delle applicaz
 - [00:36:35 → 00:37:15](https://www.youtube.com/embed/vvc9rHjXH1E?start=2195&end=2236&autoplay=1) · Pupia News · Vittorio Colao · score 0.92
   > Vorrei anche fare una breve nota sulla strategia nazionale di AI che abbiamo adottato il 24 novembre 21 come governo... Noi con la strategia nazionale volevamo invece dare un po' più impeto se volete al nostro sistema na
-- [00:00:08 → 00:01:45](https://www.youtube.com/embed/ux4rNZbA7aQ?start=8&end=106&autoplay=1) · Bloomberg Television · Anthony Di Paola · score 0.89
+- [00:00:00 → 00:01:02](https://www.youtube.com/embed/ux4rNZbA7aQ?start=0&end=63&autoplay=1) · Bloomberg Television · Anthony Di Paola · score 0.89
   > the Qatar's Ras Laffan area was hit last night and that's a huge area which has multiple LNG export trains... they also have there the Pearl GTL plant which is a plant run by Shell... sustained severe damage according to
 - [00:02:08 → 00:02:34](https://www.youtube.com/embed/ux4rNZbA7aQ?start=128&end=155&autoplay=1) · Bloomberg Television · Anthony Di Paola · score 0.89
   > Qatar: Dealing with fire at Ras Laffan Industrial Area... Qatar: World's largest LNG plant suffered extensive damage... ExxonMobil is one of the US companies that's a big shareholder in some of those facilities in Qatar.
@@ -36,7 +38,7 @@
   > قطر تعد من أكبر موردي الغاز الطبيعي المسال عالمياً اذ تمثل حوالي 20% من صادرات الغاز الطبيعي المسال في العالم
 - [00:00:35 → 00:00:47](https://www.youtube.com/embed/VG-6Kqh6-8s?start=35&end=48&autoplay=1) · فرانس 24 / FRANCE 24 Arabic · ماري زعرور حنا · score 0.81
   > تعتمد دول عديدة على الغاز القطري فإلى جانب الهند وكوريا الجنوبية تأتي الصين التي تعتمد على نحو 24% من الغاز القطري
-- [00:42:29 → 00:42:45](https://www.youtube.com/embed/AzWkrSivblA?start=2549&end=2566&autoplay=1) · Pupia News · Giulia Pastorella · score 0.77
+- [00:41:26 → 00:41:45](https://www.youtube.com/embed/AzWkrSivblA?start=2486&end=2506&autoplay=1) · Pupia News · Giulia Pastorella · score 0.77
   > stiamo lavorando anche nell'attuale DDL AI del governo per vedere se possiamo inserire qualcosa in questo senso, quindi credo che sia fondamentale spingere il prima possibile per un approccio limitato all'Italia ma avend
-- [00:10:34 → 00:11:02](https://www.youtube.com/embed/AzWkrSivblA?start=634&end=663&autoplay=1) · Pupia News · Andrea Tesei · score 0.72
+- [00:10:32 → 00:11:01](https://www.youtube.com/embed/AzWkrSivblA?start=632&end=662&autoplay=1) · Pupia News · Andrea Tesei · score 0.72
   > In questo momento le normative per la maggior parte vengono pubblicate con dei formati obsoleti che non sono conformi a questi standard. Ci sono state delle iniziative istituzionali che hanno iniziato questo percorso ver
