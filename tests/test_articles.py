@@ -45,3 +45,14 @@ def test_gemini_failure_is_not_taken_as_text(monkeypatch):
     assert t == "" and "robots" in why
     t, why = at.read(A("https://www.reuters.com/b"), L("INACCESSIBLE", {}), "x", [3])
     assert t == ""
+
+
+def test_status_keeps_workflows_block(tmp_path, monkeypatch):
+    from quote_finder import status
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "results").mkdir()
+    out = tmp_path / "ETAT.md"
+    out.write_text("# ancien\n\n<!-- workflows:start -->\n## Workflows\n- ❌ Find quotes : échec\n<!-- workflows:end -->\n")
+    status.build(tmp_path / "results", out)
+    t = out.read_text()
+    assert "## Clés et quotas" in t and "- ❌ Find quotes : échec" in t and t.count("workflows:start") == 1

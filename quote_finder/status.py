@@ -178,6 +178,14 @@ def build(results: Path = Path("results"), out: Path = Path("ETAT.md")) -> Path:
           "**normal, rien à faire** : Gemini analyse les vidéos (±1 à ±5 s) et le téléphone recale ensuite sur les sous-titres (±1-2 s)."]
     L += ["", "## Téléphone (précision des extraits)", ""] + ph_lines
     L += ["", "## Dernier lancement", ""] + lot_lines
+    # section « Workflows » écrite par le workflow État (.github/etat) : conservée telle quelle
+    try:
+        old = out.read_text(encoding="utf-8")
+    except OSError:
+        old = ""
+    if "<!-- workflows:start -->" in old and "<!-- workflows:end -->" in old:
+        L += ["", "<!-- workflows:start -->" + old.split("<!-- workflows:start -->", 1)[1].split("<!-- workflows:end -->", 1)[0]
+              + "<!-- workflows:end -->"]
     L += ["", "---", "Détail des clés : [state/QUOTAS.md](state/QUOTAS.md) · Résultats : [results/README.md](results/README.md)", ""]
     out.write_text("\n".join(L), encoding="utf-8")
     return out
