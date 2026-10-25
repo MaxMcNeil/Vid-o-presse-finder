@@ -123,7 +123,8 @@ def _from_ytdlp(d: dict) -> VideoCandidate:
     up = d.get("upload_date") or ""
     pub = f"{up[:4]}-{up[4:6]}-{up[6:8]}" if len(up) == 8 else ""
     vid = d.get("id", "")
-    return VideoCandidate("youtube", vid, d.get("webpage_url") or f"https://www.youtube.com/watch?v={vid}",
+    # toujours l'adresse « watch?v= » (jamais /shorts/…) : les liens horodatés et les extraits en dépendent
+    return VideoCandidate("youtube", vid, f"https://www.youtube.com/watch?v={vid}" if vid else d.get("webpage_url", ""),
                           d.get("title", ""), d.get("description", "") or "", d.get("channel") or d.get("uploader") or "",
                           pub, int(d["duration"]) if d.get("duration") else None, channel_id=d.get("channel_id") or "",
                           channel_subs=d.get("channel_follower_count"))

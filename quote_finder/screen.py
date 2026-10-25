@@ -16,7 +16,8 @@ PROMPT = """Tu fais le tri avant une recherche de déclarations.
 CIBLE ({ttype}) : {target}
 SUJET RECHERCHÉ : {claim}
 (Reformulation : {summary})
-{since}
+{since}Nous sommes le {today}. Si le sujet est d'actualité, un contenu qui traite d'un AUTRE épisode plus ancien
+(ex. une crise de 2022-2024 alors qu'on cherche la situation actuelle) vaut au plus 4 ; un contenu récent sur le sujet vaut plus.
 Voici des {kind} trouvés par un moteur de recherche (beaucoup sont hors sujet). Pour CHACUN, note de 0 à 10 la probabilité
 qu'il contienne une déclaration ou une analyse sur CE sujet précis à propos de CETTE cible :
 10 = c'est exactement le sujet ; 6 = le sujet est probablement abordé ; 3 = même thème général mais autre affaire ;
@@ -50,7 +51,8 @@ def llm_scores(llm, plan, o, items: list[tuple[str, str, str, str]], kind: str =
         lines.append(f"{i}. « {title} » — {src} — {date[:10] or '?'}" + (f" — {d}" if d else ""))
     prompt = PROMPT.format(ttype=plan.target_type, target=o.target, claim=o.claim or "(tout propos marquant sur la cible)",
                            summary=plan.claim_summary, kind=kind, items="\n".join(lines),
-                           since=f"Période : à partir du {o.since}.\n" if getattr(o, "since", "") else "")
+                           since=f"Période : à partir du {o.since}.\n" if getattr(o, "since", "") else "",
+                           today=__import__("datetime").date.today().isoformat())
     try:
         d = llm.generate_json(prompt)
     except Exception as e:  # noqa: BLE001 - le tri est un plus : sans lui, on garde le tri local

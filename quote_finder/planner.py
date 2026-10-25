@@ -40,7 +40,7 @@ Réponds en JSON strict avec exactement ces clés :
   "target_aliases": ["noms et variantes de la cible : nom complet, nom court, gentilé/adjectif (ex. suisse, swiss, helvétique), sigle, variantes de transcription"],
   "official_speakers": ["qui parle AU NOM de la cible, avec noms propres actuels : pour un pays le gouvernement, ministres, porte-parole, administrations concernées par le sujet ; pour une entité ses dirigeants et porte-parole ; pour une personne son entourage officiel (porte-parole) ; vide pour un sujet"],
   "authoritative_sources": ["10 à 20 sources de référence pour CE sujet : agences, médias publics et nationaux du pays concerné, institutions, sites officiels ; noms de chaînes YouTube ET domaines (ex. rts.ch, admin.ch, Reuters, franceinfo)"],
-  "countries": ["codes ISO à 2 lettres des pays directement concernés (ex. CH pour la Suisse ; FR, US, SA, AE...), 1 à 6 ; pays du Golfe : GCC"],
+  "countries": ["1 à 3 codes, le plus important d'abord : pays dont les institutions et médias FONT AUTORITÉ sur ce sujet (ex. CH pour la Suisse ; FR, US, IT, SA...), pas les pays seulement évoqués ; pays du Golfe : GCC ; Europe / Union européenne / Commission : EU ; organisation internationale (ONU, FAO, OMS, FMI, OTAN...) ou personne qui y travaille : ORG"],
   "site_query": "4 à 7 mots-clés courts pour chercher ce sujet sur le site d'un média, dans la langue du pays concerné (ex. Confédération Microsoft 365 souveraineté)",
   "youtube_queries": ["6 à 10 requêtes visant des sources sérieuses : journal télévisé, conférence de presse, déclaration officielle, interview, débat parlementaire, nom de média + sujet ; langues variées"],
   "news_queries": ["4 à 6 requêtes pour articles d'agences et grands médias"]
@@ -98,7 +98,8 @@ def make_plan(llm, target: str, claim: str, others: list[str], langs: list[str],
                 target_type=ttype,
                 official_speakers=[str(s) for s in (d.get("official_speakers") or []) if s][:15],
                 authoritative_sources=[str(s) for s in (d.get("authoritative_sources") or []) if s][:25],
-                countries=[str(c).upper()[:2] for c in (d.get("countries") or []) if c][:3],
+                countries=[c for c in (str(x).upper().strip()[:4] for x in (d.get("countries") or []) if x)
+                           if c.isalpha() and len(c) in (2, 3, 4)][:3],
                 site_query=" ".join(str(d.get("site_query") or "").split()[:8]),
             )
         except Exception as e:  # noqa: BLE001

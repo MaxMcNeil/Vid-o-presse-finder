@@ -3,7 +3,8 @@
 # Repart du dépôt à jour à chaque essai : jamais de conflit avec une écriture simultanée.
 set -u
 LOT="$1"; FIRST_ID="${2:-01-recherche}"
-[ -d dl ] || { echo "::error::Aucun résultat produit (voir les étapes « Recherche »)"; exit 1; }
+[ -d dl ] || [ -n "${MATRIX:-}" ] || { echo "::error::Aucun résultat produit (voir les étapes « Recherche »)"; exit 1; }
+mkdir -p dl
 # Résultats et quotas restent dans dl/ et dlq/ (non suivis) : à chaque essai on repart du dépôt À JOUR,
 # on y replace NOTRE lot, on refusionne les quotas et on régénère index et ETAT.md. Ainsi, une écriture
 # faite entre-temps (téléphone, workflow État, autre recherche) n'est jamais écrasée ni en conflit.
@@ -17,6 +18,8 @@ for i in 1 2 3 4 5 6; do
   else
     mkdir -p "results/$LOT/$FIRST_ID" && cp -r dl/. "results/$LOT/$FIRST_ID/"
   fi
+  # recherche prévue mais sans résultat (job annulé, installation bloquée...) : signalée, jamais perdue en silence
+  [ -n "${MATRIX:-}" ] && python3 -m quote_finder.batch missing "results/$LOT" "$MATRIX" > /dev/null
   # lot lancé par OSINT-teleprompter- : on garde le lien (le montage s'en sert pour se synchroniser)
   if [ -n "${ORIGINE:-}" ] && [ "${ORIGINE}" != "null" ]; then printf '%s\n' "$ORIGINE" > "results/$LOT/ORIGINE.json"; fi
   files=$(find dlq -name quota.json 2>/dev/null)

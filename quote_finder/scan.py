@@ -132,6 +132,15 @@ def _context(plan: Plan, o) -> dict:
                 claim=o.claim or "(tout propos marquant sur la cible)", summary=plan.claim_summary)
 
 
+RULES = """RÈGLES (le résultat sert à un montage vidéo : chaque passage doit être exact, complet et pile sur le sujet) :
+- La citation doit, À ELLE SEULE, porter sur la CIBLE et sur le SUJET. Si elle concerne une autre cible ou une autre région
+  (ex. l'Afrique seule alors que la cible est l'Europe) ou une autre époque/affaire, verdict = "mention".
+- UN passage = UN moment continu de 5 à 40 s environ. N'assemble pas avec « ... » des phrases éloignées : fais plusieurs éléments.
+- Ne sont PAS des déclarations : une question posée par le présentateur, un titre ou bandeau affiché à l'écran,
+  le lancement d'un sujet (« Could this ...? ») ou la signature de fin de reportage (« X, Al Jazeera, Abuja »).
+- Ne liste pas deux fois le même passage (pas de chevauchement entre deux éléments).
+"""
+
 FIELDS = """- "speaker_name": nom du locuteur UNIQUEMENT s'il est cité dans le contenu, la description, le titre ou un bandeau ; n'invente jamais un nom, sinon ""
 - "speaker_role": "official" (gouvernement, élu en fonction, porte-parole, dirigeant d'institution/entreprise) | "expert" (chercheur, spécialiste reconnu) | "politician" | "journalist" | "other"
 - "confidence": nombre de 0 à 1
@@ -156,6 +165,7 @@ EXTRAITS :
 {excerpts}
 
 Pour chaque passage où l'affirmation est faite — à la lettre OU dans le sens — ajoute un élément à "hits".
+{rules}
 Un même extrait peut contenir plusieurs occurrences (répétitions) : une entrée par occurrence, avec son propre horodatage.
 Champs :
 - "excerpt": numéro de l'extrait
@@ -170,11 +180,23 @@ N'invente rien : si aucun passage ne convient, renvoie {{"hits": []}}.
 Réponds en JSON : {{"hits": [...]}}"""
 
 
+# noms qui n'en sont pas (renvoyés parfois par l'IA à la place d'un vrai nom)
+NOT_A_NAME = {"target", "cible", "unknown", "inconnu", "inconnue", "journaliste", "journalist", "intervenant", "intervenante",
+              "speaker", "locuteur", "narrateur", "narrator", "voix off", "voiceover", "voice over", "presentateur",
+              "presentatrice", "presenter", "anchor", "reporter", "correspondant", "correspondent", "host", "n a", "na",
+              "none", "null", "aucun", "other", "other named", "official", "expert", "unidentified", "non identifie"}
+
+
+def clean_name(name: str) -> str:
+    n = " ".join(str(name or "").split())
+    return "" if normalize(n) in NOT_A_NAME or len(normalize(n)) < 2 else n
+
+
 def _hit_from(d: dict) -> Hit | None:
     try:
         return Hit(t=parse_ts(d.get("t")), t_end=parse_ts(d.get("t_end")), quote=str(d.get("quote", "")).strip(),
                    verdict=str(d.get("verdict", "")).lower(), who_says=str(d.get("who_says", "unknown")).lower(),
-                   speaker_name=str(d.get("speaker_name", "") or ""), confidence=float(d.get("confidence", 0) or 0),
+                   speaker_name=clean_name(d.get("speaker_name", "")), confidence=float(d.get("confidence", 0) or 0),
                    why=str(d.get("why", "")), speaker_role=str(d.get("speaker_role", "") or "").lower())
     except (TypeError, ValueError):
         return None
@@ -184,7 +206,7 @@ def judge_excerpts(llm, plan: Plan, o, meta: dict, excerpts: list[Excerpt], kind
     if not excerpts:
         return []
     body = "\n\n".join(f"--- EXTRAIT {i + 1} ---\n{e.text}" for i, e in enumerate(excerpts))
-    prompt = JUDGE_PROMPT.format(kind=kind, fields=FIELDS, title=meta.get("title", ""), channel=meta.get("channel", ""),
+    prompt = JUDGE_PROMPT.format(kind=kind, fields=FIELDS, rules=RULES, title=meta.get("title", ""), channel=meta.get("channel", ""),
                                  date=meta.get("published", ""), desc=(meta.get("description", "") or "")[:500].replace("\n", " "),
                                  excerpts=body, **_context(plan, o))
     d = llm.generate_json(prompt)
@@ -198,17 +220,18 @@ CIBLE ({ttype}) : {target} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {ot
 AFFIRMATION / SUJET RECHERCHÉ : {claim}  (Reformulation : {summary})
 Le titre peut être trompeur : juge uniquement ce qui est réellement dit.
 Liste CHAQUE moment où l'affirmation est faite, à la lettre ou dans le sens, avec l'horodatage exact (début de la phrase).
+{rules}
 Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vidéo : DÉBUT de la déclaration), "t_end" (secondes : FIN de la
 déclaration, juste après sa dernière phrase ; la déclaration doit être complète), "quote" (propos tenus, au plus près),
 "verdict" ("literal"|"paraphrase"|"mention"|"denial"), "who_says" ("target"|"other_named"|"reported"|"unknown"),
 {fields}
-(pour speaker_name : nom prononcé ou affiché à l'écran, p. ex. bandeau ; sinon "Journaliste" ou "Intervenant").
+(pour speaker_name : nom prononcé ou affiché à l'écran, p. ex. bandeau ; sinon "" — speaker_role dit alors qui parle).
 Si rien ne correspond : {{"hits": []}}. Réponds en JSON : {{"hits": [...]}}"""
 
 
 def judge_video_direct(llm, plan: Plan, o, url: str, audio: bytes | None = None) -> list[Hit]:
     medium = "Écoute cet enregistrement audio en entier." if audio else "Regarde et écoute cette vidéo en entier."
-    prompt = VIDEO_PROMPT.format(medium=medium, fields=FIELDS, **_context(plan, o))
+    prompt = VIDEO_PROMPT.format(medium=medium, fields=FIELDS, rules=RULES, **_context(plan, o))
     if audio:
         d = llm.generate_json(prompt, inline_media=("audio/mp3", audio), media_key=url)
     else:
@@ -380,3 +403,75 @@ def finish_times(hits: list[Hit], duration: float | None = None) -> None:
             h.t_end = min(h.t_end, float(duration))
         if h.t_end <= h.t:  # garde-fou final : jamais de durée nulle ou négative
             h.t_end = h.t + est
+
+
+# ------------------------------------------------------------------ nettoyage final (avant rapport et montage)
+import re as _re2
+
+_ELLIPSIS = _re2.compile(r"\s*(?:\[\s*(?:\.\.\.|…)\s*\]|\.\.\.|…)\s*")
+_SIGNOFF = _re2.compile(r"(?:^|[.!?]\s+)([A-ZÀ-Ý][\w'’-]+(?:\s+[A-ZÀ-Ý][\w'’-]+){0,3}),\s*(?:al jazeera|reuters|bbc|euronews|"
+                        r"france ?24|dw|cnn|sky news|rfi|afp|associated press|ap|rts|rai|tg24)\b[^.!?]*[.!?]?\s*$", _re2.I)
+
+
+def _words(t: str) -> int:
+    return len(normalize(t).split())
+
+
+def est_duration(quote: str) -> float:
+    """Durée parlée probable d'une citation (≈ 2,5 mots / s)."""
+    return max(4.0, _words(quote) / 2.5 + 1.5)
+
+
+def not_a_statement(h: Hit) -> str:
+    """Raison d'écarter un passage qui n'est pas une déclaration, ou "" s'il est bon."""
+    q = h.quote.strip()
+    letters = [c for c in q if c.isalpha()]
+    if _words(q) < 3:
+        return "trop court"
+    if len(letters) >= 8 and sum(c.isupper() for c in letters) / len(letters) > 0.8:
+        return "titre affiché à l'écran"
+    if q.rstrip(" »\"'").endswith("?") and h.speaker_role not in ("official", "expert", "politician"):
+        return "question du présentateur"
+    if _SIGNOFF.fullmatch(q) or (_SIGNOFF.search(q) and _words(_SIGNOFF.sub("", q)) < 5):
+        return "signature de reportage"
+    return ""
+
+
+def tidy_hits(hits: list[Hit], duration: float | None = None, authority: float = 0.5) -> list[Hit]:
+    """Garde-fous avant le montage : pas de faux passages (questions, bandeaux, signatures), pas de durée aberrante,
+    jamais deux extraits qui se chevauchent dans la même vidéo."""
+    out = []
+    for h in hits:
+        why = not_a_statement(h)
+        if why:
+            log.info("  écarté (%s) : %s", why, h.quote[:80])
+            continue
+        m = _SIGNOFF.search(h.quote)
+        if m:  # signature en fin de citation : retirée du texte
+            h.quote = h.quote[:m.start(0)].rstrip(" ,") + ("." if not h.quote[:m.start(0)].rstrip().endswith((".", "!", "?")) else "")
+        if h.t is not None and h.t_end is not None:
+            d, est = h.t_end - h.t, est_duration(h.quote)
+            parts = [x for x in _ELLIPSIS.split(h.quote) if _words(x) >= 3]
+            if len(parts) > 1 and d > 1.5 * est + 10:
+                # morceaux éloignés collés avec « ... » : on garde le 1er morceau, seul horodaté avec certitude
+                h.quote, h.t_end = parts[0].strip() + " …", h.t + est_duration(parts[0]) * 1.3
+            elif d > 2 * est + 10:
+                h.t_end = h.t + est * 1.3  # fin aberrante (plusieurs minutes pour une phrase) : ramenée à la durée parlée
+            if duration:
+                h.t_end = min(h.t_end, float(duration))
+        out.append(h)
+    # chevauchements dans une même vidéo : le meilleur est gardé ; petit chevauchement = fin du 1er avancée
+    out.sort(key=lambda x: (x.t is None, x.t or 0))
+    res: list[Hit] = []
+    for h in out:
+        prev = res[-1] if res else None
+        if prev and h.t is not None and prev.t is not None and prev.t_end is not None and h.t < prev.t_end - 0.3:
+            ov = min(prev.t_end, h.t_end or h.t) - h.t
+            shorter = min(prev.t_end - prev.t, (h.t_end or h.t + 4) - h.t)
+            if ov >= 0.3 * max(1.0, shorter):
+                if hit_score(h, authority) > hit_score(prev, authority):
+                    res[-1] = h
+                continue
+            prev.t_end = h.t
+        res.append(h)
+    return res

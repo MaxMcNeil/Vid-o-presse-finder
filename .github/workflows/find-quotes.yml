@@ -81,12 +81,12 @@ jobs:
             exit 1
           fi
           echo "matrix=$m" >> "$GITHUB_OUTPUT"
-          echo "lot=$(date -u +%Y-%m-%d_%H%M)_n${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "lot=$(TZ=Europe/Rome date +%Y-%m-%d_%H%M)_n${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"   # heure italienne
 
   search:
     needs: prepare
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 55
     strategy:
       fail-fast: false
       max-parallel: ${{ fromJSON(inputs.en_parallele || github.event.client_payload.reglages.en_parallele || '2') }}
@@ -123,6 +123,9 @@ jobs:
       IN_LANGS: ${{ inputs.langs || github.event.client_payload.reglages.langs }}
       IN_SINCE: ${{ inputs.depuis || github.event.client_payload.reglages.depuis }}
     steps:
+      - name: Début du job
+        run: echo "JOB_T0=$(date +%s)" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v5
 
       - uses: actions/setup-python@v6
@@ -138,16 +141,25 @@ jobs:
           restore-keys: qf-cache-
 
       - name: Dépendances
+        timeout-minutes: 12   # borné : un miroir lent ne doit jamais faire annuler la recherche
         run: |
-          which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-          pip install -r requirements.txt && pip install -U -q yt-dlp   # yt-dlp toujours à jour (YouTube change souvent)
+          bash scripts/install_deps.sh requirements.txt   # yt-dlp toujours à jour (YouTube change souvent)
 
       - name: Recherche
+        timeout-minutes: 45
         run: |
+          # temps de recherche = ce qui reste avant la limite du job (55 min), moins 8 min pour enregistrer
+          left=$(( 47 - ( $(date +%s) - JOB_T0 ) / 60 ))
+          mins=$(( left < 35 ? left : 35 ))
+          if [ "$mins" -lt 6 ]; then
+            mkdir -p "results/$LOT/$S_ID"
+            echo "Recherche non lancée : plus assez de temps après l'installation (relance-la)." > "results/$LOT/$S_ID/ERREUR.txt"
+            exit 0
+          fi
           python -m quote_finder --target "$S_TARGET" --claim "$S_CLAIM" --type "$S_TYPE" \
             --speakers "${IN_SPEAKERS:-auto}" --authority "${IN_AUTH:-forte}" \
             --max-videos "${IN_MAXV:-8}" --max-articles "${IN_MAXA:-6}" --langs "${IN_LANGS:-fr,en}" \
-            --since "$IN_SINCE" --max-minutes 35 --out results --batch-id "$LOT" --search-id "$S_ID"
+            --since "$IN_SINCE" --max-minutes "$mins" --out results --batch-id "$LOT" --search-id "$S_ID"
 
       - uses: actions/upload-artifact@v6
         if: always()
@@ -190,6 +202,7 @@ jobs:
           # lien avec le run OSINT-teleprompter- qui a lancé ce lot (vide si lancé à la main) -> results/<lot>/ORIGINE.json
           ORIGINE: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload.origine) || '' }}
           FIRST_ID: ${{ fromJSON(needs.prepare.outputs.matrix)[0].id }}
+          MATRIX: ${{ needs.prepare.outputs.matrix }}   # pour signaler une recherche interrompue (jamais perdue en silence)
         run: |
           cp scripts/publish_lot.sh /tmp/publish_lot.sh   # copie : le dépôt est réinitialisé pendant l'enregistrement
           bash /tmp/publish_lot.sh "$LOT" "$FIRST_ID"
@@ -212,8 +225,8 @@ jobs:
       - name: Télécharger les extraits et assembler un premier montage
         run: |
           git pull -q
-          which ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-          pip install -q "yt-dlp>=2025.1.1"
+          which ffmpeg >/dev/null || (timeout 300 sudo apt-get update -qq && timeout 300 sudo apt-get install -y -qq ffmpeg)
+          timeout 300 pip install -q --timeout 30 --retries 4 "yt-dlp[default,curl-cffi]>=2025.1.1"
           python -m quote_finder.clips "results/$LOT/montage.json" --out "clips/$LOT" --max 25 || true
       - uses: actions/upload-artifact@v6
         with:

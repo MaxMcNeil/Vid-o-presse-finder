@@ -89,6 +89,15 @@ def main() -> int:
                 return f"{len(t)} caractères lus" + (f", vrai lien : {real[:70]}" if real else "")
             r, e, d = t(rd)
             line(OK if r else KO, ("lien Google Actualités" if "news.google.com" in a.url else a.url[:40]), r or e)
+        if g:  # vrai lien d'un article Google Actualités retrouvé par la recherche web de Gemini
+            def fr(a=g[0]):
+                import copy
+                real = article_text.find_real_url(copy.copy(a), llm)
+                if not real:
+                    raise RuntimeError("vrai lien non retrouvé")
+                return real[:80]
+            r, e, d = t(fr)
+            line(OK if r else KO, "vrai lien d'un article Google Actualités (recherche web Gemini)", r or e)
     print("\nVidéos :")
     for i, key in enumerate(keys_from_env("YOUTUBE"), 1):
         def yt(key=key):  # 1 unité seulement (au lieu de 100 pour une recherche)

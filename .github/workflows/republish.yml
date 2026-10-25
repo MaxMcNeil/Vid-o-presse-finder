@@ -42,7 +42,9 @@ jobs:
         run: |
           # même nom de lot que le lancement d'origine : date de début + numéro
           INFO=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}" -q '.created_at + " " + (.run_number|tostring)')
-          LOT="$(date -u -d "${INFO% *}" +%Y-%m-%d_%H%M)_n${INFO##* }"
+          # lot déjà présent (même numéro) : on le réutilise ; sinon heure italienne (comme Find quotes)
+          LOT=$(ls -d results/*_n${INFO##* } 2>/dev/null | head -1 | xargs -r basename)
+          [ -n "$LOT" ] || LOT="$(TZ=Europe/Rome date -d "${INFO% *}" +%Y-%m-%d_%H%M)_n${INFO##* }"
           echo "Lot : $LOT"
           cp scripts/publish_lot.sh /tmp/publish_lot.sh
           bash /tmp/publish_lot.sh "$LOT"

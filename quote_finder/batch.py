@@ -63,7 +63,12 @@ def merge(batch_dir: Path, title: str = "") -> Path:
         rj = d / "results.json"
         if not rj.exists():
             err = d / "ERREUR.txt"
-            rows.append((d.name, "?", "?", 0, 0, 0, err.read_text(encoding="utf-8")[:200] if err.exists() else "aucun résultat"))
+            try:
+                info = json.loads((d / "recherche.json").read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                info = {}
+            msg = " ".join(err.read_text(encoding="utf-8").split())[:200] if err.exists() else "aucun résultat"
+            rows.append((d.name, info.get("target", "?"), info.get("claim", "?"), 0, 0, 0, msg))
             continue
         data = json.loads(rj.read_text(encoding="utf-8"))
         mj = d / "montage.json"
@@ -109,10 +114,33 @@ def merge(batch_dir: Path, title: str = "") -> Path:
         L += ["", "## Meilleurs extraits", ""]
         for c in clips[:15]:
             L.append(f"- [{c['start_tc'][:8]} → {c['end_tc'][:8]}]({c['link']}) · {c.get('channel', '')} · "
-                     f"{c.get('speaker') or c.get('who_says', '')} · score {c.get('score', 0):.2f}\n  > {c.get('quote', '')[:220]}")
+                     f"{c.get('speaker') or 'locuteur non identifié'} · score {c.get('score', 0):.2f}\n  > {c.get('quote', '')[:220]}")
     p = batch_dir / "INDEX.md"
     p.write_text("\n".join(L) + "\n", encoding="utf-8")
     return p
+
+
+def mark_missing(batch_dir: Path, matrix_json: str) -> list[str]:
+    """Recherches prévues (matrice du lancement) sans dossier de résultats : dossier + ERREUR.txt explicite."""
+    batch_dir = Path(batch_dir)
+    try:
+        searches = json.loads(matrix_json or "[]")
+    except ValueError:
+        return []
+    out = []
+    for s in searches if isinstance(searches, list) else []:
+        sid = str(s.get("id") or "")
+        if not sid:
+            continue
+        d = batch_dir / sid
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "recherche.json").write_text(json.dumps({k: s.get(k, "") for k in ("target", "claim", "type")},
+                                                      ensure_ascii=False), encoding="utf-8")
+        if not (d / "results.json").exists() and not (d / "ERREUR.txt").exists():
+            (d / "ERREUR.txt").write_text("Recherche interrompue sans résultat (job annulé ou temps dépassé sur GitHub) : "
+                                          "relance-la seule.", encoding="utf-8")
+            out.append(sid)
+    return out
 
 
 def update_results_readme(results_dir: Path) -> Path:
@@ -136,6 +164,9 @@ def main(argv=None) -> int:
             text = Path(a[2]).read_text(encoding="utf-8")
         default_type = a[3] if len(a) >= 4 else "auto"
         print(json.dumps(parse(text, default_type), ensure_ascii=False))
+        return 0
+    if len(a) >= 3 and a[0] == "missing":
+        print("\n".join(mark_missing(Path(a[1]), a[2])))
         return 0
     if len(a) >= 2 and a[0] == "merge":
         p = merge(Path(a[1]))

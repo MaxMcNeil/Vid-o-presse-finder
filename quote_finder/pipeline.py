@@ -54,8 +54,9 @@ class Options:
     allow_heuristic: bool = False
     since: str = ""                  # AAAA-MM-JJ : ignorer ce qui est plus ancien (facultatif)
     max_video_minutes: int = 60      # au-delà, une vidéo sans sous-titres n'est pas envoyée à Gemini (quota par minute)
-    refine_max: int = 12
-    article_gemini_max: int = 6      # articles pertinents illisibles autrement : lus par Gemini (url_context)             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
+    refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
+    article_gemini_max: int = 8      # articles pertinents illisibles autrement : lus par Gemini (url_context)
+    article_search_max: int = 10     # liens Google Actualités : vrai lien retrouvé par Gemini (google_search)
 
     @property
     def person(self) -> str:  # compatibilité
@@ -179,7 +180,18 @@ def select(items: list, plan: Plan, o: Options, llm, kind: str, cap: int, meta, 
         return 0.15 if d > o.max_video_minutes * 60 else (0.05 if d > 30 * 60 else 0.0)
     pool.sort(key=lambda x: -(x.relevance / 10 * 0.6 + x.authority * 0.4 - _len_penalty(x)))
     strong = [x for x in pool if x.authority >= o.min_authority]
-    chosen = strong[:cap]
+    # diversité : pas plus d'un tiers des places pour une même chaîne / un même média (sauf s'il n'y a rien d'autre)
+    per_src = max(2, -(-cap // 3))
+    count: dict[str, int] = {}
+    chosen, overflow = [], []
+    for x in strong:
+        k = normalize(getattr(x, "channel", "") or getattr(x, "domain", "") or getattr(x, "source", ""))[:40]
+        if k and count.get(k, 0) >= per_src:
+            overflow.append(x)
+            continue
+        count[k] = count.get(k, 0) + 1
+        chosen.append(x)
+    chosen = (chosen + overflow)[:cap] if len(chosen) < cap else chosen[:cap]
     if len(chosen) < max(1, cap // 2) and o.authority == "forte":
         extra = [x for x in pool if x not in chosen and x.authority >= 0.4 and x.relevance >= 7][: cap - len(chosen)]
         for x in extra:
@@ -344,11 +356,12 @@ def resolve_google_news(a: ArticleCandidate, http=None) -> str:
 
 
 def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None,
-                    gemini_budget: list[int] | None = None) -> ArticleResult:
+                    gemini_budget: list[int] | None = None, search_budget: list[int] | None = None) -> ArticleResult:
     from . import article_text
     subject = f"{o.target} — {o.claim or plan.claim_summary}"
     try:
-        text, via = article_text.read(a, llm, subject, gemini_budget if getattr(a, "relevance", 0) >= 6 else None)
+        rel_ok = getattr(a, "relevance", 0) >= 6
+        text, via = article_text.read(a, llm, subject, gemini_budget if rel_ok else None, search_budget if rel_ok else None)
     except Exception as e:  # noqa: BLE001
         text, via = "", f"erreur ({type(e).__name__})"
     verified = bool(text)  # sinon : on juge au moins le chapô (snippet) s'il existe
@@ -453,10 +466,22 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     vres: list[VideoResult] = []
 
     def safe_video(v):
-        try:
-            return analyze_video(v, plan, o, llm, budget, abudget)
-        except Exception as e:  # noqa: BLE001 - une vidéo en erreur ne doit pas perdre les autres
-            return VideoResult(v, [], "none", f"erreur interne ({type(e).__name__}: {str(e)[:100]})")
+        for attempt in (1, 2):
+            try:
+                r = analyze_video(v, plan, o, llm, budget, abudget)
+            except Exception as e:  # noqa: BLE001 - une vidéo en erreur ne doit pas perdre les autres
+                return VideoResult(v, [], "none", f"erreur interne ({type(e).__name__}: {str(e)[:100]})")
+            # surcharge passagère chez Google (503/500) : 2e essai un peu plus tard, s'il reste du temps
+            transient = r.note.startswith("erreur LLM") and re.search(r"HTTP 5\d\d|high demand|overloaded|unavailable", r.note)
+            if attempt == 1 and transient and video_deadline - time.time() > 240:
+                with _budget_lock:
+                    budget[0] += 1 if r.video.platform == "youtube" else 0
+                    abudget[0] += 0 if r.video.platform == "youtube" else 1
+                log.info("Gemini surchargé pour %s : nouvel essai dans 30 s", v.title[:50])
+                time.sleep(30)
+                continue
+            return r
+        return r
 
     video_deadline = t0 + o.max_minutes * 60 * 0.75  # on garde 25 % du temps pour la presse
     ex = ThreadPoolExecutor(o.workers)
@@ -487,6 +512,8 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
                          h.quote[:80])
         r.hits = sorted(kept, key=lambda h: h.t if h.t is not None else 0)
     refine_videos(vres, o, llm, deadline)
+    for r in vres:  # garde-fous du montage : faux passages, durées aberrantes, chevauchements
+        r.hits = scan.tidy_hits(r.hits, r.video.duration, r.video.authority)
     blocked = sum(1 for r in vres if r.method in ("gemini-video", "gemini-audio"))
     if blocked:
         log.info("%d/%d vidéos analysées sans transcription (YouTube bloque souvent les transcriptions depuis GitHub)",
@@ -498,10 +525,11 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
             arts = discover_articles(plan, o, pools, http, llm, site_arts)
 
             gbudget = [o.article_gemini_max]
+            sbudget = [o.article_search_max]
 
             def safe_article(a):
                 try:
-                    return analyze_article(a, plan, o, llm, http, gbudget)
+                    return analyze_article(a, plan, o, llm, http, gbudget, sbudget)
                 except Exception as e:  # noqa: BLE001
                     return ArticleResult(a, [], False, f"erreur interne ({type(e).__name__})")
             ex = ThreadPoolExecutor(o.workers)
@@ -515,7 +543,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
             finally:
                 ex.shutdown(wait=False, cancel_futures=True)
             for r in ares:
-                r.hits = [h for h in r.hits if scan.keep_hit(h, plan, o)]
+                r.hits = scan.tidy_hits([h for h in r.hits if scan.keep_hit(h, plan, o)], None, r.article.authority)
                 tn = normalize(r.article.title)
                 r.relevant_title = scan.group_score(r.article.title, plan.term_groups) >= 1 and \
                     (o.target_type == "sujet" or any(a and a in tn for a in plan.target_aliases))

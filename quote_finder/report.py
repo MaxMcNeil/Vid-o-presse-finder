@@ -20,12 +20,23 @@ TIMING = {"sous-titres": "calé sur les sous-titres (±1-2 s)", "ia-affiné": "a
           "ia": "estimé par l'IA (±5 s)", "non retrouvé": "⚠️ non retrouvé à la réécoute : exclu du montage"}  # marges avant/après pour le montage, selon la précision
 
 
+_YT_ID = __import__("re").compile(r"(?:v=|/shorts/|youtu\.be/|/embed/|/live/)([\w-]{3,})")
+
+
+def yt_watch(url: str) -> str:
+    """Toute adresse YouTube (shorts, youtu.be, embed, live) -> https://www.youtube.com/watch?v=ID"""
+    m = _YT_ID.search(url or "")
+    return f"https://www.youtube.com/watch?v={m.group(1)}" if m else url
+
+
 def ts_url(url: str, platform: str, t: float | None) -> str:
+    if platform == "youtube":
+        url = yt_watch(url)
     if t is None:
         return url
     s = int(t)
     if platform == "youtube":
-        return f"{url}&t={s}s"
+        return f"{url}{'&' if '?' in url else '?'}t={s}s"
     if platform in ("dailymotion", "archive"):
         return f"{url}?start={s}"
     return url
@@ -51,14 +62,16 @@ def dur(h) -> float | None:
 
 
 def video_id(url: str, platform: str) -> str:
-    if platform == "youtube" and "v=" in url:
-        return url.split("v=")[1].split("&")[0]
+    if platform == "youtube":
+        m = _YT_ID.search(url or "")
+        if m:
+            return m.group(1)
     return url.rstrip("/").split("/")[-1]
 
 
 def clip_link(url: str, platform: str, h) -> str:
     """Lien qui ne lit QUE l'extrait (YouTube)."""
-    if platform == "youtube" and h.t is not None and h.t_end is not None and "v=" in url:
+    if platform == "youtube" and h.t is not None and h.t_end is not None and _YT_ID.search(url or ""):
         return f"https://www.youtube.com/embed/{video_id(url, platform)}?start={int(h.t)}&end={int(h.t_end) + 1}&autoplay=1"
     return ts_url(url, platform, h.t)
 
@@ -70,9 +83,13 @@ def _best(r) -> float:
 def montage_clips(o, vm, search_id: str = "") -> list[dict]:
     """Une entrée par extrait, triée du plus solide au moins solide : prête pour un montage automatique."""
     clips = []
+    import copy
+    from .scan import tidy_hits
     for r in vm:
         v = r.video
-        for h in r.hits:
+        # mêmes garde-fous que la recherche (utile après un recalage par le téléphone) : jamais d'extraits qui se chevauchent
+        ok = [copy.copy(h) for h in r.hits if h.t is not None and h.t_end is not None and h.timing != "non retrouvé"]
+        for h in tidy_hits(ok, v.duration, v.authority):
             if h.t is None or h.t_end is None or h.timing == "non retrouvé":
                 continue
             pb, pa = PAD.get(h.timing, PAD["ia"])
@@ -81,13 +98,15 @@ def montage_clips(o, vm, search_id: str = "") -> list[dict]:
                 tout = min(tout, float(v.duration))
             clips.append({
                 "search": search_id, "target": o.target, "target_type": o.target_type, "claim": o.claim,
-                "platform": v.platform, "video_id": video_id(v.url, v.platform), "source_url": v.url,
+                "platform": v.platform, "video_id": video_id(v.url, v.platform),
+                "source_url": yt_watch(v.url) if v.platform == "youtube" else v.url,
                 "title": v.title, "channel": v.channel, "uploaded": (v.published or "")[:10],
                 "source_authority": v.authority, "source_authority_why": v.authority_why,
                 "start": round(h.t, 2), "end": round(h.t_end, 2), "duration": dur(h),
                 "start_tc": tc(h.t), "end_tc": tc(h.t_end),
                 "in": round(tin, 2), "out": round(tout, 2), "in_tc": tc(tin), "out_tc": tc(tout),
-                "timing": h.timing, "quote": h.quote, "speaker": h.speaker_name, "speaker_role": h.speaker_role,
+                "timing": h.timing, "quote": h.quote, "speaker": h.speaker_name or ROLE.get(h.speaker_role, "").capitalize(),
+                "speaker_role": h.speaker_role,
                 "who_says": h.who_says, "verdict": h.verdict, "confidence": h.confidence,
                 "score": hit_score(h, v.authority), "link": clip_link(v.url, v.platform, h),
             })

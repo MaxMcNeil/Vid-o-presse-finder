@@ -114,10 +114,11 @@ class GeminiClient:
             soon = min(soon, free_at - now)
         return None, soon
 
-    def _note_overload(self, m: str) -> None:
-        """503 « forte demande » : après 2 échecs le modèle est mis en pause 2 min (pour toutes les clés)."""
+    def _note_overload(self, m: str, media: bool = False) -> None:
+        """503 « forte demande » : après 2 échecs (1 seul pour une vidéo, appel lourd) le modèle est mis en pause 2 min
+        pour toutes les clés ; les autres modèles prennent le relais."""
         self._overload[m] = self._overload.get(m, 0) + 1
-        if self._overload[m] >= 2:
+        if self._overload[m] >= (1 if media else 2):
             self._overload[m] = 0
             self._cool[m] = time.time() + 120
             log.warning("Gemini %s surchargé : pause 2 min, on utilise d'autres modèles", m)
@@ -197,7 +198,8 @@ class GeminiClient:
                     cand = r.json()["candidates"][0]
                     if tools:  # réponse texte brute + métadonnées de lecture de page
                         out = {"text": "".join(pt.get("text", "") for pt in cand["content"]["parts"]),
-                               "meta": cand.get("urlContextMetadata") or cand.get("url_context_metadata") or {}}
+                               "meta": cand.get("urlContextMetadata") or cand.get("url_context_metadata") or {},
+                               "grounding": cand.get("groundingMetadata") or cand.get("grounding_metadata") or {}}
                     else:
                         out = parse_json_loose(cand["content"]["parts"][0]["text"])
                     self._overload[m] = 0
@@ -253,7 +255,9 @@ class GeminiClient:
                     self._bad.add((key, m))           # accès refusé à CE modèle seulement
                 continue
             if r.status_code >= 500:
-                self._note_overload(m)
+                self._note_overload(m, media)
+                if media and r.status_code == 503:
+                    attempt -= 1  # surcharge passagère chez Google : ne consomme pas les essais de la vidéo (borné par le temps)
                 time.sleep(min(2 + attempt, 8))
                 continue
             raise LLMError(last)  # 400 : vidéo privée/indisponible, requête invalide...
@@ -496,6 +500,19 @@ class LLMRouter:
         if hit is not None:
             return hit
         out = self.gemini.generate_json(prompt, tools=[{"url_context": {}}], until=time.time() + self.TEXT_CALL_MAX,
+                                        max_attempts=8)
+        cache.put("llm", ck, out)
+        return out
+
+    def search_web(self, prompt: str) -> dict:
+        """Gemini cherche sur le web (outil google_search) : {"text", "grounding"}. Gemini seulement."""
+        if not self.gemini or not self.gemini.pool.available():
+            raise QuotaExhausted("Gemini indisponible")
+        ck = f"google_search\n{prompt}"
+        hit = cache.get("llm", ck)
+        if hit is not None:
+            return hit
+        out = self.gemini.generate_json(prompt, tools=[{"google_search": {}}], until=time.time() + self.TEXT_CALL_MAX,
                                         max_attempts=8)
         cache.put("llm", ck, out)
         return out

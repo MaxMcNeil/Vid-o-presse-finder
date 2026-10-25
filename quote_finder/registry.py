@@ -26,9 +26,24 @@ SOURCES: dict[str, list[Source]] = {
     "INT": [S("reuters.com", "Reuters", True, ("Reuters",)), S("apnews.com", "Associated Press", True, ("Associated Press",)),
             S("afp.com", "AFP", False, ("AFP News Agency", "AFP")), S("france24.com", "France 24", True, ("FRANCE 24", "FRANCE 24 English")),
             S("dw.com", "DW", True, ("DW News",)), S("euronews.com", "Euronews", True, ("euronews",)),
-            S("bbc.com", "BBC", True, ("BBC News",)), S("aljazeera.com", "Al Jazeera", True, ("Al Jazeera English",)),
-            S("un.org", "Nations unies", True, ("United Nations",), True), S("europarl.europa.eu", "Parlement européen", True,
-            ("European Parliament",), True), S("ec.europa.eu", "Commission européenne", True, ("European Commission",), True)],
+            S("bbc.com", "BBC", True, ("BBC News",)), S("aljazeera.com", "Al Jazeera", True, ("Al Jazeera English",))],
+    # Union européenne (cible « Europe », « UE », « Commission »…) : institutions d'abord
+    "EU": [S("ec.europa.eu", "Commission européenne", True, ("European Commission",), True),
+           S("europarl.europa.eu", "Parlement européen", True, ("European Parliament",), True),
+           S("consilium.europa.eu", "Conseil de l'UE", True, ("EU Council",), True),
+           S("eeas.europa.eu", "Service européen pour l'action extérieure", True, ("EU External Action",), True),
+           S("europa.eu", "Union européenne", True, (), True), S("euronews.com", "Euronews", True, ("euronews",)),
+           S("politico.eu", "Politico Europe"), S("euractiv.com", "Euractiv"), S("euobserver.com", "EUobserver")],
+    # Organisations internationales (ONU, FAO, OMS…) et les personnes qui y travaillent
+    "ORG": [S("un.org", "Nations unies", True, ("United Nations",), True), S("fao.org", "FAO", True, ("FAO",), True),
+            S("wfp.org", "Programme alimentaire mondial", True, ("World Food Programme",), True),
+            S("who.int", "OMS", True, ("World Health Organization (WHO)",), True), S("imf.org", "FMI", True, ("IMF",), True),
+            S("worldbank.org", "Banque mondiale", True, ("World Bank",), True), S("oecd.org", "OCDE", True, ("OECD",), True),
+            S("wto.org", "OMC", True, ("WTO",), True), S("iea.org", "Agence internationale de l'énergie", True, ("IEA",), True),
+            S("nato.int", "OTAN", True, ("NATO",), True), S("unhcr.org", "HCR", True, ("UNHCR",), True),
+            S("ifad.org", "FIDA", True, ("IFAD",), True)],
+    "UA": [S("ukrinform.net", "Ukrinform"), S("kyivindependent.com", "The Kyiv Independent", True, ("The Kyiv Independent",)),
+           S("president.gov.ua", "Présidence ukrainienne", True, ("Volodymyr Zelensky",), True)],
     "CH": [S("rts.ch", "RTS", True, ("RTS - Radio Télévision Suisse", "RTS Info")), S("srf.ch", "SRF", True, ("SRF News",)),
            S("rsi.ch", "RSI", True, ("RSI",)), S("swissinfo.ch", "SWI swissinfo.ch", True, ("SWI swissinfo.ch", "SWI swissinfo.ch - English")),
            S("letemps.ch", "Le Temps", False, ("Le Temps",)), S("nzz.ch", "NZZ", True, ("NZZ",)), S("tdg.ch", "Tribune de Genève"),
@@ -82,8 +97,9 @@ SOURCES: dict[str, list[Source]] = {
 
 LANG_COUNTRIES = {"fr": ["FR", "CH", "BE", "CA"], "en": ["US", "GB"], "de": ["DE", "CH", "AT"], "it": ["IT", "CH"], "es": ["ES"],
                   "ar": ["SA", "AE", "QA"]}
-GROUPS = {"GCC": ["SA", "AE", "QA", "KW", "BH", "OM"], "UK": ["GB"], "EU": ["INT"], "UAE": ["AE"], "KSA": ["SA"]}
-COUNTRY_LANG = {"FR": "fr", "BE": "fr", "CH": "fr", "CA": "fr", "US": "en", "GB": "en", "DE": "de", "AT": "de", "IT": "it",
+GROUPS = {"GCC": ["SA", "AE", "QA", "KW", "BH", "OM"], "UK": ["GB"], "UE": ["EU"], "UAE": ["AE"], "KSA": ["SA"],
+          "INTL": ["ORG"], "ONU": ["ORG"], "UN": ["ORG"]}
+COUNTRY_LANG = {"UA": "en", "FR": "fr", "BE": "fr", "CH": "fr", "CA": "fr", "US": "en", "GB": "en", "DE": "de", "AT": "de", "IT": "it",
                 "ES": "es", "SA": "ar", "AE": "ar", "QA": "ar", "KW": "ar", "BH": "ar", "OM": "ar", "EG": "ar"}
 
 
@@ -97,13 +113,15 @@ def expand(countries: list[str]) -> list[str]:
 
 
 def for_search(countries: list[str], langs: list[str], extra_domains: list[str] | None = None, limit: int = 10) -> list[Source]:
-    """Sources à interroger directement : celles des pays concernés d'abord, puis l'international,
-    puis celles proposées par l'IA pour ce sujet."""
+    """Sources à interroger directement. Répartition garantie (le 25/10/2026, un pays cité en 3e avait pris toutes les
+    places et les agences internationales n'apparaissaient plus) : pays principal (4 au plus), pays secondaires (2 chacun),
+    sources proposées par l'IA pour ce sujet, et TOUJOURS au moins 2 agences internationales."""
     out: list[Source] = []
     seen: set[str] = set()
+    reserve = 2 if limit >= 6 else 1
 
-    def add(s: Source):
-        if s.domain not in seen:
+    def add(s: Source, cap: int) -> None:
+        if s.domain not in seen and len(out) < cap:
             seen.add(s.domain)
             out.append(s)
     blocks = []  # un bloc par pays demandé ; un groupe (GCC) = ses pays à tour de rôle
@@ -111,19 +129,32 @@ def for_search(countries: list[str], langs: list[str], extra_domains: list[str] 
             [c for l in langs for c in LANG_COUNTRIES.get(l, [])][:2]:
         members = GROUPS.get(c, [c])
         per = [sorted(SOURCES.get(m, []), key=lambda s: (not s.official, not s.video)) for m in members if m != "INT"]
-        blocks.append([p[i] for i in range(max((len(p) for p in per), default=0)) for p in per if i < len(p)])
-    # 1) pays concernés : le premier cité d'abord (ex. la Suisse avant les États-Unis), institutions et médias vidéo en tête
-    for i, b in enumerate(blocks):
-        for s in (b if i == 0 else b[:3]):  # pays secondaires : leurs 3 sources principales seulement
-            add(s)
-    # 2) sources proposées par l'IA pour ce sujet (domaines)
-    for d in extra_domains or []:
+        b = [p[i] for i in range(max((len(p) for p in per), default=0)) for p in per if i < len(p)]
+        if b:
+            blocks.append(b)
+    body = limit - reserve
+    extras = []
+    for d in extra_domains or []:  # sources proposées par l'IA pour ce sujet (domaines)
         d = d.lower().strip().removeprefix("https://").removeprefix("http://").removeprefix("www.").split("/")[0]
         if "." in d and " " not in d:
-            add(next((s for c in SOURCES.values() for s in c if s.domain == d), Source(d, d)))
-    # 3) international
-    for s in SOURCES["INT"]:
-        add(s)
+            extras.append(next((s for c in SOURCES.values() for s in c if s.domain == d), Source(d, d)))
+    for s in (blocks[0][:4] if blocks else []):   # pays / ensemble principal
+        add(s, body)
+    for s in extras[:2]:                          # les 2 premières sources propres au sujet
+        add(s, body)
+    for b in blocks[1:]:                          # pays secondaires : 2 chacun
+        for s in b[:2]:
+            add(s, body)
+    for s in extras[2:]:
+        add(s, body)
+    for b in blocks:  # places encore libres : suite des pays concernés
+        for s in b:
+            add(s, body)
+    intl = SOURCES["INT"]
+    if "fr" in (langs or []):  # AFP / France 24 en tête pour une recherche en français
+        intl = sorted(intl, key=lambda s: s.domain not in ("afp.com", "france24.com"))
+    for s in intl:
+        add(s, limit)
     return out[:limit]
 
 
