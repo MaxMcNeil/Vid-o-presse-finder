@@ -290,43 +290,63 @@ def _pr(a: str, b: str) -> float:
     return best
 
 
+def _start_candidates(norm: list[str], words: list[str], idx: list[int], strict: bool) -> list[tuple[float, int]]:
+    """(score, i) des lignes où la déclaration peut COMMENCER."""
+    head, first = " ".join(words[:6]), " ".join(words[:2])
+    out = []
+    for i in idx:
+        nxt = norm[i + 1] if i + 1 < len(norm) else ""
+        if strict:
+            # 1er mot dans la ligne (à une faute près) et 2 premiers mots à cheval sur cette ligne et la suivante
+            if not term_present(norm[i], words[0]) and not (len(words[0]) < 5 and words[0] in norm[i].split()):
+                continue
+            if _pr(first, norm[i] + " " + nxt) < 80:
+                continue
+        else:
+            # sous-titres automatiques approximatifs : un des 3 premiers mots suffit pour ancrer le début
+            if not any(term_present(norm[i], w) or w in norm[i].split() for w in words[:3]):
+                continue
+        out.append((_pr(head, " ".join(norm[i:i + 3])), i))
+    return out
+
+
 def refine_times(hits: list[Hit], segs: list[Segment], radius: float = 90.0) -> None:
     """Cale début et fin sur les lignes de la transcription qui contiennent vraiment la citation (±1-2 s),
-    au lieu de l'horodatage lu par l'IA. Sans correspondance sûre, l'horodatage IA est conservé."""
+    au lieu de l'horodatage lu par l'IA. Recherche autour de l'horodatage IA, puis dans toute la vidéo
+    (l'IA se trompe parfois de plusieurs minutes). Sans correspondance sûre, l'horodatage IA est conservé."""
+    import re as _re
     if not segs:
         return
     norm = [normalize(s.text) for s in segs]
+    every = list(range(len(segs)))
     for h in hits:
         if h.t is None:
             continue
-        words = normalize(h.quote).split()
+        # citation avec coupure (« ... », « [...] ») : début cherché sur le 1er morceau, fin sur le dernier
+        parts = [p for p in _re.split(r"\s*(?:\[\s*(?:\.\.\.|…)\s*\]|\.\.\.|…)\s*", h.quote) if len(normalize(p).split()) >= 3]
+        words = normalize(parts[0] if parts else h.quote).split()
+        last_words = normalize(parts[-1] if parts else h.quote).split()
         if len(words) < 3:
             continue
-        head, tail = " ".join(words[:6]), " ".join(words[-6:])
-        first = " ".join(words[:2])
-        idx = [i for i, s in enumerate(segs) if abs(s.start - h.t) <= radius]
-        if not idx:
-            continue
-        best_i, best = None, 0.0
-        for i in idx:
-            # la déclaration doit COMMENCER dans cette ligne : son 1er mot y figure (à une faute près)
-            if not term_present(norm[i], words[0]) and not (len(words[0]) < 5 and words[0] in norm[i].split()):
-                continue
-            if _pr(first, norm[i] + " " + (norm[i + 1] if i + 1 < len(norm) else "")) < 80:
-                continue
-            sc = _pr(head, " ".join(norm[i:i + 3]))
-            closer = best_i is not None and abs(sc - best) <= 0.5 and abs(segs[i].start - h.t) < abs(segs[best_i].start - h.t)
-            if sc > best + 0.5 or closer:
-                best_i, best = i, sc
-        if best_i is None or best < 82:
+        tail = " ".join(last_words[-6:])
+        near = [i for i, s in enumerate(segs) if abs(s.start - h.t) <= radius]
+        best_i = None
+        for idx, strict, need in ((near, True, 82), (near, False, 88), (every, True, 90), (every, False, 93)):
+            cands = sorted(_start_candidates(norm, words, idx, strict), key=lambda x: (-x[0], abs(segs[x[1]].start - h.t)))
+            if cands and cands[0][0] >= need:
+                if idx is every and len(cands) > 1 and cands[1][0] >= cands[0][0] - 1 and \
+                        abs(segs[cands[1][1]].start - segs[cands[0][1]].start) > 30:
+                    continue  # phrase répétée à plusieurs endroits : ambigu, on ne devine pas
+                best_i = cands[0][1]
+                break
+        if best_i is None:
             continue
         end_j, best_e = None, 0.0
-        for j in range(best_i, min(len(segs), best_i + 60)):
-            if segs[j].start - segs[best_i].start > 240:
+        for j in range(best_i, min(len(segs), best_i + 80)):
+            if segs[j].start - segs[best_i].start > 300:
                 break
             win = " ".join(norm[max(best_i, j - 2):j + 1])
-            # la déclaration doit FINIR dans cette ligne : son dernier mot y figure
-            if not term_present(norm[j], words[-1]) and not (len(words[-1]) < 5 and words[-1] in norm[j].split()):
+            if not term_present(norm[j], last_words[-1]) and not (len(last_words[-1]) < 5 and last_words[-1] in norm[j].split()):
                 continue
             sc = _pr(tail, win)
             if sc >= best_e:
@@ -337,6 +357,8 @@ def refine_times(hits: list[Hit], segs: list[Segment], radius: float = 90.0) -> 
         if end_j is not None and best_e >= 80:
             nxt = segs[end_j + 1].start if end_j + 1 < len(segs) else segs[end_j].start + 4.0
             h.t_end = max(nxt, h.t + 1.0)
+        elif h.t_end is not None and h.t_end <= h.t:
+            h.t_end = None  # fin inconnue : estimée ensuite d'après la longueur de la citation
         h.timing = "sous-titres"
 
 

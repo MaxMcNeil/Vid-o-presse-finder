@@ -31,7 +31,17 @@ from .util import fmt_ts
 log = logging.getLogger("qf.tel")
 HIT_FIELDS = set(Hit.__dataclass_fields__)
 DONE = ("sous-titres",)                      # déjà précis
-FINAL = ("ok", "pas de sous-titres", "pas retrouvé dans les sous-titres")  # ne pas retenter
+FINAL = ("ok", "pas de sous-titres", "pas retrouvé dans les sous-titres")  # ne pas retenter...
+ALGO = 2  # ...sauf si la méthode de recalage a été améliorée depuis la tentative (version enregistrée avec)
+
+
+def pending(m: dict) -> bool:
+    """Extrait encore à recaler par le téléphone ?"""
+    if m.get("timing") in DONE:
+        return False
+    if m.get("tel_status") == "ok" or m.get("tel_status") == "pas de sous-titres":
+        return False
+    return not (m.get("tel_status") in FINAL and m.get("tel_algo", 1) >= ALGO)
 
 
 class Blocked(Exception):
@@ -164,7 +174,7 @@ def process(results_dir: Path, days: int = 14, max_videos: int = 40, dry_run: bo
             for v in data.get("videos", []):
                 if v.get("platform") != "youtube":
                     continue
-                todo = [m for m in v.get("moments", []) if m.get("timing") not in DONE and m.get("tel_status") not in FINAL]
+                todo = [m for m in v.get("moments", []) if pending(m)]
                 if not todo:
                     continue
                 if stats["videos"] >= max_videos:
@@ -195,7 +205,7 @@ def process(results_dir: Path, days: int = 14, max_videos: int = 40, dry_run: bo
                             scan.finish_times([trial], v.get("duration"))
                             m.update(t=trial.t, t_end=trial.t_end, timing="sous-titres")
                             break
-                    m["tel_date"] = today
+                    m["tel_date"], m["tel_algo"] = today, ALGO
                     if m.get("timing") == "sous-titres":
                         m["tel_status"] = "ok"
                         stats["recalés"] += 1

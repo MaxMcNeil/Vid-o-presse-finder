@@ -280,3 +280,27 @@ def test_hits_after_video_end_are_dropped():
     hits = [Hit(344, "x y z", "literal", "target", "", 0.9, t_end=246), Hit(217, "a b c", "literal", "target", "", 0.9, t_end=232)]
     scan.finish_times(hits, duration=246)
     assert [(h.t, h.t_end) for h in hits] == [(217, 232)]
+
+
+def test_refine_finds_quote_far_from_ai_timestamp_and_handles_ellipsis():
+    segs = [Segment(i * 4.0, "bla bla autre sujet") for i in range(200)]
+    segs[126] = Segment(504.0, "switzerland wants to become")
+    segs[127] = Segment(507.5, "more digitally independent what does")
+    segs[128] = Segment(511.0, "that mean exactly")
+    h = Hit(300, "Switzerland wants to become more digitally independent. What does that mean exactly?", "literal", "x", "", 0.9, t_end=310)
+    scan.refine_times([h], segs)  # l'IA s'était trompée de 3 minutes
+    assert h.t == 504.0 and h.t_end == segs[129].start and h.timing == "sous-titres"
+    segs2 = [Segment(0, "intro"), Segment(10, "pour comprendre il faut écouter matthias"), Segment(14, "stürmer professeur"),
+             Segment(18, "blabla long"), Segment(40, "les données de l'état sur un bureau"), Segment(44, "à washington voilà")]
+    h2 = Hit(12, "Pour comprendre, il faut écouter Matthias Stürmer ... sur un bureau à Washington", "literal", "x", "", 0.9, t_end=50)
+    scan.refine_times([h2], segs2)
+    assert (h2.t, h2.t_end) == (10, 44 + 4.0) and h2.timing == "sous-titres"
+
+
+def test_refine_does_not_guess_when_phrase_repeats_far_apart():
+    segs = [Segment(i * 5.0, "x y z") for i in range(100)]
+    segs[10] = Segment(50.0, "it's the best approach for both sides")
+    segs[80] = Segment(400.0, "it's the best approach for both sides")
+    h = Hit(250, "It's the best approach for both sides", "literal", "x", "", 0.9, t_end=255)
+    scan.refine_times([h], segs)
+    assert h.timing == "ia" and h.t == 250
