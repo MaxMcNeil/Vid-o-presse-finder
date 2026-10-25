@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 25/10/2026 à 22:02 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 25/10/2026 à 22:21 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -8,8 +8,17 @@ _Mis à jour le 25/10/2026 à 22:02 (heure italienne), automatiquement après ch
 
 ## Clés et quotas
 
-- ✅ **Gemini (IA)** : 5/5 clé(s) utilisable(s)
-- ✅ **YouTube (recherche)** : 5/5 clé(s) utilisable(s) · ≈ 444 recherches restantes aujourd'hui
+- ⚠️ **Gemini (IA)** : 10/10 clé(s) utilisable(s)
+  - Gemini clé 1 : 1 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 2 : 3 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 3 : 4 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 4 : 4 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 5 : 4 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 6 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 7 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 8 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+  - Gemini clé 9 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
+- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 743 recherches restantes aujourd'hui
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
