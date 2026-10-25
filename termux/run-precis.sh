@@ -2,6 +2,8 @@
 # Un passage de précision. --auto : silencieux, et seulement si le dernier passage date de plus de 2 h.
 QF="$HOME/.qf"; REPO="$(cat "$QF/repo" 2>/dev/null || echo "$HOME/vpf")"; LOG="$QF/precis.log"
 mkdir -p "$QF"
+# YouTube a refusé récemment : en automatique, on laisse refroidir 6 h (insister prolonge le blocage)
+if [ "${1:-}" = "--auto" ] && [ -f "$QF/blocked_until" ] && [ "$(date +%s)" -lt "$(cat "$QF/blocked_until")" ]; then exit 0; fi
 if [ "${1:-}" = "--auto" ] && [ -f "$QF/last_ok" ] && [ $(( $(date +%s) - $(stat -c %Y "$QF/last_ok") )) -lt 7200 ]; then exit 0; fi
 # un seul passage à la fois (verrou), un verrou de plus de 1 h est considéré comme abandonné
 if ! mkdir "$QF/lock" 2>/dev/null; then
@@ -18,6 +20,11 @@ curl -s -m 15 -o /dev/null https://github.com || { echo "$(date '+%F %T') pas de
 RC=$?
 tail -n 3000 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"
 touch "$QF/last_ok"
+if tail -n 6 "$LOG" | grep -q "YouTube a limité"; then
+  echo $(( $(date +%s) + 21600 )) > "$QF/blocked_until"
+else
+  rm -f "$QF/blocked_until"
+fi
 LAST="$(grep -E "extraits recalés" "$LOG" | tail -1)"
 if [ "${1:-}" != "--auto" ]; then tail -n 12 "$LOG"; fi
 if command -v termux-notification >/dev/null && echo "$LAST" | grep -qE "recalés : [1-9]"; then

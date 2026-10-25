@@ -19,7 +19,9 @@ echo "3/5 Commande qf…"
 pkill -f "qf listen" 2>/dev/null; pkill -f "quote_finder.phone " 2>/dev/null
 rm -f "$HOME/.termux/boot/"*qf-listen* "$HOME/.termux/boot/"*quote* 2>/dev/null
 cp "$REPO/termux/run-precis.sh" "$QF/run-precis.sh" && chmod +x "$QF/run-precis.sh"
-cp "$REPO/termux/qf" "$PREFIX/bin/qf" && chmod +x "$PREFIX/bin/qf"
+rm -f "$PREFIX/bin/qf"   # ancien raccourci (1re version) éventuellement cassé
+cp "$REPO/termux/qf" "$PREFIX/bin/qf" && chmod +x "$PREFIX/bin/qf" && hash -r 2>/dev/null
+[ -x "$PREFIX/bin/qf" ] || echo "⚠ commande qf non installée : utilise « bash $REPO/termux/qf precis »"
 echo "$REPO" > "$QF/repo"
 
 echo "4/5 Passage automatique (compatible économie d'énergie)…"
