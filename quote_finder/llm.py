@@ -235,7 +235,8 @@ class GeminiClient:
                 self._bad.add((key, m))
                 continue
             if r.status_code == 429:
-                if re.search(r"perday|per day|daily", low):
+                full = r.text.lower()  # la précision « PerDay » est souvent tout au bout de la réponse de Google
+                if re.search(r"perday|per day|daily|requests_per_day", full):
                     from . import quota
                     log.warning("Gemini : quota du jour de %s atteint (%s) → autre modèle ou autre clé", m, self.pool.label(key))
                     self._until[(key, m)] = quota.next_reset()

@@ -141,3 +141,28 @@ def test_groq_key_in_old_secret_is_recognised_without_variable(st, monkeypatch):
     monkeypatch.setenv("FALLBACK_LLM_KEYS", "gsk_abc123\nsk-or-v1-xyz")
     r = L.LLMRouter.from_env()
     assert [(f.name, list(f.pool._next_ok)) for f in r.fallbacks] == [("groq", ["gsk_abc123"]), ("openrouter", ["sk-or-v1-xyz"])]
+
+
+def test_daily_quota_detected_even_at_end_of_long_google_error(st):
+    """Réponse réelle du 25/10 : « You exceeded your current quota… » avec le type de quota (PerDay) après 400 caractères."""
+    from quote_finder.llm import GeminiClient
+    body = ('{"error":{"code":429,"message":"You exceeded your current quota, please check your plan and billing details. '
+            + "x" * 500 + ' quotaId: GenerateRequestsPerDayPerProjectPerModel-FreeTier"}}')
+
+    class H:
+        calls = []
+
+        def get(self, *a, **k):
+            return R(200, {"models": [{"name": "models/gemini-9-flash", "supportedGenerationMethods": ["generateContent"]},
+                                      {"name": "models/gemini-9-flash-lite", "supportedGenerationMethods": ["generateContent"]}]})
+
+        def post(self, url, params=None, json=None, timeout=None):
+            m = url.split("models/")[1].split(":")[0]
+            self.calls.append(m)
+            if m == "gemini-9-flash":
+                return R(429, body)
+            return R(200, {"candidates": [{"content": {"parts": [{"text": '{"ok": 1}'}]}}]})
+    h = H()
+    c = GeminiClient(KeyPool("gemini", ["g1"], 0, persist=True), ["x"], h)
+    assert c.generate_json("x") == {"ok": 1} and h.calls == ["gemini-9-flash", "gemini-9-flash-lite"]
+    assert quota.state().model_until("gemini", "g1", "gemini-9-flash") > time.time() + 3600  # jusqu'à la remise à zéro
