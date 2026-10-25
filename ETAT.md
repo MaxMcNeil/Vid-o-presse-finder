@@ -34,13 +34,12 @@ _Mis à jour le 25/10/2026 à 19:17 (heure italienne), automatiquement après ch
 <!-- workflows:start -->
 ## Workflows
 
-_Vérifié le 25/10/2026 à 10:27 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
+_Vérifié le 25/10/2026 à 19:17 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
 
-- ✅ **Diagnostic** : dernier lancement réussi (24/10 à 15:07) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40096257106)
-- ❌ **Find quotes** : dernier lancement en échec (25/10 à 10:25, failure) — dernier succès le 25/10 à 09:39 · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40178902290)
-  - **Cause** : un fichier, une Release ou une ressource attendue est introuvable (étape « publish → Enregistrer les résultats dans le dépôt »)
-  - **Quoi faire** : vérifie le nom / le lien du fichier fourni au workflow
-  - Message : `Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md`
+✅ **Tout fonctionne** : aucun workflow en échec.
+
+- ✅ **Diagnostic** : dernier lancement réussi (25/10 à 10:42) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40180776568)
+- ✅ **Find quotes** : dernier lancement réussi (25/10 à 19:17) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40218967337)
 - ✅ **Republier un lancement** : dernier lancement réussi (25/10 à 10:27) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40180725266)
 
 <!-- workflows:end -->
