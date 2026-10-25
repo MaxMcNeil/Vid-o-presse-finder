@@ -1,0 +1,578 @@
+{
+ "target": "Europe",
+ "target_type": "sujet",
+ "claim": "menace de famine ou de crise alimentaire à cause des guerres en Ukraine et en Iran",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Recherche de déclarations d'autorités et d'experts sur les risques de famine ou de crise alimentaire mondiale/européenne causés par les conflits en Ukraine et avec l'Iran.",
+  "term_groups": [
+   [
+    "crise alimentaire",
+    "famine",
+    "securite alimentaire",
+    "penurie alimentaire",
+    "food crisis",
+    "famine",
+    "food insecurity",
+    "food shortage",
+    "crisi alimentare",
+    "carestia",
+    "sicurezza alimentare"
+   ],
+   [
+    "guerre en ukraine",
+    "conflit ukrainien",
+    "guerre d ukraine",
+    "war in ukraine",
+    "ukraine war",
+    "guerra in ucraina",
+    "conflitto ucraino"
+   ],
+   [
+    "iran",
+    "guerre en iran",
+    "tension iran",
+    "iran war",
+    "iranian conflict",
+    "guerra iran",
+    "tensioni iran"
+   ]
+  ],
+  "target_aliases": [
+   "crise alimentaire ukraine iran",
+   "famine guerre ukraine iran",
+   "food security ukraine iran war",
+   "europe"
+  ],
+  "youtube_queries": [
+   "Europe menace de famine ou de crise alimentaire à cause des guerres en Ukraine et en Iran",
+   "fao crise alimentaire ukraine iran",
+   "onu risque famine guerre ukraine",
+   "reuters food crisis ukraine war iran",
+   "bbc news global food shortage war",
+   "france 24 menace famine mondiale guerre",
+   "ansa crisi alimentare guerra ucraina",
+   "conférence de presse onu sécurité alimentaire",
+   "wfp food insecurity crisis war"
+  ],
+  "news_queries": [
+   "Europe menace de famine ou de crise alimentaire à cause des guerres en Ukraine et en Iran",
+   "crise alimentaire menace guerre ukraine iran",
+   "global food shortage war ukraine iran",
+   "fao risk famine conflict ukraine iran",
+   "crisi alimentare carestia guerra ucraina iran"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "it"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 9,
+   "queries_news": 5,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "un.org",
+    "fao.org",
+    "wfp.org",
+    "who.int",
+    "ec.europa.eu",
+    "europarl.europa.eu",
+    "afp.com",
+    "france24.com"
+   ],
+   "site_articles": 58,
+   "site_articles_by_site": {
+    "un.org": 10,
+    "fao.org": 10,
+    "wfp.org": 10,
+    "who.int": 10,
+    "ec.europa.eu": 1,
+    "europarl.europa.eu": 6,
+    "afp.com": 1,
+    "france24.com": 10
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "United Nations": 0,
+    "FAO": 0,
+    "World Food Programme": 0
+   },
+   "videos_candidates": 253,
+   "site_videos_scored": [],
+   "videos_low_authority": 72,
+   "videos_relevant": 7,
+   "videos_by_platform": {
+    "youtube": 7
+   },
+   "articles_candidates": 212,
+   "articles_low_authority": 19,
+   "articles_relevant": 7,
+   "articles_read_via": {
+    "api": 3,
+    "illisible : lien Google Actualités non converti": 2,
+    "archive.org": 1,
+    "illisible : site fermé aux robots, pas d'archive": 1
+   },
+   "timing": {
+    "ia-affiné": 8,
+    "non retrouvé": 4
+   },
+   "elapsed_min": 20.6,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.5-flash": 5,
+      "gemini-3-flash-preview": 5,
+      "gemini-3.5-flash-lite": 14,
+      "gemini-3.7-flash": 3,
+      "gemini-3.8-flash": 3
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "sujet",
+  "official_speakers": [],
+  "authoritative_sources": [
+   "fao.org",
+   "wfp.org",
+   "europa.eu",
+   "lemonde.fr",
+   "francelive.fr",
+   "franceinfo",
+   "bbc.com",
+   "reuters.com",
+   "afp.com",
+   "ansa.it",
+   "rai.it",
+   "corriere.it",
+   "lefigaro.fr",
+   "dw.com"
+  ],
+  "site_query": "crise alimentaire famine guerre ukraine iran",
+  "countries": [
+   "ORG",
+   "EU"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 7,
+  "articles_scanned": 7
+ },
+ "videos": [
+  {
+   "title": "Will there be a food shortage in the UK due to the war in Iran? #Food #Iran #BBCNews",
+   "uploaded": "2026-04-16",
+   "platform": "youtube",
+   "video_id": "SEIzRKTHhVQ",
+   "duration": 82,
+   "channel": "BBC News",
+   "url": "https://www.youtube.com/watch?v=SEIzRKTHhVQ",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:05",
+     "end": "00:16",
+     "start_seconds": 5.4,
+     "end_seconds": 16.7,
+     "start_tc": "00:00:05.400",
+     "end_tc": "00:00:16.700",
+     "duration_seconds": 11.3,
+     "timestamp": "00:05",
+     "link": "https://www.youtube.com/watch?v=SEIzRKTHhVQ&t=5s",
+     "clip_link": "https://www.youtube.com/embed/SEIzRKTHhVQ?start=5&end=17&autoplay=1",
+     "t": 5.4,
+     "quote": "The government is preparing for potential food shortages if the Strait of Hormuz is still closed. This is all to do with the supply of carbon dioxide.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Keir Starmer",
+     "confidence": 1.0,
+     "why": "The speaker, a high-ranking UK official, explicitly mentions government preparations for potential food shortages due to the conflict in the Middle East.",
+     "t_end": 16.7,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "00:44",
+     "end": "00:56",
+     "start_seconds": 44.4,
+     "end_seconds": 56.7,
+     "start_tc": "00:00:44.400",
+     "end_tc": "00:00:56.700",
+     "duration_seconds": 12.3,
+     "timestamp": "00:44",
+     "link": "https://www.youtube.com/watch?v=SEIzRKTHhVQ&t=44s",
+     "clip_link": "https://www.youtube.com/embed/SEIzRKTHhVQ?start=44&end=57&autoplay=1",
+     "t": 44.4,
+     "quote": "Government sources have told the BBC there could be less choice on the shelves under its reasonable worst-case scenario, if CO2 supplies are disrupted.",
+     "verdict": "paraphrase",
+     "who_says": "journalist",
+     "speaker_name": "",
+     "confidence": 1.0,
+     "why": "The journalist reports on official government scenarios regarding food supply disruptions and reduced choice on shelves.",
+     "t_end": 56.7,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Iran war will worsen food insecurity in already fragile nations, humanitarian group warns",
+   "uploaded": "2026-05-05",
+   "platform": "youtube",
+   "video_id": "MDWI--CskEA",
+   "duration": 299,
+   "channel": "CBS News",
+   "url": "https://www.youtube.com/watch?v=MDWI--CskEA",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:36",
+     "end": "01:14",
+     "start_seconds": 36.5,
+     "end_seconds": 74.5,
+     "start_tc": "00:00:36.500",
+     "end_tc": "00:01:14.500",
+     "duration_seconds": 38.0,
+     "timestamp": "00:36",
+     "link": "https://www.youtube.com/watch?v=MDWI--CskEA&t=36s",
+     "clip_link": "https://www.youtube.com/embed/MDWI--CskEA?start=36&end=75&autoplay=1",
+     "t": 36.5,
+     "quote": "Often when people are thinking about the war they're of course thinking about the Middle East where all of the action is happening. But the impacts of the war... are traveling around the world through fuel and fertilizer prices, which cascade through the economy and end up being paid by people.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Kate Phillips-Barrasso",
+     "confidence": 0.9,
+     "why": "The expert explains how the conflict impacts global food security through economic cascades affecting fuel and fertilizer prices.",
+     "t_end": 74.5,
+     "speaker_role": "expert",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "01:14",
+     "end": "01:43",
+     "start_seconds": 74.9,
+     "end_seconds": 103.37,
+     "start_tc": "00:01:14.900",
+     "end_tc": "00:01:43.370",
+     "duration_seconds": 28.5,
+     "timestamp": "01:14",
+     "link": "https://www.youtube.com/watch?v=MDWI--CskEA&t=74s",
+     "clip_link": "https://www.youtube.com/embed/MDWI--CskEA?start=74&end=104&autoplay=1",
+     "t": 74.9,
+     "quote": "We are really concerned that these dramatic increases in fuel and fertilizer prices are going to have a dramatic impact on food insecurity around the world and as the World Food Program has said, an estimated 45 million additional people worldwide will fall into hunger by the end of this year.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Kate Phillips-Barrasso",
+     "confidence": 1.0,
+     "why": "The speaker explicitly states the risk of global hunger and food insecurity resulting from the conflict's impact on resources.",
+     "t_end": 103.37,
+     "speaker_role": "expert",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "02:11",
+     "end": "02:33",
+     "start_seconds": 131.0,
+     "end_seconds": 153.2,
+     "start_tc": "00:02:11.000",
+     "end_tc": "00:02:33.200",
+     "duration_seconds": 22.2,
+     "timestamp": "02:11",
+     "link": "https://www.youtube.com/watch?v=MDWI--CskEA&t=131s",
+     "clip_link": "https://www.youtube.com/embed/MDWI--CskEA?start=131&end=154&autoplay=1",
+     "t": 131.0,
+     "quote": "If fertilizer prices are really high because very little is getting through the strait right now, they will plant less crop or they will have a less productive yield. And that basically means when they come to harvest in the fall that there will be dramatically less food.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Kate Phillips-Barrasso",
+     "confidence": 0.95,
+     "why": "She details the mechanism by which the conflict leads to a reduction in food production and subsequent food shortages.",
+     "t_end": 153.2,
+     "speaker_role": "expert",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Conflict in the Middle East and the implications for food security - FAO Presser | United Nations",
+   "uploaded": "2026-03-27",
+   "platform": "youtube",
+   "video_id": "rNZdXxmnK8Q",
+   "duration": 1615,
+   "channel": "United Nations",
+   "url": "https://www.youtube.com/watch?v=rNZdXxmnK8Q",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "13:46",
+     "end": "14:09",
+     "start_seconds": 826.0,
+     "end_seconds": 849.0,
+     "start_tc": "00:13:46.000",
+     "end_tc": "00:14:09.000",
+     "duration_seconds": 23.0,
+     "timestamp": "13:46",
+     "link": "https://www.youtube.com/watch?v=rNZdXxmnK8Q&t=826s",
+     "clip_link": "https://www.youtube.com/embed/rNZdXxmnK8Q?start=826&end=850&autoplay=1",
+     "t": 826.0,
+     "quote": "my focus and our focus as FAO is on food security, and that's where we can focus. But clearly what we are saying by looking at the different temporalities is that if everything is resolved in the next two weeks or so, the markets will absorb and that will minimize any potential risk of food security in the world in the next planting season or any potential risk of economic impacts.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Maximo Torero",
+     "confidence": 0.95,
+     "why": "The FAO official discusses food security risks related to potential global economic and food crises based on the duration of conflicts.",
+     "t_end": 849.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    },
+    {
+     "start": "16:44",
+     "end": "17:30",
+     "start_seconds": 1004.0,
+     "end_seconds": 1050.0,
+     "start_tc": "00:16:44.000",
+     "end_tc": "00:17:30.000",
+     "duration_seconds": 46.0,
+     "timestamp": "16:44",
+     "link": "https://www.youtube.com/watch?v=rNZdXxmnK8Q&t=1004s",
+     "clip_link": "https://www.youtube.com/embed/rNZdXxmnK8Q?start=1004&end=1051&autoplay=1",
+     "t": 1004.0,
+     "quote": "During the Ukraine war the major problem was that when the war started, the war in Ukraine, Ukraine had already shipped a significant share of their commodities, which mainly were wheat and sunflower out because they finished the first harvest. So the problem when the Black Sea was blocked was that the new harvest needed to be stored, and especially the following year. The other problem of course was the problem of natural gas, which was crucial for Europe, for production of nitrogen, and also fertilizers. But it was possible at the end even in the first months to be able to move fertilizers through Russian Federation and also grain to other countries of the world. So there was flexibility that allowed that to move and to resolve and closing the gap.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Maximo Torero",
+     "confidence": 0.95,
+     "why": "The official compares past impacts of the Ukraine war on grain, fertilizers, and food supply chains.",
+     "t_end": 1050.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    }
+   ]
+  },
+  {
+   "title": "What has the Iran war got to do with the price of bread?",
+   "uploaded": "2026-03-06",
+   "platform": "youtube",
+   "video_id": "UojeGMfqgKw",
+   "duration": 77,
+   "channel": "Reuters",
+   "url": "https://www.youtube.com/watch?v=UojeGMfqgKw",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:16",
+     "start_seconds": 0.0,
+     "end_seconds": 16.7,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:16.700",
+     "duration_seconds": 16.7,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=UojeGMfqgKw&t=0s",
+     "clip_link": "https://www.youtube.com/embed/UojeGMfqgKw?start=0&end=17&autoplay=1",
+     "t": 0.0,
+     "quote": "What does the war in Iran have to do with the price of bread? Unfortunately, a lot. You might already know that oil prices have jumped because tankers are stuck in the Persian Gulf. But here's what you might not know: a third of the world's fertilizer passes through that same narrow strait.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Elena Casas",
+     "confidence": 1.0,
+     "why": "The journalist explains how the conflict in Iran impacts global fertilizer supply, which directly affects food prices and security.",
+     "t_end": 16.7,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "00:49",
+     "end": "01:07",
+     "start_seconds": 49.3,
+     "end_seconds": 67.4,
+     "start_tc": "00:00:49.300",
+     "end_tc": "00:01:07.400",
+     "duration_seconds": 18.1,
+     "timestamp": "00:49",
+     "link": "https://www.youtube.com/watch?v=UojeGMfqgKw&t=49s",
+     "clip_link": "https://www.youtube.com/embed/UojeGMfqgKw?start=49&end=68&autoplay=1",
+     "t": 49.3,
+     "quote": "Without it, crop yields will fall. Everyday staples like bread, pasta and potatoes will get more expensive. When Russia launched its full scale invasion of Ukraine back in 2022, fertilizer supply took a hit. Food prices jumped 11.4% in the U.S. that year and 15% in Europe.",
+     "verdict": "literal",
+     "who_says": "other_named",
+     "speaker_name": "Elena Casas",
+     "confidence": 1.0,
+     "why": "The journalist explicitly mentions the impact of the Ukraine war on food prices in Europe and the risk of falling crop yields.",
+     "t_end": 67.4,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "How the Iran war could raise food prices | Global News Podcast",
+   "uploaded": "2026-03-23",
+   "platform": "youtube",
+   "video_id": "OMsTBoMNeHg",
+   "duration": 572,
+   "channel": "BBC News",
+   "url": "https://www.youtube.com/watch?v=OMsTBoMNeHg",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "03:26",
+     "end": "03:39",
+     "start_seconds": 206.0,
+     "end_seconds": 219.0,
+     "start_tc": "00:03:26.000",
+     "end_tc": "00:03:39.000",
+     "duration_seconds": 13.0,
+     "timestamp": "03:26",
+     "link": "https://www.youtube.com/watch?v=OMsTBoMNeHg&t=206s",
+     "clip_link": "https://www.youtube.com/embed/OMsTBoMNeHg?start=206&end=220&autoplay=1",
+     "t": 206.0,
+     "quote": "And we've talked so much about oil and gas, but also food is going to become a problem if this war continues. The United Nations has warned that tens of millions more people could face acute hunger if this war lasts until June.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Charlotte Gallagher",
+     "confidence": 1.0,
+     "why": "The journalist explicitly mentions the UN warning about acute hunger and food security risks due to the ongoing conflict.",
+     "t_end": 219.0,
+     "speaker_role": "journalist",
+     "timing": "non retrouvé"
+    },
+    {
+     "start": "08:22",
+     "end": "08:52",
+     "start_seconds": 502.0,
+     "end_seconds": 532.0,
+     "start_tc": "00:08:22.000",
+     "end_tc": "00:08:52.000",
+     "duration_seconds": 30.0,
+     "timestamp": "08:22",
+     "link": "https://www.youtube.com/watch?v=OMsTBoMNeHg&t=502s",
+     "clip_link": "https://www.youtube.com/embed/OMsTBoMNeHg?start=502&end=533&autoplay=1",
+     "t": 502.0,
+     "quote": "And when you are talking about less developed nations, the other thing to remember is that the people kind of, you know, we're not talking giant agricultural firms, we're talking smallholders who really aren't able to bear these higher costs of things like fertilizer. And so that's why you have agencies like the UN World Food Programme warning that, you know, there is a risk of acute hunger for some sort of 45 million people as a result of this conflict kind of worsening conditions on the ground.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Michelle Fleury",
+     "confidence": 1.0,
+     "why": "The correspondent details the UN World Food Programme's warning about acute hunger for 45 million people due to the conflict's impact on fertilizer and agriculture.",
+     "t_end": 532.0,
+     "speaker_role": "journalist",
+     "timing": "non retrouvé"
+    }
+   ]
+  },
+  {
+   "title": "Global Food Crisis Warning: Grain Prices Hit Highest Level Since 2022 | World News | TV9Gujarati",
+   "uploaded": "2026-09-06",
+   "platform": "youtube",
+   "video_id": "C7ihClPgbl8",
+   "duration": 81,
+   "channel": "TV9 Gujarati",
+   "url": "https://www.youtube.com/watch?v=C7ihClPgbl8",
+   "method": "gemini-video",
+   "authority": 0.7,
+   "authority_why": "chaîne non répertoriée (5 010 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:07",
+     "end": "00:20",
+     "start_seconds": 7.4,
+     "end_seconds": 20.3,
+     "start_tc": "00:00:07.400",
+     "end_tc": "00:00:20.300",
+     "duration_seconds": 12.9,
+     "timestamp": "00:07",
+     "link": "https://www.youtube.com/watch?v=C7ihClPgbl8&t=7s",
+     "clip_link": "https://www.youtube.com/embed/C7ihClPgbl8?start=7&end=21&autoplay=1",
+     "t": 7.4,
+     "quote": "यूरोपमा हिट वेभ, अलग्नोनी असर खादय संकट ना ऐन्धान | युद्ध ना कारने अनाजय हेरफेर खोरवाई हवातिय हजु पुर्वठो ओछो थसे | भारतमा खांड सेती चीजो ना भाव बधि रहा छे |",
+     "verdict": "paraphrase",
+     "who_says": "unknown",
+     "speaker_name": "",
+     "confidence": 0.8,
+     "why": "Le présentateur mentionne les impacts des canicules et de la guerre en Ukraine/Iran sur la sécurité alimentaire en Europe.",
+     "t_end": 20.3,
+     "speaker_role": "journalist",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Global food supplies could be badly hit if Iran war drags on, says fertiliser boss",
+   "date": "2026-03-14",
+   "source": "The Guardian",
+   "domain": "theguardian.com",
+   "url": "https://www.theguardian.com/world/2026/mar/14/global-food-supplies-iran-war-fertiliser-yara-svein-tore-holsether",
+   "verified_on_full_text": true,
+   "read_via": "api",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "“For some crops, if they don’t get the fertiliser, you can see a reduction of up to 50% in the first harvest,” he added, referring to European summer crops including early potatoes.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Svein Tore Holsether",
+     "confidence": 0.85,
+     "why": "Le dirigeant de Yara International alerte sur une chute drastique des rendements agricoles en Europe en raison de la guerre en Iran qui perturbe l'approvisionnement en engrais.",
+     "t_end": 45.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "L’escalade au Moyen-Orient pourrait porter l’insécurité alimentaire à des niveaux sans précédent, avertit le PAM",
+   "date": "2026-03-17",
+   "source": "ONU Programme Alimentaire Mondial",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQNzFGSm5VLXZfT2ZuMkF0aWRBcUhzRmJyU29aRlAtY1V0cTRKSTFFNk1RYXg1YzA5LUZsSmNHanM2WU12N3hEbDhyUHRqUlZwSGhXYjRlY0h4VTBDTGxPRzBXQ2VjMmM1VzFSSl9aUjA3bjY2d3FSUHBvVm1FeXpBZlhFVFZYWGYyb2R3blRWZUJMMDFlQ1Y0c0hCM041alV1M1J6bVRpLWxBYWFX?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Le conflit au Moyen-Orient menace la sécurité alimentaire mondiale",
+   "date": "2026-04-15",
+   "source": "rts.ch",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOTHdDekM3RklReURWNmdNakVMVnhUT3dUQUVIMkhhTlNSdFBVNVZLZ3U0Yk5mM0hZOWJPR084bE5jUksyUUZubGZOLUUxdE80YWxPcHZLY3JieFMtMXhLYXB3YjZMQllmWmFfZmFvVktQR252cTdTejYxUW9IaXI4UzJKZ3djWHFzMzlwRlNYTTNRUVhaSEdPams5MTZGNzNGczVnRG1pSTN4R1NId2lkWHdMR1lnZw?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Global Food Supply Faces a Dangerous Bottleneck as Iran War Persists",
+   "date": "2026-03-27",
+   "source": "The New York Times",
+   "url": "https://www.nytimes.com/2026/03/27/business/economy/fertilizer-food-supply-iran-war.html",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  }
+ ],
+ "unverifiable_videos": []
+}
