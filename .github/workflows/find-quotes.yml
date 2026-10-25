@@ -55,7 +55,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: find-quotes
+  # lancements OSINT : groupe propre à chaque run -> jamais annulés par un autre lancement en attente
+  group: find-quotes${{ github.event_name == 'repository_dispatch' && format('-osint-{0}', github.run_id) || '' }}
   cancel-in-progress: false
 
 jobs:
