@@ -8,15 +8,14 @@ if ! mkdir "$QF/lock" 2>/dev/null; then
   [ $(( $(date +%s) - $(stat -c %Y "$QF/lock" 2>/dev/null || date +%s) )) -gt 3600 ] && rm -rf "$QF/lock" && mkdir "$QF/lock" || exit 0
 fi
 trap 'rm -rf "$QF/lock"' EXIT
-command -v termux-wake-lock >/dev/null && termux-wake-lock 2>/dev/null   # le temps du passage seulement
-curl -s -m 15 -o /dev/null https://github.com || { echo "$(date '+%F %T') pas de réseau, passage reporté" >> "$LOG"; command -v termux-wake-unlock >/dev/null && termux-wake-unlock; exit 0; }
+# pas de réseau : on reporte (aucun réveil forcé du téléphone, compatible économie d'énergie)
+curl -s -m 15 -o /dev/null https://github.com || { echo "$(date '+%F %T') pas de réseau, passage reporté" >> "$LOG"; exit 0; }
 {
   echo "===== $(date '+%F %T')"
   cd "$REPO" && git pull --rebase -q 2>&1 | tail -2
   timeout 1800 python -m quote_finder.phone_precise --repo "$REPO" 2>&1 | grep -v "^ *$" | tail -15
 } >> "$LOG" 2>&1
 RC=$?
-command -v termux-wake-unlock >/dev/null && termux-wake-unlock 2>/dev/null
 tail -n 3000 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"
 touch "$QF/last_ok"
 LAST="$(grep -E "extraits recalés" "$LOG" | tail -1)"

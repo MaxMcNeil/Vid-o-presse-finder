@@ -9,7 +9,9 @@ echo "1/5 Paquets Termux…"
 pkg install -y python git curl >/dev/null 2>&1 || { echo "✘ pkg install a échoué : lance 'pkg update' puis relance ce script"; exit 1; }
 pkg install -y termux-api >/dev/null 2>&1 || true
 echo "2/5 Bibliothèques Python (sous-titres YouTube)…"
-pip install -q --upgrade "youtube-transcript-api>=1.0,<2" "requests>=2.31,<3" || { echo "✘ pip a échoué"; exit 1; }
+pip install -q --upgrade "youtube-transcript-api>=1.0,<2" "requests>=2.31,<3" yt-dlp || { echo "✘ pip a échoué"; exit 1; }
+# un ancien verrou de veille laissé par la 1re version : relâché (économie d'énergie)
+command -v termux-wake-unlock >/dev/null && termux-wake-unlock 2>/dev/null
 [ -d "$REPO/.git" ] || { echo "✘ dépôt introuvable dans $REPO (QF_REPO=chemin pour un autre dossier)"; exit 1; }
 
 echo "3/5 Commande qf…"

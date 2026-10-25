@@ -8,10 +8,22 @@ case "${1:-aide}" in
     [ -f "$QF/last_ok" ] && echo "Dernier passage : $(date -r "$QF/last_ok" '+%d/%m %H:%M')" || echo "Aucun passage encore"
     command -v termux-job-scheduler >/dev/null && (timeout 15 termux-job-scheduler --pending 2>/dev/null | grep -q 4242 && echo "Passage automatique : actif" || echo "Passage automatique : inactif (relance : qf installer)")
     echo "--- derniers messages ---"; tail -n 15 "$QF/precis.log" 2>/dev/null ;;
-  maj|update) cd "$REPO" && git pull --rebase && bash "$REPO/termux/install-precis.sh" ;;
+  maj|update) cd "$REPO" && git pull --rebase && pip install -q -U yt-dlp && bash "$REPO/termux/install-precis.sh" ;;
+  test)  # diagnostic : quel moyen d'accès aux sous-titres marche depuis ce téléphone, sur ce réseau ?
+    cd "$REPO" && python - <<'PY'
+from quote_finder import phone_precise as p
+for name, fn in (("youtube-transcript-api", p._api_tracks), ("yt-dlp", p._ytdlp_tracks)):
+    try:
+        t = fn("dQw4w9WgXcQ", ["en"])
+        print(f"✔ {name} : {sum(len(x) for x in t)} lignes de sous-titres" if t else f"⚠ {name} : aucune ligne")
+    except Exception as e:
+        print(f"✘ {name} : {e}")
+PY
+    ;;
   installer|install) bash "$REPO/termux/install-precis.sh" ;;
   *) echo "qf precis   → recale maintenant les extraits sur les sous-titres YouTube et envoie sur GitHub"
      echo "qf statut   → dernier passage, passage automatique, derniers messages"
      echo "qf maj      → met à jour le programme depuis GitHub et réinstalle"
-     echo "qf installer→ réinstalle (sans danger)" ;;
+     echo "qf installer→ réinstalle (sans danger)"
+     echo "qf test     → vérifie si YouTube laisse lire les sous-titres depuis ce téléphone / ce réseau" ;;
 esac
