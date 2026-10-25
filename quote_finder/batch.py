@@ -78,6 +78,14 @@ def merge(batch_dir: Path, title: str = "") -> Path:
     L = [f"# {title or 'Lot de recherches'} — {batch_dir.name}", "",
          f"{len(rows)} recherche(s), {len(clips)} extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).", "",
          "| # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |", "|---|---|---|---|---|---|---|"]
+    prec = {}
+    for c in clips:
+        prec[c.get("timing", "ia")] = prec.get(c.get("timing", "ia"), 0) + 1
+    if clips:
+        todo = sum(n for k, n in prec.items() if k != "sous-titres" and k)
+        L.insert(3, f"Précision : {prec.get('sous-titres', 0)} extrait(s) calé(s) sur les sous-titres (±1-2 s), "
+                    f"{prec.get('ia-affiné', 0)} affiné(s) par Gemini (±1 s), {prec.get('ia', 0)} estimé(s) (±5 s)."
+                    + (f" ⏳ {todo} seront recalés par le téléphone au prochain passage (`qf precis`)." if todo else "") + "\n")
     for name, target, claim, nv, nc, na, err in rows:
         link = f"[report.md]({name}/report.md)" if not err else f"⚠️ {err}"
         L.append(f"| {name[:2]} | {target} | {claim} | {nv} | {nc} | {na} | {link} |")

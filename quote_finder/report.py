@@ -121,6 +121,7 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
     data = {
         **head, "plan": plan.to_dict(), "stats": stats or {},
         "videos": [{"title": r.video.title, "uploaded": r.video.published[:10], "platform": r.video.platform,
+                    "video_id": video_id(r.video.url, r.video.platform), "duration": r.video.duration,
                     "channel": r.video.channel, "url": r.video.url, "method": r.method,
                     "authority": r.video.authority, "authority_why": r.video.authority_why,
                     "moments": [{"start": fmt_ts(h.t), "end": fmt_ts(h.t_end), "start_seconds": h.t, "end_seconds": h.t_end,

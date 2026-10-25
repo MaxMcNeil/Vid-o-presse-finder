@@ -122,6 +122,23 @@ ou lance *Actions → Diagnostic* qui teste chaque clé de chaque api et donne l
 5. Sans sous-titres : Gemini regarde la vidéo (YouTube) ou écoute l'audio (Dailymotion, Archive).
 6. Garde-fous : 5 min max par vidéo analysée par IA, 35 min max par recherche, une recherche en échec n'empêche pas les autres d'être enregistrées.
 
+## Précision par le téléphone (facultatif, recommandé)
+
+Depuis GitHub, YouTube bloque la lecture des sous-titres. Depuis ton téléphone (connexion de particulier), non.
+Le téléphone sert donc de **bonus** : GitHub fait toute la recherche sans jamais l'attendre, puis le téléphone, quand il
+passe, recale les extraits des 14 derniers jours sur les sous-titres YouTube (±1-2 s) et renvoie les fichiers sur GitHub.
+Aucun compte YouTube : sous-titres publics, comme un visiteur non connecté.
+
+Installation (une fois, dans Termux) :
+```bash
+cd ~/vpf && git pull && bash termux/install-precis.sh
+```
+- Passage automatique : planificateur Android (avec l'appli **Termux:API**), compatible économie d'énergie
+  (Android choisit le moment), au démarrage (avec **Termux:Boot**) et à chaque ouverture de Termux.
+- `qf precis` : passage immédiat · `qf statut` : état · `qf maj` : mise à jour.
+- Téléphone éteint, hors réseau, YouTube qui limite : rien ne casse, c'est fait au passage suivant.
+- Chaque lot (`INDEX.md`) indique combien d'extraits restent à recaler.
+
 ## Diagnostic
 
 *Actions → Diagnostic → Run workflow* teste chaque clé et chaque service depuis GitHub et dit ce qui ne marche pas.

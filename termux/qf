@@ -1,0 +1,17 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# qf precis | qf statut | qf maj | qf installer
+QF="$HOME/.qf"; REPO="$(cat "$QF/repo" 2>/dev/null || echo "$HOME/vpf")"
+case "${1:-aide}" in
+  precis|précis) "$QF/run-precis.sh" ;;
+  statut|status)
+    echo "Dépôt : $REPO"
+    [ -f "$QF/last_ok" ] && echo "Dernier passage : $(date -r "$QF/last_ok" '+%d/%m %H:%M')" || echo "Aucun passage encore"
+    command -v termux-job-scheduler >/dev/null && (timeout 15 termux-job-scheduler --pending 2>/dev/null | grep -q 4242 && echo "Passage automatique : actif" || echo "Passage automatique : inactif (relance : qf installer)")
+    echo "--- derniers messages ---"; tail -n 15 "$QF/precis.log" 2>/dev/null ;;
+  maj|update) cd "$REPO" && git pull --rebase && bash "$REPO/termux/install-precis.sh" ;;
+  installer|install) bash "$REPO/termux/install-precis.sh" ;;
+  *) echo "qf precis   → recale maintenant les extraits sur les sous-titres YouTube et envoie sur GitHub"
+     echo "qf statut   → dernier passage, passage automatique, derniers messages"
+     echo "qf maj      → met à jour le programme depuis GitHub et réinstalle"
+     echo "qf installer→ réinstalle (sans danger)" ;;
+esac
