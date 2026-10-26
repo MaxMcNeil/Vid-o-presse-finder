@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 27/10/2026 à 00:30 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 27/10/2026 à 00:34 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -21,10 +21,10 @@ _Mis à jour le 27/10/2026 à 00:30 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 0 min (données mobiles) : 15 extrait(s) recalé(s), 1 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
-  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 6 h 30 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
+- ✅ Dernier passage il y a 0 min (données mobiles) : 32 extrait(s) recalé(s), 3 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
+  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 6 h 34 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
-- ⏳ Extraits en attente de recalage par le téléphone : 104
+- ⏳ Extraits en attente de recalage par le téléphone : 79
 
 ## Dernier lancement
 

@@ -105,3 +105,31 @@ _Recherche de déclarations d'autorités et d'experts sur les risques de famine 
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 20.6 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:03 → 00:16](https://www.youtube.com/embed/SEIzRKTHhVQ?start=3&end=17&autoplay=1) — Will there be a food shortage in the UK due to the war in Iran? #Food 
+  > The government is preparing for potential food shortages if the Strait of Hormuz is still closed. This is all to do with the supply of carbon dioxide.
+- [00:45 → 00:58](https://www.youtube.com/embed/SEIzRKTHhVQ?start=45&end=59&autoplay=1) — Will there be a food shortage in the UK due to the war in Iran? #Food 
+  > Government sources have told the BBC there could be less choice on the shelves under its reasonable worst-case scenario, if CO2 supplies are disrupted.
+- [00:37 → 00:57](https://www.youtube.com/embed/MDWI--CskEA?start=37&end=58&autoplay=1) — Iran war will worsen food insecurity in already fragile nations, human
+  > Often when people are thinking about the war they're of course thinking about the Middle East where all of the action is happening. But the impacts of the war... are traveling around the world through
+- [01:10 → 01:33](https://www.youtube.com/embed/MDWI--CskEA?start=70&end=94&autoplay=1) — Iran war will worsen food insecurity in already fragile nations, human
+  > We are really concerned that these dramatic increases in fuel and fertilizer prices are going to have a dramatic impact on food insecurity around the world and as the World Food Program has said, an e
+- [02:18 → 02:37](https://www.youtube.com/embed/MDWI--CskEA?start=138&end=158&autoplay=1) — Iran war will worsen food insecurity in already fragile nations, human
+  > If fertilizer prices are really high because very little is getting through the strait right now, they will plant less crop or they will have a less productive yield. And that basically means when the
+- [08:26 → 08:50](https://www.youtube.com/embed/rNZdXxmnK8Q?start=506&end=531&autoplay=1) — Conflict in the Middle East and the implications for food security - F
+  > my focus and our focus as FAO is on food security, and that's where we can focus. But clearly what we are saying by looking at the different temporalities is that if everything is resolved in the next
+- [10:05 → 10:49](https://www.youtube.com/embed/rNZdXxmnK8Q?start=605&end=650&autoplay=1) — Conflict in the Middle East and the implications for food security - F
+  > During the Ukraine war the major problem was that when the war started, the war in Ukraine, Ukraine had already shipped a significant share of their commodities, which mainly were wheat and sunflower 
+- [00:00 → 00:17](https://www.youtube.com/embed/UojeGMfqgKw?start=0&end=18&autoplay=1) — What has the Iran war got to do with the price of bread?
+  > What does the war in Iran have to do with the price of bread? Unfortunately, a lot. You might already know that oil prices have jumped because tankers are stuck in the Persian Gulf. But here's what yo
+- [00:49 → 01:08](https://www.youtube.com/embed/UojeGMfqgKw?start=49&end=69&autoplay=1) — What has the Iran war got to do with the price of bread?
+  > Without it, crop yields will fall. Everyday staples like bread, pasta and potatoes will get more expensive. When Russia launched its full scale invasion of Ukraine back in 2022, fertilizer supply took
+- [02:05 → 02:20](https://www.youtube.com/embed/OMsTBoMNeHg?start=125&end=141&autoplay=1) — How the Iran war could raise food prices | Global News Podcast
+  > And we've talked so much about oil and gas, but also food is going to become a problem if this war continues. The United Nations has warned that tens of millions more people could face acute hunger if
+- [05:01 → 05:33](https://www.youtube.com/embed/OMsTBoMNeHg?start=301&end=334&autoplay=1) — How the Iran war could raise food prices | Global News Podcast
+  > And when you are talking about less developed nations, the other thing to remember is that the people kind of, you know, we're not talking giant agricultural firms, we're talking smallholders who real
+

@@ -1,17 +1,17 @@
 # 🔗 OSINT : préparatifs guerre USA Russie Allemagne France — 2026-10-26_2220_n24
 
 Lancé par [MaxMcNeil/OSINT-teleprompter-](https://github.com/MaxMcNeil/OSINT-teleprompter-/actions/runs/40398213168) pour le live : « Ils préparent la guerre » — script dans `prompter/2026-10-26_20h55_preparatifs-guerre-usa-russie-allemagne-france`.
-Précision : 15 extrait(s) calé(s) sur les sous-titres (±1-2 s), 1 affiné(s) par Gemini (±1 s), 0 estimé(s) (±5 s).
+Précision : 16 extrait(s) calé(s) sur les sous-titres (±1-2 s), 1 affiné(s) par Gemini (±1 s), 0 estimé(s) (±5 s).
 
 
-4 recherche(s), 16 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
+4 recherche(s), 17 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |
 |---|---|---|---|---|---|---|
 | 01 | Donald Trump | calls for 1.5 trillion dollar defense budget dream army | 2 | 2 | 2 | [report.md](01-donald-trump-calls-for-1-5-trillion-dollar-defense/report.md) |
 | 02 | Sergueï Lavrov | no pause in special military operation at UN Security Council | 6 | 7 | 1 | [report.md](02-serguei-lavrov-no-pause-in-special-military-operat/report.md) |
 | 03 | Friedrich Merz | Bundeswehr zur stärksten konventionellen Armee in Europa machen | 1 | 1 | 0 | [report.md](03-friedrich-merz-bundeswehr-zur-starksten-konvention/report.md) |
-| 04 | Parlement français | adoption de la loi de programmation militaire 436 milliards d'euros | 4 | 6 | 4 | [report.md](04-parlement-francais-adoption-de-la-loi-de-programma/report.md) |
+| 04 | Parlement français | adoption de la loi de programmation militaire 436 milliards d'euros | 4 | 7 | 4 | [report.md](04-parlement-francais-adoption-de-la-loi-de-programma/report.md) |
 
 ## Meilleurs extraits
 
@@ -43,5 +43,5 @@ Précision : 15 extrait(s) calé(s) sur les sous-titres (±1-2 s), 1 affiné(s) 
   > Once I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kiev regime with weapons
 - [00:06:55 → 00:07:14](https://www.youtube.com/embed/xgXYEc6ZzUI?start=415&end=435&autoplay=1) · DWS News · Friedrich Merz · score 0.83
   > We are transforming our army, the Bundeswehr, into the, quote, strongest conventional army in Europe. Our new military strategy puts political intent into a coherent military framework.
-- [00:11:22 → 00:11:33](https://www.youtube.com/embed/EYjBc72VgVg?start=682&end=694&autoplay=1) · DWS News · Donald Trump · score 0.73
-  > and next year, I'm proud to say, and Pete, we have to get moving on this, $1.5 trillion we're going up to. All we need, and it's all made in the USA.
+- [00:05:28 → 00:05:41](https://www.youtube.com/embed/RfnXrYOdtC4?start=328&end=342&autoplay=1) · Public Sénat · Steve Kim · score 0.81
+  > gouvernement et députés poussés pour 36 milliards d'euros de rab d'ici à 2030, les sénateurs souhaitaient eux porter l'effort jusqu'à 50 milliards au regard du contexte international.

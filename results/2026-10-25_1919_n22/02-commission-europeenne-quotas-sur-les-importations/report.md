@@ -103,3 +103,23 @@ _Décisions, propositions ou débats de la Commission européenne concernant l'i
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 22.4 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:29 → 00:55](https://www.youtube.com/embed/j5uVicxkHSc?start=29&end=56&autoplay=1) — Brussels considers allowing restrictions on Ukrainian grain in case of
+  > We need to take into account the sensitivities of agricultural sectors, especially in the neighbouring countries... including on a possibility of having safeguards not only in the case of disturbances
+- [00:20 → 00:39](https://www.youtube.com/embed/tcJCRYzcHWQ?start=20&end=40&autoplay=1) — L'UE dénonce l'interdiction décidée par Varsovie et Budapest d'importe
+  > La Commission européenne a répondu que ces interdictions unilatérales étaient inacceptables. Elle lance dans l'urgence une consultation... ce qui signifie que c'est au niveau de l'UE que de telles déc
+- [01:07 → 01:34](https://www.youtube.com/embed/VvNzGdxu0_0?start=67&end=95&autoplay=1) — EU moves to limit row over Ukrainian grain as Bulgaria announces impor
+  > The EU has rushed to quell the revolt arguing for a common European approach as customs policy should be united across the block. You will recall that we have already provided a support package of 56.
+- [01:03 → 01:23](https://www.youtube.com/embed/cPguMcNKDK4?start=63&end=84&autoplay=1) — Trade Commissioner wants full trade liberalization with Ukraine! AGRI 
+  > Now, how have different members of the college contributed to this? Well, they have contributed all of them by looking at the proposals from the college, discussing their point of view. Commission of 
+- [01:23 → 02:26](https://www.youtube.com/embed/cPguMcNKDK4?start=83&end=147&autoplay=1) — Trade Commissioner wants full trade liberalization with Ukraine! AGRI 
+  > In relation to Commissioner Wojciechowski, he advocates consistently and strongly for European farmers... there's a balance to be struck here between continuing our unwavering support for Ukraine on a
+- [00:03 → 00:09](https://www.youtube.com/embed/54GSNumTqGw?start=3&end=10&autoplay=1) — Brussels proposes to extend EU-Ukraine free trade. But restrictions on
+  > the European Commission has issued proposals to restrict farm imports from Ukraine
+- [01:09 → 01:27](https://www.youtube.com/embed/54GSNumTqGw?start=69&end=88&autoplay=1) — Brussels proposes to extend EU-Ukraine free trade. But restrictions on
+  > Now the Commission is willing to add an emergency break for other sensitive goods like egg, sugar and poultry. Pre-war tariffs will be introduced if import volumes exceed the level of the last two yea
+

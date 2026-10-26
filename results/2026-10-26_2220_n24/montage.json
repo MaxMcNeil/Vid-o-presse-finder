@@ -465,6 +465,39 @@
    "order": 14
   },
   {
+   "search": "04-parlement-francais-adoption-de-la-loi-de-programma",
+   "target": "Parlement français",
+   "target_type": "entite",
+   "claim": "adoption de la loi de programmation militaire 436 milliards d'euros",
+   "platform": "youtube",
+   "video_id": "RfnXrYOdtC4",
+   "source_url": "https://www.youtube.com/watch?v=RfnXrYOdtC4",
+   "title": "Christian Cambon : « Pour dissuader un ennemi de vous attaquer, il faut être fort »",
+   "channel": "Public Sénat",
+   "uploaded": "2026-07-01",
+   "source_authority": 1.0,
+   "source_authority_why": "chaîne officielle / agence",
+   "start": 328.17,
+   "end": 341.07,
+   "duration": 12.9,
+   "start_tc": "00:05:28.169",
+   "end_tc": "00:05:41.069",
+   "in": 327.17,
+   "out": 341.87,
+   "in_tc": "00:05:27.169",
+   "out_tc": "00:05:41.869",
+   "timing": "sous-titres",
+   "quote": "gouvernement et députés poussés pour 36 milliards d'euros de rab d'ici à 2030, les sénateurs souhaitaient eux porter l'effort jusqu'à 50 milliards au regard du contexte international.",
+   "speaker": "Steve Kim",
+   "speaker_role": "journalist",
+   "who_says": "other_named",
+   "verdict": "paraphrase",
+   "confidence": 0.9,
+   "score": 0.805,
+   "link": "https://www.youtube.com/embed/RfnXrYOdtC4?start=328&end=342&autoplay=1",
+   "order": 15
+  },
+  {
    "search": "01-donald-trump-calls-for-1-5-trillion-dollar-defense",
    "target": "Donald Trump",
    "target_type": "personne",
@@ -495,7 +528,7 @@
    "confidence": 0.95,
    "score": 0.726,
    "link": "https://www.youtube.com/embed/EYjBc72VgVg?start=682&end=694&autoplay=1",
-   "order": 15
+   "order": 16
   },
   {
    "search": "01-donald-trump-calls-for-1-5-trillion-dollar-defense",
@@ -528,7 +561,7 @@
    "confidence": 0.85,
    "score": 0.713,
    "link": "https://www.youtube.com/embed/0i6Gap4vRZM?start=0&end=23&autoplay=1",
-   "order": 16
+   "order": 17
   }
  ]
 }

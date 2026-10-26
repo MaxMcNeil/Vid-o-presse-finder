@@ -368,26 +368,29 @@
    "authority_why": "chaîne officielle / agence",
    "moments": [
     {
-     "start": "08:47",
-     "end": "09:00",
-     "start_seconds": 527.0,
-     "end_seconds": 540.0,
-     "start_tc": "00:08:47.000",
-     "end_tc": "00:09:00.000",
-     "duration_seconds": 13.0,
-     "timestamp": "08:47",
-     "link": "https://www.youtube.com/watch?v=RfnXrYOdtC4&t=527s",
-     "clip_link": "https://www.youtube.com/embed/RfnXrYOdtC4?start=527&end=541&autoplay=1",
-     "t": 527.0,
+     "start": "05:28",
+     "end": "05:41",
+     "start_seconds": 328.169,
+     "end_seconds": 341.069,
+     "start_tc": "00:05:28.169",
+     "end_tc": "00:05:41.069",
+     "duration_seconds": 12.9,
+     "timestamp": "05:28",
+     "link": "https://www.youtube.com/watch?v=RfnXrYOdtC4&t=328s",
+     "clip_link": "https://www.youtube.com/embed/RfnXrYOdtC4?start=328&end=342&autoplay=1",
+     "t": 328.169,
      "quote": "gouvernement et députés poussés pour 36 milliards d'euros de rab d'ici à 2030, les sénateurs souhaitaient eux porter l'effort jusqu'à 50 milliards au regard du contexte international.",
      "verdict": "paraphrase",
      "who_says": "other_named",
      "speaker_name": "Steve Kim",
      "confidence": 0.9,
      "why": "Le journaliste explique le compromis trouvé au Sénat et à l'Assemblée nationale concernant la loi de programmation militaire et son budget supplémentaire.",
-     "t_end": 540.0,
+     "t_end": 341.069,
      "speaker_role": "journalist",
-     "timing": "non retrouvé"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "ok"
     }
    ]
   }

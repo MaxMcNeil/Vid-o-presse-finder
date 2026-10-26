@@ -137,3 +137,35 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 16.6 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:00 → 00:06](https://www.youtube.com/embed/Dye2xK1fA4U?start=0&end=7&autoplay=1) — UK warns Iran's Hormuz blockade could trigger global food crisis
+  > Britain is warning that the war on Iran could soon develop into a global food crisis.
+- [00:12 → 00:22](https://www.youtube.com/embed/Dye2xK1fA4U?start=12&end=23&autoplay=1) — UK warns Iran's Hormuz blockade could trigger global food crisis
+  > They say that the damage from the delays is already being priced into the agricultural markets, raising fears of lower harvest and rising food costs.
+- [00:52 → 01:01](https://www.youtube.com/embed/Dye2xK1fA4U?start=52&end=62&autoplay=1) — UK warns Iran's Hormuz blockade could trigger global food crisis
+  > The World Food Programme estimates that some 45 million more people could fall into acute food insecurity if the conflict continues.
+- [01:16 → 01:31](https://www.youtube.com/embed/Dye2xK1fA4U?start=76&end=92&autoplay=1) — UK warns Iran's Hormuz blockade could trigger global food crisis
+  > The world risks sleepwalking into a global food crisis, and we cannot risk tens of millions of people going hungry because Iran has hijacked an international shipping lane.
+- [00:19 → 00:45](https://www.youtube.com/embed/_yRfrvFOQIk?start=19&end=46&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > Food prices are up and fertilizer costs are soaring. Aid agencies are calling for the free flow of commodities through the Strait of Hormuz. But could supplies be rerouted and at what cost? The UN war
+- [00:48 → 01:21](https://www.youtube.com/embed/_yRfrvFOQIk?start=48&end=82&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > The next global food crisis may not begin in farms or supermarkets. It's unfolding in a narrow stretch of water. The UN warns if fertilizers cannot pass through the Strait of Hormuz in the next few we
+- [01:29 → 01:56](https://www.youtube.com/embed/_yRfrvFOQIk?start=89&end=117&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > World food prices are at a three-year high as the Iran war sends shockwaves through global markets. A United Nations report says the cost of basic essentials rose 1.6% in April. A lot of that is being
+- [02:13 → 02:32](https://www.youtube.com/embed/_yRfrvFOQIk?start=133&end=153&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > But the long-term danger comes from fertilizer shortages. Around one-third of the world's supply also comes from the Gulf. Prices are on the rise, further squeezing margins for farmers. The cost and a
+- [02:29 → 02:57](https://www.youtube.com/embed/_yRfrvFOQIk?start=149&end=178&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > Planting season ends in some African countries in May, in others it's in June, others it's July and then it's August. And basically we have a few weeks ahead of us to prevent what will likely be a mas
+- [03:10 → 03:23](https://www.youtube.com/embed/_yRfrvFOQIk?start=190&end=204&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > Countries already struggling with conflict, food shortages, and economic shocks could be pushed over the edge. International agencies are warning against hoarding vital supplies and are urging provisi
+- [04:43 → 05:18](https://www.youtube.com/embed/_yRfrvFOQIk?start=283&end=319&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > Short of actually having the Strait of Hormuz reopened, is there anything that the world can do at this stage to prevent this? What needs to be done short of reopening the Strait of Hormuz is shoring 
+- [08:24 → 08:54](https://www.youtube.com/embed/_yRfrvFOQIk?start=504&end=535&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > We're talking about this horrifying statistic of potentially 45 million more people around the globe potentially being pushed into hunger or starvation. Where is it likely that we are going to see thi
+- [12:06 → 12:18](https://www.youtube.com/embed/_yRfrvFOQIk?start=726&end=739&autoplay=1) — Could Iran war trigger a hunger crisis? | Counting the Cost
+  > Already they're struggling with the cost of inputs. Cost of seeds, cost of fertilizer, herbicides, and pesticides have also increased. Ahmed Idris, Al Jazeera, for Counting the Cost in Abuja, Nigeria.
+
