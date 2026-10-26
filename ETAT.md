@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 25/10/2026 à 22:21 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 26/10/2026 à 23:10 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -8,17 +8,8 @@ _Mis à jour le 25/10/2026 à 22:21 (heure italienne), automatiquement après ch
 
 ## Clés et quotas
 
-- ⚠️ **Gemini (IA)** : 10/10 clé(s) utilisable(s)
-  - Gemini clé 1 : 1 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 2 : 3 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 3 : 4 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 4 : 4 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 5 : 4 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 6 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 7 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 8 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-  - Gemini clé 9 : 2 modèle(s) au bout du quota du jour, les autres modèles restent utilisés → tout revient demain à 8 h 01
-- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 743 recherches restantes aujourd'hui
+- ✅ **Gemini (IA)** : 10/10 clé(s) utilisable(s)
+- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 750 recherches restantes aujourd'hui
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
@@ -30,15 +21,16 @@ _Mis à jour le 25/10/2026 à 22:21 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 2 h (données mobiles) : 0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
-  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique demain à 1 h 42 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
+- ✅ Dernier passage il y a 1 j (données mobiles) : 0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
-- ⏳ Extraits en attente de recalage par le téléphone : 104
+- ⏳ Extraits en attente de recalage par le téléphone : 117
 
 ## Dernier lancement
 
-- ✅ Lot **2026-10-25_2141_n23** : 1 recherche(s) réussie(s), 12 extrait(s) vidéo
-- ⚠️ **Articles** : 4 lu(s) (api ×3, archive.org ×1), 3 illisible(s) : lien Google Actualités non converti ×2, site fermé aux robots, pas d'archive ×1
+- ⚠️ Lot **2026-10-26_2220_n24** : 4 recherche(s) réussie(s), 17 extrait(s) vidéo
+  - 1 vidéo(s) non analysée(s) : autre erreur
+  - 2 vidéo(s) non analysée(s) : vidéo trop longue (> 60 min)
+- ⚠️ **Articles** : 14 lu(s) (archive.org ×7, api ×2, direct ×5), 17 illisible(s) : lien Google Actualités non converti ×14, site fermé aux robots, pas d'archive ×3
 
 <!-- workflows:start -->
 ## Workflows

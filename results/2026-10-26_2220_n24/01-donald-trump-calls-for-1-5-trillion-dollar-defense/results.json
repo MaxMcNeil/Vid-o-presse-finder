@@ -1,0 +1,350 @@
+{
+ "target": "Donald Trump",
+ "target_type": "personne",
+ "claim": "calls for 1.5 trillion dollar defense budget dream army",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Donald Trump réclame ou propose un budget de défense record atteignant 1,5 billion (trillion) de dollars pour financer une armée idéale (« dream army »).",
+  "term_groups": [
+   [
+    "1 5 trillion",
+    "one point five trillion",
+    "1 5 billion",
+    "1 5 billion",
+    "un virgule cinq billion",
+    "trillion dollar",
+    "billion de dollars",
+    "trillion dollar"
+   ],
+   [
+    "defense budget",
+    "military budget",
+    "budget de la defense",
+    "budget militaire",
+    "defense spending",
+    "military spending",
+    "depenses militaires"
+   ],
+   [
+    "dream army",
+    "dream military",
+    "armee de reve",
+    "rebuild our military",
+    "rebuilding the military",
+    "historic defense budget"
+   ]
+  ],
+  "target_aliases": [
+   "donald trump",
+   "trump",
+   "donald j trump",
+   "president trump",
+   "former president trump"
+  ],
+  "youtube_queries": [
+   "Donald Trump calls for 1.5 trillion dollar defense budget dream army",
+   "Trump speech defense budget trillion",
+   "Trump 1.5 trillion military budget C-SPAN",
+   "Trump press conference military spending",
+   "Donald Trump rally dream army defense",
+   "Trump rally address US defense budget",
+   "Trump propose budget militaire defense",
+   "AP archive Donald Trump defense speech"
+  ],
+  "news_queries": [
+   "Donald Trump calls for 1.5 trillion dollar defense budget dream army",
+   "Trump \"1.5 trillion\" defense budget",
+   "Donald Trump \"dream army\" military budget",
+   "Trump calls for defense budget increase Reuters AP",
+   "Trump record defense spending military propose",
+   "Trump budget defense 1.5 trillion dollars"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "cible",
+   "reference_sites": [
+    "whitehouse.gov",
+    "nytimes.com",
+    "washingtonpost.com",
+    "npr.org",
+    "reuters.com",
+    "apnews.com",
+    "afp.com",
+    "france24.com"
+   ],
+   "site_articles": 28,
+   "site_articles_by_site": {
+    "nytimes.com": 8,
+    "washingtonpost.com": 5,
+    "npr.org": 1,
+    "reuters.com": 2,
+    "apnews.com": 10,
+    "afp.com": 1,
+    "france24.com": 1
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "The White House": 0,
+    "The New York Times": 0,
+    "NPR": 0
+   },
+   "videos_candidates": 103,
+   "site_videos_scored": [],
+   "videos_low_authority": 50,
+   "videos_relevant": 18,
+   "videos_by_platform": {
+    "youtube": 8
+   },
+   "articles_candidates": 143,
+   "articles_low_authority": 41,
+   "articles_relevant": 13,
+   "articles_read_via": {
+    "archive.org": 5,
+    "illisible : lien Google Actualités non converti": 4,
+    "api": 1,
+    "illisible : site fermé aux robots, pas d'archive": 2
+   },
+   "timing": {
+    "ia-affiné": 2
+   },
+   "elapsed_min": 18.3,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 7,
+      "gemini-3.7-flash": 3,
+      "gemini-3.6-flash": 5,
+      "gemini-3-flash-preview": 7,
+      "gemini-3.5-flash-lite": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "personne",
+  "official_speakers": [
+   "Donald Trump",
+   "Karoline Leavitt",
+   "Steven Cheung",
+   "Trump Campaign Spokesperson"
+  ],
+  "authoritative_sources": [
+   "reuters.com",
+   "apnews.com",
+   "c-span.org",
+   "defense.gov",
+   "whitehouse.gov",
+   "bloomberg.com",
+   "politico.com",
+   "defensenews.com",
+   "wsj.com",
+   "nytimes.com",
+   "afp.com",
+   "france24.com",
+   "C-SPAN",
+   "Reuters",
+   "Associated Press"
+  ],
+  "site_query": "Trump defense budget trillion military",
+  "countries": [
+   "US"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "WATCH:  U.S. President Donald Trump Announces $1.5 Trillion Military Vision at Defense Summit | AC1E",
+   "uploaded": "2026-07-15",
+   "platform": "youtube",
+   "video_id": "EYjBc72VgVg",
+   "duration": 841,
+   "channel": "DWS News",
+   "url": "https://www.youtube.com/watch?v=EYjBc72VgVg",
+   "method": "gemini-video",
+   "authority": 0.62,
+   "authority_why": "chaîne non répertoriée (349 000 abonnés)",
+   "moments": [
+    {
+     "start": "11:24",
+     "end": "11:35",
+     "start_seconds": 684.0,
+     "end_seconds": 695.0,
+     "start_tc": "00:11:24.000",
+     "end_tc": "00:11:35.000",
+     "duration_seconds": 11.0,
+     "timestamp": "11:24",
+     "link": "https://www.youtube.com/watch?v=EYjBc72VgVg&t=684s",
+     "clip_link": "https://www.youtube.com/embed/EYjBc72VgVg?start=684&end=696&autoplay=1",
+     "t": 684.0,
+     "quote": "and next year, I'm proud to say, and Pete, we have to get moving on this, $1.5 trillion we're going up to. All we need, and it's all made in the USA.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Donald Trump",
+     "confidence": 0.95,
+     "why": "Donald Trump states that next year the defense budget will go up to 1.5 trillion dollars.",
+     "t_end": 695.0,
+     "speaker_role": "politician",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Trump Says Defense Budget Will Reach $1.5 Trillion, Touts ‘Golden Age’ Of Shipbuilding",
+   "uploaded": "2026-10-06",
+   "platform": "youtube",
+   "video_id": "0i6Gap4vRZM",
+   "duration": 336,
+   "channel": "Forbes Breaking News",
+   "url": "https://www.youtube.com/watch?v=0i6Gap4vRZM",
+   "method": "gemini-video",
+   "authority": 0.7,
+   "authority_why": "chaîne non répertoriée (5 620 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:22",
+     "start_seconds": 0.0,
+     "end_seconds": 22.5,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:22.500",
+     "duration_seconds": 22.5,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=0i6Gap4vRZM&t=0s",
+     "clip_link": "https://www.youtube.com/embed/0i6Gap4vRZM?start=0&end=23&autoplay=1",
+     "t": 0.0,
+     "quote": "proudly signed into law a record setting defense budget and this year is going to be 1.5 trillion. I believe, I don't want to speak too early, but we broke the trillion mark and we're going to be at 1.5. At the same time, we're cutting costs of other things which are wastes, but we're going to have new ships and drones and aircraft and missiles and everything.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Donald Trump",
+     "confidence": 0.85,
+     "why": "Donald Trump évoque un budget de défense record atteignant 1,5 trillion de dollars pour financer de nouveaux équipements militaires (navires, drones, avions, missiles).",
+     "t_end": 22.5,
+     "speaker_role": "politician",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "White House asks for massive $1.5 trillion defense budget – a 40% increase",
+   "date": "2026-04-03",
+   "source": "Le Monde.fr",
+   "domain": "lemonde.fr",
+   "url": "https://www.lemonde.fr/en/international/article/2026/04/03/white-house-asks-for-massive-1-5-trillion-defense-budget-a-40-increase_6752097_4.html",
+   "verified_on_full_text": true,
+   "read_via": "archive.org",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "US President Donald Trump on Friday, April 3, asked lawmakers to approve a massive $1.5 trillion defense budget for 2027, as the United States faces rising costs from its war with Iran and mounting global security commitments.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.9,
+     "why": "Le journaliste rapporte explicitement que Donald Trump demande un budget de défense massif de 1,5 trillion de dollars.",
+     "t_end": 45.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Here Are 1.5 Trillion Reasons Not to Trust Pete Hegseth’s Budget",
+   "date": "2026-05-13",
+   "source": "The New York Times",
+   "domain": "nytimes.com",
+   "url": "https://www.nytimes.com/2026/05/13/opinion/hegseth-pentagon-military-budget.html",
+   "verified_on_full_text": true,
+   "read_via": "archive.org",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Secretary of Defense Pete Hegseth recently asked Congress for a staggering amount of money: $1.5 trillion. That’s a more than 40 percent increase from last year’s also incomprehensible Pentagon budget... It would bankroll President Trump’s weirdly retro military wish list.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "The New York Times",
+     "confidence": 0.9,
+     "why": "The article reports that the $1.5 trillion budget request submitted by Hegseth is designed to fund Donald Trump's military 'wish list'.",
+     "t_end": 30.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "Senator Murray Grills Hegseth on Iran War, Trump’s Astronomical $1.5 Trillion War Budget, and Spending Priorities",
+   "date": "2026-05-12",
+   "source": "Senator Patty Murray (.gov)",
+   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOQ1VDNm5reUt0SkRGV29uenlDaVdUTmpITU82QU1aYjBja1dqMFp0ZHdkdWRrU21ZZ3l4aFh0SHJEV1Y4NXFLTllRYUlQUFNPVnFmZS1oejN0UGowc0RGZW1WU1BrMXg2VnNtSGdrV3VSdVktN29xeEN2OVVHSXAtcDhuT2ZZWjROUEprNWlFV0p6NlRnM1dNb2k1T21HUk45QXNQc0JfUDZsUjMyVW9uNGZNREtpWVZaSjRKUWFZWEdyRFIxZFhMaTBjSzI4bzlPUGRNVTQ1dw?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Trump’s Military Budget Hits Snags Amid Questions on Iran War Costs",
+   "date": "2026-06-19",
+   "source": "The New York Times",
+   "url": "https://www.nytimes.com/2026/06/19/us/politics/military-budget-congress-iran-trump-hegseth.html",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  },
+  {
+   "title": "Trump calls for a major increase in defense spending alongside cuts in domestic spending",
+   "date": "2026-04-03",
+   "source": "PBS",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOVnJxeXI3TDJCNmFpU2RNb0syZlRsYUxGaGg4MzE0QUhMaFp5YXFYNVlzaklrbUMwbndtWnBpcnd0R1hpMDJENnpEVktmTDlrMXJJNlNsMlR1UGFqUFZVcEI4Y3BwYzFpVHdjN2F1dzh1QTFKZWRqWmpFdlVVTTdKWE5MQ0F3X0NXR2hsQ2pFT3hWUDAwVS1uSENKcWdZRVQ0Z3A4QUozdXdIaDBkUE8yaEtkMlNydjcwTWM4TzhvT29FcVQ30gHKAUFVX3lxTE5wOUZURVpVdGhoMy1NbFRQSGhQOUpQNWJPR0xONDFwcU9ubVFKdnZjaDFVQjVBeFpvMW1PdjdpSHJaV2Y4R3VHQ3U5UnJGcU12SW1UWTl3aDZJYy1Ld3dpakh1d1NIWkc3WEVCeDRyVFMwUVBzNDRkVGV1WF8xR1E4NVJFWkdNQ3l0ZDVCNnNzVEZtMWs1cVRWRzUyODNHS0F3VFM0S2l0NzdOcWpVak1yNTQ1SHBfNlNpTDJneUltVGZ3WUIzdVotdlE?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Opinion | Here Are 1.5 Trillion Reasons Not to Trust Pete Hegseth’s Budget",
+   "date": "2026-05-13",
+   "source": "The New York Times",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPQU5aR05wb013N0dpYU51X1dNR3FYdjVocFVuaXI5eUg5QzdGRm4tTFVFNzR2dm5ZWXJFUmVBTXRULXBFMlRpd1dlTWVSRExNemFhVUtveXZaV1dxTFFmZ1UyRlFSTUJTNHc1eFRPNXFKcmUwMEZISzIzXzJuclM2MEZRTGhKcTg?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Pass Trump’s Defense Budget",
+   "date": "2026-10-13",
+   "source": "The Wall Street Journal",
+   "url": "https://www.wsj.com/opinion/pass-trumps-defense-budget-9c74aa0c",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  },
+  {
+   "title": "Trump requests USD 1.5 trillion defense budget, largest in decades",
+   "date": "2026-04-03",
+   "source": "Times Kuwait",
+   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOcVJPQnRTcFcxcWE2a01oSjM5c3Q2bFJ4djFaWGhoYTNGZjVNZFRBcWVTUUFGT2JvOTdVQzFBT2t6ZWw0ZnV4MFNJWkVWb0k0S05QeWpKYkVhYkQ3Yy1xdTM4aDRJRjRlU19pdGU3WDJwMlRGQTh2RXB4U2swOXpiLWF6eXlKUi03Y3RHTjlETENsQ3hm?oc=5",
+   "authority": 0.85,
+   "reason": "lien Google Actualités non converti"
+  }
+ ],
+ "unverifiable_videos": []
+}

@@ -1,0 +1,42 @@
+{
+ "target": "Friedrich Merz",
+ "target_type": "personne",
+ "claim": "Bundeswehr zur stärksten konventionellen Armee in Europa machen",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "clips": [
+  {
+   "search": "03-friedrich-merz-bundeswehr-zur-starksten-konvention",
+   "target": "Friedrich Merz",
+   "target_type": "personne",
+   "claim": "Bundeswehr zur stärksten konventionellen Armee in Europa machen",
+   "platform": "youtube",
+   "video_id": "xgXYEc6ZzUI",
+   "source_url": "https://www.youtube.com/watch?v=xgXYEc6ZzUI",
+   "title": "FULL SPEECH: Germany Will Build Europe’s Strongest Army, Says Chancellor Friedrich Merz | AC14",
+   "channel": "DWS News",
+   "uploaded": "2026-05-09",
+   "source_authority": 0.62,
+   "source_authority_why": "chaîne non répertoriée (349 000 abonnés)",
+   "start": 415.9,
+   "end": 432.2,
+   "duration": 16.3,
+   "start_tc": "00:06:55.900",
+   "end_tc": "00:07:12.200",
+   "in": 414.7,
+   "out": 433.2,
+   "in_tc": "00:06:54.700",
+   "out_tc": "00:07:13.200",
+   "timing": "ia-affiné",
+   "quote": "We are transforming our army, the Bundeswehr, into the, quote, strongest conventional army in Europe. Our new military strategy puts political intent into a coherent military framework.",
+   "speaker": "Friedrich Merz",
+   "speaker_role": "politician",
+   "who_says": "target",
+   "verdict": "literal",
+   "confidence": 0.95,
+   "score": 0.826,
+   "link": "https://www.youtube.com/embed/xgXYEc6ZzUI?start=415&end=433&autoplay=1",
+   "order": 1
+  }
+ ]
+}

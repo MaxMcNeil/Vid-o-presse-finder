@@ -1,0 +1,227 @@
+{
+ "target": "Friedrich Merz",
+ "target_type": "personne",
+ "claim": "Bundeswehr zur stärksten konventionellen Armee in Europa machen",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Friedrich Merz souhaite faire de la Bundeswehr la plus puissante armée conventionnelle d'Europe.",
+  "term_groups": [
+   [
+    "bundeswehr",
+    "armee",
+    "armee",
+    "army",
+    "military",
+    "streitkrafte",
+    "forces armees"
+   ],
+   [
+    "starkste",
+    "starkste konventionelle armee",
+    "strongest",
+    "strongest conventional army",
+    "plus puissante",
+    "premiere armee",
+    "plus forte armee conventionnelle",
+    "most powerful conventional force"
+   ],
+   [
+    "europa",
+    "europe",
+    "europas",
+    "in europe",
+    "en europe"
+   ]
+  ],
+  "target_aliases": [
+   "friedrich merz",
+   "merz",
+   "friedrich marz",
+   "cdu merz"
+  ],
+  "youtube_queries": [
+   "Friedrich Merz Bundeswehr zur stärksten konventionellen Armee in Europa machen",
+   "Friedrich Merz Bundeswehr stärkste Armee Europa",
+   "Merz Rede Bundestag Bundeswehr konventionelle",
+   "Friedrich Merz interview Bundeswehr Europa",
+   "Friedrich Merz Bundeswehr strongest conventional army",
+   "Friedrich Merz armée allemande la plus puissante d'Europe",
+   "Phoenix Friedrich Merz Bundeswehr Europa",
+   "DW News Friedrich Merz German army Europe"
+  ],
+  "news_queries": [
+   "Friedrich Merz Bundeswehr zur stärksten konventionellen Armee in Europa machen",
+   "Friedrich Merz Bundeswehr stärkste konventionelle Armee Europa",
+   "Merz Bundeswehr strongest conventional army Europe",
+   "Friedrich Merz armée allemande première armée conventionnelle Europe",
+   "Merz Bundeswehr Europapolitik Verteidigung",
+   "Friedrich Merz defense military spending strongest army Europe"
+  ],
+  "languages": [
+   "fr",
+   "en",
+   "de"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 8,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "cible",
+   "reference_sites": [
+    "bundesregierung.de",
+    "tagesschau.de",
+    "zdf.de",
+    "spiegel.de",
+    "ec.europa.eu",
+    "europarl.europa.eu",
+    "afp.com",
+    "france24.com"
+   ],
+   "site_articles": 1,
+   "site_articles_by_site": {
+    "bundesregierung.de": 1
+   },
+   "site_pages_probed": 1,
+   "site_videos": 0,
+   "official_channels": {
+    "Bundesregierung": 1,
+    "tagesschau": 8,
+    "ZDFheute Nachrichten": 7
+   },
+   "videos_candidates": 71,
+   "site_videos_scored": [
+    "Bundeskanzler Friedrich Merz war am „Tag der Bundeswehr“ zu  (4/10)",
+    "\"Wind of Change\" beim Großen Zapfenstreich für Ursula von de (0/10)",
+    "Mehr Waffen, mehr Soldaten: Schafft Deutschland den Kraftakt (0/10)",
+    "Franziska Brantner & Armin Laschet über Wirtschaft, Migratio (0/10)",
+    "Strack-Zimmermann im Interview: Ukraine-Lage, Waffenlieferun (0/10)",
+    "Streit über Panzer-Ringtausch: Polen kritisiert Deutschland (0/10)",
+    "Bedingt abwehrbereit - schafft Deutschland so die Zeitenwend (0/10)",
+    "Ukraine-Krieg: UN beklagen \"ungeheure\" Menschenrechtsverletz (0/10)"
+   ],
+   "videos_low_authority": 30,
+   "videos_relevant": 3,
+   "videos_by_platform": {
+    "youtube": 3
+   },
+   "articles_candidates": 68,
+   "articles_low_authority": 17,
+   "articles_relevant": 3,
+   "articles_read_via": {
+    "illisible : lien Google Actualités non converti": 2,
+    "api": 1
+   },
+   "timing": {
+    "ia-affiné": 1
+   },
+   "elapsed_min": 14.9,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 3,
+      "gemini-3.7-flash": 3,
+      "gemini-3-flash-preview": 2
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 2
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "personne",
+  "official_speakers": [
+   "Friedrich Merz"
+  ],
+  "authoritative_sources": [
+   "tagesschau.de",
+   "zdf.de",
+   "dw.com",
+   "deutschlandfunk.de",
+   "dpa",
+   "reuters.com",
+   "afp.com",
+   "lemonde.fr",
+   "lefigaro.fr",
+   "france24.com",
+   "bbc.com",
+   "politico.eu",
+   "phoenix",
+   "bundestag.de"
+  ],
+  "site_query": "Merz Bundeswehr stärkste Armee Europa",
+  "countries": [
+   "DE",
+   "EU",
+   "FR"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 3,
+  "articles_scanned": 3
+ },
+ "videos": [
+  {
+   "title": "FULL SPEECH: Germany Will Build Europe’s Strongest Army, Says Chancellor Friedrich Merz | AC14",
+   "uploaded": "2026-05-09",
+   "platform": "youtube",
+   "video_id": "xgXYEc6ZzUI",
+   "duration": 781,
+   "channel": "DWS News",
+   "url": "https://www.youtube.com/watch?v=xgXYEc6ZzUI",
+   "method": "gemini-video",
+   "authority": 0.62,
+   "authority_why": "chaîne non répertoriée (349 000 abonnés)",
+   "moments": [
+    {
+     "start": "06:55",
+     "end": "07:12",
+     "start_seconds": 415.9,
+     "end_seconds": 432.2,
+     "start_tc": "00:06:55.900",
+     "end_tc": "00:07:12.200",
+     "duration_seconds": 16.3,
+     "timestamp": "06:55",
+     "link": "https://www.youtube.com/watch?v=xgXYEc6ZzUI&t=415s",
+     "clip_link": "https://www.youtube.com/embed/xgXYEc6ZzUI?start=415&end=433&autoplay=1",
+     "t": 415.9,
+     "quote": "We are transforming our army, the Bundeswehr, into the, quote, strongest conventional army in Europe. Our new military strategy puts political intent into a coherent military framework.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Friedrich Merz",
+     "confidence": 0.95,
+     "why": "Friedrich Merz affirme explicitement vouloir transformer la Bundeswehr en la plus puissante armée conventionnelle d'Europe (« strongest conventional army in Europe »).",
+     "t_end": 432.2,
+     "speaker_role": "politician",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [],
+ "unreadable_articles": [
+  {
+   "title": "«L’armée conventionnelle la plus puissante d’Europe»: quand l'Allemagne se rêve première puissance militaire du continent",
+   "date": "2026-05-01",
+   "source": "Le Temps",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQaTE5RXFSazBRbWs0YW1YZXdoOG1BSzJsNmkwdzhnbW80MFA1R1AyQnJzMHhwdVJsTlNYTDhfbURZQVpXaGkwTDc1amJDa01HYy0zbzdvbkk3S0Y4bkJDTkVPbEo0M0w0dHRGYy1ZMTlxZUZXZFE2SmtOT2lFTDBBcGZOcTQ3RDdFNk1DMnV3Q21IUGFFMFhoUXVKdkpScjVhQWV6S3laZ2NBcWIxSWRpMmFrU3BhUF9MbHNia3RySy13ZnNOU01SdnpySWx2TTFHYURrUUc1Z3ZORWxVQTdVdDRmYw?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Deutschlands Aufrüstung: Partner sind skeptisch, doch Europa braucht Stärke",
+   "date": "2026-08-05",
+   "source": "NZZ",
+   "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNZFNQYVdiQ1hMeXdEV1d4cXFhLWhtNEVIMHV0V0JUVGVHYWw5REhoUE1aTTg5N0JXemFqUXZmTGlGcmRFcFFHLU9BaUZJb2xDUGlNbnRqZ25aRjU3YndjSGdDejQ0RVl0M3Nqdl92bWRBemRCbVFweGNVd3N0OE5CSGkxYTkxdlJjd0RmWkIxU2JLU0gzMWpTMllfeXJDOURYalp1VXo3WmFYMHhJOEI2UkZzNFptMnJ4STA2b3NESnpoSU5yZ0xFdFpJTENJdm1SV21saW1CQzVZWExVd3U2c1pSZS1nSW0ycC1oWWNmODVyYTRUUWFCbmRB?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  }
+ ],
+ "unverifiable_videos": []
+}

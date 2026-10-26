@@ -1,0 +1,35 @@
+{
+  "cibles": [
+    "Gouvernement des États-Unis",
+    "Gouvernement du Royaume-Uni",
+    "Gouvernement de la Fédération de Russie",
+    "Gouvernement fédéral d'Allemagne",
+    "Gouvernement de la République française"
+  ],
+  "court": "préparatifs guerre USA Russie Allemagne France",
+  "demontrer": "Les gouvernements des États-Unis, du Royaume-Uni, de la Russie, de l'Allemagne et de la France augmentent leurs budgets et leurs capacités militaires pour préparer un conflit mondial",
+  "depot": "MaxMcNeil/OSINT-teleprompter-",
+  "dossier": "2026-10-26_20h55_preparatifs-guerre-usa-russie-allemagne-france",
+  "langue": "fr",
+  "points": [
+    {
+      "id": "P1",
+      "intitule": "Les États-Unis et le Royaume-Uni intensifient leurs dépenses de défense et leurs alliances militaires"
+    },
+    {
+      "id": "P2",
+      "intitule": "La Russie réoriente massivement son industrie et son budget vers l'effort de guerre"
+    },
+    {
+      "id": "P3",
+      "intitule": "L'Allemagne opère un tournant historique en se réarmant massivement"
+    },
+    {
+      "id": "P4",
+      "intitule": "La France accélère sa transition vers une économie de guerre via la loi de programmation militaire"
+    }
+  ],
+  "run_id": "40398213168",
+  "run_url": "https://github.com/MaxMcNeil/OSINT-teleprompter-/actions/runs/40398213168",
+  "sujet": "Ils préparent la guerre"
+}

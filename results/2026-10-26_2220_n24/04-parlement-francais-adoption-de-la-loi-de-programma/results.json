@@ -1,0 +1,578 @@
+{
+ "target": "Parlement français",
+ "target_type": "entite",
+ "claim": "adoption de la loi de programmation militaire 436 milliards d'euros",
+ "speakers": "tous",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "L'Assemblée nationale ou le Sénat français a adopté la loi de programmation militaire (LPM) prévoyant un budget de 436 milliards d'euros.",
+  "term_groups": [
+   [
+    "loi de programmation militaire",
+    "lpm",
+    "military programming law",
+    "military programming bill",
+    "loi programmation militaire",
+    "lpm 2024 2030"
+   ],
+   [
+    "413 milliards",
+    "413 billion",
+    "436 milliards",
+    "436 billion",
+    "413 milliards d euros",
+    "436 milliards d euros"
+   ],
+   [
+    "adoption",
+    "adopte",
+    "vote definitif",
+    "vote",
+    "passed",
+    "approved",
+    "adoption definitive"
+   ]
+  ],
+  "target_aliases": [
+   "parlement francais",
+   "assemblee nationale",
+   "senat",
+   "french parliament",
+   "national assembly"
+  ],
+  "youtube_queries": [
+   "Parlement français adoption de la loi de programmation militaire 436 milliards d'euros",
+   "Assemblée nationale vote loi de programmation militaire",
+   "Sénat loi de programmation militaire 413 436 milliards",
+   "Sébastien Lecornu loi de programmation militaire",
+   "France 24 loi de programmation militaire vote",
+   "Franceinfo budget armée loi de programmation militaire",
+   "French Parliament military programming bill 436 billion"
+  ],
+  "news_queries": [
+   "Parlement français adoption de la loi de programmation militaire 436 milliards d'euros",
+   "adoption loi de programmation militaire 436 milliards",
+   "vote Parlement loi de programmation militaire armée",
+   "French Parliament passes military programming bill",
+   "AFP loi de programmation militaire budget armee"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 7,
+   "queries_news": 5,
+   "authority": "forte",
+   "speakers": "tous",
+   "reference_sites": [
+    "elysee.fr",
+    "gouvernement.fr",
+    "assemblee-nationale.fr",
+    "senat.fr",
+    "defense.gouv.fr",
+    "vie-publique.fr",
+    "afp.com",
+    "france24.com"
+   ],
+   "site_articles": 37,
+   "site_articles_by_site": {
+    "assemblee-nationale.fr": 10,
+    "senat.fr": 10,
+    "defense.gouv.fr": 5,
+    "vie-publique.fr": 10,
+    "france24.com": 2
+   },
+   "site_pages_probed": 12,
+   "site_videos": 0,
+   "official_channels": {
+    "Élysée": 0,
+    "Gouvernement": 0,
+    "franceinfo": 0
+   },
+   "videos_candidates": 33,
+   "site_videos_scored": [],
+   "videos_low_authority": 17,
+   "videos_relevant": 12,
+   "videos_by_platform": {
+    "dailymotion": 2,
+    "youtube": 6
+   },
+   "articles_candidates": 157,
+   "articles_low_authority": 16,
+   "articles_relevant": 29,
+   "articles_read_via": {
+    "direct": 3,
+    "archive.org": 2,
+    "illisible : lien Google Actualités non converti": 7
+   },
+   "timing": {
+    "ia-affiné": 3,
+    "non retrouvé": 4
+   },
+   "elapsed_min": 18.3,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.6-flash": 6,
+      "gemini-3-flash-preview": 5,
+      "gemini-3.5-flash": 11,
+      "gemini-3.8-flash": 2,
+      "gemini-3.7-flash": 1,
+      "gemini-3.5-flash-lite": 3,
+      "gemini-3.1-flash-lite-preview": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 1
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "entite",
+  "official_speakers": [
+   "Sébastien Lecornu",
+   "Ministère des Armées",
+   "Gouvernement français",
+   "Emmanuel Macron"
+  ],
+  "authoritative_sources": [
+   "defense.gouv.fr",
+   "vie-publique.fr",
+   "assemblee-nationale.fr",
+   "senat.fr",
+   "lemonde.fr",
+   "lefigaro.fr",
+   "AFP",
+   "Reuters",
+   "franceinfo",
+   "FRANCE 24"
+  ],
+  "site_query": "Parlement loi de programmation militaire 436 milliards",
+  "countries": [
+   "FR"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 12
+ },
+ "videos": [
+  {
+   "title": "Actualisation de la loi de programmation militaire",
+   "uploaded": "2026-05-29",
+   "platform": "youtube",
+   "video_id": "KEgIgfD7MKY",
+   "duration": 2870,
+   "channel": "Sénat",
+   "url": "https://www.youtube.com/watch?v=KEgIgfD7MKY",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "00:36",
+     "end": "00:56",
+     "start_seconds": 36.0,
+     "end_seconds": 56.67,
+     "start_tc": "00:00:36.000",
+     "end_tc": "00:00:56.670",
+     "duration_seconds": 20.7,
+     "timestamp": "00:36",
+     "link": "https://www.youtube.com/watch?v=KEgIgfD7MKY&t=36s",
+     "clip_link": "https://www.youtube.com/embed/KEgIgfD7MKY?start=36&end=57&autoplay=1",
+     "t": 36.0,
+     "quote": "On est trois ans plus tard aujourd'hui avec une nouvelle copie qui nous demande 36 milliards d'euros supplémentaires et qui donc démontre que le Sénat en 2023 avait raison sur son analyse du sujet.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Cédric Perrin",
+     "confidence": 0.9,
+     "why": "Le président de la commission des affaires étrangères du Sénat évoque la nouvelle trajectoire budgétaire de la LPM, passant de 400 à 436 milliards d'euros (400 + 36).",
+     "t_end": 56.67,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "05:02",
+     "end": "05:15",
+     "start_seconds": 302.0,
+     "end_seconds": 315.0,
+     "start_tc": "00:05:02.000",
+     "end_tc": "00:05:15.000",
+     "duration_seconds": 13.0,
+     "timestamp": "05:02",
+     "link": "https://www.youtube.com/watch?v=KEgIgfD7MKY&t=302s",
+     "clip_link": "https://www.youtube.com/embed/KEgIgfD7MKY?start=302&end=316&autoplay=1",
+     "t": 302.0,
+     "quote": "Ce qu'on nous propose aujourd'hui, c'est une loi de programmation qui permet évidemment un effort substantiel de 36 milliards d'euros, mais qui ne permet en quelque sorte que de sécuriser notre loi de programmation précédente.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "Cédric Perrin",
+     "confidence": 0.9,
+     "why": "Le locuteur confirme la proposition d'une LPM augmentée de 36 milliards d'euros (soit 436 milliards au total par rapport aux 400 initiaux).",
+     "t_end": 315.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    },
+    {
+     "start": "22:18",
+     "end": "22:33",
+     "start_seconds": 1338.0,
+     "end_seconds": 1353.0,
+     "start_tc": "00:22:18.000",
+     "end_tc": "00:22:33.000",
+     "duration_seconds": 15.0,
+     "timestamp": "22:18",
+     "link": "https://www.youtube.com/watch?v=KEgIgfD7MKY&t=1338s",
+     "clip_link": "https://www.youtube.com/embed/KEgIgfD7MKY?start=1338&end=1354&autoplay=1",
+     "t": 1338.0,
+     "quote": "On parle de 436 évidemment, mais je rappelle qu'en 2023 lors de la discussion de la loi de programmation militaire nous avons remis en cause la véracité des 13 milliards d'euros que le gouvernement nous annonçait.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Cédric Perrin",
+     "confidence": 1.0,
+     "why": "Le locuteur cite explicitement le chiffre de 436 milliards d'euros dans le cadre de la discussion sur la LPM au Sénat.",
+     "t_end": 1353.0,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    },
+    {
+     "start": "22:35",
+     "end": "22:46",
+     "start_seconds": 1355.0,
+     "end_seconds": 1366.9,
+     "start_tc": "00:22:35.000",
+     "end_tc": "00:22:46.900",
+     "duration_seconds": 11.9,
+     "timestamp": "22:35",
+     "link": "https://www.youtube.com/watch?v=KEgIgfD7MKY&t=1355s",
+     "clip_link": "https://www.youtube.com/embed/KEgIgfD7MKY?start=1355&end=1367&autoplay=1",
+     "t": 1355.0,
+     "quote": "Si aujourd'hui le gouvernement annonce 400 milliards de point de départ pour arriver à 436 en augmentant de 36 milliards d'euros, où sont les 13 ?",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Cédric Perrin",
+     "confidence": 1.0,
+     "why": "Le locuteur mentionne explicitement l'objectif de 436 milliards d'euros pour la LPM.",
+     "t_end": 1366.9,
+     "speaker_role": "official",
+     "timing": "non retrouvé"
+    }
+   ]
+  },
+  {
+   "title": "Le Sénat vote la LPM actualisée",
+   "uploaded": "2026-06-09",
+   "platform": "youtube",
+   "video_id": "Uj5lKt50flU",
+   "duration": 89,
+   "channel": "Public Sénat",
+   "url": "https://www.youtube.com/watch?v=Uj5lKt50flU",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:13",
+     "start_seconds": 0.8,
+     "end_seconds": 13.0,
+     "start_tc": "00:00:00.800",
+     "end_tc": "00:00:13.000",
+     "duration_seconds": 12.2,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=Uj5lKt50flU&t=0s",
+     "clip_link": "https://www.youtube.com/embed/Uj5lKt50flU?start=0&end=14&autoplay=1",
+     "t": 0.8,
+     "quote": "Résultat du scrutin. Votants 344, exprimés 330, pour 297, contre 33. Le Sénat a donc adopté.",
+     "verdict": "paraphrase",
+     "who_says": "official",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "Le président de séance au Sénat annonce l'adoption par le Sénat du projet de loi de programmation militaire (LPM).",
+     "t_end": 13.0,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Loi de programmation militaire 2024-2030 : les députés votent 36 milliards d’euros supplémentaires",
+   "uploaded": "2026-05-19",
+   "platform": "youtube",
+   "video_id": "REVbhskyMGc",
+   "duration": 83,
+   "channel": "Le Monde",
+   "url": "https://www.youtube.com/watch?v=REVbhskyMGc",
+   "method": "gemini-video",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "moments": [
+    {
+     "start": "00:01",
+     "end": "00:14",
+     "start_seconds": 1.1,
+     "end_seconds": 14.1,
+     "start_tc": "00:00:01.100",
+     "end_tc": "00:00:14.100",
+     "duration_seconds": 13.0,
+     "timestamp": "00:01",
+     "link": "https://www.youtube.com/watch?v=REVbhskyMGc&t=1s",
+     "clip_link": "https://www.youtube.com/embed/REVbhskyMGc?start=1&end=15&autoplay=1",
+     "t": 1.1,
+     "quote": "Le scrutin est ouvert... Le scrutin est clos. Pour : 440, contre : 122. L'Assemblée nationale a adopté.",
+     "verdict": "paraphrase",
+     "who_says": "target",
+     "speaker_name": "",
+     "confidence": 0.95,
+     "why": "La présidente de séance de l'Assemblée nationale annonce officiellement le vote et l'adoption du texte de la loi de programmation militaire.",
+     "t_end": 14.1,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Christian Cambon : « Pour dissuader un ennemi de vous attaquer, il faut être fort »",
+   "uploaded": "2026-07-01",
+   "platform": "youtube",
+   "video_id": "RfnXrYOdtC4",
+   "duration": 1397,
+   "channel": "Public Sénat",
+   "url": "https://www.youtube.com/watch?v=RfnXrYOdtC4",
+   "method": "gemini-video",
+   "authority": 1.0,
+   "authority_why": "chaîne officielle / agence",
+   "moments": [
+    {
+     "start": "08:47",
+     "end": "09:00",
+     "start_seconds": 527.0,
+     "end_seconds": 540.0,
+     "start_tc": "00:08:47.000",
+     "end_tc": "00:09:00.000",
+     "duration_seconds": 13.0,
+     "timestamp": "08:47",
+     "link": "https://www.youtube.com/watch?v=RfnXrYOdtC4&t=527s",
+     "clip_link": "https://www.youtube.com/embed/RfnXrYOdtC4?start=527&end=541&autoplay=1",
+     "t": 527.0,
+     "quote": "gouvernement et députés poussés pour 36 milliards d'euros de rab d'ici à 2030, les sénateurs souhaitaient eux porter l'effort jusqu'à 50 milliards au regard du contexte international.",
+     "verdict": "paraphrase",
+     "who_says": "other_named",
+     "speaker_name": "Steve Kim",
+     "confidence": 0.9,
+     "why": "Le journaliste explique le compromis trouvé au Sénat et à l'Assemblée nationale concernant la loi de programmation militaire et son budget supplémentaire.",
+     "t_end": 540.0,
+     "speaker_role": "journalist",
+     "timing": "non retrouvé"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Actualisation de la loi de programmation militaire : « Aller plus vite et plus loin »",
+   "date": "2026-04-09",
+   "source": "defense.gouv",
+   "domain": "defense.gouv.fr",
+   "url": "https://www.defense.gouv.fr/actualites/actualisation-loi-programmation-militaire-aller-plus-vite-plus-loin",
+   "verified_on_full_text": true,
+   "read_via": "direct",
+   "authority": 1.0,
+   "authority_why": "source officielle",
+   "passages": [
+    {
+     "t": null,
+     "quote": "La loi actualisant la programmation militaire 2024-2030 prévoit 36 milliards d’euros supplémentaires pour les armées françaises d’ici 2030. Après le feu vert du Conseil constitutionnel le 6 août, sa promulgation le 16 août doit permettre d’accélérer le réarmement français et de renforcer les capacités critiques des forces.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.9,
+     "why": "Le texte confirme la promulgation de la loi (impliquant son adoption préalable par le Parlement) et mentionne l'effort budgétaire additionnel de 36 Mds€ s'ajoutant à la LPM initiale.",
+     "t_end": 30.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "Loi de programmation militaire : le Parlement valide un budget des armées de 436 milliards d’euros d’ici à 2030",
+   "date": "2026-07-01",
+   "source": "Le Monde.fr",
+   "domain": "lemonde.fr",
+   "url": "https://www.lemonde.fr/politique/article/2026/07/01/loi-de-programmation-militaire-le-parlement-valide-un-budget-des-armees-de-436-milliards-d-euros-d-ici-a-2030_6717592_823448.html",
+   "verified_on_full_text": true,
+   "read_via": "archive.org",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Le Parlement a approuvé mercredi 1er juillet une nouvelle version de la loi de programmation militaire (LPM), qui prévoit désormais que l’Etat consacre 436 milliards d’euros au budget des armées d’ici à 2030, censée répondre en partie aux leçons tirées des conflits en Ukraine ou au Moyen-Orient.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Le Monde",
+     "confidence": 0.98,
+     "why": "Le texte indique explicitement que le Parlement a approuvé la loi de programmation militaire prévoyant un budget de 436 milliards d'euros.",
+     "t_end": 15.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "Après le Sénat mardi, l’Assemblée nationale a très largement adopté le projet de loi du gouvernement, par 375 voix contre 113.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Le Monde",
+     "confidence": 0.95,
+     "why": "Ce passage confirme directement l'adoption de la loi par le Sénat puis par l'Assemblée nationale.",
+     "t_end": 30.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "France : le Parlement adopte une hausse majeure du budget militaire",
+   "date": "2026-07-01",
+   "source": "Euronews.com",
+   "domain": "msn.com",
+   "url": "https://www.msn.com/fr-ca/politique/gouvernement/france-l-assembl%C3%A9e-nationale-appel%C3%A9e-%C3%A0-voter-une-hausse-majeure-du-budget-militaire/ar-AA26XBwh",
+   "verified_on_full_text": true,
+   "read_via": "direct",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "En France, après un large vote favorable du Sénat (309 voix contre 34) la veille, l’Assemblée nationale a aussi, de façon convaincante (par 375 voix contre 113) approuvé ce mercredi après-midi une actualisation de la loi de programmation militaire (LPM), portant l'investissement consacré aux armées à 436 milliards d'euros d'ici à 2030",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 1.0,
+     "why": "Le texte rapporte explicitement l'adoption de la loi de programmation militaire par les deux chambres du Parlement français avec le montant budgétaire exact de 436 milliards d'euros.",
+     "t_end": 45.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    },
+    {
+     "t": null,
+     "quote": "L'adoption de cette actualisation revêt une forte portée symbolique pour Emmanuel Macron qui souhaite voir la loi promulguée avant les célébrations du 14 juillet.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 1.0,
+     "why": "Le texte confirme l'adoption de l'actualisation de la loi, validant le sujet de l'adoption parlementaire.",
+     "t_end": 65.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  },
+  {
+   "title": "436 milliards d'euros d'ici 2030: l'actualisation de la loi de programmation militaire adoptée par le Parlement, promulgation attendue pour le 14 juillet",
+   "date": "2026-07-01",
+   "source": "BFM",
+   "domain": "bfmtv.com",
+   "url": "https://www.bfmtv.com/economie/entreprises/defense/elle-cree-un-nouvel-etat-d-alerte-de-securite-nationale-le-conseil-constitutionnel-valide-la-nouvelle-loi-de-programmation-militaire-sans-en-censurer-aucune-mesure-ni-emettre-aucune-reserve_AD-202608060228.html",
+   "verified_on_full_text": true,
+   "read_via": "direct",
+   "authority": 0.75,
+   "authority_why": "média national",
+   "passages": [
+    {
+     "t": null,
+     "quote": "Le Conseil constitutionnel a validé jeudi l'ensemble de la nouvelle loi de programmation militaire, comprenant un nouvel \"état d'alerte de sécurité nationale\", sans en censurer aucune mesure ni émettre aucune réserve. Le texte gouvernemental actualise la dernière loi de programmation militaire, avec une nouvelle trajectoire de 436 milliards d'euros pour le budget des Armées d'ici 2030.",
+     "verdict": "paraphrase",
+     "who_says": "reported",
+     "speaker_name": "",
+     "confidence": 0.9,
+     "why": "Le texte confirme la validation (et donc l'adoption préalable par le Parlement) de la LPM avec le budget spécifique de 436 milliards d'euros.",
+     "t_end": 45.0,
+     "speaker_role": "journalist",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "Tome II - Actualisation de la programmation militaire pour les années 2024 à 2030 et diverses dispositions intéressant la défense",
+   "date": "2026-04-23",
+   "source": "Assemblée nationale",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONDVITGkzVDFuYzBSRU8wZWtHZUROT21RZ3RjMVAwMldXckw1RHBjdDZ2YXhMMDJsLXVaakNvRV9UVzJsMzBDNFBtSllMRnJPNTZKRWxsNTNfQzRzczl0SlJSUVo0TFYtY1hsZldBNFFvR2E0cmtoenlIdDg3RW5mZDRueTdhUlZmTTBnY213?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Projet de loi actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
+   "date": "2026-05-27",
+   "source": "Sénat",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5yYm52TlJiRi13TDV5cTFMUlU3eS10bEpCWmRDc3VtNGxJTElJUU4xY1NsZ0FHd2V0SHhGSVIyaVNqSjRJMEd2R2dLZGdrNTlvanBnU25KLWFJdw?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Projet de loi actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
+   "date": "2026-05-26",
+   "source": "Sénat",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9CVkRPY2lXQzFJaEpPS0hORk9IWjlVNTFNU1BsakVWT19fem1TWXlUNTdRM2pCcmRfRUxKaGtkcDd4aW5qQVpVbVpuN2VPZWZlY0hZS3hSakRQZw?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Projet de loi actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
+   "date": "2026-05-27",
+   "source": "Sénat",
+   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5qTWZ3ZXJoRnhvRXBvRm9hZ0JBeHFkUjlDLWQwSUctWTVBXzhUQkFkbFdWT2NWMTN2bHpKVlMwbzVKOWZaTEd1WHdqSTdEVmxXOHh4U2I3M0hZMXdjU0ww?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Projet de loi actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
+   "date": "2026-05-27",
+   "source": "Sénat",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBjVkhiSHJCVDJRWHRSOUZyWnkyUGRReGxmaVUydVdLMWEwclBSQlUtcXhELXpkOV93bDZ2b0FWaWhYeFNqUXJsdVhUM0dCd1FqSThoRzIwN2JCSms?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Loi du 16 août 2026 actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
+   "date": "2026-09-29",
+   "source": "Vie publique",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQdW1WU3BWdEZlMEFGU2IweUtkSENVMk5DQ1AtcGxfbzhSZE1VdFdnRjFuYXFkZjg1aU9rMFJpVnd4LVd2TGpzRE52M1ZBbU1KZDJlNWZybm83ZENZR09WMGV6TE5JUXM0RnctTHA2Vi1aR0d1LVQ1ZXBXSjVHNnVMTGlsR25aYXN3NVlSM0VPd09fQ2JsaEEyMUkxMjE2NFl5WGk0cVhJa1NlaC0wUmpF?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "Le Parlement vote un budget des armées en hausse, deux tiers des Français prêts à un effort",
+   "date": "2026-07-01",
+   "source": "Radio France",
+   "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxOZnZOaUcwdjJMR0JkbTBLRjhac2hDbkRNMF8xSHYyRVJHbV9LODdrZ1JLQk9GUldkc1RXeWlRNW4xNXp5TnNpNUlNaEpaOTlXMjZnX1l2OUlqcEJ1a3Jsa0hjZW9GSFdLSERuSlJQN2VsTEpsUUJUYUhDQjNaTHZBTHNnUU0xV1c4cThQVjI1TjJYeS00LWFxMnBtZnRjY29yWi1mcWZlTE1SbUVxNWtCT0RUSEFYUUNEU04zVjdWMkloNU95b3FvelFMWFhRWUpsSGhnanZ3ckZER1dxSnpob3FDdmVRQWp5ZUlmTjlnRG16dmdaUEprYmtLMTRnUQ?oc=5",
+   "authority": 0.9,
+   "reason": "lien Google Actualités non converti"
+  }
+ ],
+ "unverifiable_videos": [
+  {
+   "title": "Cédric Perrin : \"Sur 1 000 euros d'impôt français, 31 vont à la défense\"",
+   "url": "https://www.dailymotion.com/video/xacyvim",
+   "reason": "pas de sous-titres ; audio : ffmpeg absent"
+  },
+  {
+   "title": "Programmation militaire : 36 milliards pour quoi faire ? | Chaque voix compte - 06/05/26",
+   "url": "https://www.youtube.com/watch?v=hq9F7Ja3Eh0",
+   "reason": "vidéo de 65 min : trop longue pour l'analyse IA (limite 60 min, quotas Gemini)"
+  },
+  {
+   "title": "Loi de programmation militaire : audition de C. Vautrin | La séance est ouverte ! - 08/04/2026",
+   "url": "https://www.youtube.com/watch?v=9qKeQFWeFjw",
+   "reason": "vidéo de 87 min : trop longue pour l'analyse IA (limite 60 min, quotas Gemini)"
+  }
+ ]
+}

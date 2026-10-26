@@ -1,0 +1,459 @@
+{
+ "target": "Sergueï Lavrov",
+ "target_type": "personne",
+ "claim": "no pause in special military operation at UN Security Council",
+ "speakers": "cible",
+ "authority_level": "forte",
+ "plan": {
+  "claim_summary": "Déclarations de Sergueï Lavrov excluant toute pause ou trêve dans l'opération militaire spéciale russe, formulées notamment dans le cadre du Conseil de sécurité ou de l'Assemblée générale de l'ONU.",
+  "term_groups": [
+   [
+    "no pause",
+    "no ceasefire",
+    "no truce",
+    "pas de pause",
+    "pas de treve",
+    "aucun cessez le feu",
+    "без пауз",
+    "никаких пауз",
+    "перемирия не будет"
+   ],
+   [
+    "special military operation",
+    "military operation",
+    "operation militaire speciale",
+    "operation militaire",
+    "специальная военная операция",
+    "сво",
+    "военная операция"
+   ],
+   [
+    "security council",
+    "unsc",
+    "united nations",
+    "un general assembly",
+    "conseil de securite",
+    "onu",
+    "совет безопасности",
+    "совбез",
+    "оон"
+   ]
+  ],
+  "target_aliases": [
+   "serguei lavrov",
+   "sergey lavrov",
+   "sergei lavrov",
+   "lavrov",
+   "сергеи лавров",
+   "лавров"
+  ],
+  "youtube_queries": [
+   "Sergueï Lavrov no pause in special military operation at UN Security Council",
+   "Sergey Lavrov UN Security Council special military operation",
+   "Lavrov press conference UN General Assembly pause",
+   "Sergueï Lavrov Conseil de sécurité ONU opération militaire",
+   "Lavrov United Nations speech Ukraine ceasefire",
+   "Сергей Лавров Совет Безопасности ООН перемирие",
+   "Сергей Лавров пресс-конференция ООН СВО",
+   "UN Web TV Lavrov press conference Ukraine",
+   "Reuters Lavrov UN Security Council address"
+  ],
+  "news_queries": [
+   "Sergueï Lavrov no pause in special military operation at UN Security Council",
+   "Lavrov \"no pause\" \"special military operation\" UN",
+   "Lavrov UN Security Council Ukraine ceasefire rejection",
+   "Sergueï Lavrov ONU \"pas de pause\" opération militaire",
+   "Лавров ООН никаких пауз спецоперация",
+   "Lavrov press conference UN \"no truce\" Ukraine"
+  ],
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "source": "llm",
+  "diag": {
+   "youtube_keys": 8,
+   "queries_video": 9,
+   "queries_news": 6,
+   "authority": "forte",
+   "speakers": "cible",
+   "reference_sites": [
+    "un.org",
+    "fao.org",
+    "wfp.org",
+    "who.int",
+    "mid.ru",
+    "whitehouse.gov",
+    "afp.com",
+    "france24.com"
+   ],
+   "site_articles": 1,
+   "site_articles_by_site": {
+    "mid.ru": 1
+   },
+   "site_pages_probed": 0,
+   "site_videos": 0,
+   "official_channels": {
+    "United Nations": 0,
+    "FAO": 0,
+    "World Food Programme": 0
+   },
+   "videos_candidates": 60,
+   "site_videos_scored": [],
+   "videos_low_authority": 26,
+   "videos_relevant": 14,
+   "videos_by_platform": {
+    "youtube": 8
+   },
+   "articles_candidates": 52,
+   "articles_low_authority": 8,
+   "articles_relevant": 4,
+   "articles_read_via": {
+    "direct": 2,
+    "illisible : lien Google Actualités non converti": 1,
+    "illisible : site fermé aux robots, pas d'archive": 1
+   },
+   "timing": {
+    "ia-affiné": 7
+   },
+   "elapsed_min": 15.6,
+   "youtube_keys_status": "8/8 disponible(s)",
+   "llm_usage": {
+    "gemini": {
+     "clés": "10/10 disponible(s)",
+     "modèles utilisés": {
+      "gemini-3.8-flash": 4,
+      "gemini-3.6-flash": 9,
+      "gemini-3.7-flash": 2,
+      "gemini-3.5-flash": 2,
+      "gemini-3-flash-preview": 4,
+      "gemini-3.5-flash-lite": 1
+     }
+    },
+    "groq": {
+     "clés": "1/1 disponible(s)",
+     "appels": 0
+    }
+   },
+   "timed_out": false
+  },
+  "target_type": "personne",
+  "official_speakers": [
+   "Sergueï Lavrov",
+   "Maria Zakharova",
+   "Vassily Nebenzia"
+  ],
+  "authoritative_sources": [
+   "Reuters",
+   "AFP",
+   "AP News",
+   "TASS",
+   "RIA Novosti",
+   "RT",
+   "mid.ru",
+   "un.org",
+   "United Nations",
+   "UN Web TV",
+   "France 24",
+   "BBC News",
+   "Le Monde",
+   "rfi.fr"
+  ],
+  "site_query": "Лавров ООН пауз военная операция",
+  "countries": [
+   "RU",
+   "ORG",
+   "US"
+  ]
+ },
+ "stats": {
+  "videos_scanned": 8,
+  "articles_scanned": 4
+ },
+ "videos": [
+  {
+   "title": "FULL CLASH: Lavrov Rejects Ukraine War Pause as Sybiha Demands Immediate Ceasefire at UN | AC1N",
+   "uploaded": "2026-09-23",
+   "platform": "youtube",
+   "video_id": "OJS8dno5Xl8",
+   "duration": 1700,
+   "channel": "DRM News",
+   "url": "https://www.youtube.com/watch?v=OJS8dno5Xl8",
+   "method": "gemini-video",
+   "authority": 0.67,
+   "authority_why": "chaîne non répertoriée (977 000 abonnés)",
+   "moments": [
+    {
+     "start": "09:40",
+     "end": "10:04",
+     "start_seconds": 580.9,
+     "end_seconds": 604.2,
+     "start_tc": "00:09:40.900",
+     "end_tc": "00:10:04.200",
+     "duration_seconds": 23.3,
+     "timestamp": "09:40",
+     "link": "https://www.youtube.com/watch?v=OJS8dno5Xl8&t=580s",
+     "clip_link": "https://www.youtube.com/embed/OJS8dno5Xl8?start=580&end=605&autoplay=1",
+     "t": 580.9,
+     "quote": "I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kyiv regime with weapons.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergey Lavrov",
+     "confidence": 0.98,
+     "why": "Sergey Lavrov explicitly states at the UN Security Council that Russia will not pause its special military operation.",
+     "t_end": 604.2,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Russia's Lavrov Rules Out Pause During Peace Negotiations | WION News",
+   "uploaded": "2026-09-24",
+   "platform": "youtube",
+   "video_id": "LKG2AbjxZ8Q",
+   "duration": 256,
+   "channel": "WION",
+   "url": "https://www.youtube.com/watch?v=LKG2AbjxZ8Q",
+   "method": "gemini-video",
+   "authority": 0.7,
+   "authority_why": "chaîne non répertoriée (10 500 000 abonnés)",
+   "moments": [
+    {
+     "start": "02:53",
+     "end": "03:26",
+     "start_seconds": 173.8,
+     "end_seconds": 206.1,
+     "start_tc": "00:02:53.800",
+     "end_tc": "00:03:26.100",
+     "duration_seconds": 32.3,
+     "timestamp": "02:53",
+     "link": "https://www.youtube.com/watch?v=LKG2AbjxZ8Q&t=173s",
+     "clip_link": "https://www.youtube.com/embed/LKG2AbjxZ8Q?start=173&end=207&autoplay=1",
+     "t": 173.8,
+     "quote": "However, having learned from bitter experience, we will not pause the special military operation, Russia's 2022 offensive against Ukraine, for the duration of negotiations in any format. Although this is precisely what Europe wants, with the same simple goal of gaining a respite and replenishing the depleted military arsenals of the Kyiv regime, which, out of desperation, has long since switched to openly terrorist methods.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergei Lavrov",
+     "confidence": 0.95,
+     "why": "Sergueï Lavrov déclare lui-même au Conseil de sécurité de l'ONU qu'il n'y aura aucune pause dans l'opération militaire spéciale pendant d'éventuelles négociations.",
+     "t_end": 206.1,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "'You Think We'll Fall For Your Tricks?': Lavrov Tears Apart Europe In Fiery Ukraine War Speech",
+   "uploaded": "2026-09-24",
+   "platform": "youtube",
+   "video_id": "8mlxTnE3L04",
+   "duration": 677,
+   "channel": "Times Of India",
+   "url": "https://www.youtube.com/watch?v=8mlxTnE3L04",
+   "method": "gemini-video",
+   "authority": 0.7,
+   "authority_why": "chaîne non répertoriée (6 030 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:00",
+     "end": "00:24",
+     "start_seconds": 0.0,
+     "end_seconds": 24.3,
+     "start_tc": "00:00:00.000",
+     "end_tc": "00:00:24.300",
+     "duration_seconds": 24.3,
+     "timestamp": "00:00",
+     "link": "https://www.youtube.com/watch?v=8mlxTnE3L04&t=0s",
+     "clip_link": "https://www.youtube.com/embed/8mlxTnE3L04?start=0&end=25&autoplay=1",
+     "t": 0.0,
+     "quote": "Having learned from bitter experience, we will not suspend the special military operation for the duration of negotiations in any format, although Europe wants precisely this with the same straightforward goal of getting a respite and replenishing the depleted military arsenals of the Kyiv regime",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergei Lavrov",
+     "confidence": 0.95,
+     "why": "Sergei Lavrov explicitly states Russia will not suspend its special military operation during negotiations.",
+     "t_end": 24.3,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    },
+    {
+     "start": "03:55",
+     "end": "04:16",
+     "start_seconds": 235.9,
+     "end_seconds": 256.7,
+     "start_tc": "00:03:55.900",
+     "end_tc": "00:04:16.700",
+     "duration_seconds": 20.8,
+     "timestamp": "03:55",
+     "link": "https://www.youtube.com/watch?v=8mlxTnE3L04&t=235s",
+     "clip_link": "https://www.youtube.com/embed/8mlxTnE3L04?start=235&end=257&autoplay=1",
+     "t": 235.9,
+     "quote": "However, having learned from bitter experience, we will not suspend the special military operation for the duration of negotiations in any format, although Europe wants precisely this with the same straightforward goal of getting a respite and replenishing the depleted military arsenals of the Kyiv regime",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergei Lavrov",
+     "confidence": 0.95,
+     "why": "Lavrov repeats verbatim his declaration ruling out a pause in the special military operation during negotiations.",
+     "t_end": 256.7,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "Chanceler afirma que Rússia não fará 'pausa' em suas operações contra a Ucrânia | AFP",
+   "uploaded": "2026-09-23",
+   "platform": "youtube",
+   "video_id": "4cjuPnq02AM",
+   "duration": 96,
+   "channel": "AFP Português",
+   "url": "https://www.youtube.com/watch?v=4cjuPnq02AM",
+   "method": "gemini-video",
+   "authority": 0.69,
+   "authority_why": "chaîne non répertoriée (1 480 000 abonnés)",
+   "moments": [
+    {
+     "start": "00:18",
+     "end": "00:41",
+     "start_seconds": 18.0,
+     "end_seconds": 41.5,
+     "start_tc": "00:00:18.000",
+     "end_tc": "00:00:41.500",
+     "duration_seconds": 23.5,
+     "timestamp": "00:18",
+     "link": "https://www.youtube.com/watch?v=4cjuPnq02AM&t=18s",
+     "clip_link": "https://www.youtube.com/embed/4cjuPnq02AM?start=18&end=42&autoplay=1",
+     "t": 18.0,
+     "quote": "Однако наученные горьким опытом мы не будем на период перерывов... [Não vamos suspender a operação militar na Rússia durante as negociações, seja qual for o formato, embora seja exatamente isso que a Europa deseja, com o objetivo de ganhar um respiro e reabastecer os arsenais militares esgotados de Kiev...]",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergei Lavrov",
+     "confidence": 0.95,
+     "why": "Sergueï Lavrov déclare au Conseil de sécurité de l'ONU que la Russie ne suspendra pas ses opérations militaires pendant d'éventuelles négociations.",
+     "t_end": 41.5,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "FULL: Lavrov Rejects Pause in Russia’s Military Operation, Slams Europe & West in Fiery Speech |AC1N",
+   "uploaded": "2026-09-23",
+   "platform": "youtube",
+   "video_id": "rrzEyNyvV9k",
+   "duration": 1040,
+   "channel": "DRM News",
+   "url": "https://www.youtube.com/watch?v=rrzEyNyvV9k",
+   "method": "gemini-video",
+   "authority": 0.67,
+   "authority_why": "chaîne non répertoriée (977 000 abonnés)",
+   "moments": [
+    {
+     "start": "09:31",
+     "end": "09:49",
+     "start_seconds": 571.0,
+     "end_seconds": 589.0,
+     "start_tc": "00:09:31.000",
+     "end_tc": "00:09:49.000",
+     "duration_seconds": 18.0,
+     "timestamp": "09:31",
+     "link": "https://www.youtube.com/watch?v=rrzEyNyvV9k&t=571s",
+     "clip_link": "https://www.youtube.com/embed/rrzEyNyvV9k?start=571&end=590&autoplay=1",
+     "t": 571.0,
+     "quote": "I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kyiv regime with weapons.",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergey Lavrov",
+     "confidence": 0.95,
+     "why": "Lavrov directly states at the UN Security Council meeting that Russia will not pause its special military operation.",
+     "t_end": 589.0,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  },
+  {
+   "title": "FULL: Lavrov Defends Russia’s Position on Ukraine, Rejects Ceasefire Pause & Criticizes West | AC1E",
+   "uploaded": "2026-09-23",
+   "platform": "youtube",
+   "video_id": "4X4v683_0-8",
+   "duration": 1030,
+   "channel": "DWS News",
+   "url": "https://www.youtube.com/watch?v=4X4v683_0-8",
+   "method": "gemini-video",
+   "authority": 0.62,
+   "authority_why": "chaîne non répertoriée (349 000 abonnés)",
+   "moments": [
+    {
+     "start": "09:43",
+     "end": "10:07",
+     "start_seconds": 583.7,
+     "end_seconds": 607.7,
+     "start_tc": "00:09:43.700",
+     "end_tc": "00:10:07.700",
+     "duration_seconds": 24.0,
+     "timestamp": "09:43",
+     "link": "https://www.youtube.com/watch?v=4X4v683_0-8&t=583s",
+     "clip_link": "https://www.youtube.com/embed/4X4v683_0-8?start=583&end=608&autoplay=1",
+     "t": 583.7,
+     "quote": "Once I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kiev regime with weapons",
+     "verdict": "literal",
+     "who_says": "target",
+     "speaker_name": "Sergei Lavrov",
+     "confidence": 0.95,
+     "why": "Sergei Lavrov explicitly states at the UN Security Council that Russia will not accept any pause in its special military operation.",
+     "t_end": 607.7,
+     "speaker_role": "official",
+     "timing": "ia-affiné"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "title": "Assemblée général de l'ONU : la Russie \"ne va pas faire de pause\" dans sa guerre, affirme Sergueï Lavrov ; Zelensky dénonce \"la folie\" de Poutine",
+   "date": "2026-09-23",
+   "source": "RTBF",
+   "domain": "rtbf.be",
+   "url": "https://www.rtbf.be/article/guerre-en-ukraine-la-russie-ne-va-pas-faire-de-pause-dans-sa-guerre-affirme-serguei-lavrov-a-l-onu-11789644",
+   "verified_on_full_text": true,
+   "read_via": "direct",
+   "authority": 0.9,
+   "authority_why": "média de référence",
+   "passages": [
+    {
+     "t": null,
+     "quote": "\"Nous n'allons pas faire de pause dans notre opération militaire spéciale\", l'expression utilisée par Moscou pour qualifier le conflit, a déclaré le ministre russe des Affaires étrangères. \"L'Europe veut obtenir une pause, pour l'utiliser pour approvisionner en armes\" l'Ukraine, a-t-il ajouté.",
+     "verdict": "literal",
+     "who_says": "reported",
+     "speaker_name": "Sergueï Lavrov",
+     "confidence": 0.95,
+     "why": "Il s'agit des déclarations directes de Sergueï Lavrov rapportées par le journaliste, affirmant que la Russie ne fera pas de pause dans son opération militaire spéciale.",
+     "t_end": 15.0,
+     "speaker_role": "official",
+     "timing": "ia"
+    }
+   ]
+  }
+ ],
+ "unreadable_articles": [
+  {
+   "title": "Maintenance of peace and security of Ukraine - Security Council, 10227th meeting",
+   "date": "2026-09-23",
+   "source": "Welcome to the United Nations",
+   "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE54TnJnUVozMzE1VURIdkhDVWpaTmR5Z1B5ODlRZ05hTG9vbXNiaU1jUXR4Z0ZVV05tZ0U2QTY2aTE0eDZ0SXBqOXhDTQ?oc=5",
+   "authority": 1.0,
+   "reason": "lien Google Actualités non converti"
+  },
+  {
+   "title": "La Russie «ne va pas faire de pause» dans sa guerre avec l'Ukraine, dit Sergeï Lavrov à l'ONU",
+   "date": "2026-09-23",
+   "source": "Radio France Internationale",
+   "url": "https://www.rfi.fr/fr/en-bref/20260923-la-russie-ne-va-pas-faire-de-pause-dans-sa-guerre-avec-l-ukraine-dit-serge%C3%AF-lavrov-%C3%A0-l-onu",
+   "authority": 0.9,
+   "reason": "site fermé aux robots, pas d'archive"
+  }
+ ],
+ "unverifiable_videos": []
+}
