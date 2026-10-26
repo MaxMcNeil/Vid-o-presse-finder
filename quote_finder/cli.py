@@ -53,6 +53,31 @@ def _split(s: str) -> list[str]:
     return [x.strip() for x in (s or "").split(",") if x.strip()]
 
 
+def norm_since(v: str) -> str:
+    """« depuis » toujours en AAAA-MM-JJ (comparaison de dates texte). Accepte aussi JJ/MM/AAAA, 30j, 6m, 1a.
+    Illisible -> aucun filtre (avec un avertissement), jamais un filtre faux."""
+    import re
+    v = " ".join(str(v or "").lower().split())
+    if not v:
+        return ""
+    m = re.fullmatch(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})", v)
+    m2 = None if m else re.fullmatch(r"(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})", v)
+    try:
+        if m:
+            return dt.date(*map(int, m.groups())).isoformat()
+        if m2:
+            d, mo, y = map(int, m2.groups())
+            return dt.date(y, mo, d).isoformat()
+    except ValueError:
+        pass
+    m = re.fullmatch(r"(\d{1,4})\s*(j|jours?|d|days?|s|sem|semaines?|w|weeks?|m|mois|months?|a|ans?|y|years?)", v)
+    if m:
+        days = int(m.group(1)) * {"j": 1, "d": 1, "s": 7, "w": 7, "m": 30, "a": 365, "y": 365}[m.group(2)[0]]
+        return (dt.date.today() - dt.timedelta(days=days)).isoformat()
+    print(f"::warning::date « depuis » illisible ({v}) : aucun filtre de date appliqué")
+    return ""
+
+
 def options_for(a, target: str, claim: str, ttype: str) -> Options:
     speakers = "tous" if a.anyone else a.speakers
     langs = _split(a.langs) or ["fr"]
@@ -60,7 +85,7 @@ def options_for(a, target: str, claim: str, ttype: str) -> Options:
         langs = ["ar"] + langs
     return Options(target=target.strip(), claim=claim.strip(), target_type=ttype, speakers=speakers, also=_split(a.also),
                    langs=langs, max_videos=a.max_videos, max_articles=a.max_articles,
-                   authority=a.authority, since=a.since,
+                   authority=a.authority, since=norm_since(a.since),
                    video_fallback_max=a.video_fallback_max if a.video_fallback_max is not None else a.max_videos,
                    audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict,
                    platforms=_split(a.platforms), articles=not a.no_articles, max_minutes=a.max_minutes,

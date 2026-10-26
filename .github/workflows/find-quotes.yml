@@ -39,7 +39,7 @@ on:
         required: false
         default: "fr,en"
       depuis:
-        description: "Seulement après cette date (AAAA-MM-JJ, facultatif)"
+        description: "Seulement après cette date : AAAA-MM-JJ, JJ/MM/AAAA, ou 30j / 6m / 1a (facultatif)"
         required: false
         default: ""
       telecharger_extraits:
