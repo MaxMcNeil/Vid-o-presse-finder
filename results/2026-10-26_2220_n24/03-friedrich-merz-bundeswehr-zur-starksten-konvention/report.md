@@ -48,3 +48,11 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 2 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 14.9 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [06:55 → 07:14](https://www.youtube.com/embed/xgXYEc6ZzUI?start=415&end=435&autoplay=1) — FULL SPEECH: Germany Will Build Europe’s Strongest Army, Says Chancell
+  > We are transforming our army, the Bundeswehr, into the, quote, strongest conventional army in Europe. Our new military strategy puts political intent into a coherent military framework.
+

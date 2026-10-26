@@ -181,25 +181,28 @@
    "moments": [
     {
      "start": "06:55",
-     "end": "07:12",
-     "start_seconds": 415.9,
-     "end_seconds": 432.2,
-     "start_tc": "00:06:55.900",
-     "end_tc": "00:07:12.200",
-     "duration_seconds": 16.3,
+     "end": "07:14",
+     "start_seconds": 415.16,
+     "end_seconds": 434.6,
+     "start_tc": "00:06:55.160",
+     "end_tc": "00:07:14.600",
+     "duration_seconds": 19.4,
      "timestamp": "06:55",
      "link": "https://www.youtube.com/watch?v=xgXYEc6ZzUI&t=415s",
-     "clip_link": "https://www.youtube.com/embed/xgXYEc6ZzUI?start=415&end=433&autoplay=1",
-     "t": 415.9,
+     "clip_link": "https://www.youtube.com/embed/xgXYEc6ZzUI?start=415&end=435&autoplay=1",
+     "t": 415.16,
      "quote": "We are transforming our army, the Bundeswehr, into the, quote, strongest conventional army in Europe. Our new military strategy puts political intent into a coherent military framework.",
      "verdict": "literal",
      "who_says": "target",
      "speaker_name": "Friedrich Merz",
      "confidence": 0.95,
      "why": "Friedrich Merz affirme explicitement vouloir transformer la Bundeswehr en la plus puissante armée conventionnelle d'Europe (« strongest conventional army in Europe »).",
-     "t_end": 432.2,
+     "t_end": 434.6,
      "speaker_role": "politician",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "ok"
     }
    ]
   }

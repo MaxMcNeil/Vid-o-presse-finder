@@ -184,26 +184,29 @@
    "authority_why": "chaîne non répertoriée (349 000 abonnés)",
    "moments": [
     {
-     "start": "11:24",
-     "end": "11:35",
-     "start_seconds": 684.0,
-     "end_seconds": 695.0,
-     "start_tc": "00:11:24.000",
-     "end_tc": "00:11:35.000",
-     "duration_seconds": 11.0,
-     "timestamp": "11:24",
-     "link": "https://www.youtube.com/watch?v=EYjBc72VgVg&t=684s",
-     "clip_link": "https://www.youtube.com/embed/EYjBc72VgVg?start=684&end=696&autoplay=1",
-     "t": 684.0,
+     "start": "11:22",
+     "end": "11:33",
+     "start_seconds": 682.16,
+     "end_seconds": 693.88,
+     "start_tc": "00:11:22.160",
+     "end_tc": "00:11:33.880",
+     "duration_seconds": 11.7,
+     "timestamp": "11:22",
+     "link": "https://www.youtube.com/watch?v=EYjBc72VgVg&t=682s",
+     "clip_link": "https://www.youtube.com/embed/EYjBc72VgVg?start=682&end=694&autoplay=1",
+     "t": 682.16,
      "quote": "and next year, I'm proud to say, and Pete, we have to get moving on this, $1.5 trillion we're going up to. All we need, and it's all made in the USA.",
      "verdict": "paraphrase",
      "who_says": "target",
      "speaker_name": "Donald Trump",
      "confidence": 0.95,
      "why": "Donald Trump states that next year the defense budget will go up to 1.5 trillion dollars.",
-     "t_end": 695.0,
+     "t_end": 693.88,
      "speaker_role": "politician",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "ok"
     }
    ]
   },
@@ -223,10 +226,10 @@
      "start": "00:00",
      "end": "00:22",
      "start_seconds": 0.0,
-     "end_seconds": 22.5,
+     "end_seconds": 22.08,
      "start_tc": "00:00:00.000",
-     "end_tc": "00:00:22.500",
-     "duration_seconds": 22.5,
+     "end_tc": "00:00:22.080",
+     "duration_seconds": 22.1,
      "timestamp": "00:00",
      "link": "https://www.youtube.com/watch?v=0i6Gap4vRZM&t=0s",
      "clip_link": "https://www.youtube.com/embed/0i6Gap4vRZM?start=0&end=23&autoplay=1",
@@ -237,9 +240,12 @@
      "speaker_name": "Donald Trump",
      "confidence": 0.85,
      "why": "Donald Trump évoque un budget de défense record atteignant 1,5 trillion de dollars pour financer de nouveaux équipements militaires (navires, drones, avions, missiles).",
-     "t_end": 22.5,
+     "t_end": 22.08,
      "speaker_role": "politician",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "ok"
     }
    ]
   }

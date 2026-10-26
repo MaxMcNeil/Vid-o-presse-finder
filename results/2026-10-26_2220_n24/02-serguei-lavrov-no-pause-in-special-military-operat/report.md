@@ -94,3 +94,21 @@ _Déclarations de Sergueï Lavrov excluant toute pause ou trêve dans l'opérati
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 15.6 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [09:31 → 09:50](https://www.youtube.com/embed/OJS8dno5Xl8?start=571&end=591&autoplay=1) — FULL CLASH: Lavrov Rejects Ukraine War Pause as Sybiha Demands Immedia
+  > I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kyiv regime with
+- [02:53 → 03:27](https://www.youtube.com/embed/LKG2AbjxZ8Q?start=173&end=208&autoplay=1) — Russia's Lavrov Rules Out Pause During Peace Negotiations | WION News
+  > However, having learned from bitter experience, we will not pause the special military operation, Russia's 2022 offensive against Ukraine, for the duration of negotiations in any format. Although this
+- [00:00 → 00:18](https://www.youtube.com/embed/8mlxTnE3L04?start=0&end=19&autoplay=1) — 'You Think We'll Fall For Your Tricks?': Lavrov Tears Apart Europe In 
+  > Having learned from bitter experience, we will not suspend the special military operation for the duration of negotiations in any format, although Europe wants precisely this with the same straightfor
+- [03:45 → 04:06](https://www.youtube.com/embed/8mlxTnE3L04?start=225&end=247&autoplay=1) — 'You Think We'll Fall For Your Tricks?': Lavrov Tears Apart Europe In 
+  > However, having learned from bitter experience, we will not suspend the special military operation for the duration of negotiations in any format, although Europe wants precisely this with the same st
+- [09:31 → 09:50](https://www.youtube.com/embed/rrzEyNyvV9k?start=571&end=591&autoplay=1) — FULL: Lavrov Rejects Pause in Russia’s Military Operation, Slams Europ
+  > I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kyiv regime with
+- [09:32 → 09:51](https://www.youtube.com/embed/4X4v683_0-8?start=572&end=592&autoplay=1) — FULL: Lavrov Defends Russia’s Position on Ukraine, Rejects Ceasefire P
+  > Once I'd like to reiterate that we are not going to have a pause in our special military operation. Europe, whatever it thinks, just wants to get a pause and it wants to use it to pump the Kiev regime
+

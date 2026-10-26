@@ -92,3 +92,21 @@ _L'Assemblée nationale ou le Sénat français a adopté la loi de programmation
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 18.3 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:58 → 01:12](https://www.youtube.com/embed/KEgIgfD7MKY?start=58&end=73&autoplay=1) — Actualisation de la loi de programmation militaire
+  > On est trois ans plus tard aujourd'hui avec une nouvelle copie qui nous demande 36 milliards d'euros supplémentaires et qui donc démontre que le Sénat en 2023 avait raison sur son analyse du sujet.
+- [03:02 → 03:14](https://www.youtube.com/embed/KEgIgfD7MKY?start=182&end=195&autoplay=1) — Actualisation de la loi de programmation militaire
+  > Ce qu'on nous propose aujourd'hui, c'est une loi de programmation qui permet évidemment un effort substantiel de 36 milliards d'euros, mais qui ne permet en quelque sorte que de sécuriser notre loi de
+- [13:36 → 13:51](https://www.youtube.com/embed/KEgIgfD7MKY?start=816&end=832&autoplay=1) — Actualisation de la loi de programmation militaire
+  > On parle de 436 évidemment, mais je rappelle qu'en 2023 lors de la discussion de la loi de programmation militaire nous avons remis en cause la véracité des 13 milliards d'euros que le gouvernement no
+- [13:53 → 14:02](https://www.youtube.com/embed/KEgIgfD7MKY?start=833&end=843&autoplay=1) — Actualisation de la loi de programmation militaire
+  > Si aujourd'hui le gouvernement annonce 400 milliards de point de départ pour arriver à 436 en augmentant de 36 milliards d'euros, où sont les 13 ?
+- [00:00 → 00:13](https://www.youtube.com/embed/Uj5lKt50flU?start=0&end=14&autoplay=1) — Le Sénat vote la LPM actualisée
+  > Résultat du scrutin. Votants 344, exprimés 330, pour 297, contre 33. Le Sénat a donc adopté.
+- [00:01 → 00:24](https://www.youtube.com/embed/REVbhskyMGc?start=1&end=25&autoplay=1) — Loi de programmation militaire 2024-2030 : les députés votent 36 milli
+  > Le scrutin est ouvert... Le scrutin est clos. Pour : 440, contre : 122. L'Assemblée nationale a adopté.
+

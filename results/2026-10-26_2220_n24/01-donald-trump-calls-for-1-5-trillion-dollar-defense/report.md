@@ -70,3 +70,13 @@ _Donald Trump réclame ou propose un budget de défense record atteignant 1,5 bi
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 18.3 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [11:22 → 11:33](https://www.youtube.com/embed/EYjBc72VgVg?start=682&end=694&autoplay=1) — WATCH:  U.S. President Donald Trump Announces $1.5 Trillion Military V
+  > and next year, I'm proud to say, and Pete, we have to get moving on this, $1.5 trillion we're going up to. All we need, and it's all made in the USA.
+- [00:00 → 00:22](https://www.youtube.com/embed/0i6Gap4vRZM?start=0&end=23&autoplay=1) — Trump Says Defense Budget Will Reach $1.5 Trillion, Touts ‘Golden Age’
+  > proudly signed into law a record setting defense budget and this year is going to be 1.5 trillion. I believe, I don't want to speak too early, but we broke the trillion mark and we're going to be at 1
+

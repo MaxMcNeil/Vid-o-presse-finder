@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 26/10/2026 à 23:10 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 27/10/2026 à 00:30 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -13,7 +13,7 @@ _Mis à jour le 26/10/2026 à 23:10 (heure italienne), automatiquement après ch
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
-- ℹ️ Remise à zéro des quotas gratuits Google : chaque jour à 8 h 01 (minuit en Californie).
+- ℹ️ Remise à zéro des quotas gratuits Google : chaque jour à 9 h 01 (minuit en Californie).
 
 ## YouTube depuis GitHub
 
@@ -21,9 +21,10 @@ _Mis à jour le 26/10/2026 à 23:10 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 1 j (données mobiles) : 0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
+- ✅ Dernier passage il y a 0 min (données mobiles) : 15 extrait(s) recalé(s), 1 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
+  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 6 h 30 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
-- ⏳ Extraits en attente de recalage par le téléphone : 117
+- ⏳ Extraits en attente de recalage par le téléphone : 104
 
 ## Dernier lancement
 
