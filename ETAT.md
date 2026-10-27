@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 27/10/2026 à 15:22 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 27/10/2026 à 22:52 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -9,20 +9,19 @@ _Mis à jour le 27/10/2026 à 15:22 (heure italienne), automatiquement après ch
 ## Clés et quotas
 
 - ✅ **Gemini (IA)** : 10/10 clé(s) utilisable(s)
-- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 800 recherches restantes aujourd'hui
+- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 799 recherches restantes aujourd'hui
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
-- ℹ️ Remise à zéro des quotas gratuits Google : chaque jour à 9 h 01 (minuit en Californie).
+- ℹ️ Remise à zéro des quotas gratuits Google : chaque jour à 8 h 01 (minuit en Californie).
 
-## YouTube depuis GitHub
+## Sous-titres YouTube depuis GitHub
 
-- ❌ Sous-titres et téléchargements YouTube bloqués depuis GitHub (constaté le 24/10/2026, c'est permanent) → **normal, rien à faire** : Gemini analyse les vidéos (±1 à ±5 s) et le téléphone recale ensuite sur les sous-titres (±1-2 s).
+- ℹ️ Pas encore de mesure (elle apparaît après le prochain lancement). Méthodes essayées dans l'ordre : youtube-transcript-api → yt-dlp (avec jeton PO) → yt-dlp autres clients → yt-dlp + cookies (si fournis) → miroirs Invidious ; à défaut Gemini réécoute (±1 s) et le téléphone recale ensuite.
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 0 min (données mobiles) : 34 extrait(s) recalé(s), 5 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
-  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 21 h 22 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
+- ✅ Dernier passage il y a 7 h (données mobiles) : 34 extrait(s) recalé(s), 5 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
 - ⏳ Extraits en attente de recalage par le téléphone : 43
 
