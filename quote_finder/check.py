@@ -57,7 +57,7 @@ def main() -> int:
         pool.labels[key] = f"Gemini clé {i}"  # numéro réel dans le secret (et non « clé 1 » à chaque fois)
         st.label("gemini", key, pool.labels[key])
         c = GeminiClient(pool, list(llm.gemini.models), preferred=llm.gemini.preferred, timeout=60)
-        r, e, d = t(lambda c=c: c.generate_json('Réponds exactement {"ok": true}', max_attempts=4))
+        r, e, d = t(lambda c=c: c.generate_json('Réponds exactement {"ok": true}', max_attempts=4), 40)
         models = c._key_models.get(key, [])
         fl = [m for m in models if not is_text_only(m)]
         gm = [m for m in models if is_text_only(m)]
@@ -89,7 +89,7 @@ def main() -> int:
                 if not t:
                     raise RuntimeError("page non lue (réponse vide ou « INACCESSIBLE »)")
                 return f"{len(t)} caractères lus" + (f", vrai lien : {real[:70]}" if real else "")
-            r, e, d = t(rd)
+            r, e, d = t(rd, 60)
             line(OK if r else KO, ("lien Google Actualités" if "news.google.com" in a.url else a.url[:40]), r or e)
         if g:  # vrai lien d'un article Google Actualités retrouvé par la recherche web de Gemini
             def fr(a=g[0]):
@@ -98,7 +98,7 @@ def main() -> int:
                 if not real:
                     raise RuntimeError("vrai lien non retrouvé")
                 return real[:80]
-            r, e, d = t(fr)
+            r, e, d = t(fr, 60)
             line(OK if r else KO, "vrai lien d'un article Google Actualités (recherche web Gemini)", r or e)
     print("\nVidéos :")
     for i, key in enumerate(keys_from_env("YOUTUBE"), 1):
@@ -142,8 +142,9 @@ def main() -> int:
     from .sources import news
     for name, fn in (("Bing Actualités", lambda: news.bing_news("Bardella", 5, "fr")),
                      ("Google Actualités", lambda: news.google_news("Bardella", 5, "fr")),
-                     ("GDELT", lambda: news.gdelt("Bardella", 5))):
-        r, e, d = t(fn)
+                     ("GDELT", lambda: news.gdelt("Bardella", 5)),
+                     ("Recherche Google par Gemini (vrais liens)", lambda: news.gemini_search(llm, "Bardella Assemblée nationale", 5, "fr"))):
+        r, e, d = t(fn, 60)
         line(OK if r else WARN, name, f"{len(r)} article(s)" if r else (e or "0 résultat (souvent un blocage temporaire)"))
     print("\nÉtat des clés (aussi dans state/QUOTAS.md après chaque recherche) :\n")
     print(st.markdown())
