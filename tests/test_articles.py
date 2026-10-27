@@ -88,3 +88,21 @@ def test_text_of_another_article_is_rejected(monkeypatch):
     other = "Un tout autre sujet : la météo de demain, pluie et vent sur la côte. " * 30
     t, why = at.read(A("https://www.reuters.com/a"), L(other, ok), "x", [2])
     assert t == ""
+
+
+def test_google_search_by_gemini_keeps_only_urls_google_returned(monkeypatch):
+    from quote_finder.sources import news
+    monkeypatch.setattr(news, "_resolve", lambda u: {"r1": "https://www.lemonde.fr/economie/article/2026/10/20/famine-europe_1.html",
+                                                    "r2": "https://www.reuters.com/world/europe/food-crisis-2026-10-21/"}.get(u, u))
+
+    class G:
+        def search_web(self, prompt):
+            return {"text": '{"articles": ['
+                    '{"title": "La famine menace l\\u2019Europe", "source": "Le Monde", "url": "https://www.lemonde.fr/economie/article/2026/10/20/famine-europe_1.html", "date": "2026-10-20"},'
+                    '{"title": "Inventé", "source": "Fake", "url": "https://www.inexistant.example/x"}]}',
+                    "grounding": {"groundingChunks": [{"web": {"uri": "r1", "title": "lemonde.fr"}},
+                                                      {"web": {"uri": "r2", "title": "reuters.com"}}]}}
+    arts = news.gemini_search(G(), "famine Europe", 8, "fr")
+    urls = [a.url for a in arts]
+    assert urls[0].startswith("https://www.lemonde.fr/") and arts[0].title.startswith("La famine")
+    assert any("reuters.com" in u for u in urls) and not any("inexistant" in u for u in urls)

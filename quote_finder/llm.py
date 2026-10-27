@@ -228,6 +228,11 @@ class GeminiClient:
             if r.status_code == 400 and ("video_metadata" in low or "fps" in low) and video_url and not video_clip:
                 parts[0].pop("video_metadata", None)  # option refusée par ce modèle : on s'en passe
                 continue
+            if r.status_code in (400, 403) and tools and re.search(r"tool|grounding|google_search|url_context|search", low):
+                # ce modèle n'accepte pas cet outil (recherche Google / lecture de page) : un autre modèle essaie
+                log.info("Gemini %s : outil %s refusé, autre modèle", m, list(tools[0])[0])
+                self._until[(key, m)] = time.time() + 3600
+                continue
             if r.status_code == 400 and "mediaresolution" in low:
                 self._no_res = True
                 continue

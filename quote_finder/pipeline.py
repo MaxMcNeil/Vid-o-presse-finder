@@ -57,6 +57,7 @@ class Options:
     refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
     article_gemini_max: int = 8      # articles pertinents illisibles autrement : lus par Gemini (url_context)
     article_search_max: int = 10     # liens Google Actualités : vrai lien retrouvé par Gemini (google_search)
+    article_google_queries: int = 3  # recherches Google (par Gemini) d'articles par recherche : vrais liens directs
 
     @property
     def person(self) -> str:  # compatibilité
@@ -218,7 +219,9 @@ def discover_articles(plan: Plan, o: Options, pools: dict, http=None, llm=None,
     queries += [f"{base} site:{authority.domain_of('https://' + d.split('//')[-1])}" for d in doms]
     for i, q in enumerate(queries):
         lg = o.langs[i % len(o.langs)] if o.langs else "en"
-        batch = _safe(news.gdelt, q, 30, http) if i < 2 else []
+        # recherche Google par Gemini : vrais liens d'articles (pas de lien Google Actualités à convertir)
+        batch = _safe(news.gemini_search, llm, q, 8, lg) if i < o.article_google_queries and "site:" not in q else []
+        batch += _safe(news.gdelt, q, 30, http) if i < 2 else []
         batch += _safe(news.bing_news, q, 20, lg, http)
         if i < 4 or "site:" in q:
             batch += _safe(news.google_news, q, 20, lg, http)

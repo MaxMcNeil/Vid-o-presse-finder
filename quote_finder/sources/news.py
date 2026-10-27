@@ -162,3 +162,57 @@ def nyt(pool: KeyPool, query: str, n: int = 10, http=None) -> list[ArticleCandid
         out.append(ArticleCandidate("The New York Times", d["web_url"], (d.get("headline") or {}).get("main", ""),
                                     (d.get("pub_date") or "")[:10], snippet=snip, domain="nytimes.com"))
     return out
+
+
+# ------------------------------------------------------------------ recherche Google via Gemini (vrais liens)
+GSEARCH_PROMPT = """Fais une recherche Google d'ARTICLES DE PRESSE et de pages officielles sur ce sujet :
+« {query} »
+Langue des résultats : {lang}. Privilégie agences de presse, grands médias, institutions et sites officiels.
+Donne jusqu'à {n} articles réellement trouvés (aucun inventé), du plus pertinent au moins pertinent.
+Réponds en JSON : {{"articles": [{{"title": "titre exact", "source": "nom du média", "url": "adresse complète", "date": "AAAA-MM-JJ ou vide", "summary": "1 phrase : ce que dit l'article"}}]}}"""
+
+
+def _resolve(u: str) -> str:
+    from ..article_text import _follow
+    return _follow(u) if u else ""
+
+
+def gemini_search(llm, query: str, n: int = 8, lang: str = "fr") -> list[ArticleCandidate]:
+    """« Une simple recherche Google » : Gemini cherche avec l'outil google_search. Les adresses retenues sont celles
+    renvoyées par Google lui-même (métadonnées de recherche, redirections résolues) ; une adresse écrite par l'IA
+    n'est gardée que si Google l'a aussi renvoyée (même site), jamais inventée."""
+    if llm is None or not getattr(llm, "search_web", None):
+        return []
+    d = llm.search_web(GSEARCH_PROMPT.format(query=query, lang=lang, n=n)) or {}
+    from ..util import items_of, parse_json_loose
+    g = d.get("grounding") or {}
+    chunks = g.get("groundingChunks") or g.get("grounding_chunks") or []
+    real = []  # (url, domaine) renvoyés par Google
+    for c in chunks:
+        w = c.get("web") or {}
+        u = _resolve(w.get("uri", ""))
+        if u and "google." not in domain_of(u):
+            real.append((u, domain_of(u), w.get("title", "")))
+    try:
+        items = items_of(parse_json_loose(d.get("text", "") or "{}"), "articles")
+    except Exception:  # noqa: BLE001
+        items = []
+    out, used = [], set()
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        u, title = str(it.get("url") or ""), str(it.get("title") or "")
+        dom = domain_of(u) if u else ""
+        same = [r for r in real if r[0] not in used and (r[0].rstrip("/") == u.rstrip("/") or
+                                                         (dom and (r[1] == dom or r[1].endswith("." + dom))))]
+        if not same:
+            continue  # adresse que Google n'a pas renvoyée : jamais gardée
+        exact = next((r for r in same if r[0].rstrip("/") == u.rstrip("/")), same[0])
+        used.add(exact[0])
+        out.append(ArticleCandidate(str(it.get("source") or exact[1]), exact[0], title or exact[2],
+                                    str(it.get("date") or "")[:10], snippet=str(it.get("summary") or ""), domain=exact[1]))
+    for u, dom, t in real:  # résultats Google sans fiche : gardés avec le titre tiré de l'adresse
+        if u not in used and len(out) < n:
+            slug = u.rstrip("/").split("/")[-1].replace("-", " ").replace("_", " ")
+            out.append(ArticleCandidate(t or dom, u, slug[:150], "", domain=dom))
+    return out[:n]
