@@ -128,6 +128,32 @@ def _lot_section(results: Path) -> tuple[list[str], list[str], dict]:
     return L, todo, agg
 
 
+def _subs_section(results: Path) -> list[str]:
+    """Quelles méthodes de la cascade (subtitles.py) ont fourni les sous-titres lors du dernier lancement."""
+    lot = _latest_lot(results)
+    ok, blocked, none, failed = {}, {}, 0, 0
+    for rj in sorted(lot.glob("*/results.json")) if lot else []:
+        st = (((json.loads(rj.read_text(encoding="utf-8")).get("plan") or {}).get("diag") or {}).get("subtitles")) or {}
+        for k, n in (st.get("ok") or {}).items():
+            ok[k] = ok.get(k, 0) + n
+        for k, n in (st.get("blocked") or {}).items():
+            blocked[k] = blocked.get(k, 0) + n
+        none += st.get("sans_sous_titres", 0)
+        failed += st.get("échecs", 0)
+    if not (ok or blocked or none or failed):
+        return ["- ℹ️ Pas encore de mesure (elle apparaît après le prochain lancement). Méthodes essayées dans l'ordre : "
+                "youtube-transcript-api → yt-dlp (avec jeton PO) → yt-dlp autres clients → yt-dlp + cookies (si fournis) → "
+                "miroirs Invidious ; à défaut Gemini réécoute (±1 s) et le téléphone recale ensuite."]
+    icon = "✅" if ok and not failed else "⚠️" if ok else "❌"
+    L = [f"- {icon} Dernier lancement : sous-titres obtenus pour {sum(ok.values())} vidéo(s)"
+         + (" (" + ", ".join(f"{k} ×{n}" for k, n in ok.items()) + ")" if ok else "")
+         + (f", {none} sans sous-titres" if none else "") + (f", {failed} refusée(s) par toutes les méthodes" if failed else "")]
+    if blocked:
+        L.append("  - Refus de YouTube : " + ", ".join(f"{k} ×{n}" for k, n in blocked.items())
+                 + " → rien à faire : la méthode suivante prend le relais, puis Gemini (±1 s) et le téléphone")
+    return L
+
+
 def _phone_section(results: Path) -> tuple[list[str], list[str]]:
     L, todo = [], []
     pend = 0
@@ -173,9 +199,7 @@ def build(results: Path = Path("results"), out: Path = Path("ETAT.md")) -> Path:
          "## En bref", ""]
     L += [f"- 👉 {t}" for t in todo] or ["- ✅ Rien ne bloque. Tu peux lancer tes recherches."]
     L += ["", "## Clés et quotas", ""] + k_lines
-    L += ["", "## YouTube depuis GitHub", "",
-          "- ❌ Sous-titres et téléchargements YouTube bloqués depuis GitHub (constaté le 24/10/2026, c'est permanent) → "
-          "**normal, rien à faire** : Gemini analyse les vidéos (±1 à ±5 s) et le téléphone recale ensuite sur les sous-titres (±1-2 s)."]
+    L += ["", "## Sous-titres YouTube depuis GitHub", ""] + _subs_section(results)
     L += ["", "## Téléphone (précision des extraits)", ""] + ph_lines
     L += ["", "## Dernier lancement", ""] + lot_lines
     # section « Workflows » écrite par le workflow État (.github/etat) : conservée telle quelle

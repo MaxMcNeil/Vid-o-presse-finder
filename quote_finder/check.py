@@ -118,9 +118,11 @@ def main() -> int:
     from .sources import youtube
     r, e, d = t(lambda: youtube.search_ytdlp("actualité", 3))
     line(OK if r else KO, "YouTube via yt-dlp (sans clé)", f"{len(r)} résultat(s)" if r else (e or "0 résultat"))
-    from youtube_transcript_api import YouTubeTranscriptApi
-    r, e, d = t(lambda: len(YouTubeTranscriptApi().fetch("dQw4w9WgXcQ", languages=["en"])))
-    line(OK if r else KO, "Sous-titres YouTube", f"{r} lignes lues" if r else (e or "vide") + "  (YouTube bloque cette connexion : l'analyse vidéo par IA prend le relais)")
+    from . import subtitles   # chaque méthode de la cascade, une par une (la 1re qui marche sert en recherche)
+    for name, fn in subtitles.methods(["en"]):
+        r, e, d = t(lambda fn=fn: sum(len(x.segs) for x in fn("dQw4w9WgXcQ")))
+        line(OK if r else KO, f"Sous-titres YouTube : {name}", f"{r} lignes lues en {d:.0f}s" if r else (e or "vide")
+             + "  (la méthode suivante prend le relais)")
     from .sources import other_video
     dm, e, d = t(lambda: other_video.dailymotion("actualités", 10))
     line(OK if dm else KO, "Dailymotion (recherche)", f"{len(dm)} résultat(s)" if dm else (e or "0 résultat"))

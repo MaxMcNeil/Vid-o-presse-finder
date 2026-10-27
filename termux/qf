@@ -11,13 +11,13 @@ case "${1:-aide}" in
   maj|update) cd "$REPO" && git pull --rebase origin main && pip install -q -U yt-dlp && bash "$REPO/termux/install-precis.sh" ;;
   test)  # diagnostic : quel moyen d'accès aux sous-titres marche depuis ce téléphone, sur ce réseau ?
     cd "$REPO" && python - <<'PY'
-from quote_finder import phone_precise as p
-for name, fn in (("youtube-transcript-api", p._api_tracks), ("yt-dlp", p._ytdlp_tracks)):
+from quote_finder import subtitles as s
+for name, fn in s.methods(["en"]):   # chaque méthode de la cascade, une par une
     try:
-        t = fn("dQw4w9WgXcQ", ["en"])
-        print(f"✔ {name} : {sum(len(x) for x in t)} lignes de sous-titres" if t else f"⚠ {name} : aucune ligne")
+        t = fn("dQw4w9WgXcQ")
+        print(f"✔ {name} : {sum(len(x.segs) for x in t)} lignes de sous-titres" if t else f"⚠ {name} : aucune ligne")
     except Exception as e:
-        print(f"✘ {name} : {e}")
+        print(f"✘ {name} : {type(e).__name__} {e}")
 PY
     ;;
   installer|install) bash "$REPO/termux/install-precis.sh" ;;

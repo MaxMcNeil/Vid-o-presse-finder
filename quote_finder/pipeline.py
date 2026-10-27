@@ -427,6 +427,8 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     if hasattr(llm, "set_deadline"):
         llm.set_deadline(deadline)
     TIMED_OUT.clear()
+    from . import subtitles
+    subtitles.reset()
     plan = make_plan(llm, o.target, o.claim, o.also, o.langs, o.speakers, o.target_type)
     if o.target_type == "auto":
         o.target_type = plan.target_type
@@ -564,6 +566,7 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
         for h in r.hits:
             tim[h.timing] = tim.get(h.timing, 0) + 1
     plan.diag["timing"] = tim
+    plan.diag["subtitles"] = subtitles.STATS.as_dict()  # quelle méthode a fourni les sous-titres (ETAT.md)
     plan.diag["elapsed_min"] = round((time.time() - t0) / 60, 1)
     plan.diag["youtube_keys_status"] = yt_pool.status()
     if hasattr(llm, "usage"):

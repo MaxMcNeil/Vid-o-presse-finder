@@ -44,72 +44,9 @@ def pending(m: dict) -> bool:
     return not (m.get("tel_status") in FINAL and m.get("tel_algo", 1) >= ALGO)
 
 
-# Facultatif : cookies d'un compte YouTube SECONDAIRE (fichier ~/.qf/cookies.txt), utilisés par yt-dlp
-# quand YouTube refuse le réseau. Jamais envoyés sur GitHub.
-COOKIES = Path.home() / ".qf" / "cookies.txt"
+from .subtitles import Blocked  # noqa: E402 - même exception pour tout le programme
 
-
-class Blocked(Exception):
-    """YouTube refuse temporairement (trop de requêtes) : on s'arrête et on retentera plus tard."""
-
-
-def _api_tracks(video_id: str, langs: list[str]) -> list[list[Segment]]:
-    """youtube-transcript-api : rapide, mais parfois refusé par YouTube (IpBlocked)."""
-    import html
-    import re
-    from youtube_transcript_api import YouTubeTranscriptApi
-    try:
-        tl = YouTubeTranscriptApi().list(video_id)
-    except Exception as e:  # noqa: BLE001
-        name = type(e).__name__
-        if name in ("RequestBlocked", "IpBlocked", "TooManyRequests", "YouTubeRequestFailed", "PoTokenRequired"):
-            raise Blocked(name) from e
-        return []  # sous-titres désactivés, vidéo privée ou supprimée...
-    cands = list(tl)
-    cands.sort(key=lambda c: (0 if c.language_code.split("-")[0] in langs else 1, c.is_generated))
-    out = []
-    for c in cands[:3]:
-        try:
-            f = c.fetch()
-        except Exception as e:  # noqa: BLE001
-            if type(e).__name__ in ("RequestBlocked", "IpBlocked", "TooManyRequests", "PoTokenRequired"):
-                raise Blocked(type(e).__name__) from e
-            continue
-        segs = [Segment(float(s.start), re.sub(r"\s+", " ", html.unescape(s.text)).strip()) for s in f]
-        segs = [s for s in segs if s.text]
-        if segs:
-            out.append(segs)
-    return out
-
-
-def _ytdlp_tracks(video_id: str, langs: list[str]) -> list[list[Segment]]:
-    """yt-dlp : mis à jour très souvent pour suivre YouTube ; sous-titres d'origine (« -orig ») et langues voulues."""
-    import glob
-    import os
-    import tempfile
-    from .transcripts import parse_vtt_srt
-    want = ",".join([".*-orig"] + [f"{l}" for l in langs] + [f"{l}-.*" for l in langs])
-    with tempfile.TemporaryDirectory() as d:
-        try:
-            p = subprocess.run([sys.executable, "-m", "yt_dlp", "--skip-download", "--write-subs", "--write-auto-subs",
-                                "--sub-langs", want, "--sub-format", "vtt", "--no-warnings", "--sleep-subtitles", "1",
-                                *(["--cookies", str(COOKIES)] if COOKIES.is_file() else []),
-                                "-o", os.path.join(d, "s.%(ext)s"), f"https://www.youtube.com/watch?v={video_id}"],
-                               capture_output=True, text=True, timeout=180)
-        except (subprocess.SubprocessError, OSError):
-            return []
-        err = (p.stderr or "") + (p.stdout or "")
-        files = sorted(glob.glob(os.path.join(d, "*.vtt")), key=lambda f: (0 if "-orig" in f else 1, f))
-        if not files:
-            if any(x in err for x in ("not a bot", "429", "Too Many Requests", "Sign in to confirm")):
-                raise Blocked("yt-dlp: " + ("vérification anti-robot" if "bot" in err else "trop de requêtes"))
-            return []
-        out = []
-        for f in files[:3]:
-            segs = parse_vtt_srt(open(f, encoding="utf-8", errors="replace").read())
-            if segs:
-                out.append(segs)
-        return out
+COOKIES = Path.home() / ".qf" / "cookies.txt"  # facultatif : compte YouTube SECONDAIRE, jamais envoyé sur GitHub
 
 
 def fetch_original(video_id: str, langs: list[str]) -> list[list[Segment]]:
@@ -125,20 +62,12 @@ def fetch_original(video_id: str, langs: list[str]) -> list[list[Segment]]:
 
 def _fetch_original(video_id: str, langs: list[str]) -> list[list[Segment]]:
     """Sous-titres dans la langue ORIGINALE de la vidéo (les citations sont dans cette langue), puis les langues voulues.
-    Jamais de traduction. Deux moyens : youtube-transcript-api, puis yt-dlp si le premier est refusé ou vide."""
-    blocked = None
-    try:
-        tracks = _api_tracks(video_id, langs)
-        if tracks:
-            return tracks
-    except Blocked as e:
-        blocked = e
-    except ImportError:
-        pass
-    try:
-        return _ytdlp_tracks(video_id, langs)
-    except Blocked as e:
-        raise Blocked(f"{blocked} puis {e}" if blocked else str(e)) from e
+    Jamais de traduction. Toutes les méthodes gratuites en cascade (subtitles.py), la plus fiable d'abord."""
+    from . import subtitles
+    tracks, via = subtitles.fetch(video_id, langs)
+    if tracks:
+        log.info("sous-titres %s : %s", video_id, via)
+    return [t.segs for t in tracks]
 
 
 def _rebuild(search_dir: Path, data: dict) -> int:

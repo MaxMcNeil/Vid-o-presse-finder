@@ -105,6 +105,7 @@ jobs:
       GUARDIAN_API_KEYS: ${{ secrets.GUARDIAN_API_KEYS }}
       NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
       YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
+      YT_COOKIES: ${{ secrets.YT_COOKIES }}       # facultatif : compte YouTube secondaire (sous-titres)
       FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
       QF_CACHE_DIR: .cache

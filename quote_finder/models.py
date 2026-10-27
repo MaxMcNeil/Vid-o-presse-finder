@@ -17,6 +17,7 @@ class Transcript:
     segments: list[Segment]
     lang: str = "?"
     kind: str = "unknown"  # manual | auto | subtitles
+    via: str = ""          # méthode qui a fourni les sous-titres (youtube-transcript-api, yt-dlp, Invidious...)
 
 
 @dataclass

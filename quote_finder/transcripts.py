@@ -21,83 +21,36 @@ log = logging.getLogger("qf.transcripts")
 
 
 def _to_cache(t: Transcript) -> dict:
-    return {"lang": t.lang, "kind": t.kind, "segs": [[s.start, s.text] for s in t.segments]}
+    return {"lang": t.lang, "kind": t.kind, "via": t.via, "segs": [[s.start, s.text] for s in t.segments]}
 
 
 def _from_cache(d: dict) -> Transcript | None:
     if not d or not d.get("segs"):
         return None
-    return Transcript([Segment(a, b) for a, b in d["segs"]], d.get("lang", "?"), d.get("kind", "unknown"))
+    return Transcript([Segment(a, b) for a, b in d["segs"]], d.get("lang", "?"), d.get("kind", "unknown"),
+                      (d.get("via") or "") + " (cache)")
 
 
-# ---------- YouTube (youtube-transcript-api) ----------
-def _yt_api(video_id: str, langs: list[str]) -> Transcript | None:
-    from youtube_transcript_api import YouTubeTranscriptApi
-    kw = {}
-    proxy = os.environ.get("YT_PROXY_URL")
-    if proxy:
-        from youtube_transcript_api.proxies import GenericProxyConfig
-        kw["proxy_config"] = GenericProxyConfig(http_url=proxy, https_url=proxy)
-    api = YouTubeTranscriptApi(**kw)
-    tl = api.list(video_id)
-    tr, kind = None, "manual"
+# ---------- YouTube : toutes les méthodes gratuites en cascade (subtitles.py) ----------
+def _youtube(video_id: str, langs: list[str]) -> Transcript | None:
+    from . import subtitles
     try:
-        tr = tl.find_manually_created_transcript(langs)
-    except Exception:  # noqa: BLE001
-        try:
-            tr, kind = tl.find_generated_transcript(langs), "auto"
-        except Exception:  # noqa: BLE001
-            pass
-    if tr is None:  # n'importe quelle langue, traduite vers la première langue voulue si possible
-        for cand in tl:
-            tr, kind = cand, "auto" if cand.is_generated else "manual"
-            try:
-                if cand.is_translatable and cand.language_code.split("-")[0] not in langs:
-                    tr = cand.translate(langs[0])
-                    kind += "+translated"
-            except Exception:  # noqa: BLE001
-                pass
-            break
-    if tr is None:
+        tracks, via = subtitles.fetch(video_id, langs, translate_to=langs[0] if langs else "")
+    except subtitles.Blocked as e:
+        log.info("sous-titres %s refusés partout (%s) : analyse par Gemini", video_id, str(e)[:120])
         return None
-    f = tr.fetch()
-    segs = [Segment(float(s.start), re.sub(r"\s+", " ", html.unescape(s.text)).strip()) for s in f]
-    return Transcript([s for s in segs if s.text], f.language_code, kind)
+    if not tracks:
+        return None
+    # pour la recherche : une piste dans une langue de travail si possible (les termes cherchés y sont), sinon l'originale
+    t = next((t for t in tracks if t.lang in langs and t.kind != "translated"), None) or \
+        next((t for t in tracks if t.lang in langs), None) or tracks[0]
+    kind = {"manual": "manual", "translated": "auto+translated"}.get(t.kind, "auto")
+    return Transcript(t.segs, t.lang, kind, via)
 
 
 # ---------- yt-dlp (toutes plateformes) ----------
+from .subtitles import parse_vtt_srt  # noqa: E402,F401 - utilisé aussi par le téléphone
 _TS = re.compile(r"(?:(\d+):)?(\d{2}):(\d{2})[.,](\d{3})\s+-->")
-
-
-def parse_vtt_srt(raw: str) -> list[Segment]:
-    segs: list[Segment] = []
-    cur_t, buf = None, []
-    last_line = ""
-
-    def flush():
-        nonlocal cur_t, buf, last_line
-        if cur_t is not None:
-            lines = []
-            for ln in buf:
-                ln = re.sub(r"<[^>]+>", "", ln).strip()
-                ln = html.unescape(ln)
-                if ln and ln != last_line:  # les sous-titres auto YouTube répètent la ligne précédente
-                    lines.append(ln)
-                    last_line = ln
-            if lines:
-                segs.append(Segment(cur_t, " ".join(lines)))
-        cur_t, buf = None, []
-
-    for line in raw.splitlines():
-        m = _TS.search(line)
-        if m:
-            flush()
-            h, mi, s, ms = (int(x or 0) for x in m.groups())
-            cur_t = h * 3600 + mi * 60 + s + ms / 1000
-        elif cur_t is not None and line.strip() and not line.strip().isdigit() and not line.startswith(("NOTE", "WEBVTT")):
-            buf.append(line)
-    flush()
-    return segs
 
 
 def _ytdlp_subs(url: str, langs: list[str]) -> Transcript | None:
@@ -147,11 +100,9 @@ def get_transcript(v: VideoCandidate, langs: list[str]) -> Transcript | None:
     t = None
     if v.platform == "youtube":
         try:
-            t = call_with_timeout(_yt_api, 45, v.id, langs)
-        except Exception as e:  # noqa: BLE001 (blocage IP, sous-titres désactivés...)
-            log.info("transcript API %s: %s", v.id, type(e).__name__)
-        if t is None:
-            t = _ytdlp_subs(v.url, langs)
+            t = call_with_timeout(_youtube, 360, v.id, langs)
+        except Exception as e:  # noqa: BLE001 - jamais bloquant : Gemini prend le relais
+            log.info("sous-titres %s : %s", v.id, type(e).__name__)
     elif v.platform == "archive":
         t = _archive_subs(v.id) or _ytdlp_subs(v.url, langs)
     else:
