@@ -56,7 +56,7 @@ class Options:
     max_video_minutes: int = 60      # au-delà, une vidéo sans sous-titres n'est pas envoyée à Gemini (quota par minute)
     refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
     article_gemini_max: int = 8      # articles pertinents illisibles autrement : lus par Gemini (url_context)
-    article_search_max: int = 10     # liens Google Actualités : vrai lien retrouvé par Gemini (google_search)
+    article_search_max: int = 4      # liens Google Actualités restants : vrai lien retrouvé par Gemini (google_search)
     article_google_queries: int = 3  # recherches Google (par Gemini) d'articles par recherche : vrais liens directs
 
     @property
