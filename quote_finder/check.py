@@ -18,10 +18,12 @@ def line(sym, name, detail=""):
     print(f" {sym} {name}" + (f" — {detail}" if detail else ""), flush=True)
 
 
-def t(fn):
+def t(fn, limit: float = 90):
+    """Un test = au plus 90 s : un service qui ne répond pas ne doit jamais faire annuler tout le Diagnostic."""
+    from .util import call_with_timeout
     t0 = time.time()
     try:
-        return fn(), None, time.time() - t0
+        return call_with_timeout(fn, limit), None, time.time() - t0
     except Exception as e:  # noqa: BLE001
         return None, f"{type(e).__name__}: {str(e)[:110]}", time.time() - t0
 

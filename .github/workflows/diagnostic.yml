@@ -9,7 +9,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 22
     env:
       YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
       YOUTUBE_API_KEYS_PLUS: ${{ secrets.YOUTUBE_API_KEYS_PLUS }}
@@ -34,9 +34,11 @@ jobs:
           cache: pip
       - run: |
           bash scripts/install_deps.sh requirements.txt   # borné dans le temps ; yt-dlp toujours à jour
-      - run: |
+      - name: Tester chaque clé et chaque service
+        timeout-minutes: 16   # borné : il reste toujours le temps d'enregistrer le compte rendu (même partiel)
+        run: |
           mkdir -p state
-          { echo "# Dernier diagnostic"; echo; echo '```'; python -m quote_finder.check 2>&1 | grep -v "^ *$"; echo '```'; } > /tmp/diag.md
+          { echo "# Dernier diagnostic"; echo; echo '```'; python -u -m quote_finder.check 2>&1 | grep --line-buffered -v "^ *$"; echo '```'; } > /tmp/diag.md
           cat /tmp/diag.md | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Enregistrer l'état des clés (state/QUOTAS.md)
         if: always()
