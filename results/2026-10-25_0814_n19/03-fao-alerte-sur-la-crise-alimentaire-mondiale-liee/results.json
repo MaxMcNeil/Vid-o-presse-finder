@@ -180,26 +180,29 @@
    "authority_why": "média de référence",
    "moments": [
     {
-     "start": "00:44",
-     "end": "00:53",
-     "start_seconds": 44.4,
-     "end_seconds": 53.9,
-     "start_tc": "00:00:44.400",
-     "end_tc": "00:00:53.900",
-     "duration_seconds": 9.5,
-     "timestamp": "00:44",
-     "link": "https://www.youtube.com/watch?v=6gTtOkpt8Fc&t=44s",
-     "clip_link": "https://www.youtube.com/embed/6gTtOkpt8Fc?start=44&end=54&autoplay=1",
-     "t": 44.4,
+     "start": "00:41",
+     "end": "00:50",
+     "start_seconds": 41.72,
+     "end_seconds": 50.4,
+     "start_tc": "00:00:41.720",
+     "end_tc": "00:00:50.400",
+     "duration_seconds": 8.7,
+     "timestamp": "00:41",
+     "link": "https://www.youtube.com/watch?v=6gTtOkpt8Fc&t=41s",
+     "clip_link": "https://www.youtube.com/embed/6gTtOkpt8Fc?start=41&end=51&autoplay=1",
+     "t": 41.72,
      "quote": "Now that war in Ukraine is still ongoing, and this year the Iran war has piled on top of it.",
      "verdict": "paraphrase",
      "who_says": "journalist",
      "speaker_name": "Hannah Hummel",
      "confidence": 0.95,
      "why": "La journaliste Hannah Hummel mentionne la poursuite de la guerre en Ukraine et le conflit impliquant l'Iran comme facteurs pesant sur la situation alimentaire mondiale au début du reportage basé sur les données et avertissements de la FAO.",
-     "t_end": 53.9,
+     "t_end": 50.4,
      "speaker_role": "journalist",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "ok"
     }
    ]
   },
@@ -235,7 +238,10 @@
      "why": "The video explicitly reports on the FAO warning about a upcoming global food crisis caused by conflicts and regional tensions (such as Iran and Strait of Hormuz).",
      "t_end": 26.0,
      "speaker_role": "journalist",
-     "timing": "ia-affiné"
+     "timing": "ia-affiné",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "pas retrouvé dans les sous-titres"
     },
     {
      "start": "00:39",
@@ -257,7 +263,10 @@
      "why": "The video highlights the FAO's report warning of systemic agrifood shock and impending global catastrophe due to conflict-related trade disruptions.",
      "t_end": 58.7,
      "speaker_role": "journalist",
-     "timing": "ia-affiné"
+     "timing": "ia-affiné",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "pas retrouvé dans les sous-titres"
     }
    ]
   }

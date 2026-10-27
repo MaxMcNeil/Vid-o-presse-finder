@@ -52,3 +52,11 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 2 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 12.5 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:55 → 01:45](https://www.youtube.com/embed/3ndo9Y2Upv8?start=55&end=106&autoplay=1) — Ukraine, Ormuz : vers la pénurie alimentaire mondiale ? - JT du mardi 
+  > C'est la convergence des catastrophes qui atteint peut-être la capacité des humains à se nourrir convenablement, et ce dès 2027. [...] Concrètement, les importantes sécheresses de 2026 combinées avec 
+

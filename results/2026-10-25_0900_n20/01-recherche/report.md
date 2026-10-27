@@ -115,3 +115,31 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 2 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 20.4 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:00 → 00:03](https://www.youtube.com/embed/LbzeRVYUiLY?start=0&end=4&autoplay=1) — Strait of Hormuz: Hunger looming | Fertilizer shipments cannot wait
+  > The disruption of the Strait of Hormuz can push 45 million more people into hunger and starvation. We have one third of all fertilizers in the world going through the Strait of Hormuz. So we can see h
+- [00:43 → 01:21](https://www.youtube.com/embed/LbzeRVYUiLY?start=43&end=82&autoplay=1) — Strait of Hormuz: Hunger looming | Fertilizer shipments cannot wait
+  > was to develop a mechanism, focused on fertilizers and related raw materials such as urea, sulfur and ammonia, to prevent a massive humanitarian crisis... So the productivity of agriculture is very mu
+- [00:00 → 00:11](https://www.youtube.com/embed/u3vV1maECYg?start=0&end=12&autoplay=1) — UN Sets Up Task Force For Strait Of Hormuz As Iran War Threatens Globa
+  > intensify disruptions in the maritime trade through the strait of Hormuz risks creating a ripple effect impacting humanitarian needs and agricultural production in the coming months.
+- [00:00 → 00:10](https://www.youtube.com/embed/HYaGMLP29-c?start=0&end=11&autoplay=1) — Fertilizer crisis means food inflation 'locked in' for at least a year
+  > As the Strait of Hormuz blockage continues, it's not just oil and gas being impacted. Noah Gordon points out the supply and price of food and fertilizer is also impacted.
+- [00:32 → 00:51](https://www.youtube.com/embed/HYaGMLP29-c?start=32&end=52&autoplay=1) — Fertilizer crisis means food inflation 'locked in' for at least a year
+  > You've really got a double crisis with fertilizer. The Middle East region is a big producer of fertilizer itself, nitrogen-based fertilizer comes from places like Saudi Arabia and Qatar, and that obvi
+- [01:09 → 01:33](https://www.youtube.com/embed/dFfe5qPPtP0?start=69&end=94&autoplay=1) — UN Warns Millions Risk Hunger as Hormuz Fertiliser Trade Remains Block
+  > The reason is clear: 1/3 of all seaborne fertilizers go through the Strait of Hormuz, and some of the poorest countries in Africa are highly dependent on fertilizers from the Strait of Hormuz. For ins
+- [01:54 → 02:09](https://www.youtube.com/embed/dFfe5qPPtP0?start=114&end=130&autoplay=1) — UN Warns Millions Risk Hunger as Hormuz Fertiliser Trade Remains Block
+  > When the crisis started, we knew that a few countries, some countries in Africa and Southeast Asia, would be impacted. Now it's much worse because the entire fertilizer market is disrupted.
+- [01:08 → 01:16](https://www.youtube.com/embed/df5mwb9nKec?start=68&end=77&autoplay=1) — Hormuz Blockade: How the Iran Conflict Threatens Global Food Supply an
+  > And fully a third of all fertilizers traded by sea usually pass through the Strait of Hormuz.
+- [01:13 → 01:31](https://www.youtube.com/embed/df5mwb9nKec?start=73&end=92&autoplay=1) — Hormuz Blockade: How the Iran Conflict Threatens Global Food Supply an
+  > The closure of the Strait of Hormuz will impact the world's access to fertilizer, right? Which will increase the cost of fertilizer, which will increase the cost of food production. I mean, it will be
+- [01:41 → 01:59](https://www.youtube.com/embed/df5mwb9nKec?start=101&end=120&autoplay=1) — Hormuz Blockade: How the Iran Conflict Threatens Global Food Supply an
+  > I would say we also really need to look at food prices because you need energy to produce food and natural gas, for example, is often used to produce fertilizer. So there's potential here for a jump i
+- [01:39 → 02:01](https://www.youtube.com/embed/3QE4rvAXhmo?start=99&end=122&autoplay=1) — Iran War's On Impact On Global Food Supply | U.N. Activates Fertilizer
+  > a time-bound exceptional limited mechanism just for fertilizers and related raw materials because this will be still in time for the planting season. This mechanism for the Strait of Hormuz will be ba
+

@@ -60,3 +60,11 @@ _Avertissements ou rapports de la FAO concernant l'impact des conflits en Ukrain
 - IA groq : clés 1/1 disponible(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 9.8 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [00:41 → 00:50](https://www.youtube.com/embed/6gTtOkpt8Fc?start=41&end=51&autoplay=1) — How El Nino and two wars are driving the next food price crisis | DW N
+  > Now that war in Ukraine is still ongoing, and this year the Iran war has piled on top of it.
+

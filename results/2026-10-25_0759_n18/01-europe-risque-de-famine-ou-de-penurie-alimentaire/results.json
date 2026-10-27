@@ -176,26 +176,29 @@
    "authority_why": "chaîne non répertoriée (1 080 000 abonnés)",
    "moments": [
     {
-     "start": "00:56",
-     "end": "02:25",
-     "start_seconds": 56.4,
-     "end_seconds": 145.7,
-     "start_tc": "00:00:56.400",
-     "end_tc": "00:02:25.700",
-     "duration_seconds": 89.3,
-     "timestamp": "00:56",
-     "link": "https://www.youtube.com/watch?v=3ndo9Y2Upv8&t=56s",
-     "clip_link": "https://www.youtube.com/embed/3ndo9Y2Upv8?start=56&end=146&autoplay=1",
-     "t": 56.4,
+     "start": "00:55",
+     "end": "01:45",
+     "start_seconds": 55.76,
+     "end_seconds": 105.8,
+     "start_tc": "00:00:55.760",
+     "end_tc": "00:01:45.800",
+     "duration_seconds": 50.0,
+     "timestamp": "00:55",
+     "link": "https://www.youtube.com/watch?v=3ndo9Y2Upv8&t=55s",
+     "clip_link": "https://www.youtube.com/embed/3ndo9Y2Upv8?start=55&end=106&autoplay=1",
+     "t": 55.76,
      "quote": "C'est la convergence des catastrophes qui atteint peut-être la capacité des humains à se nourrir convenablement, et ce dès 2027. [...] Concrètement, les importantes sécheresses de 2026 combinées avec les conflits en Ukraine et au Proche-Orient qui conduisent au blocage de la Mer Noire et du détroit d'Ormuz sont en train de créer les conditions d'une généralisation de l'insécurité alimentaire dans le monde.",
      "verdict": "paraphrase",
      "who_says": "other_named",
      "speaker_name": "Nicolas de Lamberterie",
      "confidence": 0.85,
      "why": "Le journaliste explique que les conflits en Ukraine et au Proche-Orient (détroit d'Ormuz/Iran) ainsi que les sécheresses font courir un risque d'insécurité alimentaire et de pénurie globale, touchant également l'Occident/Europe.",
-     "t_end": 145.7,
+     "t_end": 105.8,
      "speaker_role": "journalist",
-     "timing": "ia-affiné"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-27",
+     "tel_algo": 2,
+     "tel_status": "ok"
     }
    ]
   }

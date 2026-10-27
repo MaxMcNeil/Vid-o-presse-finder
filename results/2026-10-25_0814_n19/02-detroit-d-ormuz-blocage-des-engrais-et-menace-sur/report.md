@@ -94,3 +94,31 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 23.2 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [01:09 → 01:33](https://www.youtube.com/embed/dFfe5qPPtP0?start=69&end=94&autoplay=1) — UN Warns Millions Risk Hunger as Hormuz Fertiliser Trade Remains Block
+  > The reason is clear: 1/3 of all seaborne fertilizers goes through the Strait of Hormuz, and some of the poorest countries in Africa are highly dependent on fertilizers from the Strait of Hormuz. For i
+- [02:32 → 02:53](https://www.youtube.com/embed/dFfe5qPPtP0?start=152&end=174&autoplay=1) — UN Warns Millions Risk Hunger as Hormuz Fertiliser Trade Remains Block
+  > On average we would need five vessels a day of fertilizers and related raw material - ammonia, sulfur, and urea - to go through the strait and to reach those that are in need of those fertilizers to p
+- [03:38 → 03:49](https://www.youtube.com/embed/dFfe5qPPtP0?start=218&end=230&autoplay=1) — UN Warns Millions Risk Hunger as Hormuz Fertiliser Trade Remains Block
+  > let the fertilizers cross the strait and through that minimize the risks of a massive food insecurity at a global level.
+- [00:09 → 00:20](https://www.youtube.com/embed/4iRvVxVn34I?start=9&end=21&autoplay=1) — Why The U.S.-Iran War Is A Threat To The World’s Farmers
+  > Just like oil, the commodity is getting choked off at the Strait of Hormuz. And according to some experts, that could cause a spike in food prices and potential shortages across the globe.
+- [00:24 → 00:38](https://www.youtube.com/embed/4iRvVxVn34I?start=24&end=39&autoplay=1) — Why The U.S.-Iran War Is A Threat To The World’s Farmers
+  > Hundreds of oil tankers and container ships are stranded at the strait, which has been effectively impassable since February 28th. Crews aren't making the journey in fear of being attacked. And that's
+- [00:41 → 00:59](https://www.youtube.com/embed/4iRvVxVn34I?start=41&end=60&autoplay=1) — Why The U.S.-Iran War Is A Threat To The World’s Farmers
+  > Roughly a third of the global fertilizer trade moves through the passageway, and about half of global food production depends on the synthetic nitrogen fertilizer that is mainly produced in the Middle
+- [00:22 → 00:32](https://www.youtube.com/embed/b_fF5IZExSA?start=22&end=33&autoplay=1) — Détroit d’Ormuz : Face à la fermeture, le prix des engrais explose, l'
+  > Et c'est l'une des conséquences de cette guerre au Moyen-Orient, nous vous en parlions hier, la fermeture du détroit d'Ormuz a fait s'envoler les prix des engrais.
+- [00:49 → 01:03](https://www.youtube.com/embed/b_fF5IZExSA?start=49&end=64&autoplay=1) — Détroit d’Ormuz : Face à la fermeture, le prix des engrais explose, l'
+  > Un tiers des engrais utilisés dans le monde transite normalement par le détroit d'Ormuz, aujourd'hui donc fermé. Les engrais azotés sont fabriqués directement à partir de pétrole.
+- [00:15 → 00:30](https://www.youtube.com/embed/H5-F7h0K2Ds?start=15&end=31&autoplay=1) — Iran War Threatens FOOD SUPPLY
+  > And right now, the Strait of Hormuz is not really available for shipping fertilizer to various parts of the globe.
+- [00:44 → 01:15](https://www.youtube.com/embed/H5-F7h0K2Ds?start=44&end=76&autoplay=1) — Iran War Threatens FOOD SUPPLY
+  > Five primary fertilizer exporters — Iran, Saudi Arabia, Qatar, the United Arab Emirates and Bahrain — rely heavily on the Strait of Hormuz to export their wares. And as we've learned, the Strait of Ho
+- [03:22 → 03:39](https://www.youtube.com/embed/H5-F7h0K2Ds?start=202&end=220&autoplay=1) — Iran War Threatens FOOD SUPPLY
+  > It's just that the Strait of Hormuz way more important than people suspected, I guess. So they're unable to transport the fertilizer.
+

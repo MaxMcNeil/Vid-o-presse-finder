@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 27/10/2026 à 00:34 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 27/10/2026 à 15:22 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -9,7 +9,7 @@ _Mis à jour le 27/10/2026 à 00:34 (heure italienne), automatiquement après ch
 ## Clés et quotas
 
 - ✅ **Gemini (IA)** : 10/10 clé(s) utilisable(s)
-- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 750 recherches restantes aujourd'hui
+- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 800 recherches restantes aujourd'hui
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
@@ -21,10 +21,10 @@ _Mis à jour le 27/10/2026 à 00:34 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 0 min (données mobiles) : 32 extrait(s) recalé(s), 3 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
-  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 6 h 34 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
+- ✅ Dernier passage il y a 0 min (données mobiles) : 34 extrait(s) recalé(s), 5 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
+  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 21 h 22 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
-- ⏳ Extraits en attente de recalage par le téléphone : 79
+- ⏳ Extraits en attente de recalage par le téléphone : 43
 
 ## Dernier lancement
 

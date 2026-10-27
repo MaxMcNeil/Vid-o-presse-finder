@@ -55,3 +55,13 @@ Aucun article confirmé.
 - IA groq : clés 1/1 disponible(s) ; 2 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 18.6 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-27 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [01:34 → 02:35](https://www.youtube.com/embed/7uGzlJIPhgk?start=94&end=156&autoplay=1) — FULL REMARKS: EU Kallas Urges Action as Strait of Hormuz Closure Threa
+  > During the weekend I also had talks with UN Secretary General Antonio Guterres about whether it was possible to also have the same kind of initiative like we had the Black Sea initiative how to get th
+- [07:36 → 08:09](https://www.youtube.com/embed/7uGzlJIPhgk?start=456&end=490&autoplay=1) — FULL REMARKS: EU Kallas Urges Action as Strait of Hormuz Closure Threa
+  > And the food as well because via the Strait of Hormuz I mean the food supply is equally concerning and like I said the fertilizers. So if it is blocked and the fertilizers don't get through then there
+
