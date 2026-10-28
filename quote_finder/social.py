@@ -256,6 +256,23 @@ def telegram_lock(max_wait: float):
 
 
 # ------------------------------------------------------------------ Telegram
+def clean_session(raw: str) -> str:
+    """Clé de session telle que collée : retire espaces, retours à la ligne, guillemets et l'en-tête « === TG_SESSION === »."""
+    s = re.sub(r"=+\s*TG_SESSION\s*=+", "", raw or "", flags=re.I)
+    return re.sub(r"[\s'\"`]+", "", s)
+
+
+def open_session(raw: str):
+    """StringSession prête, ou PermissionError avec un message clair (copie tronquée / abîmée)."""
+    from telethon.sessions import StringSession
+    s = clean_session(raw)
+    try:
+        return StringSession(s)
+    except Exception:  # noqa: BLE001 — ValueError, struct.error, binascii.Error : toutes = copie incomplète
+        raise PermissionError(f"TG_SESSION incomplète ou abîmée ({len(s)} caractères, 353 attendus) — recopie-la "
+                              "en entier ou mieux, envoie-la avec la commande gh du README") from None
+
+
 def tg_config() -> tuple[int, str, str] | str:
     """(api_id, api_hash, session) ou message d'erreur lisible."""
     vals = {k: (os.environ.get(k) or "").strip() for k in ("TG_API_ID", "TG_API_HASH", "TG_SESSION")}
@@ -273,13 +290,9 @@ def tg_config() -> tuple[int, str, str] | str:
 
 async def _tg_search(cfg, qs, ws, since, plan, o, box: list, note: dict):
     from telethon import TelegramClient, functions
-    from telethon.sessions import StringSession
     from telethon.tl.types import Channel
     api_id, api_hash, sess = cfg
-    try:
-        ss = StringSession(re.sub(r"\s+", "", sess))   # retours à la ligne / espaces d'un copier-coller retirés
-    except ValueError:
-        raise PermissionError("TG_SESSION illisible (copie incomplète ?)") from None
+    ss = open_session(sess)
     client = TelegramClient(ss, api_id, api_hash, connection_retries=2, request_retries=2,
                             flood_sleep_threshold=15, timeout=20, receive_updates=False)
     await client.connect()
@@ -429,11 +442,7 @@ def check() -> list[str]:
     else:
         async def who():
             from telethon import TelegramClient
-            from telethon.sessions import StringSession
-            try:
-                ss = StringSession(re.sub(r"\s+", "", cfg[2]))
-            except ValueError:
-                raise PermissionError("TG_SESSION illisible (copie incomplète ?)") from None
+            ss = open_session(cfg[2])
             c = TelegramClient(ss, cfg[0], cfg[1], connection_retries=2, timeout=20, receive_updates=False)
             await c.connect()
             try:

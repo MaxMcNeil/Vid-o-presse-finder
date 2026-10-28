@@ -197,8 +197,11 @@ colonne `position` dans `articles.csv`.
 Tester : *Actions → Diagnostic* (lignes « Telegram » et « Reddit »). Un problème de session s'affiche dans ETAT.md
 avec quoi faire (« régénère TG_SESSION »).
 
-Générer une session (Termux) :
+Générer une session et l'envoyer SANS copier-coller (Termux — évite les clés tronquées) :
 ```bash
-pkg install -y python && pip install telethon
-python -c "from telethon.sync import TelegramClient; from telethon.sessions import StringSession; c=TelegramClient(StringSession(), int(input('api_id: ')), input('api_hash: ')); c.start(); print('\n=== TG_SESSION ===\n'+c.session.save())"
+pkg install -y python gh && pip install telethon && gh auth login
+python -c "from telethon.sync import TelegramClient; from telethon.sessions import StringSession; c=TelegramClient(StringSession(), int(input('api_id: ')), input('api_hash: ')); c.start(); open('tg.txt','w').write(c.session.save())"
+gh secret set TG_SESSION -R MaxMcNeil/Vid-o-presse-finder < tg.txt && rm tg.txt
 ```
+(Pour Montage-LV-final : relance la ligne `python …` pour une AUTRE session, puis
+`gh secret set TG_SESSION -R MaxMcNeil/Montage-LV-final < tg.txt && rm tg.txt`.)

@@ -373,4 +373,4 @@ def test_bad_session_string_is_loud(monkeypatch):
         monkeypatch.delenv(k, raising=False)
     social.reset()
     assert social.telegram(plan(), opts(), 30) == []
-    assert "illisible" in social.STATUS["telegram"] and "régénère" in social.STATUS["telegram"]
+    assert "abîmée" in social.STATUS["telegram"] and "régénère" in social.STATUS["telegram"]
