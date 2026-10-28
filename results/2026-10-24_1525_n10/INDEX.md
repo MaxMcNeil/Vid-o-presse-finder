@@ -1,16 +1,16 @@
 # Lot de recherches — 2026-10-24_1525_n10
 
-1 recherche(s), 12 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
-Précision : 9 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) par Gemini (±1 s), 3 estimé(s) (±5 s). ⏳ 3 seront recalés par le téléphone au prochain passage (`qf precis`).
+1 recherche(s), 11 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
+Précision : 11 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) par Gemini (±1 s), 0 estimé(s) (±5 s).
 
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |
 |---|---|---|---|---|---|---|
-| 01 | La Suisse | abandonne Microsoft pour risque de sécurité | 5 | 12 | 1 | [report.md](01-la-suisse-abandonne-microsoft-pour-risque-de-secur/report.md) |
+| 01 | La Suisse | abandonne Microsoft pour risque de sécurité | 5 | 11 | 1 | [report.md](01-la-suisse-abandonne-microsoft-pour-risque-de-secur/report.md) |
 
 ## Meilleurs extraits
 
-- [00:08:26 → 00:08:56](https://www.youtube.com/embed/HUn5SJMJ2fg?start=506&end=537&autoplay=1) · SWI swissinfo.ch - English · Sara Ibrahim · score 0.72
+- [00:20:50 → 00:21:33](https://www.youtube.com/embed/HUn5SJMJ2fg?start=1250&end=1294&autoplay=1) · SWI swissinfo.ch - English · Sara Ibrahim · score 0.72
   > Switzerland wants to become more digitally independent. What does that mean exactly? Of course, with this geopolitical situation, also countries, also businesses and not only private people understand the importance of b
 - [00:00:00 → 00:00:09](https://www.youtube.com/embed/A-cipLy-c7s?start=0&end=10&autoplay=1) · Franz Grueter · Journaliste · score 0.71
   > Überraschende Kehrtwende. Der Bund will weg von Microsoft Produkten, um die Abhängigkeit von den USA zu reduzieren.
@@ -26,11 +26,9 @@ Précision : 9 extrait(s) calé(s) sur les sous-titres (±1-2 s), 0 affiné(s) p
   > Als der Bund vor ein paar Jahren Microsoft 365 einführte, gab es Befürchtungen, die USA könnten den Datenverkehr überwachen oder der Schweiz gar den Stecker ziehen. Deshalb müsse man Alternativen vorantreiben, hieß es au
 - [00:01:03 → 00:01:18](https://www.youtube.com/embed/TyIAqNBYxpo?start=63&end=79&autoplay=1) · Actualia tech · Sébastien · score 0.56
   > Le gouvernement fédéral vient officiellement d'enclencher la marche arrière. Fini le tout Microsoft 365, place aux logiciels libres.
-- [00:10:27 → 00:12:19](https://www.youtube.com/embed/TyIAqNBYxpo?start=627&end=740&autoplay=1) · Actualia tech · Sébastien · score 0.56
+- [00:06:27 → 00:07:30](https://www.youtube.com/embed/TyIAqNBYxpo?start=387&end=451&autoplay=1) · Actualia tech · Sébastien · score 0.56
   > Pendant ce temps-là, l'armée suisse est déjà en mode commando... Le cyber-command, l'unité de cybersécurité de l'armée suisse, a décidé de doubler tout le monde sur l'autoroute. Eux n'attendent pas le bilan du projet civ
-- [00:00:46 → 00:01:26](https://www.youtube.com/embed/fl52LnZVnHE?start=46&end=87&autoplay=1) · Швейцария без фильтров  · Ксения · score 0.54
-  > И в связи с этим Швейцария сейчас занимается вопросом вообще стоит ли продолжать сотрудничать еще и с другими американскими компаниями, так как это только вершина айсберга... Но под этой верхушкой кроется еще более глоба
 - [00:00:12 → 00:00:38](https://www.youtube.com/embed/TyIAqNBYxpo?start=12&end=39&autoplay=1) · Actualia tech · Sébastien · score 0.46
   > Salut c'est Sébastien sur Actualia... on va parler de la Suisse, de nos amis suisses... parce que qu'est-ce qu'ils ont dit nos amis suisses ? Vous savez quoi ? Nos amis suisses ont dit : Bye-bye, bye-bye Windows ! La Sui
-- [00:07:23 → 00:08:56](https://www.youtube.com/embed/TyIAqNBYxpo?start=443&end=537&autoplay=1) · Actualia tech · Sébastien · score 0.46
+- [00:04:43 → 00:05:35](https://www.youtube.com/embed/TyIAqNBYxpo?start=283&end=336&autoplay=1) · Actualia tech · Sébastien · score 0.46
   > Pour comprendre, il faut écouter Matthias Stürmer, prof à la Haute école spécialisée bernoise, la BFH. Selon lui, confier à l'État les clés de l'État à un géant américain pose trois énormes soucis : l'espionnage légal ou

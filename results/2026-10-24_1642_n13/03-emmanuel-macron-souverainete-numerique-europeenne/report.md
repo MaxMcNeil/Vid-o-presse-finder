@@ -135,10 +135,24 @@ Aucun article confirmé.
 
 ## Précision (téléphone)
 
-Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+Recalé sur les sous-titres YouTube le 2026-10-28 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
 
-- [00:01 → 01:43](https://www.youtube.com/embed/F_YBDMAJcGA?start=1&end=104&autoplay=1) — Macron : "Depuis 7 ans, l’Europe a commencé à sortir de cette naïveté 
-  > Le troisième pas décisif de ces dernières années, c'est que nous avons commencé à jeter les bases d'une plus grande souveraineté technologique et industrielle. Aucune zone du monde que l'Europe n'aura
-- [01:32 → 01:38](https://www.youtube.com/embed/zVadD951mIY?start=92&end=99&autoplay=1) — Il est temps pour l’Europe d’avoir sa propre souveraineté technologiqu
-  > Otherwise you are just consumer of the tech of somebody else.
+- [02:59 → 03:40](https://www.youtube.com/embed/kRUU6awEoHk?start=179&end=221&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > This transformation presents us with a twofold challenge: innovate to remain competitive, while protecting our data, our infrastructure, and more broadly, our sovereignty. [...] We have to innovate be
+- [04:08 → 04:40](https://www.youtube.com/embed/kRUU6awEoHk?start=248&end=281&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > Because if we let the Americans and the Chinese have all the champions, one thing is certain: we may have the best regulations in the world, but we won't be regulating anything. This is why our willin
+- [11:22 → 11:51](https://www.youtube.com/embed/kRUU6awEoHk?start=682&end=712&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > We put digital sovereignty, fostering domestic champions and freeing ourselves from dependence on foreign technologies, at the forefront of the economic agenda. [...] achieving true European sovereign
+- [12:33 → 12:56](https://www.youtube.com/embed/kRUU6awEoHk?start=753&end=777&autoplay=1) — Sommet sur la souveraineté numérique européenne à Berlin : le discours
+  > Europe has implemented pioneering legislation to ensure that the digital transformation wouldn't hinder the democratic principles and consumer protection that stand at the heart of the European model.
+- [03:11 → 03:31](https://www.youtube.com/embed/zVadD951mIY?start=191&end=212&autoplay=1) — Il est temps pour l’Europe d’avoir sa propre souveraineté technologiqu
+  > We used a lot of US innovations and US solutions, but more and more European solutions as well. And for me now, what we have to do is in each sector, in each innovation, how to build the European solu
+- [15:24 → 15:38](https://www.youtube.com/embed/zVadD951mIY?start=924&end=939&autoplay=1) — Il est temps pour l’Europe d’avoir sa propre souveraineté technologiqu
+  > What we need is, I do believe, to accelerate the European financing, having an actual European finance market. It's not yet the case.
+- [05:54 → 06:25](https://www.youtube.com/embed/THmeKFVvufc?start=354&end=386&autoplay=1) — Échanges avec les membres du collectif Scale-Up Europe | Conclusion du
+  > Et puis la troisième raison qui, je dirais, encourage les deux premières, c'est cette notion de souveraineté que vous m'avez souvent entendu répéter ces dernières années, qui au début était un peu biz
+- [06:25 → 06:50](https://www.youtube.com/embed/THmeKFVvufc?start=385&end=411&autoplay=1) — Échanges avec les membres du collectif Scale-Up Europe | Conclusion du
+  > Et que demain, parce qu'on n'aura pas manqué les innovations ou pas pris les bonnes régulations, et bien simplement on n'aura plus la question à se poser. Ce sera une offre complètement chinoise ou co
+- [07:33 → 07:52](https://www.youtube.com/embed/THmeKFVvufc?start=453&end=473&autoplay=1) — Échanges avec les membres du collectif Scale-Up Europe | Conclusion du
+  > Donc la première souveraineté, elle est industrielle, elle est de business, c'est de créer l'écosystème de talents, de financements, d'entreprises qui permettent sur toutes ces innovations d'avoir une
 

@@ -133,20 +133,8 @@ _Déclarations officielles, analyses de haut niveau et couverture médiatique de
 
 ## Précision (téléphone)
 
-Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+Recalé sur les sous-titres YouTube le 2026-10-28 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
 
-- [01:33 → 02:01](https://www.youtube.com/embed/_bfN6GYB4Zk?start=93&end=122&autoplay=1) — Qatar Aims to Be World’s Biggest LNG Producer for Next 20 Years
-  > As far as the North Field expansion projects, we have two projects, North Field East, which we just announced sanctioning, and the North Field South. So the North Field East will take us from 77 milli
-- [02:55 → 03:18](https://www.youtube.com/embed/_bfN6GYB4Zk?start=175&end=199&autoplay=1) — Qatar Aims to Be World’s Biggest LNG Producer for Next 20 Years
-  > What we did is very unique this time in Qatar. We had never gone 100% QP in the past. Now we have sanctioned this project as 100% QP, but we like the joint venture model where we have international co
-- [00:00 → 01:02](https://www.youtube.com/embed/ux4rNZbA7aQ?start=0&end=63&autoplay=1) — Qatar LNG Plant Suffers 'Extensive Damage' After Iran Strike
-  > the Qatar's Ras Laffan area was hit last night and that's a huge area which has multiple LNG export trains... they also have there the Pearl GTL plant which is a plant run by Shell... sustained severe
-- [00:35 → 00:47](https://www.youtube.com/embed/VG-6Kqh6-8s?start=35&end=48&autoplay=1) — قطر توقف انتاج الغاز الطبيعي المسال استنادا إلى حالة القوة القاهرة
-  > تعتمد دول عديدة على الغاز القطري فإلى جانب الهند وكوريا الجنوبية تأتي الصين التي تعتمد على نحو 24% من الغاز القطري
-- [00:00 → 00:12](https://www.youtube.com/embed/voXqVBRWBxY?start=0&end=13&autoplay=1) — Qatar Shuts World’s Largest LNG Plant Amid US-Iran Conflict
-  > Qatar shut the world's largest liquefied natural gas (LNG) export facility after it was attacked by an Iranian drone. Here's why that matters as conflict in the Middle East continues after the US and 
-- [00:09 → 00:22](https://www.youtube.com/embed/voXqVBRWBxY?start=9&end=23&autoplay=1) — Qatar Shuts World’s Largest LNG Plant Amid US-Iran Conflict
-  > The Ras Laffan facility supplies roughly 20% of global LNG, which is used for everything from power generation to fertilizer production, and even supplies gas to households.
-- [00:30 → 00:41](https://www.youtube.com/embed/voXqVBRWBxY?start=30&end=42&autoplay=1) — Qatar Shuts World’s Largest LNG Plant Amid US-Iran Conflict
-  > LNG ships have stopped traveling through the Strait of Hormuz — the crucial waterway which all LNG from Qatar must pass to get to customers in Europe and Asia.
+- [00:16 → 00:29](https://www.youtube.com/embed/VG-6Kqh6-8s?start=16&end=30&autoplay=1) — قطر توقف انتاج الغاز الطبيعي المسال استنادا إلى حالة القوة القاهرة
+  > قطر تعد من أكبر موردي الغاز الطبيعي المسال عالمياً اذ تمثل حوالي 20% من صادرات الغاز الطبيعي المسال في العالم
 

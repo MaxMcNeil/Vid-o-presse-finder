@@ -215,8 +215,9 @@
      "t_end": 51.0,
      "speaker_role": "expert",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     }
    ]
   },

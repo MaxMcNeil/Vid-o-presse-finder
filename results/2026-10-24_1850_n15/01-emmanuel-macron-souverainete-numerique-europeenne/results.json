@@ -260,8 +260,9 @@
      "t_end": 901.8,
      "speaker_role": "official",
      "timing": "ia-affiné",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     },
     {
      "start": "17:22",
@@ -320,8 +321,9 @@
      "t_end": 181.7,
      "speaker_role": "official",
      "timing": "ia-affiné",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     },
     {
      "start": "11:20",
@@ -440,8 +442,9 @@
      "t_end": 231.0,
      "speaker_role": "official",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     },
     {
      "start": "02:43",
@@ -468,28 +471,29 @@
      "tel_status": "ok"
     },
     {
-     "start": "18:55",
-     "end": "20:05",
-     "start_seconds": 1135.0,
-     "end_seconds": 1205.0,
-     "start_tc": "00:18:55.000",
-     "end_tc": "00:20:05.000",
-     "duration_seconds": 70.0,
-     "timestamp": "18:55",
-     "link": "https://www.youtube.com/watch?v=refYWVpbwKA&t=1135s",
-     "clip_link": "https://www.youtube.com/embed/refYWVpbwKA?start=1135&end=1206&autoplay=1",
-     "t": 1135.0,
+     "start": "11:30",
+     "end": "11:48",
+     "start_seconds": 690.88,
+     "end_seconds": 708.399,
+     "start_tc": "00:11:30.880",
+     "end_tc": "00:11:48.399",
+     "duration_seconds": 17.5,
+     "timestamp": "11:30",
+     "link": "https://www.youtube.com/watch?v=refYWVpbwKA&t=690s",
+     "clip_link": "https://www.youtube.com/embed/refYWVpbwKA?start=690&end=709&autoplay=1",
+     "t": 690.88,
      "quote": "For this reason, we put digital sovereignty, fostering domestic champions and freeing ourselves from dependence on foreign technologies at the forefront of the economic agenda that we set during the Franco-German Council of Ministers.",
      "verdict": "paraphrase",
      "who_says": "target",
      "speaker_name": "Emmanuel Macron",
      "confidence": 0.98,
      "why": "Emmanuel Macron détaille la mise au premier plan de la souveraineté numérique pour se libérer de la dépendance aux technologies étrangères.",
-     "t_end": 1205.0,
+     "t_end": 708.399,
      "speaker_role": "official",
-     "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-28",
+     "tel_status": "ok",
+     "tel_algo": 2
     }
    ]
   }

@@ -89,24 +89,12 @@ _La Suisse ou ses administrations publiques envisagent ou décident d'abandonner
 
 ## Précision (téléphone)
 
-Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+Recalé sur les sous-titres YouTube le 2026-10-28 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
 
-- [00:00 → 00:09](https://www.youtube.com/embed/A-cipLy-c7s?start=0&end=10&autoplay=1) — Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!
-  > Überraschende Kehrtwende. Der Bund will weg von Microsoft Produkten, um die Abhängigkeit von den USA zu reduzieren.
-- [00:09 → 00:42](https://www.youtube.com/embed/A-cipLy-c7s?start=9&end=43&autoplay=1) — Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!
-  > Die Software Microsoft 365 wurde erst vor wenigen Monaten an Zehntausenden Arbeitsplätzen des Bundes installiert. Es gibt nun Bedenken, die Abhängigkeit vom US-Konzern sei zu groß, die Datensicherheit
-- [01:06 → 01:26](https://www.youtube.com/embed/A-cipLy-c7s?start=66&end=87&autoplay=1) — Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!
-  > Das ist richtig und wichtig. Denn ich hatte das schon vor Jahren kritisiert, damals vor allem aus Datenschutzgründen, weil eben der US-Staat grundsätzlich auf unsere Daten hätte zugreifen können. Jetz
-- [01:36 → 01:59](https://www.youtube.com/embed/A-cipLy-c7s?start=96&end=120&autoplay=1) — Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!
-  > Bei Bundesverwaltung und Schweizer Botschaften sind etwa 54.000 Arbeitsplätze mit Microsoft-Software ausgerüstet. [...] Trotzdem will der Bund also schrittweise und langfristig unabhängiger werden vom
-- [02:17 → 02:33](https://www.youtube.com/embed/A-cipLy-c7s?start=137&end=154&autoplay=1) — Digitale Unabhängigkeit oder Illusion - Bund plant radikalen Schritt!
-  > Als der Bund vor ein paar Jahren Microsoft 365 einführte, gab es Befürchtungen, die USA könnten den Datenverkehr überwachen oder der Schweiz gar den Stecker ziehen. Deshalb müsse man Alternativen vora
-- [00:00 → 00:24](https://www.youtube.com/embed/BffWWGOgcWs?start=0&end=25&autoplay=1) — Switzerland BANS Microsoft Completely - Europe Abandons USA, Germany S
-  > Switzerland's federal administration, I'm quoting here, aims to reduce its dependency on Microsoft step-by-step in the long term, a federal chancellery spokesman told NZZ am Sonntag. This comes after 
-- [00:12 → 00:38](https://www.youtube.com/embed/TyIAqNBYxpo?start=12&end=39&autoplay=1) — La Suisse commence à larguer Microsoft !
-  > Salut c'est Sébastien sur Actualia... on va parler de la Suisse, de nos amis suisses... parce que qu'est-ce qu'ils ont dit nos amis suisses ? Vous savez quoi ? Nos amis suisses ont dit : Bye-bye, bye-
-- [01:03 → 01:18](https://www.youtube.com/embed/TyIAqNBYxpo?start=63&end=79&autoplay=1) — La Suisse commence à larguer Microsoft !
-  > Le gouvernement fédéral vient officiellement d'enclencher la marche arrière. Fini le tout Microsoft 365, place aux logiciels libres.
-- [00:46 → 01:26](https://www.youtube.com/embed/fl52LnZVnHE?start=46&end=87&autoplay=1) — Альпийские хроники
-  > И в связи с этим Швейцария сейчас занимается вопросом вообще стоит ли продолжать сотрудничать еще и с другими американскими компаниями, так как это только вершина айсберга... Но под этой верхушкой кро
+- [20:50 → 21:33](https://www.youtube.com/embed/HUn5SJMJ2fg?start=1250&end=1294&autoplay=1) — Life without Big Tech: a Swiss experiment
+  > Switzerland wants to become more digitally independent. What does that mean exactly? Of course, with this geopolitical situation, also countries, also businesses and not only private people understand
+- [04:43 → 05:35](https://www.youtube.com/embed/TyIAqNBYxpo?start=283&end=336&autoplay=1) — La Suisse commence à larguer Microsoft !
+  > Pour comprendre, il faut écouter Matthias Stürmer, prof à la Haute école spécialisée bernoise, la BFH. Selon lui, confier à l'État les clés de l'État à un géant américain pose trois énormes soucis : l
+- [06:27 → 07:30](https://www.youtube.com/embed/TyIAqNBYxpo?start=387&end=451&autoplay=1) — La Suisse commence à larguer Microsoft !
+  > Pendant ce temps-là, l'armée suisse est déjà en mode commando... Le cyber-command, l'unité de cybersécurité de l'armée suisse, a décidé de doubler tout le monde sur l'autoroute. Eux n'attendent pas le
 

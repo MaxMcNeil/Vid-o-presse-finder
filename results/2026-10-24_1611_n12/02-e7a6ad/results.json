@@ -235,8 +235,9 @@
      "t_end": 505.0,
      "speaker_role": "official",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     }
    ]
   },
@@ -295,8 +296,9 @@
      "t_end": 154.0,
      "speaker_role": "journalist",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     }
    ]
   },
@@ -331,32 +333,34 @@
      "t_end": 34.0,
      "speaker_role": "journalist",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     },
     {
      "start": "00:16",
-     "end": "00:27",
-     "start_seconds": 16.0,
-     "end_seconds": 27.0,
-     "start_tc": "00:00:16.000",
-     "end_tc": "00:00:27.000",
-     "duration_seconds": 11.0,
+     "end": "00:29",
+     "start_seconds": 16.96,
+     "end_seconds": 29.08,
+     "start_tc": "00:00:16.960",
+     "end_tc": "00:00:29.080",
+     "duration_seconds": 12.1,
      "timestamp": "00:16",
      "link": "https://www.youtube.com/watch?v=VG-6Kqh6-8s&t=16s",
-     "clip_link": "https://www.youtube.com/embed/VG-6Kqh6-8s?start=16&end=28&autoplay=1",
-     "t": 16.0,
+     "clip_link": "https://www.youtube.com/embed/VG-6Kqh6-8s?start=16&end=30&autoplay=1",
+     "t": 16.96,
      "quote": "قطر تعد من أكبر موردي الغاز الطبيعي المسال عالمياً اذ تمثل حوالي 20% من صادرات الغاز الطبيعي المسال في العالم",
      "verdict": "literal",
      "who_says": "journalist",
      "speaker_name": "ماري زعرور حنا",
      "confidence": 0.95,
      "why": "The voiceover directly states Qatar's role as one of the world's largest LNG suppliers accounting for ~20% of global exports.",
-     "t_end": 27.0,
+     "t_end": 29.08,
      "speaker_role": "journalist",
-     "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "timing": "sous-titres",
+     "tel_date": "2026-10-28",
+     "tel_status": "ok",
+     "tel_algo": 2
     },
     {
      "start": "00:35",
@@ -415,8 +419,9 @@
      "t_end": 99.0,
      "speaker_role": "journalist",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     }
    ]
   },
@@ -523,8 +528,9 @@
      "t_end": 61.0,
      "speaker_role": "journalist",
      "timing": "ia",
-     "tel_date": "2026-10-25",
-     "tel_status": "pas retrouvé dans les sous-titres"
+     "tel_date": "2026-10-28",
+     "tel_status": "pas retrouvé dans les sous-titres",
+     "tel_algo": 2
     }
    ]
   }

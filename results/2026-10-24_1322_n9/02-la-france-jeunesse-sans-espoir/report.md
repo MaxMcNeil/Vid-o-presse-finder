@@ -65,3 +65,17 @@ _Déclarations et analyses faisant état d'un sentiment de désespoir, de pessim
 - IA groq : clés 1/1 disponible(s) ; 1 appel(s)
 - État détaillé des clés : `state/QUOTAS.md` à la racine du dépôt
 - Durée : 15.8 min
+
+## Précision (téléphone)
+
+Recalé sur les sous-titres YouTube le 2026-10-28 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+
+- [01:53 → 02:02](https://www.youtube.com/embed/eV-3BFfnDFs?start=113&end=123&autoplay=1) — « La jeunesse se lève contre le désastre qu’on lui propose »
+  > où se cumulent de façon éclatante la question des prix, celle d'une jeunesse sans avenir et depuis des décennies la férocité de la répression.
+- [18:28 → 18:50](https://www.youtube.com/embed/eV-3BFfnDFs?start=1108&end=1131&autoplay=1) — « La jeunesse se lève contre le désastre qu’on lui propose »
+  > C'est un concept qui va vous mettre en perspective les difficultés contemporaines pour lesquelles les jeunes aujourd'hui en particulier se voient totalement privés d'avenir et ils le voient comme un v
+- [23:34 → 23:56](https://www.youtube.com/embed/eV-3BFfnDFs?start=1414&end=1437&autoplay=1) — « La jeunesse se lève contre le désastre qu’on lui propose »
+  > et la deuxième chose, c'est aussi de se cacher, c'est-à-dire de cacher sa propre responsabilité dans le désastre actuel. Et tous ces accusations de manipulation, c'est aussi une façon d'échapper à son
+- [26:01 → 26:08](https://www.youtube.com/embed/eV-3BFfnDFs?start=1561&end=1569&autoplay=1) — « La jeunesse se lève contre le désastre qu’on lui propose »
+  > On est jeune, c'est difficile de trouver du travail, c'est compliqué pour nos parents aussi.
+

@@ -98,14 +98,14 @@ _Déclarations officielles et d'experts concernant la législation sur l'intelli
 
 ## Précision (téléphone)
 
-Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+Recalé sur les sous-titres YouTube le 2026-10-28 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
 
-- [10:32 → 11:01](https://www.youtube.com/embed/AzWkrSivblA?start=632&end=662&autoplay=1) — Roma - Per una normativa a prova di AI - Conferenza stampa di Giulio C
-  > In questo momento le normative per la maggior parte vengono pubblicate con dei formati obsoleti che non sono conformi a questi standard. Ci sono state delle iniziative istituzionali che hanno iniziato
-- [22:28 → 22:55](https://www.youtube.com/embed/AzWkrSivblA?start=1348&end=1376&autoplay=1) — Roma - Per una normativa a prova di AI - Conferenza stampa di Giulio C
-  > Dall'altro lato invece si potrebbe anche realizzare con la norma nazionale, ovviamente passando per il Ministero di Zangrillo, no? Quindi questo è un altro passaggio. Però cominciare ad agire sui rego
-- [41:26 → 41:45](https://www.youtube.com/embed/AzWkrSivblA?start=2486&end=2506&autoplay=1) — Roma - Per una normativa a prova di AI - Conferenza stampa di Giulio C
-  > stiamo lavorando anche nell'attuale DDL AI del governo per vedere se possiamo inserire qualcosa in questo senso, quindi credo che sia fondamentale spingere il prima possibile per un approccio limitato
-- [00:00 → 00:13](https://www.youtube.com/embed/suerd6hWbww?start=0&end=14&autoplay=1) — Germany, France & Italy reach agreement on future AI regulation | Worl
-  > France, Germany, and Italy have reached an agreement on how to regulate artificial intelligence. Need of the hour. According to media reports, the agreement is expected to hasten negotiations for AI l
+- [01:01 → 01:36](https://www.youtube.com/embed/vvc9rHjXH1E?start=61&end=97&autoplay=1) — Roma - Intelligenza artificiale, audizione Ministro Colao (09.03.22)
+  > Ininnanzi tutto vorrei delineare il contesto in cui si si riferisce a cui si riferisce questa proposta di regolamento su intelligenza artificiale, poi descrivere le finalità del regolamento e anche al
+- [03:47 → 04:20](https://www.youtube.com/embed/vvc9rHjXH1E?start=227&end=261&autoplay=1) — Roma - Intelligenza artificiale, audizione Ministro Colao (09.03.22)
+  > Partendo da un quadro giuridico oggi che è esattamente l'opposto, che quindi non è armonizzato, è frammentato, ci sono circa 700 tra politiche, strategie, applicazioni e incentivi diversi sull'AI in 6
+- [14:40 → 15:07](https://www.youtube.com/embed/vvc9rHjXH1E?start=880&end=908&autoplay=1) — Roma - Intelligenza artificiale, audizione Ministro Colao (09.03.22)
+  > Secondo, il regime delle eccezioni ed esenzioni previsto per i sistemi inaccettabili, abbiamo chiesto come Italia un maggior grado di dettaglio dei presupposti per chiedere questa eccezione per evitar
+- [21:56 → 22:24](https://www.youtube.com/embed/vvc9rHjXH1E?start=1316&end=1345&autoplay=1) — Roma - Intelligenza artificiale, audizione Ministro Colao (09.03.22)
+  > Vorrei anche fare una breve nota sulla strategia nazionale di AI che abbiamo adottato il 24 novembre 21 come governo... Noi con la strategia nazionale volevamo invece dare un po' più impeto se volete 
 

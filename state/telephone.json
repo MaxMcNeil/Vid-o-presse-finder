@@ -1,10 +1,8 @@
 {
- "last_run": 1793192027.0869365,
+ "last_run": 1793215625.3424814,
  "network": "données mobiles",
- "last_result": "0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau",
- "blocked": {
-  "données mobiles": 1793213627.0869036
- },
+ "last_result": "24 extrait(s) recalé(s), 19 non retrouvé(s), 0 sans sous-titres",
+ "blocked": {},
  "auto": "Android toutes les heures environ + à l'ouverture de Termux",
- "committed_at": 1793192027.087058
+ "committed_at": 1793215625.342512
 }

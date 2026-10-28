@@ -131,28 +131,10 @@ _Stratégies, investissements et déclarations officielles des pays du Conseil d
 
 ## Précision (téléphone)
 
-Recalé sur les sous-titres YouTube le 2026-10-25 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
+Recalé sur les sous-titres YouTube le 2026-10-28 (±1-2 s) — ces horodatages remplacent ceux ci-dessus :
 
-- [00:00 → 00:22](https://www.youtube.com/embed/FVf9kK9VCLo?start=0&end=23&autoplay=1) — The U.A.E.’s AI Ambitions
-  > The United Arab Emirates is a country that prides itself on building big and being first and that extends to the tech sector with the UAE's appointment of the world's first minister for artificial int
-- [00:34 → 01:04](https://www.youtube.com/embed/FVf9kK9VCLo?start=34&end=65&autoplay=1) — The U.A.E.’s AI Ambitions
-  > So some of our most successful exits so far are artificial intelligence stories of success. Careem is an artificial intelligence company that got acquired for 11 billion dirhams, 3.1 or 3.2 billion do
-- [01:19 → 01:33](https://www.youtube.com/embed/FVf9kK9VCLo?start=79&end=94&autoplay=1) — The U.A.E.’s AI Ambitions
-  > Definitely, and it also proves that there is something to be got out of it. We're not doing AI for the sake of AI, we're doing AI because it's something that creates value, and there are returns that 
-- [00:44 → 01:02](https://www.youtube.com/embed/1ny0bdkEIjE?start=44&end=63&autoplay=1) — Aramco CEO Amin Nasser on the Future of Oil, AI & Saudi Vision 2030 (E
-  > There is significant growth, as I'm sure you've seen through the tours, in technology and digitalization, in AI, to maintain our low-cost structure, extraction cost and development cost, and at the sa
-- [00:00 → 00:21](https://www.youtube.com/embed/j3JZQSaAjug?start=0&end=22&autoplay=1) — Inside the Gulf’s trillion-dollar AI gamble
-  > With energy and cash to spare, Gulf monarchies are positioning their countries and their capital to take a lead in the AI race, both acquiring and building the latest technology. I took a deep dive in
-- [00:19 → 00:35](https://www.youtube.com/embed/j3JZQSaAjug?start=19&end=36&autoplay=1) — Inside the Gulf’s trillion-dollar AI gamble
-  > From Abu Dhabi's G42 and MGX, and their massive US-UAE AI campus, to the lifting of export controls for Nvidia chips announced this week by Microsoft. The UAE was talking about AI before it was cool, 
-- [00:33 → 00:48](https://www.youtube.com/embed/j3JZQSaAjug?start=33&end=49&autoplay=1) — Inside the Gulf’s trillion-dollar AI gamble
-  > And Riyadh has its own AI champion, Humain, backed by its nearly $1 trillion Sovereign Wealth Fund, the PIF. They want to make Saudi Arabia the biggest AI power after the likes, of course, of the US a
-- [00:45 → 01:15](https://www.youtube.com/embed/j3JZQSaAjug?start=45&end=76&autoplay=1) — Inside the Gulf’s trillion-dollar AI gamble
-  > Plus Qatar, who's over $500 billion Sovereign Wealth Fund, the QIA, told CNBC their strategy is investing across the value stack of AI, rather than backing a single local AI company like the UAE's G42
-- [00:17 → 00:37](https://www.youtube.com/embed/6AkgtlaC4Fs?start=17&end=38&autoplay=1) — Saudi Arabia Plans $100 Billion AI Project to Rival UAE Technology Hub
-  > So sources are telling us that Saudi Arabia is planning a project known as Project Transcendence. We are told that this is going to be a fund that will invest in AI infrastructure, AI startups, and al
-- [01:24 → 01:52](https://www.youtube.com/embed/6AkgtlaC4Fs?start=84&end=113&autoplay=1) — Saudi Arabia Plans $100 Billion AI Project to Rival UAE Technology Hub
-  > Well, both Saudi Arabia and the UAE have been racing to set up data centers and kind of position themselves as the dominant force in AI in the region. And honestly, so far it had looked like Abu Dhabi
-- [02:10 → 03:38](https://www.youtube.com/embed/6AkgtlaC4Fs?start=130&end=219&autoplay=1) — Saudi Arabia Plans $100 Billion AI Project to Rival UAE Technology Hub
-  > And then last week out of FII, we also saw the PIF, that's Saudi Arabia's sovereign wealth fund, it announced a partnership with Google Cloud to develop a new AI hub in the Eastern Province of Dammam.
+- [05:20 → 05:58](https://www.youtube.com/embed/1ny0bdkEIjE?start=320&end=359&autoplay=1) — Aramco CEO Amin Nasser on the Future of Oil, AI & Saudi Vision 2030 (E
+  > Technology realization in 2023 used to be $2 billion. This is how much we realized from technology. In '24, $4 billion. And we're looking at $2 to $4 billion per year in technology. So we are benefiti
+- [06:43 → 07:04](https://www.youtube.com/embed/1ny0bdkEIjE?start=403&end=425&autoplay=1) — Aramco CEO Amin Nasser on the Future of Oil, AI & Saudi Vision 2030 (E
+  > If you look at our talents, how many people trained on AI in Aramco? We have the AI specialist, a couple of hundreds, but the AI-enabled, trained AI professional around more than 6,000, and we're trai
 

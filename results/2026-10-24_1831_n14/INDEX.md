@@ -1,7 +1,7 @@
 # Lot de recherches — 2026-10-24_1831_n14
 
 2 recherche(s), 3 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
-Précision : 2 extrait(s) calé(s) sur les sous-titres (±1-2 s), 1 affiné(s) par Gemini (±1 s), 0 estimé(s) (±5 s). ⏳ 1 seront recalés par le téléphone au prochain passage (`qf precis`).
+Précision : 2 extrait(s) calé(s) sur les sous-titres (±1-2 s), 1 affiné(s) par Gemini (±1 s), 0 estimé(s) (±5 s).
 
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |

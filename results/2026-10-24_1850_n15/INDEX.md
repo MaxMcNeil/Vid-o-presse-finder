@@ -1,7 +1,7 @@
 # Lot de recherches — 2026-10-24_1850_n15
 
 1 recherche(s), 11 extrait(s) vidéo au total (`montage.json` / `montage.csv` de ce dossier).
-Précision : 6 extrait(s) calé(s) sur les sous-titres (±1-2 s), 3 affiné(s) par Gemini (±1 s), 2 estimé(s) (±5 s). ⏳ 4 en attente de recalage par le téléphone (`qf precis`).
+Précision : 7 extrait(s) calé(s) sur les sous-titres (±1-2 s), 3 affiné(s) par Gemini (±1 s), 1 estimé(s) (±5 s).
 
 
 | # | Cible | Sujet | Vidéos | Extraits | Articles | Rapport |
@@ -28,7 +28,7 @@ Précision : 6 extrait(s) calé(s) sur les sous-titres (±1-2 s), 3 affiné(s) p
   > on the key pillars, on the key building blocks, you want to preserve your sovereignty, and this is just the refusal of being a vassal.
 - [00:03:33 → 00:03:51](https://www.youtube.com/embed/refYWVpbwKA?start=213&end=232&autoplay=1) · DRM News · Emmanuel Macron · score 0.86
   > Europe doesn't want to be the client of the big entrepreneurs or the big solutions being provided either from US or from China. We clearly want to design our own solutions.
-- [00:18:55 → 00:19:15](https://www.youtube.com/embed/refYWVpbwKA?start=1135&end=1156&autoplay=1) · DRM News · Emmanuel Macron · score 0.86
+- [00:11:30 → 00:11:48](https://www.youtube.com/embed/refYWVpbwKA?start=690&end=709&autoplay=1) · DRM News · Emmanuel Macron · score 0.86
   > For this reason, we put digital sovereignty, fostering domestic champions and freeing ourselves from dependence on foreign technologies at the forefront of the economic agenda that we set during the Franco-German Council
 - [00:01:14 → 00:01:47](https://www.youtube.com/embed/refYWVpbwKA?start=74&end=108&autoplay=1) · DRM News · Emmanuel Macron · score 0.85
   > we are together completely convinced that we haven't entered a technological race in the digital field which clearly affects the pillars of our society. And of course our economy has entered the race for AI, cloud comput
