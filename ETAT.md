@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 27/10/2026 à 23:12 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 28/10/2026 à 13:53 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -9,11 +9,11 @@ _Mis à jour le 27/10/2026 à 23:12 (heure italienne), automatiquement après ch
 ## Clés et quotas
 
 - ✅ **Gemini (IA)** : 10/10 clé(s) utilisable(s)
-- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 799 recherches restantes aujourd'hui
+- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 800 recherches restantes aujourd'hui
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
-- ℹ️ Remise à zéro des quotas gratuits Google : chaque jour à 8 h 01 (minuit en Californie).
+- ℹ️ Remise à zéro des quotas gratuits Google : chaque jour à 9 h 01 (minuit en Californie).
 
 ## Sous-titres YouTube depuis GitHub
 
@@ -21,7 +21,8 @@ _Mis à jour le 27/10/2026 à 23:12 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 7 h (données mobiles) : 34 extrait(s) recalé(s), 5 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
+- ✅ Dernier passage il y a 0 min (données mobiles) : 0 extrait(s) recalé(s), 0 non retrouvé(s), 0 sans sous-titres — YouTube a limité ce réseau
+  - ⚠️ données mobiles refusé par YouTube → nouvel essai automatique à 19 h 53 (les autres réseaux restent essayés : passe sur les données mobiles pour aller plus vite)
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
 - ⏳ Extraits en attente de recalage par le téléphone : 43
 
