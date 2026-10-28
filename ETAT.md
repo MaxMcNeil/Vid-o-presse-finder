@@ -36,12 +36,11 @@ _Mis à jour le 28/10/2026 à 14:33 (heure italienne), automatiquement après ch
 <!-- workflows:start -->
 ## Workflows
 
-_Vérifié le 27/10/2026 à 23:12 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
+_Vérifié le 28/10/2026 à 14:33 (heure italienne), automatiquement à la fin de chacun de tes lancements (aucune exécution planifiée)._
 
-- ❌ **Diagnostic** : dernier lancement en échec (27/10 à 23:12, failure) — dernier succès le 25/10 à 22:21 · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40590590418)
-  - **Cause** : le travail a dépassé le temps maximum (étape « check → Tester chaque clé et chaque service »)
-  - **Quoi faire** : relance ; si ça se répète, la vidéo/le traitement est trop long
-  - Message : `##[error]The action 'Tester chaque clé et chaque service' has timed out after 16 minutes.`
+✅ **Tout fonctionne** : aucun workflow en échec.
+
+- ✅ **Diagnostic** : dernier lancement réussi (28/10 à 14:33) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40695908070)
 - ✅ **Find quotes** : dernier lancement réussi (26/10 à 23:10) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40403463183)
 - ✅ **Republier un lancement** : dernier lancement réussi (25/10 à 10:27) · [voir](https://github.com/MaxMcNeil/Vid-o-presse-finder/actions/runs/40180725266)
 
