@@ -31,9 +31,9 @@ on:
         required: false
         default: "8"
       articles_par_recherche:
-        description: "Articles retenus par recherche"
+        description: "Articles retenus par recherche (plus = mieux, la lecture reste bornée dans le temps)"
         required: false
-        default: "6"
+        default: "12"
       langs:
         description: "Langues (ex : fr,en,de)"
         required: false
@@ -164,7 +164,7 @@ jobs:
           fi
           python -m quote_finder --target "$S_TARGET" --claim "$S_CLAIM" --type "$S_TYPE" \
             --speakers "${IN_SPEAKERS:-auto}" --authority "${IN_AUTH:-forte}" \
-            --max-videos "${IN_MAXV:-8}" --max-articles "${IN_MAXA:-6}" --langs "${IN_LANGS:-fr,en}" \
+            --max-videos "${IN_MAXV:-8}" --max-articles "${IN_MAXA:-12}" --langs "${IN_LANGS:-fr,en}" \
             --since "$IN_SINCE" --max-minutes "$mins" --out results --batch-id "$LOT" --search-id "$S_ID"
 
       - uses: actions/upload-artifact@v6
