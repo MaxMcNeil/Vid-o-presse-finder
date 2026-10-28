@@ -9,6 +9,12 @@ import pytest
 from quote_finder import social
 
 
+@pytest.fixture(autouse=True)
+def _isolated_state(monkeypatch, tmp_path):
+    """Pauses / plafonds propres à chaque test (jamais partagés entre tests)."""
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
+
+
 def plan(**k):
     d = dict(target_aliases=["Bardella"], term_groups=[["immigration", "migrants"], ["chiffres"]],
              site_query="Bardella immigration", news_queries=[], posts=[])
@@ -84,7 +90,8 @@ def test_reddit_ok_filters_low_score_and_nsfw():
     assert len(out) == 1 and out[0]["channel"] == "r/france" and out[0]["url"].startswith("https://www.reddit.com/r/")
 
 
-def test_reddit_blocked_everywhere_is_reported_not_raised():
+def test_reddit_blocked_everywhere_is_reported_not_raised(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
     social.reset()
     out = social.reddit(["x"], http=Http({"search.json": Resp(403), "search.rss": Resp(403)}))
     assert out == [] and "bloqué" in social.STATUS["reddit"] and "403" in social.STATUS["reddit"]
@@ -94,7 +101,7 @@ def test_reddit_json_blocked_rss_ok():
     atom = (b'<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>Bardella immigration chiffres'
             b'</title><link href="https://www.reddit.com/r/france/comments/abc/x/"/><category term="france"/>'
             b'<updated>2026-10-01T00:00:00Z</updated></entry></feed>')
-    out = social.reddit(["x"], http=Http({"search.json": Resp(429), "search.rss": Resp(200, content=atom)}))
+    out = social.reddit(["x"], http=Http({"search.json": Resp(403), "search.rss": Resp(200, content=atom)}))
     assert len(out) == 1 and out[0]["date"] == "2026-10-01"
 
 
@@ -145,7 +152,8 @@ def test_tg_error_messages(name, frag):
     assert frag in social._tg_error(e, 2)
 
 
-def test_telegram_search_with_fake_client(monkeypatch):
+def test_telegram_search_with_fake_client(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
     """Faux client Telethon : chaînes trouvées, messages filtrés (pertinence, date), lien t.me correct."""
     import datetime as dt
     import telethon
@@ -197,7 +205,8 @@ def test_telegram_search_with_fake_client(monkeypatch):
     assert social.STATUS["telegram"].startswith("ok : 2 message")
 
 
-def test_telegram_unauthorized_session_is_loud(monkeypatch):
+def test_telegram_unauthorized_session_is_loud(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
     import telethon
     monkeypatch.setenv("TG_API_ID", "1")
     monkeypatch.setenv("TG_API_HASH", "b" * 32)
@@ -225,7 +234,8 @@ def test_telegram_unauthorized_session_is_loud(monkeypatch):
     assert "régénère TG_SESSION" in social.STATUS["telegram"]
 
 
-def test_telegram_hang_is_bounded(monkeypatch):
+def test_telegram_hang_is_bounded(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
     """Telegram qui ne répond plus : on rend la main dans le temps imparti."""
     import asyncio
     import telethon
@@ -365,7 +375,8 @@ def test_classify_ok_partial_and_failure():
     social.classify(NS(generate_json=lambda p: {}), opts(), [])
 
 
-def test_bad_session_string_is_loud(monkeypatch):
+def test_bad_session_string_is_loud(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
     monkeypatch.setenv("TG_API_ID", "1")
     monkeypatch.setenv("TG_API_HASH", "b" * 32)
     monkeypatch.setenv("TG_SESSION", "pas-une-session")
@@ -374,3 +385,28 @@ def test_bad_session_string_is_loud(monkeypatch):
     social.reset()
     assert social.telegram(plan(), opts(), 30) == []
     assert "abîmée" in social.STATUS["telegram"] and "régénère" in social.STATUS["telegram"]
+
+
+def test_pause_and_cap(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
+    assert social.paused("telegram") == 0
+    social.pause("telegram", 120)
+    assert 100 < social.paused("telegram") <= 120
+    monkeypatch.setenv("TG_API_ID", "1")
+    monkeypatch.setenv("TG_API_HASH", "b" * 32)
+    monkeypatch.setenv("TG_SESSION", "x")
+    social.reset()
+    assert social.telegram(plan(), opts(), 30) == [] and "pause" in social.STATUS["telegram"]
+    assert all(social.take_slot("cap", 2) for _ in range(2)) and not social.take_slot("cap", 2)
+    (tmp_path / "qf-social-telegram.json").write_text("{corrompu", encoding="utf-8")   # fichier abîmé : ignoré
+    assert social.paused("telegram") == 0
+
+
+def test_reddit_429_pauses(monkeypatch, tmp_path):
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
+    social.reset()
+    h = Http({"search.json": Resp(429)})
+    assert social.reddit(["x", "y"], http=h) == [] and len(h.calls) == 1        # arrêt net, pas d'insistance
+    assert social.paused("reddit") > 500
+    h2 = Http({"search.json": Resp(200, red_json())})
+    assert social.reddit(["x"], http=h2) == [] and not h2.calls and "pause" in social.STATUS["reddit"]

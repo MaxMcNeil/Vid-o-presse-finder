@@ -42,6 +42,55 @@ def reset() -> None:
     STATUS.clear()
 
 
+# ------------------------------------------------------------------ pauses et plafonds (protection des comptes)
+# Partagés par tous les processus d'une même machine (le montage lance plusieurs recherches à la suite) :
+# - Telegram / Reddit demandent d'attendre → plus aucune requête avant l'heure dite (insister mène au blocage) ;
+# - Telegram : au plus QF_TG_MAX_PER_RUN recherches par lancement (12 par défaut), les affirmations les plus
+#   importantes d'abord ; petite pause entre deux requêtes.
+def _state_file(name: str) -> str:
+    return os.path.join(os.environ.get("RUNNER_TEMP") or "/tmp", f"qf-social-{name}.json")
+
+
+def _read_state(name: str) -> dict:
+    try:
+        with open(_state_file(name), encoding="utf-8") as f:
+            d = json.load(f)
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _write_state(name: str, d: dict) -> None:
+    try:
+        tmp = _state_file(name) + f".{os.getpid()}"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(d, f)
+        os.replace(tmp, _state_file(name))
+    except OSError:
+        pass
+
+
+def paused(name: str) -> float:
+    """Secondes d'attente restantes imposées par la plateforme (0 = libre)."""
+    return max(0.0, float(_read_state(name).get("until", 0) or 0) - time.time())
+
+
+def pause(name: str, seconds: float) -> None:
+    d = _read_state(name)
+    d["until"] = max(float(d.get("until", 0) or 0), time.time() + seconds)
+    _write_state(name, d)
+
+
+def take_slot(name: str, cap: int) -> bool:
+    d = _read_state(name)
+    n = int(d.get("count", 0) or 0)
+    if n >= cap:
+        return False
+    d["count"] = n + 1
+    _write_state(name, d)
+    return True
+
+
 # ------------------------------------------------------------------ mots-clés
 def queries(plan, o) -> list[str]:
     """2-3 requêtes courtes (Telegram et Reddit cherchent mal les phrases longues)."""
@@ -82,6 +131,10 @@ def _since_ok(date: str, since: str) -> bool:
 
 # ------------------------------------------------------------------ Reddit
 def reddit(qs: list[str], since: str = "", http=None, timeout: float = 20) -> list[dict]:
+    w = paused("reddit")
+    if w > 0:
+        STATUS["reddit"] = f"en pause demandée par Reddit (encore {w / 60:.0f} min) : sauté cette fois"
+        return []
     s = http or requests.Session()
     hdr = {"User-Agent": UA, "Accept": "application/json"}
     out, seen, codes = [], set(), []
@@ -97,6 +150,10 @@ def reddit(qs: list[str], since: str = "", http=None, timeout: float = 20) -> li
                 continue
             if r.status_code != 200:
                 codes.append(f"HTTP {r.status_code}")
+                if r.status_code == 429:      # « trop de requêtes » : on arrête net et on attend 10 min
+                    pause("reddit", 600)
+                    STATUS["reddit"] = "Reddit demande de ralentir (429) : pause de 10 min, résultats partiels"
+                    return out
                 continue
             try:
                 kids = r.json()["data"]["children"]
@@ -301,6 +358,7 @@ async def _tg_search(cfg, qs, ws, since, plan, o, box: list, note: dict):
             raise PermissionError("session non autorisée")
         chans = {}
         for q in qs:
+            await asyncio.sleep(1.5)
             res = await client(functions.contacts.SearchRequest(q=q, limit=20))
             for ch in res.chats:
                 if isinstance(ch, Channel) and ch.broadcast and getattr(ch, "username", None) \
@@ -311,6 +369,7 @@ async def _tg_search(cfg, qs, ws, since, plan, o, box: list, note: dict):
         seen = set()
         for ch in top:
             for w in ws[:2]:
+                await asyncio.sleep(1.5)   # rythme humain : jamais de rafale de requêtes
                 async for m in client.iter_messages(ch, search=w, limit=PER_CHANNEL):
                     text = (m.message or "").strip()
                     url = f"https://t.me/{ch.username}/{m.id}"
@@ -335,6 +394,17 @@ def telegram(plan, o, budget: float) -> list[dict]:
     except ImportError:
         STATUS["telegram"] = "module telethon absent (requirements.txt) : source ignorée"
         return []
+    w = paused("telegram")
+    if w > 0:
+        STATUS["telegram"] = f"en pause demandée par Telegram (encore {w / 60:.0f} min) : sauté (protection du compte)"
+        return []
+    try:
+        cap = int(os.environ.get("QF_TG_MAX_PER_RUN", "12"))
+    except ValueError:
+        cap = 12
+    if not take_slot("telegram-run", cap):
+        STATUS["telegram"] = f"plafond de {cap} recherches Telegram par lancement atteint (protection du compte) : sauté"
+        return []
     box: list[dict] = []
     note: dict = {}
     with telegram_lock(max_wait=min(240.0, budget / 2)) as lk:
@@ -356,6 +426,8 @@ def telegram(plan, o, budget: float) -> list[dict]:
         except Exception as e:  # noqa: BLE001 — chaque cas a son message clair
             if isinstance(e, TimeoutError) and "plus de" in str(e):
                 lk["keep"] = True   # connexion peut-être encore ouverte : verrou gardé jusqu'à expiration
+            if type(e).__name__ == "FloodWaitError":   # Telegram impose une attente : on la respecte partout
+                pause("telegram", float(getattr(e, "seconds", 300) or 300) + 60)
             STATUS["telegram"] = _tg_error(e, len(box))
             lvl = log.error if "régénère" in STATUS["telegram"] else log.warning
             lvl("Telegram : %s", STATUS["telegram"])
