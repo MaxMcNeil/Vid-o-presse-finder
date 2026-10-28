@@ -15,7 +15,7 @@ try:
 except ImportError:  # extraction simplifiée
     trafilatura = None
 
-from . import authority, media, scan, transcripts
+from . import authority, media, scan, social, transcripts
 from .keys import KeyPool, keys_from_env
 from .llm import LLMError, QuotaExhausted
 from .models import ArticleCandidate, Hit, Plan, Segment, VideoCandidate
@@ -58,6 +58,7 @@ class Options:
     article_gemini_max: int = 8      # articles pertinents illisibles autrement : lus par Gemini (url_context)
     article_search_max: int = 4      # liens Google Actualités restants : vrai lien retrouvé par Gemini (google_search)
     article_google_queries: int = 3  # recherches Google (par Gemini) d'articles par recherche : vrais liens directs
+    social: bool = True              # Telegram (chaînes publiques) + Reddit, jamais bloquant
 
     @property
     def person(self) -> str:  # compatibilité
@@ -84,6 +85,7 @@ class ArticleResult:
     note: str = ""
     relevant_title: bool = True  # le titre évoque le sujet (sert à trier les articles illisibles)
     via: str = ""                # méthode qui a permis de lire le texte (direct, archive.org, gemini, api)
+    position: str = ""           # appui | contre | neutre | ? (par rapport à l'affirmation recherchée)
 
 
 # ------------------------------------------------------------------ découverte
@@ -524,6 +526,17 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
         log.info("%d/%d vidéos analysées sans transcription (YouTube bloque souvent les transcriptions depuis GitHub)",
                  blocked, len(vres))
 
+    # réseaux sociaux (Telegram, Reddit) : courts, bornés dans le temps, jamais bloquants
+    social.reset()
+    if o.social and deadline - time.time() > 150:
+        try:
+            plan.posts = social.search(plan, o, http, budget=min(240.0, 0.2 * (deadline - time.time())))
+        except Exception as e:  # noqa: BLE001
+            social.STATUS["erreur"] = f"{type(e).__name__}: {str(e)[:100]}"
+            log.error("Réseaux sociaux abandonnés : %s", e)
+    elif o.social:
+        social.STATUS["telegram"] = social.STATUS["reddit"] = "pas assez de temps restant : sauté"
+
     ares: list[ArticleResult] = []
     if o.articles and deadline - time.time() > 90:
         try:
@@ -559,6 +572,17 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
             log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
     elif o.articles:
         log.warning("Plus assez de temps pour les articles")
+    # appui / contre : un seul appel IA pour les articles retenus et les messages (les « contre » sont listés à part)
+    kept_a = [r for r in ares if r.hits]
+    items = [{"text": f"{r.article.source} : {r.article.title}"} for r in kept_a] + plan.posts
+    if items:
+        try:
+            social.classify(llm, o, items)
+            for r, it in zip(kept_a, items):
+                r.position = it.get("position", "")
+        except Exception as e:  # noqa: BLE001
+            social.STATUS["positions"] = f"non classées ({type(e).__name__})"
+    plan.diag["social"] = dict(social.STATUS)
     via: dict[str, int] = {}
     for r in ares:
         k = r.via or ("illisible : " + (r.note or "?")[:45])

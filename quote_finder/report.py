@@ -151,7 +151,9 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
                       "domain": r.article.domain, "url": r.article.url, "verified_on_full_text": r.verified,
                       "read_via": getattr(r, "via", ""),
                       "authority": r.article.authority, "authority_why": r.article.authority_why,
+                      "position": getattr(r, "position", ""),
                       "passages": [h.to_dict() for h in r.hits]} for r in am],
+        "posts": list(getattr(plan, "posts", None) or []),
         "unreadable_articles": [{"title": r.article.title, "date": r.article.published, "source": r.article.source,
                                  "url": r.article.url, "authority": r.article.authority, "reason": r.note}
                                 for r in ares if not r.hits and not r.verified],
@@ -180,10 +182,17 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
                             f"{h.confidence:.2f}", r.video.authority, h.quote, clip_link(r.video.url, r.video.platform, h)])
     with open(outdir / "articles.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
-        w.writerow(["titre", "date", "source", "domaine", "autorite", "url", "texte_complet_verifie"])
+        w.writerow(["titre", "date", "source", "domaine", "autorite", "url", "texte_complet_verifie", "position"])
         for r in am:
             a = r.article
-            w.writerow([a.title, a.published, a.source, a.domain, a.authority, a.url, r.verified])
+            w.writerow([a.title, a.published, a.source, a.domain, a.authority, a.url, r.verified, getattr(r, "position", "")])
+    posts = list(getattr(plan, "posts", None) or [])
+    with open(outdir / "posts.csv", "w", newline="", encoding="utf-8-sig") as f:  # Telegram / Reddit
+        w = csv.writer(f)
+        w.writerow(["plateforme", "chaine", "date", "texte", "url", "audience", "commentaires", "media", "position"])
+        for x in posts:
+            w.writerow([x.get("platform"), x.get("channel"), x.get("date"), x.get("text"), x.get("url"), x.get("score", 0),
+                        x.get("comments", 0), x.get("media", ""), x.get("position", "")])
 
     title = f"{o.target} — « {o.claim} »" if o.claim else o.target
     L = [f"# {title}", "",
@@ -230,6 +239,27 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
         for h in r.hits[:2]:
             L.append(f"  > {h.quote}" + (f" — {h.speaker_name}" if h.speaker_name else ""))
     L.append("")
+    POS = {"appui": "✅ appui", "contre": "🛡 contre", "neutre": "neutre", "?": "non classé"}
+    soc = (plan.diag or {}).get("social") or {}
+    L += ["## Réseaux sociaux (Telegram, Reddit)", "",
+          f"- Telegram : {soc.get('telegram', 'non lancé')}", f"- Reddit : {soc.get('reddit', 'non lancé')}"]
+    if soc.get("positions"):
+        L.append(f"- Appui / contre : {soc['positions']}")
+    for x in posts:
+        if x.get("position") == "contre":
+            continue
+        L.append(f"- **{x.get('channel')}** ({x.get('platform')}, {x.get('date') or '?'}) {POS.get(x.get('position', ''), '')} — "
+                 f"{(x.get('text') or '')[:200]} — {x.get('url')}")
+    L.append("")
+    contre = [r for r in am if getattr(r, "position", "") == "contre"] + [x for x in posts if x.get("position") == "contre"]
+    if contre:
+        L += ["## 🛡 Ce qui contredit l'affirmation (à anticiper dans ta vidéo)", ""]
+        for x in contre:
+            if isinstance(x, dict):
+                L.append(f"- {x.get('channel')} ({x.get('date') or '?'}) — {(x.get('text') or '')[:220]} — {x.get('url')}")
+            else:
+                L.append(f"- {x.article.source} ({x.article.published or '?'}) — {x.article.title} — {x.article.url}")
+        L.append("")
     if clips:
         L += ["## Montage", "",
               "`montage.json` / `montage.csv` : un extrait par ligne, du plus solide au moins solide, avec `in`/`out` "

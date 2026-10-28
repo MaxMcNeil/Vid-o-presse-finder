@@ -106,6 +106,11 @@ jobs:
       NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
       YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
       YT_COOKIES: ${{ secrets.YT_COOKIES }}       # facultatif : compte YouTube secondaire (sous-titres)
+      # Telegram (facultatif) : chaînes publiques liées au sujet. Session PROPRE à ce dépôt (une autre pour le montage)
+      TG_API_ID: ${{ secrets.TG_API_ID }}
+      TG_API_HASH: ${{ secrets.TG_API_HASH }}
+      TG_SESSION: ${{ secrets.TG_SESSION }}
+      GH_TOKEN: ${{ github.token }}               # verrou « une session Telegram à la fois » (étiquette verrou-telegram)
       FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
       QF_CACHE_DIR: .cache

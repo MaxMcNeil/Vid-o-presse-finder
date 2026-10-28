@@ -179,3 +179,26 @@ python -m pytest -q          # tests (pip install -r requirements-dev.txt)
   la fenêtre de chaque passage** pour l'horodater au dixième de seconde (`timing = ia-affiné`) et vérifier qu'il existe.
 - Avec `autorite = forte`, une recherche sur un sujet peu couvert peut ne rien rendre : relance en `moyenne`. Le rapport indique combien de sources ont été écartées pour autorité insuffisante.
 - Articles sous paywall : vérifiés sur le chapô seulement (signalé), ou listés « à vérifier à la main ».
+
+## 📡 Réseaux sociaux : Telegram et Reddit (pas de X, TikTok ni Instagram)
+
+Chaque recherche cherche aussi, en quelques minutes au plus :
+- **Telegram** : les chaînes publiques liées au sujet, puis les messages qui contiennent tes mots-clés.
+  Secrets `TG_API_ID`, `TG_API_HASH` (my.telegram.org) et `TG_SESSION` (script Termux ci-dessous). Compte secondaire
+  conseillé. ⚠ **Une session par dépôt** : Telegram détruit une session utilisée en même temps sur deux machines
+  (un verrou — étiquette `verrou-telegram` — empêche deux recherches de ce dépôt de s'en servir ensemble).
+- **Reddit** : flux publics, sans compte. Reddit bloque souvent les serveurs GitHub : la source est alors sautée et
+  c'est écrit dans le rapport et ETAT.md.
+
+Chaque article retenu et chaque message est classé **appui / contre / neutre** par rapport à la recherche. Ce qui
+contredit est listé à part : **🛡 Ce qui contredit l'affirmation** (dans `report.md`). Fichiers : `posts.csv`,
+colonne `position` dans `articles.csv`.
+
+Tester : *Actions → Diagnostic* (lignes « Telegram » et « Reddit »). Un problème de session s'affiche dans ETAT.md
+avec quoi faire (« régénère TG_SESSION »).
+
+Générer une session (Termux) :
+```bash
+pkg install -y python && pip install telethon
+python -c "from telethon.sync import TelegramClient; from telethon.sessions import StringSession; c=TelegramClient(StringSession(), int(input('api_id: ')), input('api_hash: ')); c.start(); print('\n=== TG_SESSION ===\n'+c.session.save())"
+```

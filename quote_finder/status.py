@@ -88,7 +88,7 @@ def _latest_lot(results: Path) -> Path | None:
 
 
 def _lot_section(results: Path) -> tuple[list[str], list[str], dict]:
-    L, todo, agg = [], [], {"via": {}, "unreadable": 0, "videos_none": {}, "searches": 0, "clips": 0}
+    L, todo, agg = [], [], {"via": {}, "unreadable": 0, "videos_none": {}, "searches": 0, "clips": 0, "social": {}}
     lot = _latest_lot(results)
     if not lot:
         return ["- ℹ️ Aucun lancement pour l'instant."], todo, agg
@@ -104,6 +104,11 @@ def _lot_section(results: Path) -> tuple[list[str], list[str], dict]:
                    else "temps imparti écoulé" if "temps" in r else "quota IA épuisé" if "quota" in r else "autre erreur")
             agg["videos_none"][key] = agg["videos_none"].get(key, 0) + 1
         agg["clips"] += sum(len(v.get("moments", [])) for v in d.get("videos", []))
+        for k, v in (diag.get("social") or {}).items():
+            if k in ("telegram", "reddit"):   # le message le plus grave du lot l'emporte
+                old = agg["social"].get(k, "")
+                if not old or (str(v).startswith("⚠") and not old.startswith("⚠")) or old.startswith("ok") and not str(v).startswith("ok"):
+                    agg["social"][k] = str(v)
     errs = sorted(p.parent.name for p in lot.glob("*/ERREUR.txt"))
     icon = "❌" if errs and len(errs) == agg["searches"] + len(errs) else "⚠️" if errs or agg["videos_none"] else "✅"
     L.append(f"- {icon} Lot **{lot.name}** : {agg['searches']} recherche(s) réussie(s), {agg['clips']} extrait(s) vidéo"

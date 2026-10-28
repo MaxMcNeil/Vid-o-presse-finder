@@ -24,6 +24,10 @@ jobs:
       NYT_API_KEYS: ${{ secrets.NYT_API_KEYS }}
       YT_PROXY_URL: ${{ secrets.YT_PROXY_URL }}
       YT_COOKIES: ${{ secrets.YT_COOKIES }}       # facultatif : compte YouTube secondaire (sous-titres)
+      TG_API_ID: ${{ secrets.TG_API_ID }}
+      TG_API_HASH: ${{ secrets.TG_API_HASH }}
+      TG_SESSION: ${{ secrets.TG_SESSION }}
+      GH_TOKEN: ${{ github.token }}
       FALLBACK_LLM_PROVIDER: ${{ vars.FALLBACK_LLM_PROVIDER }}
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
     steps:
@@ -38,7 +42,7 @@ jobs:
         timeout-minutes: 16   # borné : il reste toujours le temps d'enregistrer le compte rendu (même partiel)
         run: |
           mkdir -p state
-          { echo "# Dernier diagnostic"; echo; echo '```'; python -u -m quote_finder.check 2>&1 | grep --line-buffered -v "^ *$"; echo '```'; } > /tmp/diag.md
+          { echo "# Dernier diagnostic"; echo; echo '```'; python -u -m quote_finder.check 2>&1 | grep --line-buffered -v "^ *$"; timeout 300 python -u -m quote_finder.social check 2>&1 || echo "Telegram/Reddit : test interrompu"; echo '```'; } > /tmp/diag.md
           cat /tmp/diag.md | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Enregistrer l'état des clés (state/QUOTAS.md)
         if: always()

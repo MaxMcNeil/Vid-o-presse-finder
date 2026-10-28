@@ -41,6 +41,7 @@ def parse_args(argv=None):
     p.add_argument("--strict", action="store_true", help="Exclure les propos rapportés/locuteur incertain")
     p.add_argument("--platforms", default="youtube,dailymotion,archive")
     p.add_argument("--no-articles", action="store_true")
+    p.add_argument("--no-social", action="store_true", help="sans Telegram ni Reddit")
     p.add_argument("--max-minutes", type=float, default=30, help="Durée max par recherche ; au-delà, résultats partiels")
     p.add_argument("--allow-heuristic", action="store_true", help="Continuer même si l'IA ne répond pas (déconseillé)")
     p.add_argument("--out", default="results", help="Dossier de sortie")
@@ -88,7 +89,7 @@ def options_for(a, target: str, claim: str, ttype: str) -> Options:
                    authority=a.authority, since=norm_since(a.since),
                    video_fallback_max=a.video_fallback_max if a.video_fallback_max is not None else a.max_videos,
                    audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict,
-                   platforms=_split(a.platforms), articles=not a.no_articles, max_minutes=a.max_minutes,
+                   platforms=_split(a.platforms), articles=not a.no_articles, social=not a.no_social, max_minutes=a.max_minutes,
                    allow_heuristic=a.allow_heuristic)
 
 

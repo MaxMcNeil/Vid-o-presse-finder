@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 import os
 from pathlib import Path
 
@@ -25,6 +26,8 @@ def put(ns: str, key: str, value) -> None:
     p = _path(ns, key)
     try:
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
+        tmp = p.with_name(f".{p.name}.{os.getpid()}.{threading.get_ident()}.tmp")
+        tmp.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, p)
     except OSError:
         pass

@@ -7,3 +7,4 @@ trafilatura>=1.12,<3
 rapidfuzz>=3.6,<4
 googlenewsdecoder>=0.1.7,<1
 tzdata
+telethon>=1.36,<2               # Telegram (chaînes publiques) : facultatif, ignoré sans les secrets TG_*

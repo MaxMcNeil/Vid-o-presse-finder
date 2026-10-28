@@ -127,7 +127,9 @@ class QuotaState:
             try:
                 self.path.parent.mkdir(parents=True, exist_ok=True)
                 self.data["saved"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
-                self.path.write_text(json.dumps(self.data, ensure_ascii=False, indent=1), encoding="utf-8")
+                tmp = self.path.with_name(f".{self.path.name}.{os.getpid()}.tmp")
+                tmp.write_text(json.dumps(self.data, ensure_ascii=False, indent=1), encoding="utf-8")
+                os.replace(tmp, self.path)   # atomique : un autre processus ne lit jamais un fichier à moitié écrit
             except OSError:
                 pass
 
