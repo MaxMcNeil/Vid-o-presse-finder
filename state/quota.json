@@ -1,10 +1,10 @@
 {
  "keys": {
   "gemini:0ad101a9a2": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
-   "errors": 6,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 5,
    "models": {},
    "label": "Gemini clé 1",
    "used_models": {
@@ -15,13 +15,13 @@
     "gemini-3.7-flash": 4,
     "gemini-3.5-flash-lite": 2
    },
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:6f10d27b24": {
-   "day": "2026-10-27",
-   "calls": 3,
-   "units": 3,
-   "errors": 1,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 2,
    "models": {},
    "label": "Gemini clé 2",
    "used_models": {
@@ -31,13 +31,13 @@
     "gemini-3.7-flash": 3,
     "gemini-3.5-flash": 3
    },
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:8c54858ebc": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
-   "errors": 2,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 5,
    "models": {},
    "label": "Gemini clé 3",
    "used_models": {
@@ -48,13 +48,13 @@
     "gemini-3.7-flash": 5,
     "gemini-3.1-flash-lite-preview": 1
    },
-   "last": "gemini-3.8-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:181ad99cca": {
-   "day": "2026-10-27",
-   "calls": 1,
-   "units": 1,
-   "errors": 1,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 3,
    "models": {},
    "label": "Gemini clé 4",
    "used_models": {
@@ -64,75 +64,75 @@
     "gemini-3.6-flash": 17,
     "gemini-3.5-flash": 3
    },
-   "last": "gemini-3.8-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:c7a23ab254": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
-   "errors": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
+   "errors": 3,
    "models": {},
    "label": "Gemini clé 5",
    "used_models": {
-    "gemini-3.8-flash": 16,
+    "gemini-3.8-flash": 17,
     "gemini-3.7-flash": 6,
     "gemini-3-flash-preview": 7,
     "gemini-3.6-flash": 19,
     "gemini-3.5-flash": 2
    },
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "groq:1691e6b64a": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "Groq clé 1",
    "used_models": {
-    "openai/gpt-oss-120b": 34
+    "openai/gpt-oss-120b": 35
    }
   },
   "youtube:ca0e47bd85": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 1",
    "used_models": {}
   },
   "youtube:bcc568c3e7": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 2",
    "used_models": {}
   },
   "youtube:0f238cfda0": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 3",
    "used_models": {}
   },
   "youtube:92aa479928": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 4",
    "used_models": {}
   },
   "youtube:a5a9d82454": {
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 5",
@@ -140,7 +140,7 @@
   },
   "guardian:271a422abb": {
    "models": {},
-   "day": "2026-10-27",
+   "day": "2026-10-28",
    "calls": 0,
    "units": 0,
    "errors": 0,
@@ -149,7 +149,7 @@
   },
   "nyt:61294089f2": {
    "models": {},
-   "day": "2026-10-27",
+   "day": "2026-10-28",
    "calls": 0,
    "units": 0,
    "errors": 0,
@@ -158,10 +158,10 @@
   },
   "gemini:217ed46951": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 1,
-   "units": 1,
-   "errors": 2,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 3,
    "used_models": {
     "gemini-3.6-flash": 3,
     "gemini-3.8-flash": 3,
@@ -169,29 +169,29 @@
     "gemini-3.5-flash": 1
    },
    "label": "Gemini clé 6",
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:753fa4621b": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 0,
-   "units": 0,
-   "errors": 9,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
+   "errors": 4,
    "used_models": {
-    "gemini-3.6-flash": 3,
+    "gemini-3.6-flash": 4,
     "gemini-3.5-flash": 1,
     "gemini-3.5-flash-lite": 1,
     "gemini-3-flash-preview": 1
    },
    "label": "Gemini clé 7",
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.7-flash: HTTP 503 {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Sp"
   },
   "gemini:20ab11b1f4": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 1,
-   "units": 1,
-   "errors": 3,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 4,
    "used_models": {
     "gemini-3.6-flash": 2,
     "gemini-3.7-flash": 1,
@@ -201,14 +201,14 @@
     "gemini-3.8-flash": 2
    },
    "label": "Gemini clé 8",
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:4621e99464": {
    "models": {},
-   "day": "2026-10-27",
+   "day": "2026-10-28",
    "calls": 0,
    "units": 0,
-   "errors": 6,
+   "errors": 5,
    "used_models": {
     "gemini-3.6-flash": 2,
     "gemini-3.7-flash": 1,
@@ -217,14 +217,14 @@
     "gemini-3.5-flash-lite": 1
    },
    "label": "Gemini clé 9",
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:102ba3d9ea": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 1,
-   "units": 1,
-   "errors": 7,
+   "day": "2026-10-28",
+   "calls": 0,
+   "units": 0,
+   "errors": 2,
    "used_models": {
     "gemini-3.8-flash": 1,
     "gemini-3-flash-preview": 4,
@@ -233,35 +233,35 @@
     "gemini-3.7-flash": 2
    },
    "label": "Gemini clé 10",
-   "last": "gemini-3.7-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+   "last": "gemini-3.6-flash: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "youtube:bd83e7d545": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "used_models": {},
    "label": "YouTube clé 6"
   },
   "youtube:4d2b27d659": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "used_models": {},
    "label": "YouTube clé 7"
   },
   "youtube:960f65aa4f": {
    "models": {},
-   "day": "2026-10-27",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-10-28",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "used_models": {},
    "label": "YouTube clé 8"
   }
  },
- "saved": "2026-10-27T22:12:02+00:00"
+ "saved": "2026-10-28T13:33:09+00:00"
 }
