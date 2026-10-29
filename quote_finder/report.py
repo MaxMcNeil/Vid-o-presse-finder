@@ -189,10 +189,12 @@ def build(o, plan, vres, ares, outdir: Path, stats: dict | None = None, search_i
     posts = list(getattr(plan, "posts", None) or [])
     with open(outdir / "posts.csv", "w", newline="", encoding="utf-8-sig") as f:  # Telegram / Reddit
         w = csv.writer(f)
-        w.writerow(["plateforme", "chaine", "date", "texte", "url", "audience", "commentaires", "media", "position"])
+        w.writerow(["plateforme", "chaine", "date", "texte", "url", "audience", "commentaires", "media", "position",
+                    "video_url", "duree"])
         for x in posts:
             w.writerow([x.get("platform"), x.get("channel"), x.get("date"), x.get("text"), x.get("url"), x.get("score", 0),
-                        x.get("comments", 0), x.get("media", ""), x.get("position", "")])
+                        x.get("comments", 0), x.get("media", ""), x.get("position", ""), x.get("video_url", ""),
+                        x.get("duration", "") or ""])
 
     title = f"{o.target} — « {o.claim} »" if o.claim else o.target
     L = [f"# {title}", "",

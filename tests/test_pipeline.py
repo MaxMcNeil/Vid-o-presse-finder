@@ -144,3 +144,36 @@ def test_time_budget_returns_partial_results(monkeypatch):
     assert len(vres) == 3 and all("temps imparti" in r.note for r in vres)
     assert plan.diag["timed_out"] is True
     pipeline.TIMED_OUT.clear()
+
+
+def test_social_and_press_run_in_parallel_even_when_videos_take_all_the_time(monkeypatch):
+    """Avant : Telegram/Reddit et presse passaient APRÈS les vidéos et étaient sautés faute de temps."""
+    import time
+    from quote_finder import social
+    vids = [VideoCandidate("youtube", f"V{i}", f"https://www.youtube.com/watch?v=V{i}", "t", "", "c", "2026-01-01", 100)
+            for i in range(3)]
+    monkeypatch.setattr(youtube, "search", lambda *a, **k: list(vids))
+    for n in ("dailymotion", "archive_org"):
+        monkeypatch.setattr(other_video, n, lambda *a, **k: [])
+    monkeypatch.setattr(pipeline, "analyze_video", lambda *a, **k: time.sleep(30))   # les vidéos prennent TOUT
+    calls = {}
+
+    def fake_social(plan, o, http=None, budget=0):
+        calls["social_at"] = time.time()
+        social.STATUS["telegram"] = "ok : 1 message(s)"
+        return [{"platform": "telegram", "text": "msg", "url": "https://t.me/x/1", "media": "vidéo"}]
+    monkeypatch.setattr(social, "search", fake_social)
+
+    def fake_disc(*a, **k):
+        calls["press_at"] = time.time()
+        return []
+    monkeypatch.setattr(pipeline, "discover_articles", fake_disc)
+    monkeypatch.setattr(pipeline.media_sites, "search_articles", lambda *a, **k: [])
+    pipeline.TIMED_OUT.clear()
+    t0 = time.time()
+    o = pipeline.Options("A", "B", max_minutes=0.05, workers=2, authority="toutes")
+    plan, vres, ares = pipeline.run(o, FakeLLM())
+    assert calls["social_at"] - t0 < 2 and calls["press_at"] - t0 < 2      # lancés dès le départ
+    assert plan.posts and plan.posts[0]["url"] == "https://t.me/x/1"
+    assert "sauté" not in str(plan.diag.get("social"))
+    pipeline.TIMED_OUT.clear()

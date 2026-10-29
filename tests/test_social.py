@@ -410,3 +410,19 @@ def test_reddit_429_pauses(monkeypatch, tmp_path):
     assert social.paused("reddit") > 500
     h2 = Http({"search.json": Resp(200, red_json())})
     assert social.reddit(["x"], http=h2) == [] and not h2.calls and "pause" in social.STATUS["reddit"]
+
+
+def test_reddit_video_detection():
+    from quote_finder.social import _reddit_video
+    p = "https://www.reddit.com/r/x/comments/1/t/"
+    assert _reddit_video({"is_video": True, "media": {"reddit_video": {"duration": 42}}}, p) == (p, 42.0)
+    assert _reddit_video({"url": "https://www.dailymotion.com/video/x8abc"}, p) == ("https://www.dailymotion.com/video/x8abc", 0.0)
+    assert _reddit_video({"url": "https://example.com/article"}, p) == ("", 0.0)
+    assert _reddit_video({"url": "https://notdailymotion.com/v"}, p) == ("", 0.0)
+    assert _reddit_video({}, p) == ("", 0.0)
+
+
+def test_posts_csv_has_video_columns():
+    import inspect
+    from quote_finder import report
+    assert '"video_url", "duree"' in inspect.getsource(report)

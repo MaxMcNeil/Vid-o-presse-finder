@@ -426,6 +426,70 @@ def refine_videos(vres: list[VideoResult], o: Options, llm, deadline: float) -> 
     log.info("Affinage : %s", st)
 
 
+def _collect(fut, deadline: float, what: str):
+    """Résultat d'une étape parallèle ; à l'échéance (+ marge), on continue sans elle (jamais bloquant)."""
+    try:
+        return fut.result(timeout=max(5.0, deadline - time.time() + 45))
+    except FuturesTimeout:
+        TIMED_OUT.set()
+        log.warning("Étape %s : temps imparti écoulé, on continue sans attendre", what)
+    except Exception as e:  # noqa: BLE001
+        log.error("Étape %s abandonnée (%s: %s)", what, type(e).__name__, e)
+    return None
+
+
+def _social_step(plan, o, http, deadline: float) -> list[dict]:
+    """Telegram + Reddit : temps réservé dès le départ (au moins 2 min 30, jusqu'à 45 % du temps, 7 min max) : assez
+    pour attendre son tour quand plusieurs recherches tournent en même temps (une seule session Telegram à la fois)."""
+    if not o.social:
+        return []
+    budget = max(150.0, min(420.0, 0.45 * (deadline - time.time())))
+    try:
+        return social.search(plan, o, http, budget=budget)
+    except Exception as e:  # noqa: BLE001
+        social.STATUS["erreur"] = f"{type(e).__name__}: {str(e)[:100]}"
+        log.error("Réseaux sociaux abandonnés : %s", e)
+        return []
+
+
+def _articles_step(plan, o, pools, http, llm, site_arts, deadline: float) -> list:
+    """Presse : recherche + lecture des articles, en parallèle des vidéos, jusqu'à l'échéance."""
+    ares: list[ArticleResult] = []
+    if not o.articles:
+        return ares
+    try:
+        arts = discover_articles(plan, o, pools, http, llm, site_arts)
+        gbudget = [o.article_gemini_max]
+        sbudget = [o.article_search_max]
+
+        def safe_article(a):
+            try:
+                return analyze_article(a, plan, o, llm, http, gbudget, sbudget)
+            except Exception as e:  # noqa: BLE001
+                return ArticleResult(a, [], False, f"erreur interne ({type(e).__name__})")
+        ex = ThreadPoolExecutor(max(2, o.workers))
+        afuts = {ex.submit(safe_article, a): a for a in arts}
+        try:
+            for f in as_completed(afuts, timeout=max(1.0, deadline - time.time())):
+                ares.append(f.result())
+        except FuturesTimeout:
+            TIMED_OUT.set()
+            log.warning("Temps imparti pour les articles écoulé : on garde ceux déjà lus")
+        finally:
+            ex.shutdown(wait=False, cancel_futures=True)
+        for r in ares:
+            r.hits = scan.tidy_hits([h for h in r.hits if scan.keep_hit(h, plan, o)], None, r.article.authority)
+            tn = normalize(r.article.title)
+            r.relevant_title = scan.group_score(r.article.title, plan.term_groups) >= 1 and \
+                (o.target_type == "sujet" or any(a and a in tn for a in plan.target_aliases))
+        ares.sort(key=lambda r: (not r.hits, -r.article.authority))
+        kept = [r for r in ares if r.hits][: o.max_articles]
+        return kept + [r for r in ares if not r.hits]
+    except Exception as e:  # noqa: BLE001 - les résultats vidéo sont conservés quoi qu'il arrive
+        log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
+        return ares
+
+
 def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[ArticleResult]]:
     t0 = time.time()
     deadline = t0 + o.max_minutes * 60
@@ -455,12 +519,20 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
     plan.diag = {"youtube_keys": len(yt_pool._next_ok), "queries_video": len(plan.youtube_queries),
                  "queries_news": len(plan.news_queries), "authority": o.authority, "speakers": o.speakers}
 
+    # Telegram / Reddit : n'ont besoin que du plan → lancés avant même la recherche sur les sites de référence
+    social.reset()
+    side = ThreadPoolExecutor(2)
+    side_social = side.submit(_social_step, plan, o, http, deadline)
     srcs = registry.for_search(plan.countries, o.langs, [x for x in plan.authoritative_sources if "." in x], limit=8)
     sq = plan.site_query or f"{o.target} {' '.join((o.claim or '').split()[:6])}".strip()
     site_arts = _safe(media_sites.search_articles, srcs, sq, o.langs, http)
     plan.diag["reference_sites"] = [x.domain for x in srcs]
     plan.diag["site_articles"] = len(site_arts)
     plan.diag["site_articles_by_site"] = media_sites.LAST.get("by_site", {})
+    # Telegram / Reddit et presse partent TOUT DE SUITE, en parallèle des vidéos (chacun son temps réservé) :
+    # avant, ils passaient après les vidéos et étaient sautés quand l'analyse vidéo avait tout pris.
+    side_articles = side.submit(_articles_step, plan, o, pools, http, llm, site_arts, deadline)
+    side.shutdown(wait=False)
     vids = discover_videos(plan, o, yt_pool, http, llm, site_arts)
     by_plat: dict[str, int] = {}
     for v in vids:
@@ -526,52 +598,9 @@ def run(o: Options, llm, http=None) -> tuple[Plan, list[VideoResult], list[Artic
         log.info("%d/%d vidéos analysées sans transcription (YouTube bloque souvent les transcriptions depuis GitHub)",
                  blocked, len(vres))
 
-    # réseaux sociaux (Telegram, Reddit) : courts, bornés dans le temps, jamais bloquants
-    social.reset()
-    if o.social and deadline - time.time() > 150:
-        try:
-            plan.posts = social.search(plan, o, http, budget=min(240.0, 0.2 * (deadline - time.time())))
-        except Exception as e:  # noqa: BLE001
-            social.STATUS["erreur"] = f"{type(e).__name__}: {str(e)[:100]}"
-            log.error("Réseaux sociaux abandonnés : %s", e)
-    elif o.social:
-        social.STATUS["telegram"] = social.STATUS["reddit"] = "pas assez de temps restant : sauté"
-
-    ares: list[ArticleResult] = []
-    if o.articles and deadline - time.time() > 90:
-        try:
-            arts = discover_articles(plan, o, pools, http, llm, site_arts)
-
-            gbudget = [o.article_gemini_max]
-            sbudget = [o.article_search_max]
-
-            def safe_article(a):
-                try:
-                    return analyze_article(a, plan, o, llm, http, gbudget, sbudget)
-                except Exception as e:  # noqa: BLE001
-                    return ArticleResult(a, [], False, f"erreur interne ({type(e).__name__})")
-            ex = ThreadPoolExecutor(o.workers)
-            afuts = {ex.submit(safe_article, a): a for a in arts}
-            try:
-                for f in as_completed(afuts, timeout=max(1.0, deadline - time.time())):
-                    ares.append(f.result())
-            except FuturesTimeout:
-                TIMED_OUT.set()
-                log.warning("Temps imparti pour les articles écoulé")
-            finally:
-                ex.shutdown(wait=False, cancel_futures=True)
-            for r in ares:
-                r.hits = scan.tidy_hits([h for h in r.hits if scan.keep_hit(h, plan, o)], None, r.article.authority)
-                tn = normalize(r.article.title)
-                r.relevant_title = scan.group_score(r.article.title, plan.term_groups) >= 1 and \
-                    (o.target_type == "sujet" or any(a and a in tn for a in plan.target_aliases))
-            ares.sort(key=lambda r: (not r.hits, -r.article.authority))
-            kept = [r for r in ares if r.hits][: o.max_articles]
-            ares = kept + [r for r in ares if not r.hits]
-        except Exception as e:  # noqa: BLE001 - les résultats vidéo sont conservés quoi qu'il arrive
-            log.error("Étape articles abandonnée (%s: %s) : le rapport vidéo est tout de même produit", type(e).__name__, e)
-    elif o.articles:
-        log.warning("Plus assez de temps pour les articles")
+    # résultats des étapes lancées en parallèle dès le départ (Telegram / Reddit, presse) : jamais perdus, jamais bloquants
+    plan.posts = _collect(side_social, deadline, "réseaux sociaux") or []
+    ares = _collect(side_articles, deadline, "articles") or []
     # appui / contre : un seul appel IA pour les articles retenus et les messages (les « contre » sont listés à part)
     kept_a = [r for r in ares if r.hits]
     items = [{"text": f"{r.article.source} : {r.article.title}"} for r in kept_a] + plan.posts

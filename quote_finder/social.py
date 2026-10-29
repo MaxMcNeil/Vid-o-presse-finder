@@ -170,10 +170,12 @@ def reddit(qs: list[str], since: str = "", http=None, timeout: float = 20) -> li
                     continue
                 seen.add(url)
                 date = dt.datetime.fromtimestamp(float(d.get("created_utc") or 0), dt.timezone.utc).date().isoformat()
+                vurl, vdur = _reddit_video(d, url)
                 out.append({"platform": "reddit", "channel": f"r/{d.get('subreddit', '?')}",
                             "text": (d.get("title") or "") + (" — " + d["selftext"][:300] if d.get("selftext") else ""),
                             "url": url, "date": date, "score": int(d.get("score") or 0),
-                            "comments": int(d.get("num_comments") or 0)})
+                            "comments": int(d.get("num_comments") or 0),
+                            "media": "vidéo" if vurl else "", "video_url": vurl, "duration": vdur})
             break
         if not got:  # flux RSS : parfois accepté quand le JSON est refusé
             out += [x for x in _reddit_rss(s, q, hdr, timeout, codes) if x["url"] not in seen]
@@ -181,6 +183,26 @@ def reddit(qs: list[str], since: str = "", http=None, timeout: float = 20) -> li
     if not out and codes:
         STATUS["reddit"] = f"bloqué par Reddit depuis GitHub ({', '.join(sorted(set(codes)))}) : source ignorée"
     return out
+
+
+VIDEO_HOSTS = ("v.redd.it", "dailymotion.com", "dai.ly", "rumble.com", "odysee.com", "vimeo.com", "streamable.com",
+               "archive.org", "bitchute.com", "t.me", "youtube.com", "youtu.be")
+
+
+def _reddit_video(d: dict, permalink: str) -> tuple[str, float]:
+    """Vidéo d'un post Reddit : hébergée par Reddit (son compris via la page du post) ou lien vers un hébergeur
+    vidéo connu. Renvoie (lien à télécharger, durée en s ou 0)."""
+    try:
+        rv = ((d.get("secure_media") or d.get("media") or {}).get("reddit_video") or {})
+        if d.get("is_video") or rv:
+            return permalink, float(rv.get("duration") or 0)
+        u = (d.get("url_overridden_by_dest") or d.get("url") or "").strip()
+        host = re.sub(r"^https?://(www\.|m\.)?", "", u).split("/")[0].lower()
+        if u.startswith("http") and any(host == h or host.endswith("." + h) for h in VIDEO_HOSTS):
+            return u, 0.0
+    except (AttributeError, TypeError, ValueError):
+        pass
+    return "", 0.0
 
 
 def _reddit_rss(s, q: str, hdr: dict, timeout: float, codes: list) -> list[dict]:
@@ -377,14 +399,21 @@ async def _tg_search(cfg, qs, ws, since, plan, o, box: list, note: dict):
                     if url in seen or not _since_ok(date, since) or not relevant(text, plan, o):
                         continue
                     seen.add(url)
+                    vid = bool(getattr(m, "video", None))
+                    try:
+                        dur = float(getattr(getattr(m, "file", None), "duration", 0) or 0) if vid else 0.0
+                    except (TypeError, ValueError):
+                        dur = 0.0
                     box.append({"platform": "telegram", "channel": f"@{ch.username}", "text": text[:600], "url": url,
                                 "date": date, "score": int(m.views or 0), "comments": 0,
-                                "media": "vidéo" if getattr(m, "video", None) else ("photo" if m.photo else "")})
+                                "media": "vidéo" if vid else ("photo" if m.photo else ""),
+                                "video_url": url if vid else "", "duration": dur})
     finally:
         await client.disconnect()
 
 
 def telegram(plan, o, budget: float) -> list[dict]:
+    t_start = time.time()
     cfg = tg_config()
     if isinstance(cfg, str):
         STATUS["telegram"] = cfg
@@ -407,11 +436,12 @@ def telegram(plan, o, budget: float) -> list[dict]:
         return []
     box: list[dict] = []
     note: dict = {}
-    with telegram_lock(max_wait=min(240.0, budget / 2)) as lk:
+    # attendre son tour (recherches en parallèle dans le même lancement) : jusqu'au temps réservé moins 1 min 30
+    with telegram_lock(max_wait=max(60.0, budget - 90.0)) as lk:
         if not lk["ok"]:
             STATUS["telegram"] = "session déjà utilisée par un autre lancement (verrou) : source sautée cette fois"
             return []
-        left = max(30.0, budget - 10)
+        left = max(20.0, budget - (time.time() - t_start) - 10)   # temps restant APRÈS l'attente du verrou
 
         def go():
             loop = asyncio.new_event_loop()

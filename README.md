@@ -182,7 +182,8 @@ python -m pytest -q          # tests (pip install -r requirements-dev.txt)
 
 ## 📡 Réseaux sociaux : Telegram et Reddit (pas de X, TikTok ni Instagram)
 
-Chaque recherche cherche aussi, en quelques minutes au plus :
+Chaque recherche cherche aussi, **en même temps que les vidéos et la presse** (temps réservé dès le départ : jamais
+sautée parce que l'analyse vidéo a pris tout le temps) :
 - **Telegram** : les chaînes publiques liées au sujet, puis les messages qui contiennent tes mots-clés.
   Secrets `TG_API_ID`, `TG_API_HASH` (my.telegram.org) et `TG_SESSION` (script Termux ci-dessous). Compte secondaire
   conseillé. ⚠ **Une session par dépôt** : Telegram détruit une session utilisée en même temps sur deux machines
@@ -191,8 +192,9 @@ Chaque recherche cherche aussi, en quelques minutes au plus :
   c'est écrit dans le rapport et ETAT.md.
 
 Chaque article retenu et chaque message est classé **appui / contre / neutre** par rapport à la recherche. Ce qui
-contredit est listé à part : **🛡 Ce qui contredit l'affirmation** (dans `report.md`). Fichiers : `posts.csv`,
-colonne `position` dans `articles.csv`.
+contredit est listé à part : **🛡 Ce qui contredit l'affirmation** (dans `report.md`). Fichiers : `posts.csv`
+(avec `video_url` / `duree` quand le message contient une **vidéo** : Montage LV final s'en sert comme extrait,
+téléchargeable depuis GitHub contrairement à YouTube), colonne `position` dans `articles.csv`.
 
 Tester : *Actions → Diagnostic* (lignes « Telegram » et « Reddit »). Un problème de session s'affiche dans ETAT.md
 avec quoi faire (« régénère TG_SESSION »).
