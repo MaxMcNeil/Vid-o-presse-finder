@@ -1,8 +1,8 @@
 {
- "last_run": 1793215625.3424814,
+ "last_run": 1793267800.5878608,
  "network": "données mobiles",
- "last_result": "24 extrait(s) recalé(s), 19 non retrouvé(s), 0 sans sous-titres",
+ "last_result": "rien à recaler",
  "blocked": {},
  "auto": "Android toutes les heures environ + à l'ouverture de Termux",
- "committed_at": 1793215625.342512
+ "committed_at": 1793267800.5878868
 }
