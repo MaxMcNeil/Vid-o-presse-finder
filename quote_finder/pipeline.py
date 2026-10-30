@@ -22,7 +22,7 @@ from .models import ArticleCandidate, Hit, Plan, Segment, VideoCandidate
 from .planner import make_plan
 from . import registry
 from .sources import media_sites, news, other_video, youtube
-from .util import call_with_timeout, normalize
+from .util import call_with_timeout, fmt_ts, normalize
 
 log = logging.getLogger("qf.pipeline")
 TIMED_OUT = threading.Event()
@@ -47,6 +47,7 @@ class Options:
     audio_fallback_max: int = 8      # vidéos sans sous-titres hors YouTube (sites des médias...) : audio écouté par Gemini
     min_confidence: float = 0.6
     strict: bool = False
+    reportage: bool = True           # garde aussi les passages de reportage (journaliste qui raconte / montre le fait)
     platforms: list[str] = field(default_factory=lambda: ["youtube", "dailymotion", "archive"])
     articles: bool = True
     workers: int = 3
@@ -55,8 +56,8 @@ class Options:
     since: str = ""                  # AAAA-MM-JJ : ignorer ce qui est plus ancien (facultatif)
     max_video_minutes: int = 60      # au-delà, une vidéo sans sous-titres n'est pas envoyée à Gemini (quota par minute)
     refine_max: int = 12             # passages réécoutés par Gemini pour un horodatage précis (2e passage)
-    article_gemini_max: int = 8      # articles pertinents illisibles autrement : lus par Gemini (url_context)
-    article_search_max: int = 4      # liens Google Actualités restants : vrai lien retrouvé par Gemini (google_search)
+    article_gemini_max: int = 14     # articles pertinents illisibles autrement : lus par Gemini (url_context)
+    article_search_max: int = 8      # liens Google Actualités restants : vrai lien retrouvé par Gemini (google_search)
     article_google_queries: int = 3  # recherches Google (par Gemini) d'articles par recherche : vrais liens directs
     social: bool = True              # Telegram (chaînes publiques) + Reddit, jamais bloquant
 
@@ -357,6 +358,39 @@ def resolve_google_news(a: ArticleCandidate, http=None) -> str:
                 if same_site or scan.term_present(normalize(b.title), normalize(a.title)[:80]):
                     a.url, a.domain = b.url, b.domain or a.domain
                     return a.url
+        u = _ddg_find(a.title, a.domain, http)      # 3e voie gratuite : DuckDuckGo (titre exact, même média)
+        if u:
+            a.url, a.domain = u, authority.domain_of(u) or a.domain
+            return a.url
+    return ""
+
+
+def _ddg_find(title: str, domain: str, http=None) -> str:
+    """Vrai lien d'un article d'après son titre exact, via la page HTML publique de DuckDuckGo (sans clé).
+    Seul un lien du même média est accepté. Jamais bloquant : "" en cas de refus / délai."""
+    import html as _html
+    import urllib.parse as up
+    if not title:
+        return ""
+    q = f'"{title[:120]}"' + (f" site:{domain}" if domain else "")
+    try:
+        s = http or requests.Session()
+        r = s.post("https://html.duckduckgo.com/html/", data={"q": q}, timeout=15,
+                   headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                                          "Chrome/124.0 Safari/537.36"})
+        if r.status_code != 200:
+            return ""
+        for m in re.finditer(r'class="result__a"[^>]*href="([^"]+)"', r.text):
+            u = _html.unescape(m.group(1))
+            if "uddg=" in u:
+                u = up.unquote(up.parse_qs(up.urlparse(u).query).get("uddg", [""])[0])
+            if not u.startswith("http") or "duckduckgo.com" in u or "news.google." in u:
+                continue
+            d = authority.domain_of(u)
+            if not domain or d == domain or d.endswith("." + domain) or domain.endswith("." + d):
+                return u
+    except Exception as e:  # noqa: BLE001
+        log.info("DuckDuckGo indisponible : %s", type(e).__name__)
     return ""
 
 
@@ -378,6 +412,18 @@ def analyze_article(a: ArticleCandidate, plan: Plan, o: Options, llm, http=None,
     segs = [Segment(float(i), p) for i, p in enumerate(paras)]
     # 1 paragraphe = 1 « seconde » fictive : fenêtre de 3 paragraphes
     ex = scan.find_excerpts(segs, plan, max_excerpts=5, max_chars=3000, win=3.0, step=1.0, context=1.0, merge_gap=1.0)
+    if not ex and getattr(a, "relevance", 0) >= 6 and verified:
+        # article jugé pertinent mais qui emploie d'autres mots que ceux prévus : on juge son début (titre + chapô +
+        # premiers paragraphes), au lieu de l'écarter faute de mots-clés
+        lead, n = [], 0
+        for i, p_ in enumerate(paras[:12]):
+            if n + len(p_) > 3000:
+                break
+            lead.append(f"[{fmt_ts(float(i))}] {p_}")
+            n += len(p_)
+        if lead:
+            ex = [scan.Excerpt(0.0, float(len(lead)), 1, "\n".join(lead))]
+            log.info("article sans mots-clés mais pertinent : début jugé (%s)", (a.title or a.url)[:70])
     if not ex:
         r = ArticleResult(a, [], verified, "" if verified else unread_reason)
         r.via = via if verified else ""

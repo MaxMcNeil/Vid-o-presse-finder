@@ -165,6 +165,8 @@ EXTRAITS :
 {excerpts}
 
 Pour chaque passage où l'affirmation est faite — à la lettre OU dans le sens — ajoute un élément à "hits".
+Ajoute AUSSI les passages de REPORTAGE où un journaliste ou un narrateur raconte / montre clairement le fait recherché
+(verdict "reportage") : ils servent d'illustration au montage.
 {rules}
 Un même extrait peut contenir plusieurs occurrences (répétitions) : une entrée par occurrence, avec son propre horodatage.
 Champs :
@@ -173,7 +175,7 @@ Champs :
 - "t_end": horodatage en secondes de la FIN de la déclaration : le [mm:ss] de la ligne qui suit la dernière phrase concernée
   (si la déclaration va jusqu'au bout de l'extrait, estime-la). La déclaration doit être complète : début de la phrase jusqu'à sa conclusion
 - "quote": citation EXACTE copiée de l'extrait, de la première à la dernière phrase de la déclaration (max 400 caractères)
-- "verdict": "literal" (formulation quasi identique) | "paraphrase" (même sens, autres mots) | "mention" (le sujet est évoqué sans être affirmé) | "denial" (le locuteur nie/conteste)
+- "verdict": "literal" (formulation quasi identique) | "paraphrase" (même sens, autres mots) | "reportage" (un journaliste / narrateur RACONTE ou MONTRE le fait recherché : reportage, journal télévisé, images commentées, explication — sans être la déclaration d'un acteur) | "mention" (le sujet est seulement évoqué en passant) | "denial" (le locuteur nie/conteste)
 - "who_says": "target" (la cible ou son représentant officiel parle) | "other_named" (un autre locuteur identifiable parle) | "reported" (un narrateur RAPPORTE les propos de quelqu'un) | "unknown"
 {fields}
 N'invente rien : si aucun passage ne convient, renvoie {{"hits": []}}.
@@ -219,11 +221,13 @@ CIBLE ({ttype}) : {target} (alias : {aliases}). AUTRES LOCUTEURS ACCEPTÉS : {ot
 {who}
 AFFIRMATION / SUJET RECHERCHÉ : {claim}  (Reformulation : {summary})
 Le titre peut être trompeur : juge uniquement ce qui est réellement dit.
-Liste CHAQUE moment où l'affirmation est faite, à la lettre ou dans le sens, avec l'horodatage exact (début de la phrase).
+Liste CHAQUE moment où l'affirmation est faite, à la lettre ou dans le sens, avec l'horodatage exact (début de la phrase),
+ET les passages de REPORTAGE où un journaliste / narrateur raconte ou montre clairement le fait (verdict "reportage").
 {rules}
 Champs de chaque élément de "hits" : "t" (secondes depuis le début de la vidéo : DÉBUT de la déclaration), "t_end" (secondes : FIN de la
 déclaration, juste après sa dernière phrase ; la déclaration doit être complète), "quote" (propos tenus, au plus près),
-"verdict" ("literal"|"paraphrase"|"mention"|"denial"), "who_says" ("target"|"other_named"|"reported"|"unknown"),
+"verdict" ("literal"|"paraphrase"|"reportage"|"mention"|"denial" ; "reportage" = un journaliste / narrateur raconte ou
+montre le fait recherché), "who_says" ("target"|"other_named"|"reported"|"unknown"),
 {fields}
 (pour speaker_name : nom prononcé ou affiché à l'écran, p. ex. bandeau ; sinon "" — speaker_role dit alors qui parle).
 Si rien ne correspond : {{"hits": []}}. Réponds en JSON : {{"hits": [...]}}"""
@@ -271,8 +275,11 @@ def speaker_ok(h: Hit, plan: Plan, o) -> bool:
 
 
 def keep_hit(h: Hit, plan: Plan, o) -> bool:
-    if h.verdict not in ("literal", "paraphrase") or h.confidence < o.min_confidence:
+    ok_verdicts = ("literal", "paraphrase", "reportage") if getattr(o, "reportage", True) else ("literal", "paraphrase")
+    if h.verdict not in ok_verdicts or h.confidence < o.min_confidence:
         return False
+    if h.verdict == "reportage":     # illustration : n'importe quel narrateur, mais jamais en mode strict
+        return not getattr(o, "strict", False)
     if not speaker_ok(h, plan, o):
         return False
     if o.strict:
@@ -287,7 +294,7 @@ ROLE_BONUS = {"official": 0.15, "expert": 0.1, "politician": 0.05, "journalist":
 def hit_score(h: Hit, source_authority: float = 0.5) -> float:
     """Score global pour le montage : sûreté du passage + autorité de la source + rôle du locuteur."""
     s = 0.45 * h.confidence + 0.4 * source_authority + ROLE_BONUS.get(h.speaker_role, 0.0)
-    s += 0.1 if h.verdict == "literal" else 0.0
+    s += 0.1 if h.verdict == "literal" else (-0.1 if h.verdict == "reportage" else 0.0)   # déclarations d'abord
     s -= 0.15 if h.who_says in ("reported", "unknown") else 0.0
     return round(max(0.0, min(1.0, s)), 3)
 

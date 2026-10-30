@@ -9,7 +9,7 @@ from .authority import stars
 from .scan import hit_score
 from .util import fmt_ts
 
-VERDICT = {"literal": "à la lettre", "paraphrase": "dans le sens"}
+VERDICT = {"literal": "à la lettre", "paraphrase": "dans le sens", "reportage": "reportage (illustration)"}
 WHO = {"target": "la cible (ou son représentant) parle", "other_named": "autre locuteur identifié",
        "reported": "propos rapportés par un tiers", "unknown": "locuteur non identifié avec certitude"}
 ROLE = {"official": "officiel", "expert": "expert", "politician": "responsable politique", "journalist": "journaliste",

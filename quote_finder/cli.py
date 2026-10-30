@@ -39,6 +39,7 @@ def parse_args(argv=None):
     p.add_argument("--audio-fallback-max", type=int, default=8)
     p.add_argument("--min-confidence", type=float, default=0.6)
     p.add_argument("--strict", action="store_true", help="Exclure les propos rapportés/locuteur incertain")
+    p.add_argument("--no-reportage", action="store_true", help="Seulement des déclarations (pas de passages de reportage)")
     p.add_argument("--platforms", default="youtube,dailymotion,archive")
     p.add_argument("--no-articles", action="store_true")
     p.add_argument("--no-social", action="store_true", help="sans Telegram ni Reddit")
@@ -88,7 +89,7 @@ def options_for(a, target: str, claim: str, ttype: str) -> Options:
                    langs=langs, max_videos=a.max_videos, max_articles=a.max_articles,
                    authority=a.authority, since=norm_since(a.since),
                    video_fallback_max=a.video_fallback_max if a.video_fallback_max is not None else a.max_videos,
-                   audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict,
+                   audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict, reportage=not a.no_reportage,
                    platforms=_split(a.platforms), articles=not a.no_articles, social=not a.no_social, max_minutes=a.max_minutes,
                    allow_heuristic=a.allow_heuristic)
 

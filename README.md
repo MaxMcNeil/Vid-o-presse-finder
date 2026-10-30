@@ -116,6 +116,17 @@ L'ordre d'utilisation, pour avoir le maximum de chances :
 **Savoir quelles clés sont disponibles** : ouvre `state/QUOTAS.md` (mis à jour après chaque lancement et chaque Diagnostic),
 ou lance *Actions → Diagnostic* qui teste chaque clé de chaque api et donne les unités YouTube restantes.
 
+## 🎬 Déclarations ET reportages
+
+Chaque passage retenu est classé : **à la lettre**, **dans le sens** (déclarations d'acteurs), ou **reportage
+(illustration)** : un journaliste / narrateur raconte ou montre clairement le fait cherché (journal télévisé, reportage,
+images commentées). Les reportages passent après les déclarations, mais ils suffisent à illustrer un sujet d'actualité
+quand personne ne l'a « déclaré » mot pour mot. `--no-reportage` = déclarations seulement ; `--strict` les exclut aussi.
+
+Articles : un article jugé pertinent qui emploie d'autres mots que ceux prévus est jugé sur son début (titre, chapô,
+premiers paragraphes) au lieu d'être écarté. Liens Google Actualités : décodeur, puis titre exact sur Bing, puis
+**DuckDuckGo** (même média uniquement), puis Gemini ; jusqu'à 14 articles lus par Gemini et 8 liens retrouvés par recherche.
+
 ## Comment ça marche
 
 1. **Plan (IA)** : type de cible, alias (ex. *Suisse, Swiss, helvétique*), **représentants officiels** (Conseil fédéral, ministres…), **sources de référence** pour ce sujet (ex. RTS, Le Temps, admin.ch), requêtes multilingues orientées vers ces sources.
