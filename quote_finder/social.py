@@ -305,20 +305,27 @@ def telegram_lock(max_wait: float):
         if ok and gh:
             s, api = gh
             ok = False
-            while True:
-                age = _gh_lock_age(s, api)
-                if age is not None and age > LOCK_STALE:
-                    log.warning("verrou Telegram abandonné (%.0f min) : libéré", age / 60)
-                    s.delete(f"{api}/git/refs/tags/{LOCK_TAG}", timeout=20)
-                    age = None
-                if age is None:
-                    mine = _gh_acquire(s, api)
-                    if mine:
-                        ok = True
+            try:
+                while True:
+                    age = _gh_lock_age(s, api)
+                    if age is not None and age > LOCK_STALE:
+                        log.warning("verrou Telegram abandonné (%.0f min) : libéré", age / 60)
+                        s.delete(f"{api}/git/refs/tags/{LOCK_TAG}", timeout=20)
+                        age = None
+                    if age is None:
+                        mine = _gh_acquire(s, api)
+                        if mine:
+                            ok = True
+                            break
+                    if time.time() > end:
                         break
-                if time.time() > end:
-                    break
-                time.sleep(10)
+                    time.sleep(10)
+            except (requests.RequestException, ValueError, KeyError) as e:
+                # GitHub refuse ou ne répond pas (droits du jeton, limite…) : le verrou LOCAL (déjà obtenu) protège la
+                # session dans ce lancement ; Telegram n'est plus abandonné pour autant
+                log.warning("verrou Telegram via GitHub indisponible (%s) : verrou local seulement",
+                            str(e)[:120])
+                mine, ok = "", True
         st["ok"] = ok
         yield st
     finally:

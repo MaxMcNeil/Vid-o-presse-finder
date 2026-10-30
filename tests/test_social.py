@@ -426,3 +426,25 @@ def test_posts_csv_has_video_columns():
     import inspect
     from quote_finder import report
     assert '"video_url", "duree"' in inspect.getsource(report)
+
+
+def test_github_lock_refused_falls_back_to_local_lock(monkeypatch, tmp_path):
+    """GitHub répond 403 sur l'étiquette du verrou : Telegram continue avec le verrou local (ne plus tout perdre)."""
+    import requests
+    monkeypatch.setenv("RUNNER_TEMP", str(tmp_path))
+
+    class R:
+        status_code = 403
+
+        def raise_for_status(self):
+            raise requests.HTTPError("403 Client Error: Forbidden")
+
+    class S:
+        def get(self, *a, **k):
+            return R()
+
+        def delete(self, *a, **k):
+            return R()
+    monkeypatch.setattr(social, "_gh", lambda: (S(), "https://api.github.com/repos/x/y"))
+    with social.telegram_lock(max_wait=5) as st:
+        assert st["ok"] is True
