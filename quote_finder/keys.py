@@ -30,6 +30,18 @@ def keys_from_env(prefix: str) -> list[str]:
     return res
 
 
+def shared_keys(prefix: str) -> set[str]:
+    """Clés venues UNIQUEMENT des emplacements *_KEYS_PARTAGE (clés d'autres dépôts) : réserve, utilisée en dernier."""
+    shared, own = set(), set()
+    for base in (prefix, f"{prefix}_API"):
+        shared |= set(parse_keys(os.environ.get(f"{base}_KEYS_PARTAGE")))
+        for suf in ("_KEYS", "_KEYS_PLUS", "_KEY"):
+            own |= set(parse_keys(os.environ.get(f"{base}{suf}")))
+        for i in range(1, 21):
+            own |= set(parse_keys(os.environ.get(f"{base}_KEY_{i}")))
+    return shared - own
+
+
 LABELS = {"gemini": "Gemini", "youtube": "YouTube", "guardian": "Guardian", "nyt": "NYT", "groq": "Groq",
           "cerebras": "Cerebras", "openrouter": "OpenRouter", "fallback": "LLM de secours"}
 
@@ -39,8 +51,16 @@ class KeyPool:
     d'un lancement précédent est sautée d'emblée jusqu'à la remise à zéro (minuit, heure du Pacifique).
     QF_KEY_OFFSET (numéro du job en parallèle) fait commencer chaque job par une clé différente."""
 
-    def __init__(self, name: str, keys: list[str], min_interval: float = 0.0, persist: bool = False):
+    RESERVE_WAIT = 60.0   # une clé principale revient dans moins d'1 min (limite par minute) : on l'attend plutôt
+
+    def __init__(self, name: str, keys: list[str], min_interval: float = 0.0, persist: bool = False,
+                 reserve: set[str] | None = None):
         self.name = name
+        # clés de réserve (partagées par d'autres dépôts) : seulement quand AUCUNE clé principale n'est utilisable
+        self.reserve = set(reserve or ()) & set(keys)
+        if self.reserve and not (set(keys) - self.reserve):
+            self.reserve = set()      # que des clés partagées : ce sont alors les clés principales
+        self._reserve_logged = False
         self.min_interval = min_interval
         self.persist = persist
         self._lock = threading.Lock()
@@ -98,15 +118,30 @@ class KeyPool:
                 alive = [k for k in self._next_ok if self._dead_until[k] <= now]
                 if not alive:
                     continue
-                key = min(alive, key=lambda k: self._next_ok[k])
-                delay = self._next_ok[key] - now
-                if delay <= 0 or not wait:
-                    if delay > 0:
-                        return None
-                    self._next_ok[key] = now + self.min_interval
-                    return key
-                # on réserve le créneau puis on dort hors verrou
-                self._next_ok[key] = self._next_ok[key] + self.min_interval
+                main = [k for k in alive if k not in self.reserve]
+                wait_main = 0.0
+                if not main and self.reserve:
+                    soon = min([self._dead_until[k] - now for k in self._next_ok if k not in self.reserve], default=1e9)
+                    if wait and 0 < soon <= self.RESERVE_WAIT:
+                        wait_main = soon      # une clé principale revient très vite : on l'attend plutôt
+                    elif not self._reserve_logged:
+                        self._reserve_logged = True
+                        import logging
+                        logging.getLogger("qf.keys").info("%s : clés principales indisponibles → clés partagées (réserve)",
+                                                          LABELS.get(self.name, self.name))
+                if not wait_main:
+                    key = min(main or alive, key=lambda k: self._next_ok[k])
+                    delay = self._next_ok[key] - now
+                    if delay <= 0 or not wait:
+                        if delay > 0:
+                            return None
+                        self._next_ok[key] = now + self.min_interval
+                        return key
+                    # on réserve le créneau puis on dort hors verrou
+                    self._next_ok[key] = self._next_ok[key] + self.min_interval
+            if wait_main:
+                time.sleep(max(0.2, wait_main))
+                continue
             time.sleep(delay)
             return key
 

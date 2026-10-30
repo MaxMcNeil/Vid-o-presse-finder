@@ -9,7 +9,7 @@ import time
 import requests
 
 from . import cache
-from .keys import KeyPool, keys_from_env
+from .keys import KeyPool, keys_from_env, shared_keys
 from .util import parse_json_loose
 
 log = logging.getLogger("qf.llm")
@@ -410,7 +410,8 @@ class LLMRouter:
         (ou l'ancien couple FALLBACK_LLM_KEYS + FALLBACK_LLM_PROVIDER)."""
         g = keys_from_env("GEMINI")
         forced = os.environ.get("GEMINI_MODEL")
-        gem = GeminiClient(KeyPool("gemini", g, min_interval=float(os.environ.get("GEMINI_MIN_INTERVAL", "4")), persist=True),
+        gem = GeminiClient(KeyPool("gemini", g, min_interval=float(os.environ.get("GEMINI_MIN_INTERVAL", "4")), persist=True,
+                                   reserve=shared_keys("GEMINI")),
                            DEFAULT_MODELS, preferred=[forced] if forced else []) if g else None
         fbs = []
         legacy = os.environ.get("FALLBACK_LLM_PROVIDER", "").lower().strip()
