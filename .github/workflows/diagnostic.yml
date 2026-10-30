@@ -15,6 +15,7 @@ jobs:
       YOUTUBE_API_KEYS_PLUS: ${{ secrets.YOUTUBE_API_KEYS_PLUS }}
       GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
       GEMINI_API_KEYS_PLUS: ${{ secrets.GEMINI_API_KEYS_PLUS }}
+      GEMINI_API_KEYS_PARTAGE: ${{ secrets.GEMINI_API_KEYS_PARTAGE }}   # clés Gemini de Montage-LV-final
       FALLBACK_LLM_KEYS: ${{ secrets.FALLBACK_LLM_KEYS }}
       GROQ_API_KEYS: ${{ secrets.GROQ_API_KEYS }}
       CEREBRAS_API_KEYS: ${{ secrets.CEREBRAS_API_KEYS }}

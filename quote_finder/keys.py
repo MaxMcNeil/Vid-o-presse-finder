@@ -18,6 +18,7 @@ def keys_from_env(prefix: str) -> list[str]:
     for base in (prefix, f"{prefix}_API"):
         out += parse_keys(os.environ.get(f"{base}_KEYS"))
         out += parse_keys(os.environ.get(f"{base}_KEYS_PLUS"))  # clés ajoutées EN PLUS (sans toucher aux anciennes)
+        out += parse_keys(os.environ.get(f"{base}_KEYS_PARTAGE"))  # clés de l'AUTRE dépôt (Finder <-> Montage), en plus
         out += parse_keys(os.environ.get(f"{base}_KEY"))
         for i in range(1, 21):
             out += parse_keys(os.environ.get(f"{base}_KEY_{i}"))
