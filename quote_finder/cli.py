@@ -45,6 +45,8 @@ def parse_args(argv=None):
     p.add_argument("--no-social", action="store_true", help="sans Telegram ni Reddit")
     p.add_argument("--max-minutes", type=float, default=30, help="Durée max par recherche ; au-delà, résultats partiels")
     p.add_argument("--allow-heuristic", action="store_true", help="Continuer même si l'IA ne répond pas (déconseillé)")
+    p.add_argument("--light", action="store_true", help="Recherche légère (montage, une seule clé) : aucune vidéo regardée ni "
+                   "écoutée par Gemini, aucun article lu par Gemini, aucune réécoute ; seulement les sous-titres en texte")
     p.add_argument("--out", default="results", help="Dossier de sortie")
     p.add_argument("--batch-id", default="", help="Nom du dossier du lot (défaut : date + heure)")
     p.add_argument("--search-id", default="", help="Nom du dossier de la recherche (défaut : d'après la cible)")
@@ -82,16 +84,18 @@ def norm_since(v: str) -> str:
 
 def options_for(a, target: str, claim: str, ttype: str) -> Options:
     speakers = "tous" if a.anyone else a.speakers
+    light = bool(getattr(a, "light", False))
     langs = _split(a.langs) or ["fr"]
     if has_arabic(f"{target} {claim}") and "ar" not in langs:  # recherche écrite en arabe : l'arabe passe en premier
         langs = ["ar"] + langs
     return Options(target=target.strip(), claim=claim.strip(), target_type=ttype, speakers=speakers, also=_split(a.also),
                    langs=langs, max_videos=a.max_videos, max_articles=a.max_articles,
                    authority=a.authority, since=norm_since(a.since),
-                   video_fallback_max=a.video_fallback_max if a.video_fallback_max is not None else a.max_videos,
-                   audio_fallback_max=a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict, reportage=not a.no_reportage,
+                   video_fallback_max=0 if light else (a.video_fallback_max if a.video_fallback_max is not None else a.max_videos),
+                   audio_fallback_max=0 if light else a.audio_fallback_max, min_confidence=a.min_confidence, strict=a.strict, reportage=not a.no_reportage,
                    platforms=_split(a.platforms), articles=not a.no_articles, social=not a.no_social, max_minutes=a.max_minutes,
-                   allow_heuristic=a.allow_heuristic)
+                   allow_heuristic=a.allow_heuristic,
+                   **({"refine_max": 0, "article_gemini_max": 0, "article_search_max": 0} if light else {}))
 
 
 def run_one(o: Options, llm, outdir: Path, search_id: str) -> int:

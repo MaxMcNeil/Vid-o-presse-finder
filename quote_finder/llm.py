@@ -393,7 +393,21 @@ def guess_provider(key: str) -> str:
 
 
 class LLMRouter:
-    """Essaie Gemini, puis le repli (texte seulement). Met les réponses en cache disque."""
+    """Essaie Gemini, puis le repli (texte seulement). Met les réponses en cache disque.
+    QF_LLM_BUDGET (nombre) : plafond de demandes à l'IA pour CE processus (recherche légère du montage) ; au-delà,
+    plus aucune demande n'est envoyée et la recherche rend ce qu'elle a déjà trouvé. Les réponses en cache ne comptent pas."""
+
+    budget_used = 0
+
+    def _spend(self) -> None:
+        try:
+            cap = int(os.environ.get("QF_LLM_BUDGET") or 0)
+        except ValueError:
+            cap = 0
+        if cap > 0:
+            if LLMRouter.budget_used >= cap:
+                raise QuotaExhausted(f"budget IA de la recherche atteint ({cap} demandes)")
+            LLMRouter.budget_used += 1
 
     def __init__(self, gemini: GeminiClient | None, fallback=None, fallbacks: list | None = None):
         self.gemini = gemini
@@ -465,6 +479,7 @@ class LLMRouter:
         hit = cache.get("llm", ck)
         if hit is not None:
             return hit
+        self._spend()
         err = None
         media = bool(video_url or inline_media)
         # plafond par appel : une vidéo ou un quota capricieux ne doit jamais bloquer toute la recherche
@@ -505,6 +520,7 @@ class LLMRouter:
         hit = cache.get("llm", ck)
         if hit is not None:
             return hit
+        self._spend()
         out = self.gemini.generate_json(prompt, tools=[{"url_context": {}}], until=time.time() + self.TEXT_CALL_MAX,
                                         max_attempts=8)
         cache.put("llm", ck, out)
@@ -518,6 +534,7 @@ class LLMRouter:
         hit = cache.get("llm", ck)
         if hit is not None:
             return hit
+        self._spend()
         out = self.gemini.generate_json(prompt, tools=[{"google_search": {}}], until=time.time() + self.TEXT_CALL_MAX,
                                         max_attempts=8)
         cache.put("llm", ck, out)
