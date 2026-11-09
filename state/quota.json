@@ -1,10 +1,10 @@
 {
  "keys": {
   "gemini:0ad101a9a2": {
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 10,
+   "errors": 0,
    "models": {},
    "label": "Gemini clé 1",
    "used_models": {
@@ -18,10 +18,10 @@
    "last": "gemini-3-flash-preview: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:6f10d27b24": {
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 7,
+   "errors": 0,
    "models": {},
    "label": "Gemini clé 2",
    "used_models": {
@@ -34,10 +34,10 @@
    "last": "gemini-3-flash-preview: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:8c54858ebc": {
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 10,
+   "errors": 0,
    "models": {},
    "label": "Gemini clé 3",
    "used_models": {
@@ -51,10 +51,10 @@
    "last": "gemini-3-flash-preview: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:181ad99cca": {
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 5,
+   "errors": 0,
    "models": {},
    "label": "Gemini clé 4",
    "used_models": {
@@ -67,10 +67,10 @@
    "last": "gemini-3-flash-preview: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "gemini:c7a23ab254": {
-   "day": "2026-10-28",
-   "calls": 1,
-   "units": 1,
-   "errors": 5,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
+   "errors": 0,
    "models": {},
    "label": "Gemini clé 5",
    "used_models": {
@@ -83,56 +83,56 @@
    "last": "gemini-3-flash-preview: HTTP 429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
   },
   "groq:1691e6b64a": {
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
    "label": "Groq clé 1",
    "used_models": {
-    "openai/gpt-oss-120b": 36
+    "openai/gpt-oss-120b": 37
    }
   },
   "youtube:ca0e47bd85": {
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 1",
    "used_models": {}
   },
   "youtube:bcc568c3e7": {
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 2",
    "used_models": {}
   },
   "youtube:0f238cfda0": {
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 3",
    "used_models": {}
   },
   "youtube:92aa479928": {
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 1,
+   "units": 1,
    "errors": 0,
    "models": {},
-   "label": "YouTube clé 4",
+   "label": "YouTube clé 1",
    "used_models": {}
   },
   "youtube:a5a9d82454": {
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "models": {},
    "label": "YouTube clé 5",
@@ -140,7 +140,7 @@
   },
   "guardian:271a422abb": {
    "models": {},
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
    "errors": 0,
@@ -149,7 +149,7 @@
   },
   "nyt:61294089f2": {
    "models": {},
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
    "errors": 0,
@@ -158,10 +158,10 @@
   },
   "gemini:217ed46951": {
    "models": {},
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 5,
+   "errors": 0,
    "used_models": {
     "gemini-3.6-flash": 3,
     "gemini-3.8-flash": 3,
@@ -173,10 +173,10 @@
   },
   "gemini:753fa4621b": {
    "models": {},
-   "day": "2026-10-28",
-   "calls": 1,
-   "units": 1,
-   "errors": 6,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
+   "errors": 0,
    "used_models": {
     "gemini-3.6-flash": 4,
     "gemini-3.5-flash": 1,
@@ -188,10 +188,10 @@
   },
   "gemini:20ab11b1f4": {
    "models": {},
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 6,
+   "errors": 0,
    "used_models": {
     "gemini-3.6-flash": 2,
     "gemini-3.7-flash": 1,
@@ -205,10 +205,10 @@
   },
   "gemini:4621e99464": {
    "models": {},
-   "day": "2026-10-28",
+   "day": "2026-11-09",
    "calls": 0,
    "units": 0,
-   "errors": 6,
+   "errors": 0,
    "used_models": {
     "gemini-3.6-flash": 2,
     "gemini-3.7-flash": 1,
@@ -221,10 +221,10 @@
   },
   "gemini:102ba3d9ea": {
    "models": {},
-   "day": "2026-10-28",
-   "calls": 1,
-   "units": 1,
-   "errors": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
+   "errors": 0,
    "used_models": {
     "gemini-3.8-flash": 1,
     "gemini-3-flash-preview": 5,
@@ -237,31 +237,43 @@
   },
   "youtube:bd83e7d545": {
    "models": {},
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "used_models": {},
    "label": "YouTube clé 6"
   },
   "youtube:4d2b27d659": {
    "models": {},
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "used_models": {},
    "label": "YouTube clé 7"
   },
   "youtube:960f65aa4f": {
    "models": {},
-   "day": "2026-10-28",
-   "calls": 2,
-   "units": 2,
+   "day": "2026-11-09",
+   "calls": 0,
+   "units": 0,
    "errors": 0,
    "used_models": {},
    "label": "YouTube clé 8"
+  },
+  "gemini:1a6d63d487": {
+   "models": {},
+   "day": "2026-11-09",
+   "calls": 1,
+   "units": 1,
+   "errors": 15,
+   "used_models": {
+    "gemini-3.6-flash": 1
+   },
+   "label": "Gemini clé 1",
+   "last": "gemini-2.5-flash-lite: HTTP 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash-lite is no longer"
   }
  },
- "saved": "2026-10-28T14:36:35+00:00"
+ "saved": "2026-11-09T10:02:19+00:00"
 }
