@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 09/11/2026 à 11:02 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 09/11/2026 à 11:10 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -21,7 +21,7 @@ _Mis à jour le 09/11/2026 à 11:02 (heure italienne), automatiquement après ch
 
 ## Téléphone (précision des extraits)
 
-- ✅ Dernier passage il y a 14 h (données mobiles) : rien à recaler
+- ✅ Dernier passage il y a 0 min (données mobiles) : rien à recaler
   - Passage automatique : Android toutes les heures environ + à l'ouverture de Termux
 - ✅ Extraits en attente de recalage par le téléphone : 0
 
