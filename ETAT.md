@@ -1,6 +1,6 @@
 # État du système
 
-_Mis à jour le 09/11/2026 à 11:10 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
+_Mis à jour le 10/11/2026 à 12:36 (heure italienne), automatiquement après chaque recherche, Diagnostic ou passage du téléphone._
 
 ## En bref
 
@@ -9,7 +9,7 @@ _Mis à jour le 09/11/2026 à 11:10 (heure italienne), automatiquement après ch
 ## Clés et quotas
 
 - ✅ **Gemini (IA)** : 11/11 clé(s) utilisable(s)
-- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 799 recherches restantes aujourd'hui
+- ✅ **YouTube (recherche)** : 8/8 clé(s) utilisable(s) · ≈ 800 recherches restantes aujourd'hui
 - ✅ **Groq (relais IA)** : 1/1 clé(s) utilisable(s)
 - ✅ **The Guardian** : 1/1 clé(s) utilisable(s)
 - ✅ **New York Times** : 1/1 clé(s) utilisable(s)
