@@ -23,6 +23,29 @@ PROVIDERS = {
 }
 
 
+_KEY_OK: dict = {}
+
+
+def key_ok(key: str, base: str = "", http=None) -> bool:
+    """Un 401/403 peut viser UN modèle (préversion réservée, politique de données, région…) et pas la clé : avant de
+    la déclarer morte (et de le mémoriser pour les lancements suivants), on demande au fournisseur si la clé est
+    valide. Gemini : liste des modèles ; relais : /models (OpenRouter : /key). Doute (réseau, panne) → valide."""
+    k = (base, key)
+    if k not in _KEY_OK:
+        s = http or requests
+        try:
+            if not base:
+                r = s.get("https://generativelanguage.googleapis.com/v1beta/models", params={"pageSize": 1},
+                          headers={"x-goog-api-key": key}, timeout=20)
+            else:
+                url = f"{base}/key" if "openrouter" in base else f"{base}/models"
+                r = s.get(url, headers={"Authorization": f"Bearer {key}"}, timeout=20)
+            _KEY_OK[k] = r.status_code not in (400, 401, 403)
+        except Exception:  # noqa: BLE001
+            _KEY_OK[k] = True
+    return _KEY_OK[k]
+
+
 class LLMError(Exception):
     pass
 
@@ -254,9 +277,11 @@ class GeminiClient:
                     self._until[(key, m)] = time.time() + (float(d.group(1)) + 1 if d else 30)
                 continue
             if r.status_code in (401, 403):
-                if "api key" in low or "api_key" in low:
-                    self.pool.exhaust(key, "clé refusée (invalide ou révoquée ?)")
+                if ("api key" in low or "api_key" in low or r.status_code == 401) and not key_ok(key, http=self.http):
+                    self.pool.exhaust(key, "clé refusée par Google (vérifiée : invalide ou révoquée)")
                 else:
+                    log.warning("Gemini : %s refusé à la clé %s (HTTP %s) — la clé est valide : autre modèle",
+                                m, self.pool.label(key), r.status_code)
                     self._bad.add((key, m))           # accès refusé à CE modèle seulement
                 continue
             if r.status_code >= 500:
@@ -372,7 +397,12 @@ class OpenAICompatClient:
                     self.pool.cooldown(key, min(max(wait, 2.0), 600.0))
                 continue
             if r.status_code in (401, 403):
-                self.pool.exhaust(key, "clé refusée (invalide ?)")
+                if key_ok(key, self.base, self.http):
+                    log.warning("%s : %s refusé (HTTP %s) — la clé est valide : modèle suivant", self.name,
+                                self.model, r.status_code)
+                    self._bad.add(self.model)
+                else:
+                    self.pool.exhaust(key, "clé refusée (vérifiée : invalide)")
                 continue
             if r.status_code >= 500:
                 time.sleep(3)
