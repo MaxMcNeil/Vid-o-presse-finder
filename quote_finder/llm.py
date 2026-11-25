@@ -46,6 +46,19 @@ def key_ok(key: str, base: str = "", http=None) -> bool:
     return _KEY_OK[k]
 
 
+SUITE = ("Ta réponse précédente a été coupée par la limite de longueur. Écris UNIQUEMENT la suite, en reprenant exactement "
+         "au caractère où elle s'arrête : ne répète rien, n'ajoute ni introduction, ni explication, ni balise.")
+
+
+def _jonction(a: str, b: str) -> str:
+    """Recolle la suite d'une réponse coupée sans doublon au point de jonction."""
+    b = re.sub(r"^\s*```\w*\s*", "", b or "")
+    for k in range(min(400, len(a), len(b)), 5, -1):
+        if a.endswith(b[:k]):
+            return a + b[k:]
+    return a + b
+
+
 class LLMError(Exception):
     pass
 
@@ -219,12 +232,32 @@ class GeminiClient:
             if r.status_code == 200:
                 try:
                     cand = r.json()["candidates"][0]
+                    # réponse COUPÉE (limite de longueur) : on demande SEULEMENT LA SUITE au même modèle, jamais tout
+                    txt0 = "".join(pt.get("text", "") for pt in (cand.get("content") or {}).get("parts", []) if not pt.get("thought"))
+                    n_suite = 0
+                    while cand.get("finishReason") == "MAX_TOKENS" and txt0 and n_suite < 4 and time.time() < lim:
+                        n_suite += 1
+                        log.info("Gemini %s : réponse coupée → demande de la suite seulement (%d/4)", m, n_suite)
+                        b2 = dict(body, contents=[{"role": "user", "parts": parts}, {"role": "model", "parts": [{"text": txt0}]},
+                                                  {"role": "user", "parts": [{"text": SUITE}]}])
+                        b2["generationConfig"] = {k: v for k, v in body["generationConfig"].items() if k != "responseMimeType"}
+                        try:
+                            r2 = self.http.post(GEMINI_URL.format(model=m), params={"key": key}, json=b2,
+                                                timeout=max(10.0, min(self.timeout, lim - time.time())))
+                            c2 = r2.json()["candidates"][0] if r2.status_code == 200 else None
+                        except (requests.RequestException, KeyError, IndexError, ValueError):
+                            c2 = None
+                        t2 = "".join(pt.get("text", "") for pt in ((c2 or {}).get("content") or {}).get("parts", []) if not pt.get("thought"))
+                        if not t2:
+                            break
+                        txt0 = _jonction(txt0, t2)
+                        cand = dict(cand, finishReason=c2.get("finishReason"), content={"parts": [{"text": txt0}]})
                     if tools:  # réponse texte brute + métadonnées de lecture de page
                         out = {"text": "".join(pt.get("text", "") for pt in cand["content"]["parts"]),
                                "meta": cand.get("urlContextMetadata") or cand.get("url_context_metadata") or {},
                                "grounding": cand.get("groundingMetadata") or cand.get("grounding_metadata") or {}}
                     else:
-                        out = parse_json_loose(cand["content"]["parts"][0]["text"])
+                        out = parse_json_loose(txt0 if n_suite else cand["content"]["parts"][0]["text"])
                     self._overload[m] = 0
                     self.pool.use(key, model=m)
                     self.used[m] = self.used.get(m, 0) + 1
@@ -310,6 +343,7 @@ class OpenAICompatClient:
         self.pool, self.base, self.timeout = pool, base_url.rstrip("/"), timeout
         self.models = [model]
         self._bad: set[str] = set()
+        self._pause: dict[str, float] = {}      # modèle -> instant où il redevient libre (limite par minute)
         self._discovered = False
         self._json_mode = True
         self.name = "relais"
@@ -318,10 +352,13 @@ class OpenAICompatClient:
 
     @property
     def model(self) -> str:
-        for m in self.models:
-            if m not in self._bad:
-                return m
-        raise LLMError("aucun modèle de secours utilisable : définis FALLBACK_LLM_MODEL")
+        """Le meilleur modèle LIBRE (chaque modèle a ses propres limites chez Groq) ; s'ils sont tous en pause courte,
+        celui qui se libère le premier."""
+        ok = [m for m in self.models if m not in self._bad]
+        if not ok:
+            raise LLMError("aucun modèle de secours utilisable : définis FALLBACK_LLM_MODEL")
+        libres = [m for m in ok if self._pause.get(m, 0) <= time.time()]
+        return libres[0] if libres else min(ok, key=lambda m: self._pause.get(m, 0))
 
     def _discover(self, key: str) -> None:
         self._discovered = True
@@ -351,6 +388,11 @@ class OpenAICompatClient:
             key = self.pool.acquire()
             if key is None:
                 raise QuotaExhausted(f"clés {self.name} refusées ou épuisées (dernière erreur : {last or 'aucune'})")
+            attente = self._pause.get(self.model, 0) - time.time()
+            if attente > 0:                     # tous les modèles en pause courte : on attend le premier libéré
+                if attente > 90 or time.time() + attente > lim:
+                    raise QuotaExhausted(f"{self.name} : tous les modèles saturés pour l'instant")
+                time.sleep(attente)
             body = {"model": self.model, "temperature": temperature,
                     "messages": [{"role": "system", "content": "Réponds uniquement par un objet JSON valide."},
                                  {"role": "user", "content": prompt}]}
@@ -365,7 +407,26 @@ class OpenAICompatClient:
                 continue
             if r.status_code == 200:
                 try:
-                    out = parse_json_loose(r.json()["choices"][0]["message"]["content"])
+                    ch = r.json()["choices"][0]
+                    txt = ch["message"]["content"] or ""
+                    n_suite = 0
+                    while ch.get("finish_reason") == "length" and txt and n_suite < 4:
+                        # réponse COUPÉE : SEULEMENT LA SUITE, au même modèle
+                        n_suite += 1
+                        log.info("%s %s : réponse coupée → demande de la suite seulement (%d/4)", self.name, body["model"], n_suite)
+                        b2 = dict(body, messages=body["messages"] + [{"role": "assistant", "content": txt}, {"role": "user", "content": SUITE}])
+                        b2.pop("response_format", None)
+                        try:
+                            r2 = self.http.post(f"{self.base}/chat/completions", json=b2, headers={"Authorization": f"Bearer {key}"},
+                                                timeout=max(10.0, min(self.timeout, lim - time.time())))
+                            ch = r2.json()["choices"][0] if r2.status_code == 200 else {}
+                        except (requests.RequestException, KeyError, IndexError, ValueError):
+                            ch = {}
+                        t2 = (ch.get("message") or {}).get("content") or ""
+                        if not t2:
+                            break
+                        txt = _jonction(txt, t2)
+                    out = parse_json_loose(txt)
                     self.calls += 1
                     self.pool.use(key, model=self.model)
                     return out
@@ -374,7 +435,7 @@ class OpenAICompatClient:
                     continue
             last = f"HTTP {r.status_code}: {r.text[:300]}"
             low = r.text.lower()
-            if r.status_code in (400, 404) and "model" in low and re.search(r"does not exist|decommission|not found|no access|deprecated|not supported", low):
+            if r.status_code in (400, 404) and "model" in low and re.search(r"does not exist|decommission|not found|no access|deprecated|not supported|terms acceptance", low):
                 log.warning("Modèle de secours %s refusé, on change de modèle", self.model)
                 self._bad.add(self.model)
                 if not self._discovered:
@@ -385,16 +446,29 @@ class OpenAICompatClient:
                 continue
             self.pool.note_error(key, f"HTTP {r.status_code} {r.text[:100]}")
             if r.status_code == 429:
-                if re.search(r"per day|daily|tokens per day|requests per day|\brpd\b|\btpd\b|credits", low):
+                if not self._discovered:
+                    self._discover(key)         # d'autres modèles (chacun avec SES limites) pour prendre le relais
+                autres = [m for m in self.models if m not in self._bad and m != body["model"]]
+                if re.search(r"free-models-per-day|credits", low) or (not autres and re.search(
+                        r"per day|daily|tokens per day|requests per day|\brpd\b|\btpd\b", low)):
                     log.warning("%s : quota du jour atteint (%s) → clé suivante", self.name, self.pool.label(key))
                     self.pool.exhaust(key)
+                elif re.search(r"per day|daily|tokens per day|requests per day|\brpd\b|\btpd\b", low):
+                    log.warning("%s : quota du jour de %s atteint → autre modèle", self.name, body["model"])
+                    self._bad.add(body["model"])    # chez Groq le quota du jour est PAR MODÈLE : les autres restent
                 else:
                     ra = r.headers.get("retry-after") if hasattr(r, "headers") and r.headers else None
                     try:
                         wait = float(ra) if ra else 60.0
                     except ValueError:
                         wait = 60.0
-                    self.pool.cooldown(key, min(max(wait, 2.0), 600.0))
+                    m2 = re.search(r"try again in (?:(\d+)m)?([\d.]+)s", low)
+                    if m2:
+                        wait = max(wait if ra else 0, int(m2.group(1) or 0) * 60 + float(m2.group(2)))
+                    if autres:                  # ce modèle seulement : un autre prend le relais AUSSITÔT
+                        self._pause[body["model"]] = time.time() + min(max(wait, 2.0), 600.0)
+                    else:
+                        self.pool.cooldown(key, min(max(wait, 2.0), 600.0))
                 continue
             if r.status_code in (401, 403):
                 if key_ok(key, self.base, self.http):
