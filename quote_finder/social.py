@@ -1,9 +1,12 @@
 """Réseaux sociaux en appui des recherches : Telegram (chaînes publiques) et Reddit. Pas de X, TikTok ni Instagram.
 
 Telegram (secrets TG_API_ID, TG_API_HASH, TG_SESSION — compte secondaire conseillé) :
-  1. chaînes publiques liées au sujet (recherche par nom, comme dans l'appli) ;
-  2. dans chacune, messages contenant les mots-clés de la recherche.
-  La recherche de mots dans TOUT Telegram n'existe qu'avec Premium : elle n'est pas utilisée.
+  1. recherche DANS LE CONTENU de toutes les chaînes publiques (recherche globale de Telegram) : uniquement avec les
+     recherches gratuites du jour (vérifiées AVANT chaque recherche ; jamais de paiement en Stars). Si Telegram la
+     refuse (Premium exigé, quota du jour épuisé), on passe simplement aux étapes suivantes ;
+  2. chaînes d'info connues (liste TG_CHAINES ci-dessous, ou variable QF_TG_CHAINES) : messages qui contiennent
+     les mots-clés de la recherche ;
+  3. chaînes publiques dont le NOM ressemble au sujet (comme dans l'appli), puis leurs messages.
   Une même clé de session utilisée en même temps depuis deux machines est DÉTRUITE par Telegram : un verrou
   (fichier sur la machine + étiquette « verrou-telegram » dans le dépôt GitHub) garantit un seul usage à la fois.
 
@@ -36,6 +39,15 @@ LOCK_TAG = "verrou-telegram"
 LOCK_STALE = 20 * 60          # un verrou plus vieux (machine arrêtée net) est considéré comme abandonné
 MAX_CHANNELS = 8
 PER_CHANNEL = 6
+GLOBAL_LIMIT = 30              # messages demandés à la recherche globale (une seule recherche gratuite par sujet)
+# chaînes d'info publiques fouillées par le CONTENU (selon les langues de la recherche). Un nom introuvable est
+# simplement sauté et signalé dans le rapport. Remplaçable sans toucher au code : variable QF_TG_CHAINES
+# (« fr:nom1,nom2 en:nom3 ar:nom4 » ou simplement « nom1,nom2 » pour toutes les langues).
+TG_CHAINES = {
+    "en": ["bnonews", "disclosetv", "insiderpaper", "ClashReport", "Faytuks"],
+}
+PER_KNOWN = 15                 # messages lus par mot dans une chaîne connue (le filtre de pertinence trie)
+MAX_KNOWN = 6                  # chaînes connues fouillées par recherche (rythme humain, protection du compte)
 
 
 def reset() -> None:
@@ -374,17 +386,119 @@ def tg_config() -> tuple[int, str, str] | str:
     return int(vals["TG_API_ID"]), vals["TG_API_HASH"], vals["TG_SESSION"]
 
 
+def known_channels(langs) -> list[str]:
+    """Chaînes connues pour ces langues (QF_TG_CHAINES remplace la liste par défaut)."""
+    raw = (os.environ.get("QF_TG_CHAINES") or "").strip()
+    table: dict[str, list[str]] = {}
+    if raw:
+        for part in raw.split():
+            lg, _, names = part.rpartition(":")
+            table.setdefault(lg.lower() or "*", []).extend(n.strip().lstrip("@") for n in names.split(",") if n.strip())
+    else:
+        table = TG_CHAINES
+    out: list[str] = []
+    for lg in [*(x.strip().lower()[:2] for x in (langs or []) if x), "*"]:
+        for n in table.get(lg, []):
+            if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{3,31}", n) and n.lower() not in {x.lower() for x in out}:
+                out.append(n)
+    return out[:MAX_KNOWN]
+
+
 async def _tg_search(cfg, qs, ws, since, plan, o, box: list, note: dict):
     from telethon import TelegramClient, functions
-    from telethon.tl.types import Channel
+    from telethon.tl.types import Channel, InputPeerEmpty
     api_id, api_hash, sess = cfg
     ss = open_session(sess)
     client = TelegramClient(ss, api_id, api_hash, connection_retries=2, request_retries=2,
                             flood_sleep_threshold=15, timeout=20, receive_updates=False)
     await client.connect()
+    seen: set = set()
+    used: set = set()
+
+    def keep(m, ch, how: str) -> None:
+        text = (m.message or "").strip()
+        uname = getattr(ch, "username", None)
+        if not uname:
+            return
+        url = f"https://t.me/{uname}/{m.id}"
+        date = m.date.date().isoformat() if m.date else ""
+        if url in seen or not _since_ok(date, since) or not relevant(text, plan, o):
+            return
+        seen.add(url)
+        used.add(ch.id)
+        vid = bool(getattr(m, "video", None))
+        try:
+            dur = float(getattr(getattr(m, "file", None), "duration", 0) or 0) if vid else 0.0
+        except (TypeError, ValueError):
+            dur = 0.0
+        box.append({"platform": "telegram", "channel": f"@{uname}", "text": text[:600], "url": url,
+                    "date": date, "score": int(m.views or 0), "comments": 0,
+                    "media": "vidéo" if vid else ("photo" if m.photo else ""),
+                    "video_url": url if vid else "", "duration": dur, "trouve_par": how})
+
     try:
         if not await client.is_user_authorized():
             raise PermissionError("session non autorisée")
+        # 1) recherche globale dans le CONTENU : seulement si Telegram la dit gratuite (jamais de Stars)
+        n_glob = len(box)
+        q = next((x for x in qs if x), "")
+        if q and hasattr(functions.channels, "SearchPostsRequest") and hasattr(functions.channels,
+                                                                               "CheckSearchPostsFloodRequest"):
+            try:
+                fl = await client(functions.channels.CheckSearchPostsFloodRequest(query=q))
+                free = bool(getattr(fl, "query_is_free", False)) or int(getattr(fl, "remains", 0) or 0) > 0
+                if not free:
+                    note["global"] = (f"quota gratuit du jour épuisé ({getattr(fl, 'total_daily', '?')} par jour) : "
+                                      "sautée (jamais de paiement)")
+                else:
+                    await asyncio.sleep(1.5)
+                    res = await client(functions.channels.SearchPostsRequest(
+                        offset_rate=0, offset_peer=InputPeerEmpty(), offset_id=0, limit=GLOBAL_LIMIT, query=q))
+                    chats = {c.id: c for c in getattr(res, "chats", []) or [] if isinstance(c, Channel)}
+                    for m in getattr(res, "messages", []) or []:
+                        cid = getattr(getattr(m, "peer_id", None), "channel_id", None)
+                        ch = chats.get(cid)
+                        if ch is not None and ch.broadcast and not getattr(ch, "scam", False) \
+                                and not getattr(ch, "fake", False):
+                            keep(m, ch, "recherche globale")
+                    left_ = getattr(fl, "remains", None)
+                    note["global"] = (f"ok : {len(box) - n_glob} message(s)"
+                                      + (f" (recherches gratuites restantes aujourd'hui : {max(0, int(left_) - 1)}"
+                                         f"/{getattr(fl, 'total_daily', '?')})" if left_ is not None else ""))
+            except Exception as e:  # noqa: BLE001 — Premium exigé, méthode refusée… : on passe aux étapes suivantes
+                if type(e).__name__ == "FloodWaitError":
+                    raise
+                note["global"] = f"refusée par Telegram ({type(e).__name__}) : étapes suivantes seulement"
+        else:
+            note["global"] = "non disponible (module telethon trop ancien)"
+        # 2) chaînes d'info connues, fouillées par le contenu
+        absent = []
+        n_known = len(box)
+        # dans une chaîne d'info, chercher le NOM seul ramène ses derniers messages sur cette personne (souvent hors
+        # sujet) : on cherche d'abord le terme clé du sujet (ex. « FBI »), le filtre de pertinence fait le reste
+        tgt = {normalize(x) for x in [o.target, *(plan.target_aliases or [])] if x}
+        kws = [g[0] for g in (plan.term_groups or []) if g and g[0] and len(g[0]) >= 3 and normalize(g[0]) not in tgt]
+        kws = [*kws[:2], *ws][:2]
+        for name in known_channels(getattr(o, "langs", None)):
+            await asyncio.sleep(1.5)
+            try:
+                ch = await client.get_entity(name)
+            except Exception as e:  # noqa: BLE001 — nom introuvable : sauté
+                if type(e).__name__ == "FloodWaitError":
+                    raise
+                absent.append(name)
+                continue
+            if not isinstance(ch, Channel) or not ch.broadcast:
+                absent.append(name)
+                continue
+            for w in kws[:2]:
+                await asyncio.sleep(1.5)
+                async for m in client.iter_messages(ch, search=w, limit=PER_KNOWN):
+                    keep(m, ch, "chaîne connue")
+        note["known"] = len(box) - n_known
+        if absent:
+            note["absentes"] = absent
+        # 3) chaînes dont le nom ressemble au sujet (méthode d'origine)
         chans = {}
         for q in qs:
             await asyncio.sleep(1.5)
@@ -394,28 +508,13 @@ async def _tg_search(cfg, qs, ws, since, plan, o, box: list, note: dict):
                         and not getattr(ch, "scam", False) and not getattr(ch, "fake", False):
                     chans[ch.id] = ch
         top = sorted(chans.values(), key=lambda c: -(getattr(c, "participants_count", 0) or 0))[:MAX_CHANNELS]
-        note["channels"] = len(top)
-        seen = set()
         for ch in top:
             for w in ws[:2]:
                 await asyncio.sleep(1.5)   # rythme humain : jamais de rafale de requêtes
                 async for m in client.iter_messages(ch, search=w, limit=PER_CHANNEL):
-                    text = (m.message or "").strip()
-                    url = f"https://t.me/{ch.username}/{m.id}"
-                    date = m.date.date().isoformat() if m.date else ""
-                    if url in seen or not _since_ok(date, since) or not relevant(text, plan, o):
-                        continue
-                    seen.add(url)
-                    vid = bool(getattr(m, "video", None))
-                    try:
-                        dur = float(getattr(getattr(m, "file", None), "duration", 0) or 0) if vid else 0.0
-                    except (TypeError, ValueError):
-                        dur = 0.0
-                    box.append({"platform": "telegram", "channel": f"@{ch.username}", "text": text[:600], "url": url,
-                                "date": date, "score": int(m.views or 0), "comments": 0,
-                                "media": "vidéo" if vid else ("photo" if m.photo else ""),
-                                "video_url": url if vid else "", "duration": dur})
+                    keep(m, ch, "nom de chaîne")
     finally:
+        note["channels"] = len(used)
         await client.disconnect()
 
 
@@ -459,7 +558,10 @@ def telegram(plan, o, budget: float) -> list[dict]:
                 loop.close()
         try:
             call_with_timeout(go, left + 20)
-            STATUS["telegram"] = f"ok : {len(box)} message(s) dans {note.get('channels', 0)} chaîne(s) publique(s)"
+            STATUS["telegram"] = (f"ok : {len(box)} message(s) dans {note.get('channels', 0)} chaîne(s) publique(s)"
+                                  f" · recherche globale : {note.get('global', '—')}"
+                                  f" · chaînes connues : {note.get('known', 0)} message(s)"
+                                  + (f" (introuvables : {', '.join(note['absentes'])})" if note.get("absentes") else ""))
         except Exception as e:  # noqa: BLE001 — chaque cas a son message clair
             if isinstance(e, TimeoutError) and "plus de" in str(e):
                 lk["keep"] = True   # connexion peut-être encore ouverte : verrou gardé jusqu'à expiration
@@ -511,6 +613,9 @@ def search(plan, o, http=None, budget: float = 180.0) -> list[dict]:
         STATUS["telegram"] = f"erreur {type(e).__name__} : {str(e)[:100]}"
     posts.sort(key=lambda p: -p.get("score", 0))
     log.info("Réseaux sociaux : Telegram → %s · Reddit → %s", STATUS.get("telegram"), STATUS.get("reddit"))
+    for p_ in [x for x in posts if x.get("platform") == "telegram"][:8]:
+        log.info("  Telegram %s (%s, %s) : %s — %s", p_.get("channel"), p_.get("date"), p_.get("trouve_par", ""),
+                 " ".join(str(p_.get("text") or "").split())[:110], p_.get("url"))
     return posts[:20]
 
 
